@@ -57,6 +57,14 @@
                          </a>
                          @endcan
 
+                         @can('manage-events')
+                            <a class="dropdown-item" href="/events/index">
+                             Manage Events
+                         </a>
+                         @endcan
+
+                         
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>

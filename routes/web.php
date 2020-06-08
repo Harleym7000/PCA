@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
-Route::resource('/events', 'EventsController');
 Route::resource('/news', 'NewsController');
+Route::get('/events', 'PagesController@events');
+Route::get('/events/index', 'EventsController@index');
+Route::get('/events/create', 'EventsController@create')->middleware('can:manage-events');
 Route::resource('/contact', 'ContactController');
 Auth::routes();
 

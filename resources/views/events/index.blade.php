@@ -1,20 +1,36 @@
 @extends('layouts.app')
+
 @section('content')
-<div id="events-show">
-        <h1>Events</h1>
-        @if(count($events) > 0)
-        <div class="row justify-content-center">
-        @foreach($events as $event)
-        <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="storage/event_images/{{$event->image}}" alt="Card image cap">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Events</div>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event Title</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @if(count($events) > 0)
+                    @foreach($events as $event)
+                    <tr>
+                        <th scope="row">{{$event->id}}</th>
+                        <td>{{$event->title}}</td>
+                    @endforeach
+                    </tbody>
+                      </table>
+                    @else 
+                    <p>There are no events</p>
+                    @endif
+
                 <div class="card-body">
-                  <h5 class="card-title">{{$event->title}}</h5>
-                  <p class="card-text">{{$event->description}}</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                    
                 </div>
-              </div>
-        @endforeach
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-        @endif
 @endsection
