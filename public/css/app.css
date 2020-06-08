@@ -11077,15 +11077,8 @@ body {
   margin-bottom: 1%;
 }
 
-#events-show {
-  width: 80%;
-  margin: auto;
-  padding-bottom: 5%;
-}
-
-#events-show .card {
-  margin-right: 1%;
-  margin-bottom: 1%;
+#events-show .figure {
+  border: 1px solid #000;
 }
 
 footer {

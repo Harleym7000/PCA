@@ -113,6 +113,10 @@
       </li>
     </ul>
     <div id="subscribe-form">
+        {!! Form::open(['method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'form-row']) !!}
+        {{Form::text('email', '', ['class' => 'col-9', 'placeholder' => 'Enter Email...'])}}
+        {{Form::submit('Subscribe', ['class' => 'btn btn-primary col-3'])}}
+        {!! Form::close() !!}
 </div>
 </div>
 </div>

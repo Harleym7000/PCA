@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <div class="navbar-brand pl-5">
-                <img src="img/pcaLogo.png">
+                <img src="/img/pcaLogo.png">
             </div>
 
             </ul>

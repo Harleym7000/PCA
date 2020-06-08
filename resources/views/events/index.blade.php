@@ -11,6 +11,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Event Title</th>
+                            <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -19,6 +20,17 @@
                     <tr>
                         <th scope="row">{{$event->id}}</th>
                         <td>{{$event->title}}</td>
+                        <td>
+                            @can('manage-events')
+                            <a href=""><button type="button" class="btn btn-primary float-left">Edit Event</button></a>
+                            <form action="" method="POST" class="float-left">
+                                @csrf 
+                                {{method_field('DELETE')}}
+                                <button type="submit" class="btn btn-danger">Delete Event</button>
+                            </form>
+                        </td>
+                    </tr>
+                            @endcan
                     @endforeach
                     </tbody>
                       </table>
