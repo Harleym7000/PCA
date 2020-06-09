@@ -20,7 +20,7 @@ public function about() {
 }
 
 public function events() {
-    $events = DB::select('SELECT * FROM `events` WHERE `events`.`approved` = 1 ORDER BY `events`.`id` LIMIT 4');
+    $events = DB::select('SELECT * FROM `events` WHERE `events`.`approved` = 1 ORDER BY `events`.`id`');
     return view('pages.events')->with('events', $events);
 }
 }

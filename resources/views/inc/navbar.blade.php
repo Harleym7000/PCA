@@ -23,7 +23,7 @@
                     <a class="nav-link" href="/events">Events</a>
                 </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/news">News</a>
+                    <a class="nav-link" href="/news">Our Work</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact Us</a>

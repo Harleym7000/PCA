@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-        <h1>News</h1>
+<div id="work">
+        <h1>Our Work</h1>
         @if(count($news) > 0)
         <div class="container">
         @foreach($news as $story)
@@ -15,4 +16,5 @@
               @endforeach
             </div>
               @endif
+            </div>
 @endsection

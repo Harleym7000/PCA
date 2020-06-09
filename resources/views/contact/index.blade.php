@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<div id="contact-us">
         <h1>Send Us a Message</h1>
         <p>Have a query? Send us a message below and we'll be happy to help</p>
         <div id="contact-form">
@@ -16,5 +17,6 @@
     {{Form::textarea('message', '', ['class' => 'col-11', 'placeholder' => 'Enter Message...'])}}
     {{Form::submit('Send', ['class' => 'btn btn-primary'])}}
 {!! Form::close() !!}
+</div>
 </div>
 @endsection

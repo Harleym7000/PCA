@@ -18,7 +18,9 @@ body {
   }
   
   .navbar .navbar-nav .nav-item .nav-link:hover {
-      color: #5df5f5;
+      color: #39c5c5;
+      transform: scale(1.2);
+      transition: all .5s ease-in-out;
   }
   
   /* Container holding the image and the text */
@@ -139,12 +141,104 @@ body {
       margin: auto;
       margin-bottom: 1%;
     }
+
+    //About Page
+
+    #about {
+      width: 100%;
+      margin: auto;
+      text-align: center;
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    #about #tagline {
+      width: 40%;
+      margin: auto;
+    }
+
+    #about-images {
+      background-image: url('/img/sfondo-celeste-png-6.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 50vh;
+      width: 100%;
+    }
+    #about-images .image {
+      margin-left: 3%;
+      padding-top: 6%;
+    }
+
+    #about h1 {
+      font-size: 48px;
+      font-weight: bolder;
+    }
+
+    #about p {
+      font-size: 32px;
+      font-weight: bolder;
+    }
+
+    #about-main {
+      max-height: 50vh;
+      margin-top: 5%;
+    }
+
+    #about-team {
+      height: 50vh;
+      margin-top: 5%;
+    }
+
+    #about-team .card {
+      margin-left: 3%;
+      margin-top: 3%;
+    }
   
     //Events pages 
   
     //Events Page
+    #events-show {
+      width: 70%;
+      margin: auto;
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
     #events-show .figure {
-      border: 1px solid #000;
+      z-index: 1;
+      margin-top: 10%;
+    }
+
+    #events-show .figure .figure-caption {
+      background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0), rgb(0, 0, 0));
+      height: 80px;
+      color: #fff;
+      padding-left: 10%;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: -80px;
+      z-index: 2;
+      text-shadow: 2px 2px #000;
+    }
+
+    #events-show .event:hover {
+      transform: scale(1.1);
+      transition: all .2s ease-in-out;
+      cursor: pointer;
+    }
+
+    //Our Work Page 
+    #work {
+      width: 70%;
+      margin: auto;
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    //Contact Us Page 
+    #contact-us {
+      width: 70%;
+      margin: auto;
     }
   
     //Footer styles*/
