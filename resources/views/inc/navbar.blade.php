@@ -44,13 +44,9 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                        
 
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @can('manage-users')
                             <a class="dropdown-item" href="{{ route('admin.users.index') }}">
                              User Management
@@ -62,6 +58,19 @@
                              Manage Events
                          </a>
                          @endcan
+
+                         @can('manage-events')
+                            <a class="dropdown-item" href="/events/create">
+                             Add New Event
+                         </a>
+                         @endcan
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            
 
                          
 

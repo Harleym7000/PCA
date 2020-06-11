@@ -33,7 +33,7 @@
           </div>
           </div>
           <div id="news">
-            <h1>Latest PCA News</h1>
+            <h1>Latest Projects</h1>
             @if(count($news) > 0)
             @foreach($news as $story)
             <div class="media">

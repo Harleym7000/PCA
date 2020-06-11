@@ -1,39 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div id="about">
-        <div id="tagline">
-        <h1>- About Us -</h1>
-        <p>Portstewart Community Association currently develops and implements <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> and other events for the 
-        benefit of the community.</p>
-                <br><br>
-        </div>
-
         <div id="about-images">
+                </div>
                 <div class="row">
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-                <div class="image">
-                        <img src="/img/portstewart.jpg" style="height: 250px; width: 250px;"/>
-                </div>
-        </div>
-                </div>
-                <div id="about-main">
-                        <h1>- Another tagline -</h1>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur ipsam nihil totam eligendi alias optio a iste in. Aliquid, nulla non. 
-                                Corrupti beatae sunt, soluta est inventore mollitia. Minima, ad!</p>
+                <div id="tagline" class="justify-content-center">
+                        <h1>- What We Do -</h1>
+                        <p>Portstewart Community Association currently develops and implements <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> and other events for the 
+                        benefit of the community.</p>
+                                <br><br>
+                        </div>
+                        <div id="about-img">
+                        <img src="/img/person.jpeg">
+                        </div>
                 </div>
                 <div id="about-team">
                         <h1>- Our Team -</h1>
