@@ -2,21 +2,29 @@
 @section('content')
 <div id="contact-us">
         <h1>Send Us a Message</h1>
-        <p>Have a query? Send us a message below and we'll be happy to help</p>
+        <p>Have a query or a suggestion? Send us a message below and we'll be happy to help</p>
         <div id="contact-form">
-        {!! Form::open(['method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-    <div class="form-row">
-        {{Form::label('firstname', 'First Name')}}
-        {{Form::text('firstname', '', ['class' => 'col-5', 'placeholder' => 'Enter .First Name..'])}}
-        {{Form::label('surname', 'Surname')}}
-        {{Form::text('surname', '', ['class' => 'col-5', 'placeholder' => 'Enter Surname...'])}}
-    </div>
-    {{Form::label('subject', 'Message Subject')}}
-    {{Form::text('subject', '', ['class' => 'col-11', 'placeholder' => 'Enter Message Subject...'])}}
-    {{Form::label('message', 'Message')}}
-    {{Form::textarea('message', '', ['class' => 'col-11', 'placeholder' => 'Enter Message...'])}}
-    {{Form::submit('Send', ['class' => 'btn btn-primary'])}}
-{!! Form::close() !!}
+            <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">First Name</label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="First Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Surname</label>
+                    <input type="text" class="form-control" id="inputPassword4" placeholder="Surname">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Message Subject</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="Message Subject">
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress2">Message</label>
+                  <textarea class="form-control" id="inputAddress2" placeholder="Enter Message Here..." rows="8"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
 </div>
 </div>
 @endsection

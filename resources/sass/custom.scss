@@ -1,6 +1,8 @@
 /*Global Styles*/
 body {
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
   
   /* Navbar styles*/
@@ -36,42 +38,48 @@ body {
       //Index landing Image 
       .container-fluid img {
           max-height: 88vh;
+          filter: blur(5px);
+  -webkit-filter: blur(5px);
       }
     
     /* Centered text */
     .centered {
       position: absolute;
-      top: 50%;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
   
     .centered h1 {
       text-shadow: 2px 2px #000;
-      font-size: 44px;
+      font-size: 62px;
+      width: 100%;
     }
   
     .centered .btn {
         margin-top: 6%;
-        width: 40%;
-        height: 40px;
         border-radius: 18px;
+    }
+
+    .centered a {
+      margin-top: 100px;
+      margin-left: 20px;
+      margin-right: 20px;
     }
   
     //Index Upcoming Events
     #events {
-      background-color: #191919;
       padding-bottom: 2%;
+      /*background-color: #d4f5fd;*/
     }
   
     #events h1 {
       text-align: center;
-      color: #fff;
-      padding-top: 2%;
+      padding-top: 6%;
     }
   
     #events .row {
-      padding-top: 2%;
+      padding-top: 4%;
     }
   
     //Index Events Cards 
@@ -79,33 +87,35 @@ body {
       background-color: #191919;
       margin-left: 1%;
       border: none;
+      text-align: center;
     }
   
     #events .card img {
       background-color: #fff;
-      height: 270px;
+      height: 470px;
+      border: 1px solid #c7c7c7;
     }
   
     #events .card-title {
       color: #5df5f5;
-      text-align: left;
+      text-align: center;
       font-size: 28px;
       font-weight: bold;
     }
   
     #events .card-text {
       color: #fff;
-      text-align: left;
+      text-align: center;
+      font-size: 18px;
     }
   
     #events .card .btn {
       background-color: #191919;
       color: #5df5f5;
       border: none;
-      margin-left: -5%;
-      text-align: left;
       font-weight: bold;
       font-size: 22px;
+      border: 2px solid #fff;
     }
   
     #all-events {
@@ -113,13 +123,10 @@ body {
     }
   
     #all-events .btn {
-      background-color: #191919;
-      color: #5df5f5;
-      border: none;
       font-size: 18px;
       font-weight: bold;
-      text-decoration: underline;
-      margin-top: 1%;
+      margin-top: 3%;
+      background-color: #2b8be6;
     }
   
     #all-events .btn:hover {
@@ -129,6 +136,7 @@ body {
     //Index News Stories
     #news {
       padding-bottom: 2%;
+      border-top: 1px solid #94cbff;
     }
   
     #news h1 {
@@ -140,6 +148,13 @@ body {
       width: 80%;
       margin: auto;
       margin-bottom: 1%;
+      border: 1px solid #dadada;
+    }
+
+    #news .media-body {
+      margin-top: auto;
+      margin-bottom: auto;
+      font-size: 16px;
     }
 
     //About Page
@@ -152,16 +167,14 @@ body {
     }
 
     #about #tagline {
-      width: 50%;
-      height: 50vh;
-      background-color: #191919;
+      width: 100%;
       padding-top: 5%;
-      color: #fff;
+      padding-bottom: 5%;
     }
 
     #about #tagline p {
-      padding-top: 7%;
-      width: 90%;
+      padding-top: 2%;
+      width: 60%;
       margin: auto;
       text-align: center;
       
@@ -169,22 +182,20 @@ body {
     }
 
     #about-images {
-      background-image: url('/img/contact-background.png');
+      background-image: url('/img/community.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      height: 45vh;
+      height: 65vh;
       width: 100%;
-    }
-    
-    #about-img {
-      width: 50%;
     }
 
-    #about-img img{
+    #about-img {
       width: 100%;
-      height: 50vh;
-      margin: auto;
+    }
+
+    #about-img img {
+      height: 600px;
     }
 
     #about h1 {
@@ -200,6 +211,40 @@ body {
     #about-main {
       max-height: 50vh;
       margin-top: 5%;
+    }
+
+    #about-filler {
+      height: 35vh;
+    }
+
+    #about-filler h1 {
+      padding-top: 7%;
+    }
+
+    #about-projects {
+      width: 100%;
+    }
+
+    #about-projects .img {
+      width: 50%;
+    }
+
+    #about-projects .img img{
+      width: 100%;
+    }
+
+    #about-projects .text {
+      width: 50%;
+      background-color: #191919;
+      color: #fff;
+    }
+
+    #about-projects .text h1{
+      padding-top: 10%;
+    }
+
+    #about-projects .text p{
+      padding-top: 8%;
     }
 
     #about-team {
@@ -301,3 +346,5 @@ body {
     width: 40%;
     margin: auto;
   }
+
+  //Media Queries 
