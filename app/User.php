@@ -54,4 +54,9 @@ class User extends Authenticatable
     }
     return false;
 }
+
+    public function assignRole(Role $role)
+    {
+    return $this->roles()->save($role);
+    }
 }

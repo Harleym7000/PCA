@@ -101,19 +101,19 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         if(Gate::denies('delete-users')) {
-            return redirect(route('admin.users.index'));
+            return redirect('admin.users.index');
         }
+
+        $user = User::find($id);
         $user->roles()->detach();
         $user->delete();
 
         return redirect()->route('admin.users.index');
-
     }
 
 }

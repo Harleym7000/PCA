@@ -11232,6 +11232,20 @@ body {
   margin: auto;
 }
 
+#admin-index {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#admin-index h1 {
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+#action-buttons .btn {
+  margin-left: 10px;
+}
+
 footer {
   background: #191919;
 }

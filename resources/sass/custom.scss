@@ -303,6 +303,23 @@ body {
       width: 70%;
       margin: auto;
     }
+
+    //Admin Pages
+
+    //Admin Index
+    #admin-index {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    #admin-index h1 {
+      text-align: center;
+      margin-bottom: 3%;
+    }
+
+    #action-buttons .btn {
+      margin-left: 10px;
+    }
   
     //Footer styles*/
   footer {
