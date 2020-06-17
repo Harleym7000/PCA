@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
         <div class="index container-fluid">
-            <img src="img/portstewart.jpg" alt="portstewart" style="width:100%;">
+            <img src="img/portstewart.jpg" alt="portstewart" style="width:100%;" class="bg-image">
             <div class="centered">
                 <h1>Insert PCA Mission Statement Here</h1>
                 <div class="row justify-content-center">

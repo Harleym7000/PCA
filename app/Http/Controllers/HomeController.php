@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,4 +28,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
-}
+
+    public function interest() {
+        return view('pages.interest');
+        }
+       
+    }

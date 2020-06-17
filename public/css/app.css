@@ -10971,11 +10971,11 @@ body {
   padding: 0;
 }
 
-.container-fluid img,
-.container-sm img,
-.container-md img,
-.container-lg img,
-.container-xl img {
+.container-fluid .bg-image,
+.container-sm .bg-image,
+.container-md .bg-image,
+.container-lg .bg-image,
+.container-xl .bg-image {
   max-height: 88vh;
   filter: blur(5px);
   -webkit-filter: blur(5px);
@@ -11240,6 +11240,88 @@ body {
 #admin-index h1 {
   text-align: center;
   margin-bottom: 3%;
+}
+
+#sidenav {
+  background-color: #252525;
+  height: 100vh;
+  color: #fff;
+  margin-right: 17%;
+  border-right: 1px solid #c7c7c7;
+}
+
+#sidenav .row h1 {
+  padding-top: 11%;
+  padding-left: 3%;
+}
+
+.option {
+  height: 80px;
+  display: flex;
+  padding-left: 40px;
+}
+
+.option svg {
+  width: 2.5em;
+  padding-top: 5px;
+}
+
+#sidenav .option p {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+#sidenav .option:hover {
+  background-color: #1b7cbd;
+}
+
+#sidenav .option a:hover {
+  text-decoration: none;
+}
+
+#sidenav .resize {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10%;
+  left: 42%;
+  text-align: center;
+}
+
+#test {
+  height: 10vh;
+  margin-left: -5%;
+  background-color: #fff;
+  border-bottom: 3px solid #dadada;
+}
+
+#test .row {
+  padding-left: 10%;
+  padding-top: 2%;
+}
+
+#test .icons {
+  margin-left: 70%;
+}
+
+#test .icons svg {
+  margin-left: 30px;
+}
+
+#manage-users {
+  margin-top: 5%;
+  text-align: center;
+  margin-right: 7%;
+}
+
+#manage-users .card {
+  width: 90%;
+  margin: auto;
+  margin-top: 2%;
+  text-align: left;
 }
 
 #action-buttons .btn {

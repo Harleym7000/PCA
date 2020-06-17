@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -67,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $role = Role::where('name', 'Committee Member')->first();
+        $role = Role::where('name', 'Registered Interest')->first();
 
         $user = User::create([
             'name' => $data['name'],
@@ -80,5 +81,10 @@ class RegisterController extends Controller
         return $user;
 
         
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
     }
 }
