@@ -199,6 +199,7 @@ class UsersController extends Controller
             DB::table('users')
             ->where('id', $userID)
             ->update(['password' => $newPass]);
+            return view('admin.users.resetPass')->with('success', 'Password reset successfully');
         }
 
     }

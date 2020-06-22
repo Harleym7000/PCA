@@ -34,7 +34,7 @@
     
                     <div class="card-body">
                         
-                      <form action="{{ action('Admin\UsersController@resetUserPassword') }}" method="POST">
+                      <form action="/admin/users/processResetPass" method="POST">
                         @csrf
 
                         <div class="form-group row">

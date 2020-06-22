@@ -15,8 +15,11 @@ class EventsController extends Controller
      */
     public function index()
     {
+        $title = "Event Management";
         $events = DB::select('SELECT * FROM `events` ORDER BY `events`.`id`');
-        return view('events.index')->with('events', $events);
+        return view('events.index')->with([
+            'events' => $events,
+            'title' => $title]);
     }
 
     /**
