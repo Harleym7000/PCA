@@ -11258,12 +11258,27 @@ body {
 .option {
   height: 80px;
   display: flex;
-  padding-left: 40px;
+  padding-left: 30px;
+  width: 100%;
+}
+
+.option .col-5 {
+  margin-top: 15%;
+}
+
+#sidenav a {
+  color: #fff;
 }
 
 .option svg {
   width: 2.5em;
   padding-top: 5px;
+}
+
+#sidenav img {
+  height: 100px;
+  width: 130px;
+  padding-left: 5%;
 }
 
 #sidenav .option p {
@@ -11279,7 +11294,7 @@ body {
   background-color: #1b7cbd;
 }
 
-#sidenav .option a:hover {
+#sidenav a:hover {
   text-decoration: none;
 }
 
@@ -11312,16 +11327,16 @@ body {
 }
 
 #manage-users {
-  margin-top: 5%;
+  margin-top: 6%;
   text-align: center;
-  margin-right: 7%;
+  margin-right: 5%;
 }
 
-#manage-users .card {
-  width: 90%;
-  margin: auto;
+#manage-users .table {
+  width: 100%;
   margin-top: 2%;
   text-align: left;
+  font-size: 16px;
 }
 
 #action-buttons .btn {
@@ -11368,5 +11383,92 @@ footer .subscribe {
 footer #subscribe-form {
   width: 40%;
   margin: auto;
+}
+
+@media (max-width: 575.98px) {
+  #sidenav {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #sidenav {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
 }
 

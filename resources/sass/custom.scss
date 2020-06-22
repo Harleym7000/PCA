@@ -333,7 +333,16 @@ body {
     .option {
       height: 80px;
       display: flex;
-  padding-left: 40px;
+  padding-left: 30px;
+  width: 100%;
+    }
+
+    .option .col-5 {
+      margin-top: 15%;
+    }
+
+    #sidenav a {
+      color: #fff;
     }
 
     .option svg {
@@ -341,7 +350,15 @@ body {
       padding-top: 5px;
     }
 
-      #sidenav .option p{
+    #sidenav img {
+      height: 100px;
+      width: 130px;
+      padding-left: 5%;
+    }
+
+    
+
+      #sidenav .option p {
       color: #fff;
       font-size: 14px;
       text-align: center;
@@ -355,7 +372,7 @@ body {
       background-color: #1b7cbd;
     }
 
-    #sidenav .option a:hover {
+    #sidenav a:hover {
       text-decoration: none;
     }
 
@@ -388,16 +405,16 @@ body {
     }
 
     #manage-users {
-      margin-top: 5%;
+      margin-top: 6%;
       text-align: center;
-      margin-right: 7%;
+      margin-right: 5%;
     }
 
-    #manage-users .card {
-      width: 90%;
-      margin: auto;
+    #manage-users .table {
+      width: 100%;
       margin-top: 2%;
       text-align: left;
+      font-size: 16px;
     }
 
     #action-buttons .btn {
@@ -448,3 +465,95 @@ body {
   }
 
   //Media Queries 
+  // Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
+  #sidenav {
+    display: none;
+  }
+ }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  #sidenav {
+    display: none;
+  }
+ }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { 
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) and (max-width: 1599.98px) { 
+
+  #sidenav .option p {
+    display: none;
+  }
+
+  .option {
+    height: 70px;
+    padding-left: 30%;
+  }
+
+  #sidenav img {
+    width: 80px;
+    height: 50px;
+    padding-left: 15%;
+    margin-left: 8%;
+    margin-top: 2%;
+  }
+
+  #sidenav .row h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 25%;
+  }
+ }
