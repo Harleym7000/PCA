@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <div id="app">
 <div class="container-fluid" style="text-align: left; color: #000;">
   <div class="row">
     <div class="col-2">
@@ -27,6 +28,7 @@
         @include('inc.admin-nav')
 <div id="create-user">
     <div class="container">
+    @include('partials.alerts')
         <div class="row justify-content-center">
             <div class="col-9">
                 <div class="card">
@@ -52,10 +54,10 @@
                                 <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
                             </div>
                         </div>
-                        @include('partials.alerts')
                         <button type="submit" class="btn btn-primary">Reset Password</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

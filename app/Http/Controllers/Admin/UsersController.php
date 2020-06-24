@@ -191,17 +191,19 @@ class UsersController extends Controller
 
         $user = auth()->user();
         $pass = $request->input('password');
-        $passConf = $request->input('passConf');
+        $passConf = $request->input('passwordCon');
 
         if($pass === $passConf) {
-            $userID = $user;
+            $userID = $user->id;
             $newPass = Hash::make($pass);
             DB::table('users')
             ->where('id', $userID)
             ->update(['password' => $newPass]);
-            return view('admin.users.resetPass')->with('success', 'Password reset successfully');
+            $request->session()->flash('success', 'Your password has been reset. You can now login using your new password');
+        } else {
+            $request->session()->flash('error', 'Your passwords did not match. Please try again');
         }
-
+        return view('admin.users.resetPass');
     }
 
 }

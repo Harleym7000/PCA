@@ -28,11 +28,11 @@ Route::get('/interest', 'HomeController@interest');
 
 Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
 Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName');
+Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');
-    Route::post('/users/processResetPass', 'UsersController@resetUserPassword');
 });
 
 
