@@ -15,6 +15,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -124,14 +126,15 @@ $('tbody').html(output);
 <body>
   <div id="app">
 <div class="container-fluid" style="text-align: left; color: #000;">
-  <div class="row">
+  <div class="row no-gutters">
     <div class="col-2">
       @include('inc.admin-sidenav')
     </div>
     <div class="col-10">
       @include('inc.admin-nav')
       <div id="manage-users">
-                <div class="table-responsive-sm">
+        <div class="row justify-content-center">
+                <div class="table-responsive">
                     <table class="table" id="user-table">
                       <span id="total_records"></span>
                       <thead>
@@ -192,8 +195,7 @@ $('tbody').html(output);
 </div>
     </div>
   </div>
-
-  
+</div>
 @foreach($users as $user)
   <!-- Modal -->
   <div class="modal fade" id="delete{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

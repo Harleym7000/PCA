@@ -2,7 +2,7 @@
 body {
     overflow-x: hidden;
     margin: 0;
-    padding: 0;
+    padding: auto;
   }
   
   /* Navbar styles*/
@@ -321,72 +321,67 @@ body {
       background-color: #252525;
       height: 100vh;
       color: #fff;
-      margin-right: 17%;
-      border-right: 1px solid #c7c7c7;
-    }
-
-    #sidenav .row h1 {
-      padding-top: 11%;
-      padding-left: 3%;
-    }
-
-    .option {
-      height: 80px;
-      display: flex;
-  padding-left: 30px;
-  width: 100%;
-    }
-
-    .option .col-5 {
-      margin-top: 15%;
-    }
-
-    #sidenav a {
-      color: #fff;
-    }
-
-    .option svg {
-      width:2.5em;
-      padding-top: 5px;
     }
 
     #sidenav img {
-      height: 100px;
-      width: 130px;
-      padding-left: 5%;
+      height: 110px;
+      width: 110px;
     }
 
-    
-
-      #sidenav .option p {
+      #sidenav span {
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
-      margin-top: 30px;
-      margin-left: 10px;
       text-transform: uppercase;
       
-    }
-
-    #sidenav .option:hover {
-      background-color: #1b7cbd;
     }
 
     #sidenav a:hover {
       text-decoration: none;
     }
 
-    #sidenav .resize {
-      position: absolute;
-      bottom: 0;
-      margin-bottom: 10%;
-      left: 42%;
+    #sidenav .option:hover {
+      background-color: #2b8be6;
+    }
+
+    #sidenav .option {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 20px;
+    }
+
+    #sidenav .divider {
+      width: 90%;
+      margin: auto;
+      height: 1px;
+      border-bottom: 1px solid #c7c7c7;
+    }
+
+    #sidenav .title {
+      font-size: 32px;
+      padding-left: 5%;
+    }
+
+    #sidenav .option img {
+      height: 30px;
+      width: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #resize {
       text-align: center;
+    }
+
+    #resize img {
+      height: 50px;
+      width: 50px;
+      margin-bottom: 40px;
+      margin-right: 10px;
     }
 
     #test {
       height: 10vh;
-      margin-left: -5%;
       background-color: #fff;
       border-bottom: 3px solid #dadada;
     }
@@ -405,16 +400,15 @@ body {
     }
 
     #manage-users {
-      margin-top: 6%;
+      margin-top: 5%;
       text-align: center;
-      margin-right: 5%;
     }
 
     #manage-users .table {
-      width: 100%;
-      margin-top: 2%;
+      width: 80%;
       text-align: left;
       font-size: 16px;
+      margin: auto;
     }
 
     #action-buttons .btn {

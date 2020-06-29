@@ -23,6 +23,7 @@
                   <label for="inputAddress2">Message</label>
                   <textarea class="form-control" id="inputAddress2" placeholder="Enter Message Here..." rows="8"></textarea>
                 </div>
+                <div class="g-recaptcha" data-sitekey="6Ld8_qgZAAAAABvCjz0DqqT80aTfInz5benW1k-B"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
 </div>
