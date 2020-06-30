@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::resource('/news', 'NewsController');
 Route::get('/events', 'PagesController@events');
 Route::get('/events/index', 'EventsController@index');
 Route::get('/events/create', 'EventsController@create')->middleware('can:manage-events');
+Route::get('/contact-us', 'PagesController@contact');
 Route::resource('/contact', 'ContactController');
 Auth::routes();
 
