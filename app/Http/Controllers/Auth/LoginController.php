@@ -49,7 +49,7 @@ class LoginController extends Controller
         }
 
         if(Auth::user()->hasRole('Event Manager')) {
-            $this->redirectTo = 'events/index';
+            $this->redirectTo = '/event-manager/index';
 
             return $this->redirectTo;
         }

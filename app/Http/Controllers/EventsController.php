@@ -15,11 +15,12 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $title = "Event Management";
-        $events = DB::select('SELECT * FROM `events` ORDER BY `events`.`id`');
+        $title = 'Event Management';
+        $events = Event::paginate(6);
         return view('events.index')->with([
-            'events' => $events,
-            'title' => $title]);
+            'title' => $title,
+            'events' => $events
+        ]);
     }
 
     /**
@@ -29,7 +30,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        //
     }
 
     /**
@@ -40,43 +41,7 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'date' => 'required',
-            'time' => 'required',
-            'location' => 'required',
-            'image' => 'image|nullable|max:1999'
-        ]);
-
-        //Handle File Upload
-        if($request->hasFile('image')) {
-            //Get filename with the extension 
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            //Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            //Get just ext
-            $extension = $request->file('image')->getClientOriginalExtension();
-            //File Name To Store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            //Upload Image
-            $path = $request->file('image')->storeAs('public/event_images', $fileNameToStore);
-
-        } else {
-            $fileNameToStore = 'pcaLogo.png';
-        }
-
-        //Create Event
-        $post = new Event;
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-        $post->date = $request->input('date');
-        $post->time = $request->input('time');
-        $post->location = $request->input('location');
-        $post->image = $fileNameToStore; 
-        $post->save();
-
-        return redirect('/events')->with('success', 'Event Created');
+        //
     }
 
     /**

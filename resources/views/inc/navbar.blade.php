@@ -23,7 +23,7 @@
                     <a class="nav-link" href="/events">Events</a>
                 </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/news">Our Work</a>
+                    <a class="nav-link" href="/news">News</a>
                 </li>
                     <li class="nav-item">
                     <a class="nav-link" href="/contact-us">Contact Us</a>
@@ -54,7 +54,7 @@
                          @endcan
 
                          @can('manage-events')
-                            <a class="dropdown-item" href="/events/index">
+                            <a class="dropdown-item" href="/event/index">
                              Manage Events
                          </a>
                          @endcan

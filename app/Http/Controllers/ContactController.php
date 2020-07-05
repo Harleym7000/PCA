@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return view('contact.index');
     }
 
     /**
@@ -35,11 +35,27 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact = new Contact;
-        $contact->first_name = $request->input('firstname');
-        $contact->surname = $request->input('surname');
-        $contact->subject = $request->input('subject');
-        $contact->message = $request->input('message');
+        $this->validate($request, [
+            'firstname' => 'required',
+            'surname' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
+        ]);
+
+        return response()->json([
+            'success' => 'success'
+        ]);
+
+        // $contact = new Contact;
+        // $contact->first_name = $request->input('firstname');
+        // $contact->surname = $request->input('surname');
+        // $contact->subject = $request->input('subject');
+        // $contact->message = $request->input('message');
+        //$contact->save();
+
+        // $request->session()->flash('success', 'Your message has been sent');
+        // return view('contact.index');
     }
 
     /**
