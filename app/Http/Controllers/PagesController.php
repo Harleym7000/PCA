@@ -23,4 +23,15 @@ public function events() {
     $events = DB::select('SELECT * FROM `events` WHERE `events`.`approved` = 1 ORDER BY `events`.`id`');
     return view('pages.events')->with('events', $events);
 }
+
+public function news()
+    {
+        $news = News::orderBy('id', 'desc')->get();
+        return view('pages.news')->with('news', $news);
+    }
+
+public function contact()
+    {
+        return view('pages.contact');
+    }
 }

@@ -11,10 +11,10 @@
         <div class="col-md-4 mx-auto">
   
           <!-- Content -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-          <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-            consectetur
-            adipisicing elit.</p>
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">What We Do</h5>
+          <p>Portstewart Community Association is a charitable organisation who currently organises and implemets 
+            <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> alongside other events and activities for the benefit 
+            of the community.</p>
   
         </div>
         <!-- Grid column -->
@@ -29,16 +29,16 @@
   
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="/">Home</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="/about">About</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="/events">Events</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="/news">News</a>
             </li>
           </ul>
   
@@ -51,20 +51,20 @@
         <div class="col-md-2 mx-auto">
   
           <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">More Links</h5>
   
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="/contact-us">Contact Us</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="/login">Login</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="/register">Register</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="https://redsails.co.uk/" target="_blank">Red Sails Website</a>
             </li>
           </ul>
   
@@ -77,20 +77,11 @@
         <div class="col-md-2 mx-auto">
   
           <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Social Media</h5>
   
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
-            </li>
-            <li>
-              <a href="#!">Link 2</a>
-            </li>
-            <li>
-              <a href="#!">Link 3</a>
-            </li>
-            <li>
-              <a href="#!">Link 4</a>
+              <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank">Facebook</a>
             </li>
           </ul>
   

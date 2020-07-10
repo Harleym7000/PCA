@@ -163,7 +163,6 @@ $('tbody').html(output);
                           </tr>
                         </thead>
                         <tbody>
-
                           
   
   <!-- Modal -->
@@ -187,6 +186,7 @@ $('tbody').html(output);
                     
                     </div>
             </div>
+            <?php echo $users->render(); ?>
         </div>
     </div>
 </div>

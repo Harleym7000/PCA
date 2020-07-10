@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -10928,6 +10928,8 @@ a.text-dark:focus {
   }
 }
 
+/*Fonts*/
+
 /*Global Styles*/
 
 body {
@@ -10977,23 +10979,22 @@ body {
 .container-lg .bg-image,
 .container-xl .bg-image {
   max-height: 88vh;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
 }
 
 /* Centered text */
 
 .centered {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .centered h1 {
-  text-shadow: 2px 2px #000;
   font-size: 62px;
   width: 100%;
+  font-family: "Roboto", cursive;
+  text-shadow: 3px 3px #000;
 }
 
 .centered .btn {
@@ -11002,7 +11003,7 @@ body {
 }
 
 .centered a {
-  margin-top: 100px;
+  margin-top: 250px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -11293,6 +11294,11 @@ body {
   padding: 0;
 }
 
+#sidenav .option svg {
+  width: 30px;
+  height: 30px;
+}
+
 #resize {
   text-align: center;
 }
@@ -11337,6 +11343,30 @@ body {
 
 #action-buttons .btn {
   margin-left: 10px;
+}
+
+#inbox-display {
+  margin-top: 3%;
+}
+
+.list-group a {
+  text-decoration: none;
+  color: #000;
+}
+
+.list-group p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.img-caption {
+  display: none;
+}
+
+.action-img:hover {
+  background: #D3D3D3;
+  border-radius: 30px;
 }
 
 footer {

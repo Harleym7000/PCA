@@ -178,9 +178,12 @@ $('tbody').html(output);
                       @endforeach
                     </tbody>
                       </table>
+                      
                     
                     </div>
+                    
             </div>
+            <?php echo $events->render(); ?>
         </div>
     </div>
 </div>

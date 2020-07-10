@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
         <div class="index container-fluid">
-            <img src="img/portstewart.jpg" alt="portstewart" style="width:100%;" class="bg-image">
+            <img src="img/IMG_20190803_163241.jpg" alt="portstewart" style="width:100%;" class="bg-image">
             <div class="centered">
                 <h1>Insert PCA Mission Statement Here</h1>
                 <div class="row justify-content-center">
@@ -43,7 +43,7 @@
             <div class="media">
               <img class="media-object mr-3" src="img/pcaLogo.png" alt="Generic placeholder image" style="height: 240px; width:180px;">
               <div class="media-body">
-                <a href=""><h5 class="mt-0">{{$story->title}}</h5></a>
+                <a href="/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 {{$story->story}}
                 <br><br>
                 <p>Written on: {{$story->created_at}}</p>

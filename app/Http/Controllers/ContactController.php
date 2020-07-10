@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use Illuminate\Support\Facades\DB;
+use App\Rules\Captcha;
+use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
@@ -14,7 +17,14 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact.index');
+        $title = "Inbox";
+        $contacts = DB::table('contact_us')
+        ->groupBy('first_name')
+        ->get();
+        return view('contact.index')->with([
+            'title' => $title,
+            'contacts' => $contacts
+            ]);
     }
 
     /**
@@ -35,27 +45,28 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'firstname' => 'required',
-            'surname' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
-            'g-recaptcha-response' => 'required|captcha',
-        ]);
 
-        return response()->json([
-            'success' => 'success'
-        ]);
 
-        // $contact = new Contact;
-        // $contact->first_name = $request->input('firstname');
-        // $contact->surname = $request->input('surname');
-        // $contact->subject = $request->input('subject');
-        // $contact->message = $request->input('message');
-        //$contact->save();
+        $token = $request->input('g-recaptcha-response');
+        // if(strlen($token) > 0) {
+            // successfully submitted
+
+        $contactfirst_name = $request->input('firstname');
+        $contactsurname = $request->input('surname');
+        $contactsubject = $request->input('subject');
+        $contactmessage = $request->input('message');
+
+        DB::table('contact_us')->insert(
+            ['first_name' => $contactfirst_name, 'surname' => $contactsurname, 'subject' => $contactsubject, 'message' => $contactmessage]
+        );
+        
 
         // $request->session()->flash('success', 'Your message has been sent');
-        // return view('contact.index');
+        return view('pages.contact-submit');
+        // } else {
+        //     return redirect('/contact-us');
+        // }
+        
     }
 
     /**
@@ -64,9 +75,16 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($first_name)
     {
-        //
+        $title = $first_name;
+        $contact = DB::table('contact_us')
+        ->where('first_name', '=', $first_name)
+        ->get();
+        return view('contact.show')->with([
+            'contact' => $contact,
+            'title' => $title
+            ]);
     }
 
     /**
@@ -101,5 +119,22 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getMessages() {
+       $messages = DB::table('contact_us')
+       ->groupBy('first_name')
+       ->orderBy('created_at', 'desc');
+       $result = $messages->get();
+
+       return response()->json($result);
+    }
+
+    public function markRead() 
+    {
+        $id = $_POST['id'];
+        DB::table('contact_us')
+        ->where('id', $id)
+        ->update(['message_read' => 1]);
     }
 }

@@ -16,7 +16,7 @@ class EventsController extends Controller
     public function index()
     {
         $title = 'Event Management';
-        $events = Event::paginate(6);
+        $events = Event::paginate(5);
         return view('events.index')->with([
             'title' => $title,
             'events' => $events
@@ -30,7 +30,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -52,7 +52,8 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+        return view('events.show')->with('event', $event);
     }
 
     /**
