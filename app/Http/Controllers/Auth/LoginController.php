@@ -59,10 +59,11 @@ class LoginController extends Controller
 
         if(Auth::user()->hasRole('Event Manager')) {
             $id = Auth::user()->id;
+            $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
             User::find($id);
             DB::table('users')
             ->where('id', '=', $id)
-            ->update(['logged_in' => 1]);
+            ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
             $this->redirectTo = '/event-manager/index';
 
             return $this->redirectTo;

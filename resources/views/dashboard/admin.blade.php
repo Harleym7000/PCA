@@ -46,9 +46,28 @@
             <div class="row">
               @foreach($usersData as $userData)
               <p class="card-text col-4">{{$userData->name}}</p>
-              <p class="card-text col-8">{{$userData->time_logged_in}}</p>
+              <p class="card-text col-8">{{date('d-m-Y H:i', strtotime($userData->time_logged_in))}}</p>
               @endforeach
             </div>
-        </div>
           </div>
         </div>
+            <div class="active-users-card">
+              <div class="card bg-light mb-3" style="max-width: 22rem;">
+                <div class="card-header">Total Users</div>
+                <div class="card-body">
+                  <h4 class="card-text">Total Users: {{$totalUsers}}</h4>
+                  <br>
+              </div>
+        </div>
+          </div>
+          <div class="active-users-card">
+            <div class="card bg-light mb-3" style="max-width: 22rem;">
+              <div class="card-header">Committee Members</div>
+              <div class="card-body">
+                <h4 class="card-text">Total Committee Members: {{$totalCommitteeMembers}}</h4>
+                <br>
+            </div>
+      </div>
+        </div>
+        </div>
+      </div>

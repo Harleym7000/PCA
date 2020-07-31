@@ -45,7 +45,7 @@ var output = '';
             {
               var id = data[count].id;
               //console.log(id);
-              //output += "<a href='/contact-messages/"+data[count].first_name +"'>";
+              output += "<a href='/contact-messages/"+data[count].first_name +"'>";
               output += "<div class='row'>";
               output += "<input class='form-check-input' type='checkbox' value='"+data[count].id+"' id='defaultCheck"+data[count].id + "'>";
               output += "<input type='hidden' class='messageId' value='"+data[count].id+"'>";
