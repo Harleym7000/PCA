@@ -33,6 +33,33 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
+          <div class="row">
+          <div class="col-4">
+          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
+            <div class="card-header">Total Site Visits</div>
+            <div class="card-body">
+              <h5 class="card-title">{{$totalVisitors}}</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col-4">
+          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
+            <div class="card-header">Unique Visits</div>
+            <div class="card-body">
+              <h5 class="card-title">{{$totalUniqueVisits}}</h5>
+            </div>
+          </div>
+          </div>
+          <div class="col-4">
+          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h5 class="card-title">Secondary card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+          </div>
+          </div>
           <div class="active-users-card">
           <div class="card bg-light mb-3" style="max-width: 22rem;">
             <div class="card-header">Active Users</div>
@@ -51,7 +78,7 @@
             </div>
           </div>
         </div>
-            <div class="active-users-card">
+            <div class="total-users-card">
               <div class="card bg-light mb-3" style="max-width: 22rem;">
                 <div class="card-header">Total Users</div>
                 <div class="card-body">
@@ -60,7 +87,7 @@
               </div>
         </div>
           </div>
-          <div class="active-users-card">
+          <div class="committee-members-card">
             <div class="card bg-light mb-3" style="max-width: 22rem;">
               <div class="card-header">Committee Members</div>
               <div class="card-body">
@@ -71,3 +98,4 @@
         </div>
         </div>
       </div>
+      

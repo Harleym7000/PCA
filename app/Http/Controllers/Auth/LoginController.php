@@ -40,52 +40,36 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-
     }
 
     public function redirectTo()
     {
-        if(Auth::user()->hasRole('Admin')) {
-            $id = Auth::user()->id;
-            $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
-            User::find($id);
-            DB::table('users')
-            ->where('id', '=', $id)
-            ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
-            $this->redirectTo = route('admin.users.index');
 
+        $id = Auth::user()->id;
+        $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
+        User::find($id);
+        DB::table('users')
+        ->where('id', '=', $id)
+        ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
+
+        if(Auth::user()->hasRole('Admin')) {
+            $this->redirectTo = route('admin.users.index');
             return $this->redirectTo;
         }
 
         if(Auth::user()->hasRole('Event Manager')) {
-            $id = Auth::user()->id;
-            $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
-            User::find($id);
-            DB::table('users')
-            ->where('id', '=', $id)
-            ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
             $this->redirectTo = '/event-manager/index';
 
             return $this->redirectTo;
         }
 
         if(Auth::user()->hasRole('Registered Interest')) {
-            $id = Auth::user()->id;
-            User::find($id);
-            DB::table('users')
-            ->where('id', '=', $id)
-            ->update(['logged_in' => 1]);
             $this->redirectTo = '/interest';
 
             return $this->redirectTo;
         }
 
         if(Auth::user()->hasRole('Committee Member')) {
-            $id = Auth::user()->id;
-            User::find($id);
-            DB::table('users')
-            ->where('id', '=', $id)
-            ->update(['logged_in' => 1]);
             $this->redirectTo = '/home';
 
             return $this->redirectTo;

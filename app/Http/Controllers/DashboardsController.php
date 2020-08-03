@@ -20,6 +20,10 @@ class DashboardsController extends Controller
         ->where('role_user.role_id', '=', 3)
         ->get();
         $totalCommitteeMembers = count($committeeMembers);
+        $visitors = DB::table('visitors')->get();
+        $totalVisitors = count($visitors);
+        $uniqueVisits = DB::table('visitors')->distinct()->get(['ip']);
+        $totalUniqueVisits = count($uniqueVisits);
         $title = "Admin Dashboard";
         return view('dashboard.admin')->with([
             'title' => $title,
@@ -27,7 +31,9 @@ class DashboardsController extends Controller
             'usersData' => $usersData,
             'totalUsers' => $totalUsers,
             'committeeMembers' => $committeeMembers,
-            'totalCommitteeMembers' => $totalCommitteeMembers
+            'totalCommitteeMembers' => $totalCommitteeMembers,
+            'totalVisitors' => $totalVisitors,
+            'totalUniqueVisits' => $totalUniqueVisits
             ]);
     }
 }

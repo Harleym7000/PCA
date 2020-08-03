@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2020 at 02:16 AM
+-- Generation Time: Aug 03, 2020 at 09:24 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -31,10 +31,22 @@ CREATE TABLE `contact_us` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mesage` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `mesage_read` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_us`
+--
+
+INSERT INTO `contact_us` (`id`, `first_name`, `surname`, `subject`, `message`, `created_at`, `updated_at`, `mesage_read`) VALUES
+(2, 'Harley', 'Mulholland', 'Open Mic Night', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 17:14:37', '2020-07-08 17:14:37', 0),
+(3, 'Harley', 'Mulholland', 'Open Mic Night', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 20:30:39', '2020-07-08 20:30:39', 0),
+(4, 'Test', 'User', 'Test', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 22:53:01', '2020-07-08 22:53:01', 0),
+(6, 'User', 'Name', 'This is a Test', 'This is a test contact message', '2020-07-09 19:05:29', '2020-07-09 19:05:29', 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +123,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2020_06_07_005158_create_subs_table', 6),
 (10, '2020_06_07_011943_create_contact_us_table', 7),
 (11, '2020_06_07_235310_add_approved_to_events_table', 7),
-(12, '2020_06_15_101419_add_interest_form_approved_to_users', 8);
+(12, '2020_06_15_101419_add_interest_form_approved_to_users', 8),
+(13, '2020_07_09_173701_add_logged_in_status_to_users_table', 9),
+(14, '2020_07_09_183620_add_timeloggedin_to_users_table', 10),
+(15, '2020_07_10_205651_add_read_to_contact_us_table', 11),
+(16, '2020_08_01_152436_create_visitors_table', 12),
+(17, '2020_08_01_155306_create_policy_table', 13);
 
 -- --------------------------------------------------------
 
@@ -147,6 +164,19 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policy`
+--
+
+CREATE TABLE `policy` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -202,7 +232,9 @@ INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`)
 (19, 6, 15, '2020-06-17 14:52:48', '2020-06-17 14:52:48'),
 (20, 6, 16, '2020-06-17 14:56:17', '2020-06-17 14:56:17'),
 (25, 3, 1, '2020-06-20 12:43:01', '2020-06-20 12:43:01'),
-(28, 3, 29, '2020-06-21 16:47:07', '2020-06-21 16:47:07');
+(29, 6, 30, '2020-07-06 17:20:14', '2020-07-06 17:20:14'),
+(30, 2, 31, '2020-07-08 16:48:46', '2020-07-08 16:48:46'),
+(31, 5, 32, '2020-07-08 16:50:08', '2020-07-08 16:50:08');
 
 -- --------------------------------------------------------
 
@@ -231,22 +263,57 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `logged_in` tinyint(4) NOT NULL,
+  `time_logged_in` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$/dIt7cszkUtUEcoHxNeXGuCoGLJ/RNzsrx2rLI.KYuGxlumAdcGTm', NULL, '2020-06-08 13:08:21', '2020-06-08 13:08:21'),
-(3, 'Committee Member', 'user@user.com', NULL, '$2y$10$FTjMIFE/rcRRADM.2anzu.lAoIThk61vZ7BgBMuYmJSkizbSYYq.K', NULL, '2020-06-06 20:37:11', '2020-06-07 00:00:15'),
-(4, 'Event Manager', 'event@event.com', NULL, '$2y$10$6U8.g85gMyZQooK1kuPqouMoo0bgKZRmgZemkLVM8I2b7YGItEfWe', NULL, '2020-06-07 21:03:41', '2020-06-07 21:03:41'),
-(11, 'Test', 'test@test.com', NULL, '$2y$10$9HCosPZdHCh87c.0e8c5OOiymT4QJQXawVeFh6GCyF.jKyyaAzTAq', NULL, '2020-06-14 19:40:00', '2020-06-14 19:40:00'),
-(14, 'Test 2', 'test2@test2.com', NULL, '$2y$10$JfSR1UNDSES5QwKNs69Roe.42tje01Wcd/7BVAD2SXuNwqNr.idd.', NULL, '2020-06-16 20:45:38', '2020-06-16 20:45:38'),
-(15, 'Test 3', 'test3@test3.com', NULL, '$2y$10$./uciVyXGwCeAA0X1eh/vejGqcl5XNGwxRf5UrB8xk6EbPZnsfSnG', NULL, '2020-06-17 13:52:48', '2020-06-17 13:52:48'),
-(16, 'Test 4', 'test4@test4.com', NULL, '$2y$10$eLgrfOpq7Teg/6f.Pm0fEO0MciNQCJdQiPCJPOnYB.5Hee0pXdGLi', NULL, '2020-06-17 13:56:17', '2020-06-17 13:56:17'),
-(29, 'Harley', 'email@email.com', NULL, '$2y$10$76667rlNFvvdcbfpXUBZ/OUXCzOob/UOl9zRuMZVRdYQS6fGxIR9C', NULL, '2020-06-21 15:47:07', '2020-06-21 15:47:07');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `logged_in`, `time_logged_in`) VALUES
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$Wr3gzYidvG6dX5CmFd4HX.ttNspYF0h34AbF/N4U5M3/dWl0pp1Y2', NULL, '2020-06-08 13:08:21', '2020-06-08 13:08:21', 1, '2020-08-02 18:02:28'),
+(3, 'Committee Member', 'user@user.com', NULL, '$2y$10$FTjMIFE/rcRRADM.2anzu.lAoIThk61vZ7BgBMuYmJSkizbSYYq.K', NULL, '2020-06-06 20:37:11', '2020-06-07 00:00:15', 0, '2020-07-09 19:38:40'),
+(4, 'Event Manager', 'event@event.com', NULL, '$2y$10$6U8.g85gMyZQooK1kuPqouMoo0bgKZRmgZemkLVM8I2b7YGItEfWe', NULL, '2020-06-07 21:03:41', '2020-06-07 21:03:41', 0, '2020-08-02 01:08:17'),
+(11, 'Test', 'test@test.com', NULL, '$2y$10$9HCosPZdHCh87c.0e8c5OOiymT4QJQXawVeFh6GCyF.jKyyaAzTAq', NULL, '2020-06-14 19:40:00', '2020-06-14 19:40:00', 0, '2020-07-09 19:38:40'),
+(14, 'Test 2', 'test2@test2.com', NULL, '$2y$10$JfSR1UNDSES5QwKNs69Roe.42tje01Wcd/7BVAD2SXuNwqNr.idd.', NULL, '2020-06-16 20:45:38', '2020-06-16 20:45:38', 0, '2020-07-09 19:38:40'),
+(15, 'Test 3', 'test3@test3.com', NULL, '$2y$10$./uciVyXGwCeAA0X1eh/vejGqcl5XNGwxRf5UrB8xk6EbPZnsfSnG', NULL, '2020-06-17 13:52:48', '2020-06-17 13:52:48', 0, '2020-07-09 19:38:40'),
+(16, 'Test 4', 'test4@test4.com', NULL, '$2y$10$eLgrfOpq7Teg/6f.Pm0fEO0MciNQCJdQiPCJPOnYB.5Hee0pXdGLi', NULL, '2020-06-17 13:56:17', '2020-07-08 14:45:57', 0, '2020-07-09 19:38:40'),
+(30, 'Test Admin', 'admintest@admintest.com', NULL, '$2y$10$FxnWcLUS/UEGh2Vngk1fp.Z83nWFcFSIaeRiUxnTUdy98OXAB7ADy', NULL, '2020-07-06 16:20:14', '2020-07-06 16:20:14', 0, '2020-07-09 19:38:40'),
+(31, 'Author', 'author@author.com', NULL, '$2y$10$xDOkRORV8Kjj13mhKt2d4eMFhQtSZAwDTJT3TYZvc813uKeUfqIgu', NULL, '2020-07-08 15:48:46', '2020-07-08 15:48:46', 0, '2020-07-09 19:38:40'),
+(32, 'Content Mod', 'content@content.com', NULL, '$2y$10$eIzTgFd.0FhfxH2eJBwvEOQKlxfTr2p8BR1AJ0M76dAYsqFC9qYWy', NULL, '2020-07-08 15:49:49', '2020-07-08 15:49:49', 0, '2020-07-09 19:38:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitors`
+--
+
+CREATE TABLE `visitors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_visited` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitors`
+--
+
+INSERT INTO `visitors` (`id`, `ip`, `last_visited`) VALUES
+(1, '86.129.104.93', '2020-08-01 16:27:04'),
+(2, '127.0.0.1', '2020-08-01 16:37:49'),
+(3, '127.0.0.1', '2020-08-01 16:38:20'),
+(4, '127.0.0.1', '2020-08-01 19:00:13'),
+(5, '127.0.0.1', '2020-08-01 23:38:00'),
+(6, '127.0.0.1', '2020-08-01 23:45:33'),
+(7, '127.0.0.1', '2020-08-02 00:25:24'),
+(8, '127.0.0.1', '2020-08-02 00:26:08'),
+(9, '127.0.0.1', '2020-08-02 00:46:39'),
+(10, '127.0.0.1', '2020-08-02 01:07:41'),
+(11, '127.0.0.1', '2020-08-02 01:13:27'),
+(12, '127.0.0.1', '2020-08-02 17:57:33'),
+(13, '127.0.0.1', '2020-08-02 17:58:38');
 
 --
 -- Indexes for dumped tables
@@ -289,6 +356,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `policy`
+--
+ALTER TABLE `policy`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -316,6 +389,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `visitors`
+--
+ALTER TABLE `visitors`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -323,7 +402,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -341,13 +420,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `policy`
+--
+ALTER TABLE `policy`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -359,7 +444,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `subs`
@@ -371,7 +456,13 @@ ALTER TABLE `subs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `visitors`
+--
+ALTER TABLE `visitors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

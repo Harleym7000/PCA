@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PoliciesController extends Controller
 {
@@ -13,8 +14,12 @@ class PoliciesController extends Controller
      */
     public function index()
     {
+        $policies = DB::table('policy')->get();
         $title = "Policy Documents";
-        return view('policy.index')->with('title', $title);
+        return view('policy.index')->with([
+            'title' => $title,
+            'policies' => $policies
+            ]);
     }
 
     /**

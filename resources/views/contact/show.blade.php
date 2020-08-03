@@ -34,6 +34,20 @@
           @include('inc.admin-nav')
 <h1>Contact Messages</h1>
 @foreach($contact as $message)
+<h5><strong>{{$message->first_name}} {{$message->surname}}</strong></h5> 
 <p>{{$message->message}} - {{$message->created_at}}</p>
 
 @endforeach 
+
+<div class="response-actions">
+  <button type="button" class="btn btn-light"><img src="/img/baseline_reply_black_18dp.png">Reply</button>
+</div>
+
+<div class="reply-textarea">
+  <form>
+    <div class="form-group">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="9" placeholder="Reply here..."></textarea>
+    </div>
+  </form>
+  <button type="button" class="btn btn-primary">Send <img src="/img/baseline_send_white_18dp.png"></button>
+</div>
