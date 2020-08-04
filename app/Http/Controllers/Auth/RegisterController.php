@@ -53,7 +53,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'forename' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'town' => ['required', 'string', 'max:255'],
+            'postcode' => ['required', 'string', 'max:255'],
+            'tel_no' => ['required', 'string', 'max:255'],
+            'mobile_no' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,13 +71,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+    protected function index() 
+    {
+        $causes = DB::table('causes')->get();
+        return view('auth.register', compact('causes'));
+    }
+
     protected function create(array $data)
     {
 
         $role = Role::where('name', 'Registered Interest')->first();
 
         $user = User::create([
-            'name' => $data['name'],
+            'firstname' => $data['forename'],
+            'surname' => $data['surname'],
+            'address' => $data['address'],
+            'town' => $data['town'],
+            'postcode' => $data['postcode'],
+            'tel_no' => $data['tel_no'],
+            'mob_no' => $data['mob_no'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);

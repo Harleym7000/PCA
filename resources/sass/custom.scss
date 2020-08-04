@@ -445,6 +445,30 @@ body {
       background: #D3D3D3;
       border-radius: 30px;
     }
+
+    #register-form {
+      background-color: #fff;
+      margin-top: 5%;
+      margin-bottom: 5%;
+      border: 1px solid #d8d8d8;
+    }
+
+    #register-form .form-control {
+      border: none;
+      border-bottom: 1px solid #808080;
+      background-color: #fff;
+    }
+
+    #register-form form {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+
+    #register-form .form-control:focus {
+      border: none;
+      border-bottom: 1px #002080 solid;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(216, 216, 216, 0.6);
+    }
   
     //Footer styles*/
   footer {
