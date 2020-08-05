@@ -445,6 +445,14 @@ body {
       background: #D3D3D3;
       border-radius: 30px;
     }
+
+    .message-by-contact {
+      border-bottom: 1px solid #000;
+    }
+
+    .message-by-contact:hover {
+      background-color: #f8f8f8;
+    }
   
     //Footer styles*/
   footer {

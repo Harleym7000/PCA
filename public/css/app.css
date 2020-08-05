@@ -11369,6 +11369,14 @@ body {
   border-radius: 30px;
 }
 
+.message-by-contact {
+  border-bottom: 1px solid #000;
+}
+
+.message-by-contact:hover {
+  background-color: #f8f8f8;
+}
+
 footer {
   background: #191919;
 }
