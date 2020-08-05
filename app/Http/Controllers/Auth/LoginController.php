@@ -42,16 +42,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
     public function redirectTo()
     {
 
-        $id = Auth::user()->id;
-        $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
-        User::find($id);
-        DB::table('users')
-        ->where('id', '=', $id)
-        ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
-
+        
         if(Auth::user()->hasRole('Admin')) {
             $this->redirectTo = route('admin.users.index');
             return $this->redirectTo;
@@ -71,6 +70,14 @@ class LoginController extends Controller
 
         if(Auth::user()->hasRole('Committee Member')) {
             $this->redirectTo = '/home';
+
+        $id = Auth::user()->id;
+        $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
+        User::find($id);
+        DB::table('users')
+        ->where('id', '=', $id)
+        ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
+
 
             return $this->redirectTo;
         }

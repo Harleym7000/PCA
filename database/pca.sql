@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2020 at 09:24 AM
+-- Generation Time: Aug 05, 2020 at 01:16 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -20,6 +20,55 @@ SET time_zone = "+00:00";
 --
 -- Database: `pca`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `causes`
+--
+
+CREATE TABLE `causes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `causes`
+--
+
+INSERT INTO `causes` (`id`, `name`) VALUES
+(1, 'Red Sails'),
+(2, 'Children\'s Activities'),
+(3, 'Older People\'s Activities'),
+(4, 'Family Activities'),
+(5, 'Christmas Events'),
+(6, 'Health and Well Being'),
+(7, 'Social Enterprise'),
+(8, 'Town Hall'),
+(9, 'Social Housing and Newcomers'),
+(10, 'Town Clean Ups'),
+(11, 'Committee Work'),
+(12, 'Grant Applications'),
+(13, 'First Aid'),
+(14, 'Health and Safety'),
+(15, 'Cultural Heritage'),
+(16, 'Photography'),
+(17, 'Anti-Social Behaviour Monitoring'),
+(18, 'Other');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_response`
+--
+
+CREATE TABLE `contact_response` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `responding_to` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `response` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -128,7 +177,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2020_07_09_183620_add_timeloggedin_to_users_table', 10),
 (15, '2020_07_10_205651_add_read_to_contact_us_table', 11),
 (16, '2020_08_01_152436_create_visitors_table', 12),
-(17, '2020_08_01_155306_create_policy_table', 13);
+(17, '2020_08_01_155306_create_policy_table', 13),
+(18, '2020_08_02_174103_create_contact_response_table', 14),
+(19, '2020_08_04_164425_create_causes_table', 14);
 
 -- --------------------------------------------------------
 
@@ -218,24 +269,6 @@ CREATE TABLE `role_user` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `role_user`
---
-
-INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 3, 3, '2020-06-06 21:37:28', '2020-06-06 21:37:28'),
-(5, 4, 4, '2020-06-07 22:02:54', '2020-06-07 22:02:54'),
-(6, 1, 1, '2020-06-08 14:09:20', '2020-06-08 14:09:20'),
-(9, 5, 1, '2020-06-10 21:09:55', '2020-06-10 21:09:55'),
-(14, 3, 11, '2020-06-14 20:40:00', '2020-06-14 20:40:00'),
-(18, 6, 14, '2020-06-16 21:45:38', '2020-06-16 21:45:38'),
-(19, 6, 15, '2020-06-17 14:52:48', '2020-06-17 14:52:48'),
-(20, 6, 16, '2020-06-17 14:56:17', '2020-06-17 14:56:17'),
-(25, 3, 1, '2020-06-20 12:43:01', '2020-06-20 12:43:01'),
-(29, 6, 30, '2020-07-06 17:20:14', '2020-07-06 17:20:14'),
-(30, 2, 31, '2020-07-08 16:48:46', '2020-07-08 16:48:46'),
-(31, 5, 32, '2020-07-08 16:50:08', '2020-07-08 16:50:08');
-
 -- --------------------------------------------------------
 
 --
@@ -257,7 +290,13 @@ CREATE TABLE `subs` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `town` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postcode` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tel_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mob_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -268,21 +307,16 @@ CREATE TABLE `users` (
   `time_logged_in` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `users`
+-- Table structure for table `user_causes`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `logged_in`, `time_logged_in`) VALUES
-(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$Wr3gzYidvG6dX5CmFd4HX.ttNspYF0h34AbF/N4U5M3/dWl0pp1Y2', NULL, '2020-06-08 13:08:21', '2020-06-08 13:08:21', 1, '2020-08-02 18:02:28'),
-(3, 'Committee Member', 'user@user.com', NULL, '$2y$10$FTjMIFE/rcRRADM.2anzu.lAoIThk61vZ7BgBMuYmJSkizbSYYq.K', NULL, '2020-06-06 20:37:11', '2020-06-07 00:00:15', 0, '2020-07-09 19:38:40'),
-(4, 'Event Manager', 'event@event.com', NULL, '$2y$10$6U8.g85gMyZQooK1kuPqouMoo0bgKZRmgZemkLVM8I2b7YGItEfWe', NULL, '2020-06-07 21:03:41', '2020-06-07 21:03:41', 0, '2020-08-02 01:08:17'),
-(11, 'Test', 'test@test.com', NULL, '$2y$10$9HCosPZdHCh87c.0e8c5OOiymT4QJQXawVeFh6GCyF.jKyyaAzTAq', NULL, '2020-06-14 19:40:00', '2020-06-14 19:40:00', 0, '2020-07-09 19:38:40'),
-(14, 'Test 2', 'test2@test2.com', NULL, '$2y$10$JfSR1UNDSES5QwKNs69Roe.42tje01Wcd/7BVAD2SXuNwqNr.idd.', NULL, '2020-06-16 20:45:38', '2020-06-16 20:45:38', 0, '2020-07-09 19:38:40'),
-(15, 'Test 3', 'test3@test3.com', NULL, '$2y$10$./uciVyXGwCeAA0X1eh/vejGqcl5XNGwxRf5UrB8xk6EbPZnsfSnG', NULL, '2020-06-17 13:52:48', '2020-06-17 13:52:48', 0, '2020-07-09 19:38:40'),
-(16, 'Test 4', 'test4@test4.com', NULL, '$2y$10$eLgrfOpq7Teg/6f.Pm0fEO0MciNQCJdQiPCJPOnYB.5Hee0pXdGLi', NULL, '2020-06-17 13:56:17', '2020-07-08 14:45:57', 0, '2020-07-09 19:38:40'),
-(30, 'Test Admin', 'admintest@admintest.com', NULL, '$2y$10$FxnWcLUS/UEGh2Vngk1fp.Z83nWFcFSIaeRiUxnTUdy98OXAB7ADy', NULL, '2020-07-06 16:20:14', '2020-07-06 16:20:14', 0, '2020-07-09 19:38:40'),
-(31, 'Author', 'author@author.com', NULL, '$2y$10$xDOkRORV8Kjj13mhKt2d4eMFhQtSZAwDTJT3TYZvc813uKeUfqIgu', NULL, '2020-07-08 15:48:46', '2020-07-08 15:48:46', 0, '2020-07-09 19:38:40'),
-(32, 'Content Mod', 'content@content.com', NULL, '$2y$10$eIzTgFd.0FhfxH2eJBwvEOQKlxfTr2p8BR1AJ0M76dAYsqFC9qYWy', NULL, '2020-07-08 15:49:49', '2020-07-08 15:49:49', 0, '2020-07-09 19:38:40');
+CREATE TABLE `user_causes` (
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `cause_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -313,11 +347,34 @@ INSERT INTO `visitors` (`id`, `ip`, `last_visited`) VALUES
 (10, '127.0.0.1', '2020-08-02 01:07:41'),
 (11, '127.0.0.1', '2020-08-02 01:13:27'),
 (12, '127.0.0.1', '2020-08-02 17:57:33'),
-(13, '127.0.0.1', '2020-08-02 17:58:38');
+(13, '127.0.0.1', '2020-08-02 17:58:38'),
+(14, '127.0.0.1', '2020-08-03 08:50:52'),
+(15, '127.0.0.1', '2020-08-03 09:21:16'),
+(16, '127.0.0.1', '2020-08-03 10:56:56'),
+(17, '127.0.0.1', '2020-08-04 15:36:16'),
+(18, '127.0.0.1', '2020-08-04 15:39:56'),
+(19, '127.0.0.1', '2020-08-04 15:40:36'),
+(20, '127.0.0.1', '2020-08-04 15:41:35'),
+(21, '127.0.0.1', '2020-08-04 15:42:45'),
+(22, '127.0.0.1', '2020-08-04 15:42:49'),
+(23, '127.0.0.1', '2020-08-04 15:44:09'),
+(24, '127.0.0.1', '2020-08-04 17:38:34');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `causes`
+--
+ALTER TABLE `causes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_response`
+--
+ALTER TABLE `contact_response`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contact_us`
@@ -389,6 +446,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `user_causes`
+--
+ALTER TABLE `user_causes`
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `cause_id` (`cause_id`);
+
+--
 -- Indexes for table `visitors`
 --
 ALTER TABLE `visitors`
@@ -397,6 +461,18 @@ ALTER TABLE `visitors`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `causes`
+--
+ALTER TABLE `causes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `contact_response`
+--
+ALTER TABLE `contact_response`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -420,7 +496,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -462,7 +538,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -474,6 +550,13 @@ ALTER TABLE `visitors`
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `role_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `user_causes`
+--
+ALTER TABLE `user_causes`
+  ADD CONSTRAINT `user_causes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_causes_ibfk_2` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
