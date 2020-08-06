@@ -45,6 +45,7 @@ var output = '';
             {
               var id = data[count].id;
               //console.log(id);
+              output += "<div class='message-by-contact'>";
               output += "<a href='/contact-messages/"+data[count].first_name +"'>";
               output += "<div class='row'>";
               output += "<input class='form-check-input' type='checkbox' value='"+data[count].id+"' id='defaultCheck"+data[count].id + "'>";
@@ -55,7 +56,7 @@ var output = '';
               output += "<img src='/img/baseline_mark_email_read_black_18dp.png' class='action-img' data-toggle='tooltip' data-placement='bottom' title='Mark as read'>";
               output += "<img src='/img/baseline_reply_black_18dp.png' class='action-img' data-toggle='tooltip' data-placement='bottom' title='Reply'>";
               output += "<img src='/img/baseline_delete_black_18dp.png' class='action-img' data-toggle='tooltip' data-placement='bottom' title='Delete'>";
-              output += "</div></a>";
+              output += "</div></div></a>";
 
               $('list-group-item').on('click', function () {
                 console.log(id);
