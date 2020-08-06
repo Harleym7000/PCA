@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Cause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -105,11 +106,13 @@ class UsersController extends Controller
             return redirect(route('admin.users.index'));
         }
         $roles = Role::all();
+        $causes = Cause::all();
         $title = 'Edit Users';
 
         return view('admin.users.edit')->with([
             'user' => $user,
             'roles' => $roles,
+            'causes' => $causes,
             'title' => $title
         ]);
     }
@@ -124,6 +127,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        $user->causes()->sync($request->causes);
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -151,6 +155,7 @@ class UsersController extends Controller
 
         $user = User::find($id);
         $user->roles()->detach();
+        $user->causes()->detach();
         $user->delete();
 
         return redirect()->route('admin.users.index');

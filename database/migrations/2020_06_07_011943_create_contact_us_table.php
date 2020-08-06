@@ -13,11 +13,12 @@ class CreateContactUsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contact_us', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('surname');
-            $table->longText('mesage');
+            $table->string('subject');
+            $table->longText('message');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateContactUsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact_us');
+        Schema::dropIfExists('contacts');
     }
 }

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname', 'surname', 'address', 'town', 'postcode', 'tel_no', 'mob_no', 'email', 'password',
     ];
 
     /**
@@ -58,5 +58,30 @@ class User extends Authenticatable
     public function assignRole(Role $role)
     {
     return $this->roles()->save($role);
+    }
+
+    public function causes()
+    {
+        return $this->belongsToMany('App\Cause');
+    }
+
+    public function hasCause($cause) 
+    {
+        if($this->causes()->where('name', $cause)->first()) {
+            return true;
+        }
+        return false;
+    }
+    public function hasAnyCauses($causes) 
+    {
+        if($this->roles()->whereIn('name', $causes)->first()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function assignCause(Cause $cause)
+    {
+        return $this->cause()->save($cause);
     }
 }

@@ -16,6 +16,7 @@ class CreateCausesTable extends Migration
         Schema::create('causes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
         });
     }
 

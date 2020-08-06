@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
+use App\Cause;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -78,32 +79,41 @@ class RegisterController extends Controller
         return view('auth.register', compact('causes'));
     }
 
-    protected function create(array $data)
+    protected function create(Request $data)
     {
 
         $role = Role::where('name', 'Registered Interest')->first();
 
-        $user = User::create([
-            'firstname' => $data['forename'],
-            'surname' => $data['surname'],
-            'address' => $data['address'],
-            'town' => $data['town'],
-            'postcode' => $data['postcode'],
-            'tel_no' => $data['tel_no'],
-            'mob_no' => $data['mob_no'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
+        $user = new User();
+
+        $user->firstname = request('forename');
+        $user->surname = request('surname');
+        $user->address = request('address');
+        $user->town = request('town');
+        $user->postcode = request('postcode');
+        $user->tel_no = request('tel_no');
+        $user->mob_no = request('mob_no');
+        $user->email = request('email');
+        $user->password = Hash::make(request('password'));
+        $user->causes = request('causes');
+
+        $user->save();
+
+            // 'firstname' => $data['forename'],
+            // 'surname' => $data['surname'],
+            // 'address' => $data['address'],
+            // 'town' => $data['town'],
+            // 'postcode' => $data['postcode'],
+            // 'tel_no' => $data['tel_no'],
+            // 'mob_no' => $data['mob_no'],
+            // 'email' => $data['email'],
+            // 'password' => Hash::make($data['password']),
+            // 'causes' => $data['causes']
 
         $user->assignRole($role);
 
-        return $user;
-
-        
-    }
-
-    protected function registered(Request $request, $user)
-    {
         $this->guard()->logout();
+
+        return view('auth.login');
     }
 }

@@ -20,6 +20,8 @@ class CreateEventsTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('venue');
+            $table->string('image');
+            $table->tinyInteger('approved');
             $table->timestamps();
         });
     }

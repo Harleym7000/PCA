@@ -13,8 +13,11 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::truncate();
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'author']);
-        Role::create(['name' => 'generic user']);
+        Role::create(['name' => 'Admin']);
+        Role::create(['name' => 'Author']);
+        Role::create(['name' => 'Committee Member']);
+        Role::create(['name' => 'Event Manager']);
+        Role::create(['name' => 'Content Moderator']);
+        Role::create(['name' => 'Registered Interest']);
     }
 }

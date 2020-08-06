@@ -13,7 +13,7 @@ class CreatePolicyTable extends Migration
      */
     public function up()
     {
-        Schema::create('policy', function (Blueprint $table) {
+        Schema::create('policies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreatePolicyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('policy');
+        Schema::dropIfExists('policies');
     }
 }
