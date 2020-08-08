@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
 
@@ -47,10 +48,17 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function redirectTo()
+    public function authenticate(Request $request)
     {
+        $credentials = $request->only('email', 'password');
 
-        
+        if (Auth::attempt($credentials)) {
+            ////echo "Valid user";
+            return $this->redirectTo();
+        }
+    }
+
+    public function redirectTo() {
         if(Auth::user()->hasRole('Admin')) {
             $this->redirectTo = route('admin.users.index');
             return $this->redirectTo;
@@ -71,17 +79,13 @@ class LoginController extends Controller
         if(Auth::user()->hasRole('Committee Member')) {
             $this->redirectTo = '/home';
 
-        $id = Auth::user()->id;
-        $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
-        User::find($id);
-        DB::table('users')
-        ->where('id', '=', $id)
-        ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
-
-
-            return $this->redirectTo;
+        // $id = Auth::user()->id;
+        // $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
+        // User::find($id);
+        // DB::table('users')
+        // ->where('id', '=', $id)
+        // ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
         }
-        
     }
 
     public function logout() {

@@ -95,25 +95,21 @@ class RegisterController extends Controller
         $user->mob_no = request('mob_no');
         $user->email = request('email');
         $user->password = Hash::make(request('password'));
-        $user->causes = request('causes');
 
         $user->save();
 
-            // 'firstname' => $data['forename'],
-            // 'surname' => $data['surname'],
-            // 'address' => $data['address'],
-            // 'town' => $data['town'],
-            // 'postcode' => $data['postcode'],
-            // 'tel_no' => $data['tel_no'],
-            // 'mob_no' => $data['mob_no'],
-            // 'email' => $data['email'],
-            // 'password' => Hash::make($data['password']),
-            // 'causes' => $data['causes']
+        $userId = $user->id;
+        $causes = request('causes');
+        foreach($causes as $cause) {
+            $causeID = $cause;
+            DB::table('user_causes')->insert([
+                'user_id' => $userId,
+                'cause_id' => $causeID
+            ]);
+        }
 
         $user->assignRole($role);
-
         $this->guard()->logout();
-
         return view('auth.login');
     }
 }

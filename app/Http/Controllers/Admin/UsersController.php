@@ -28,7 +28,7 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(8); 
+        $users = User::paginate(8);
         return view('admin.users.index')->with([
             'roles' => $roles,
             'users'=> $users,
@@ -166,7 +166,7 @@ class UsersController extends Controller
         $query = DB::table('users')
         ->join('role_user', 'users.id', '=', 'role_user.user_id')
         ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.id AS user_id', 'users.name', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
+        ->select('users.id AS user_id', 'users.firstname', 'users.surname', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
         ->where('role_user.role_id', '=', $role_id);
 
         $result = $query->get();
@@ -179,8 +179,9 @@ class UsersController extends Controller
         $query = DB::table('users')
         ->join('role_user', 'users.id', '=', 'role_user.user_id')
         ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.id AS user_id', 'users.name', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
-        ->where('users.name', 'like', '%'.$name.'%')
+        ->select('users.id AS user_id', 'users.firstname', 'users.surname', 'users.email', 'role_user.role_id', 'role_user.user_id AS role_user_id', 'roles.name AS role_name')
+        ->where('users.firstname', 'like', '%'.$name.'%')
+        ->orWhere('users.surname', 'like', '%'.$name.'%')
         ->groupBy('users.id');
 
         $result = $query->get();
@@ -209,6 +210,11 @@ class UsersController extends Controller
             $request->session()->flash('error', 'Your passwords did not match. Please try again');
         }
         return view('admin.users.resetPass');
+    }
+
+    public function getUserCauses(Request $request) 
+    {
+        $user_id = $_POST['user_id'];
     }
 
 }
