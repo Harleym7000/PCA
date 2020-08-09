@@ -214,7 +214,23 @@ class UsersController extends Controller
 
     public function getUserCauses(Request $request) 
     {
-        $user_id = $_POST['user_id'];
+        $user_id = $_POST['id'];
+        $query = DB::table('user_causes')
+        ->join('causes', 'user_causes.id', '=', 'causes.id')
+        ->select('user_causes.user_id', 'user_causes.cause_id', 'causes.name AS cause')
+        ->where('user_causes.user_id', '=', $user_id);
+
+        $result = $query->get();
+
+        return response()->json($result);
+    }
+
+    public function getAllUsers() {
+        $userQuery = DB::table('users')
+        ->select('users.id', 'users.firstname', 'users.surname', 'users.address', 'users.town', 'users.postcode', 'users.tel_no', 'users.mob_no', 'users.email');
+        $userResult = $userQuery->get();
+
+        return response()->json($userResult);
     }
 
 }

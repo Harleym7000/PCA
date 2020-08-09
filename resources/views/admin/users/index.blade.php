@@ -31,9 +31,29 @@
                       
                         $(document).ready(function(){
 
-                          $('#view-user').click(function(e){
-                            var viewUserID = $('#view-user').val();
-                            console.log('User ID: '+viewUserID);
+                          $('#view-user1').click(function(e){
+                            e.preventDefault();
+                            var id = $('.btn-success').val();
+                            console.log('User ID: ' + id);
+
+                            $.ajax({
+        type: "POST",
+        url: "/admin/getUserCauses",
+        data: { 
+            id: id
+        },
+        success: function(data) {
+
+            // for(var count = 0; count < len; count++) {
+            //   output += '<h3>'+data[count].cause+'</h3>';
+            //   console.log(output);
+            // }
+            //$('.causes-result').html(output);
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
                           });
 
 
@@ -52,7 +72,7 @@ success:function(data){
   var output = '';
                                 var len = data.length;
                                 
-                                //console.log(len);
+                                console.log(len);
                                 //console.log("Data is" +JSON.stringify(data));
                                 var roles = [];
                                 for(var count = 0; count < len; count++) 
@@ -187,7 +207,7 @@ $('tbody').html(output);
                         <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                         <td id="action-buttons">
                           @can('edit-users')
-                          <button id="view-user" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
+                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
                           @endcan
                             @can('edit-users')
                             <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark">Edit User</button></a>
@@ -229,7 +249,8 @@ $('tbody').html(output);
         <h3>Address: {{$user->address}}, {{$user->town}}, {{$user->postcode}}</h3>
         <h3>Tel: {{$user->tel_no}}</h3>
         <h3>Mob: {{$user->mob_no}}</h3>
-        <h3>Causes Supporting: 
+        <h3>Causes Supporting:</h3> 
+        <h3 class="causes-result"></h3>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

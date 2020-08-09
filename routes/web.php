@@ -56,7 +56,9 @@ Route::get('/send-mail', function(){
 });
 
 Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
+Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers');
 Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName');
+Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses');
 Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword');
 Route::get('/admin/getContactMessages', 'ContactController@getMessages');
 Route::resource('/contact-messages', 'ContactController');
