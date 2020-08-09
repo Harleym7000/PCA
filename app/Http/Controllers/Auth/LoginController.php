@@ -5,11 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\User;
-use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -31,7 +27,22 @@ class LoginController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = RouteServiceProvider::HOME;
+    
+        protected function authenticated(Request $request, $user)
+        {
+            if($user->hasRole('Admin')) {
+                return redirect('/admin');
+            }
+            if($user->hasRole('Event Manager')) {
+                return redirect('/event-manager/index');
+            }
+            if($user->hasRole('Committee Member')) {
+                return redirect('/member');
+            }
+            if($user->hasRole('Author')) {
+                return redirect('/author');
+            }
+        }
 
     /**
      * Create a new controller instance.
@@ -41,59 +52,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            ////echo "Valid user";
-            return $this->redirectTo();
-        }
-    }
-
-    public function redirectTo() {
-        if(Auth::user()->hasRole('Admin')) {
-            $this->redirectTo = route('admin.users.index');
-            return $this->redirectTo;
-        }
-
-        if(Auth::user()->hasRole('Event Manager')) {
-            $this->redirectTo = '/event-manager/index';
-
-            return $this->redirectTo;
-        }
-
-        if(Auth::user()->hasRole('Registered Interest')) {
-            $this->redirectTo = '/interest';
-
-            return $this->redirectTo;
-        }
-
-        if(Auth::user()->hasRole('Committee Member')) {
-            $this->redirectTo = '/home';
-
-        // $id = Auth::user()->id;
-        // $current_date_time = Carbon::now('Europe/London')->toDateTimeString();
-        // User::find($id);
-        // DB::table('users')
-        // ->where('id', '=', $id)
-        // ->update(['logged_in' => 1, 'time_logged_in' => $current_date_time]);
-        }
-    }
-
-    public function logout() {
-        $id = Auth::user()->id;
-        DB::table('users')
-        ->where('id', '=', $id)
-        ->update(['logged_in' => 0]);
-        Auth::logout();
-        return redirect('/');
     }
 }

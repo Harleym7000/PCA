@@ -16,9 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EventsTableSeeder::class);
         $this->call(NewsTableSeeder::class);
         $this->call(PolicyTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
         $this->call(SubsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(UserCausesTableSeeder::class);
+        $this->call(LaratrustSeeder::class);
     }
 }

@@ -26,25 +26,12 @@ Route::get('/contact-us', 'PagesController@contact');
 Route::post('/contact-submit', 'ContactController@store');
 
 //Auth Routes
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@authenticate');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Auth::routes();
 
-// Registration Routes...
-Route::get('/register', 'Auth\RegisterController@index')->name('register');
-Route::post('/register', 'Auth\RegisterController@create');
-
-// Password Reset Routes...
-Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('/password/reset', 'Auth\ResetPasswordController@reset');
-
-Route::get('/logout', 'Auth\LoginController@logout');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/interest', 'HomeController@interest');
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/member', 'MemberController@index')->name('member');
+Route::get('/event-manager/index', 'EventsController@index')->name('event');
+Route::get('/author', 'AuthorController@index');
 
 Route::get('/send-mail', function(){
     $details = [
@@ -64,9 +51,8 @@ Route::get('/admin/getContactMessages', 'ContactController@getMessages');
 Route::resource('/contact-messages', 'ContactController');
 Route::post('/contact-message/mark-as-read', 'ContactController@markRead');
 
-Route::get('/event-manager/index', 'EventsController@index')->middleware('can:manage-events');
-Route::get('/admin/contact', 'ContactController@index')->middleware('can:manage-users');
-Route::get('/admin/dashboard', 'DashboardsController@admin')->middleware('can:manage-users');
+Route::get('/admin/contact', 'ContactController@index');
+Route::get('/admin/dashboard', 'DashboardsController@admin');
 Route::get('/admin/pages', 'AdminPagesManagerController@index');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
 

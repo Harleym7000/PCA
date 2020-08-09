@@ -30,36 +30,6 @@
 });
                       
                         $(document).ready(function(){
-
-                          $('#view-user1').click(function(e){
-                            e.preventDefault();
-                            var id = $('.btn-success').val();
-                            console.log('User ID: ' + id);
-
-                            $.ajax({
-        type: "POST",
-        url: "/admin/getUserCauses",
-        data: { 
-            id: id
-        },
-        success: function(data) {
-
-            // for(var count = 0; count < len; count++) {
-            //   output += '<h3>'+data[count].cause+'</h3>';
-            //   console.log(output);
-            // }
-            //$('.causes-result').html(output);
-        },
-        error: function(result) {
-            alert('error');
-        }
-    });
-                          });
-
-
-
-
-
                           $('#user-search').on('keyup',function(){
                             var value = $('#user-search').val();
 $.ajax({
@@ -204,7 +174,6 @@ $('tbody').html(output);
                     <tr>
                         <td>{{$user->firstname}} {{$user->surname}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                         <td id="action-buttons">
                           @can('edit-users')
                           <button id="view-user{{$user->id}}" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
@@ -250,7 +219,6 @@ $('tbody').html(output);
         <h3>Tel: {{$user->tel_no}}</h3>
         <h3>Mob: {{$user->mob_no}}</h3>
         <h3>Causes Supporting:</h3> 
-        <h3 class="causes-result"></h3>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
