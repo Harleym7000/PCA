@@ -27,6 +27,8 @@ Route::post('/contact-submit', 'ContactController@store');
 
 //Auth Routes
 Auth::routes();
+Route::get('/register', 'Auth\RegisterController@index');
+Route::post('/register', 'Auth\RegisterController@create');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/member', 'MemberController@index')->name('member');

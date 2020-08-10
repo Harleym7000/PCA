@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cause extends Model
 {
-    protected $casts = [
-        'causes' => 'array'
-    ];
+    protected $tablename = 'causes';
+    protected $primaryKey = 'id';
 
-    public function setOptionsAttribute($causes)
-{
-    $this->attributes['causes'] = json_encode($causes);
-}
+    public function users() {
+        return $this->belongsToMany('App\User');
+    }
 }

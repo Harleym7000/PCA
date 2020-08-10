@@ -93,7 +93,8 @@
 </div></a>
 <div class="divider">
 </div>
-<a href="/logout">
+<a href="{{ route('logout') }}" onclick="event.preventDefault();
+document.getElementById('logout-form').submit();">
       <div class="option">
       <div class="row no-gutters">
           <div class="col-3 my-auto">
@@ -105,7 +106,7 @@
       </div>
     </div>
   </a>
-  <form id="logout-form" action="/logout" method="POST" style="display: none;">
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf
   </form>
 <div class="divider">

@@ -71,7 +71,8 @@
                         <div class="col-md-6">
                     @foreach ($roles as $role)
                         <div class="form-check">
-                          <input type="checkbox" name="roles[]" value="{{ $role->id }}">
+                          <input type="checkbox" name="roles[]" value="{{ $role->id }}"
+                          @if($user->roles()->pluck('id')->contains($role->id)) checked @endif>
                           <label>{{ $role->name }}</label>
                         </div>
                     @endforeach

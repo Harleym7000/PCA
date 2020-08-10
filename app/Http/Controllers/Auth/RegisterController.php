@@ -76,13 +76,13 @@ class RegisterController extends Controller
     protected function index() 
     {
         $causes = DB::table('causes')->get();
-        return view('auth.register', compact('causes'));
+        return view('auth.register')->with('causes', $causes);
     }
 
     protected function create(Request $data)
     {
 
-        $role = Role::where('name', 'Registered Interest')->first();
+        $role = Role::where('name', 'Committee Member')->first();
 
         $user = new User();
 
@@ -108,7 +108,7 @@ class RegisterController extends Controller
             ]);
         }
 
-        $user->assignRole($role);
+        $user->attachRole($role);
         $this->guard()->logout();
         return view('auth.login');
     }

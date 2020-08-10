@@ -41,23 +41,21 @@ dataType: "json",
 success:function(data){
   var output = '';
                                 var len = data.length;
+                                var totalRoles = data.role_name;
+                                console.log('Total Roles' +totalRoles);
                                 
                                 console.log(len);
                                 //console.log("Data is" +JSON.stringify(data));
-                                var roles = [];
                                 for(var count = 0; count < len; count++) 
                                   {
                                     var userID = data[count].user_id;
-                                    roles.push(data[count].role_name);
-                                    console.log(roles)
+                                    
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
                                     output += '<tr>';
                                     output += '<td>' + data[count].firstname + ' '+ data[count].surname+'</td>';
                                     output += '<td>' + data[count].email + '</td>';
-                                    for(let i = 0; i < roles.length; i++) {
-                                      output += '<td>' + data[count].role_name + '</td>';
-                                    }
+                                    output += '<td>'; + data[count].role_name + '</td>';
                                     output += '<td>';
                                     output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
                                     output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
@@ -174,6 +172,7 @@ $('tbody').html(output);
                     <tr>
                         <td>{{$user->firstname}} {{$user->surname}}</td>
                         <td>{{$user->email}}</td>
+                        <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons">
                           @can('edit-users')
                           <button id="view-user{{$user->id}}" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
@@ -218,7 +217,9 @@ $('tbody').html(output);
         <h3>Address: {{$user->address}}, {{$user->town}}, {{$user->postcode}}</h3>
         <h3>Tel: {{$user->tel_no}}</h3>
         <h3>Mob: {{$user->mob_no}}</h3>
-        <h3>Causes Supporting:</h3> 
+        <h3>Causes Supporting:
+            {{ implode(', ',$user->causes()->get()->pluck('name')->toArray())}}  
+        </h3> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
