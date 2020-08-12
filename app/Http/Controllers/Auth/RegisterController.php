@@ -102,7 +102,7 @@ class RegisterController extends Controller
         $causes = request('causes');
         foreach($causes as $cause) {
             $causeID = $cause;
-            DB::table('user_causes')->insert([
+            DB::table('cause_user')->insert([
                 'user_id' => $userId,
                 'cause_id' => $causeID
             ]);

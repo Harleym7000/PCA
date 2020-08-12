@@ -155,6 +155,7 @@ class UsersController extends Controller
 
         $user = User::find($id);
         $user->roles()->detach();
+        $user->causes()->detach();
         $user->delete();
 
         return redirect()->route('admin.users.index');

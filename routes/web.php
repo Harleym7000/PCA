@@ -33,16 +33,9 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/member', 'MemberController@index')->name('member');
 Route::get('/event-manager/index', 'EventsController@index')->name('event');
-Route::get('/author', 'AuthorController@index');
+Route::get('/author', 'AuthorsController@index');
 
-Route::get('/send-mail', function(){
-    $details = [
-        'title' => 'Mail from PCA',
-        'body' => 'This is a test mail from PCA'
-    ];
-    \Mail::to('harleym7000@gmail.com')->send(new \App\Mail\TestMail($details));
-    echo "Email has been sent";
-});
+Route::get('/send-mail', 'MailSend@send');
 
 Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
 Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers');

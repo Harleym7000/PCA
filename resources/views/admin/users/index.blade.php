@@ -239,7 +239,7 @@ $('tbody').html(output);
           </button>
         </div>
         <div class="modal-body">
-          This will delete the user {{$user->name}}. Are you sure you wish to delete this user?
+          This will delete the user {{$user->firstname}} {{$user->surname}}. Are you sure you wish to delete this user?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
