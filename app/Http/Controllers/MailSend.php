@@ -14,7 +14,28 @@ class MailSend extends Controller
             'body' => 'Body: This is a test'
         ];
 
-        \Mail::to('harleym7000@gmail.com')->send(new SendMail($details));
+        \Mail::to('harleymdev@gmail.com')->send(new SendMail($details));
+        return view('email.thanks');
+    }
+
+    public function contact_us(Request $request) {
+        $firstname = $request->input('firstname');
+        $surname = $request->input('surname');
+        $subject = $request->input('subject');
+        $body = $request->input('message');
+        $email = $request->input('email');
+
+        $details = array(
+            'title' => 'Contact Message from '.$firstname.' '.$surname,
+            'email' => $email,
+            'subject' => $subject,
+            'body' => $body
+        );
+
+        \Mail::to('harleymdev@gmail.com')->send('email.sendMail', $details, function($message) use ($details) {
+            $message->from($details['email']);
+            $message->subject($details['subject']);
+        });
         return view('email.thanks');
     }
 }

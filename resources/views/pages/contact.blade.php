@@ -16,6 +16,11 @@
                     <input type="text" class="form-control" id="inputPassword4" placeholder="Surname" name="surname" required>
                   </div>
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Email Address:</label>
+                  <input type="email" class="form-control" id="inputPassword4" placeholder="Email Address" name="email" required>
+                </div>
+              </div>
                 <div class="form-group">
                   <label for="inputAddress">Message Subject</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="Message Subject" name="subject" required>

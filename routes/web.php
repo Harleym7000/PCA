@@ -23,7 +23,7 @@ Route::resource('/story', 'NewsController');
 Route::resource('/event', 'EventsController');
 Route::get('/events/create', 'EventsController@create')->middleware('can:manage-events');
 Route::get('/contact-us', 'PagesController@contact');
-Route::post('/contact-submit', 'ContactController@store');
+Route::post('/contact-submit', 'MailSend@contact_us');
 
 //Auth Routes
 Auth::routes();
