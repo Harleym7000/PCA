@@ -38,6 +38,7 @@ class MailSend extends Controller
         ], function ($mail) use ($request) {
             $mail->from($request->email, $request->firstname);
             $mail->to('harleymdev@gmail.com')->subject($request->subject);
+            $mail->replyTo($request->email);
 
         });
         return view('email.thanks');
