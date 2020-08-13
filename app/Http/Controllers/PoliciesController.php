@@ -14,7 +14,7 @@ class PoliciesController extends Controller
      */
     public function index()
     {
-        $policies = DB::table('policy')->get();
+        $policies = DB::table('policies')->get();
         $title = "Policy Documents";
         return view('policy.index')->with([
             'title' => $title,

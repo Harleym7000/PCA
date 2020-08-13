@@ -32,3 +32,18 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
+          <h1>Current Policy Documents</h1>
+          @if(count($policies) > 0)
+          @foreach($policies as $policy)
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{$policy->name}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="{{URL::to('/')}}/{{$policy->name}}" target="blank" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          @endforeach
+          @else
+          <p>There are currently no policy documents uploaded</p>
+          @endif
