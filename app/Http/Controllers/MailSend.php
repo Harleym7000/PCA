@@ -25,16 +25,20 @@ class MailSend extends Controller
         $body = $request->input('message');
         $email = $request->input('email');
 
-        $details = array(
-            'title' => 'Contact Message from '.$firstname.' '.$surname,
-            'email' => $email,
-            'subject' => $subject,
-            'body' => $body
-        );
+        // $details = array(
+        //     'title' => 'Contact Message from '.$firstname.' '.$surname,
+        //     'email' => $email,
+        //     'subject' => $subject,
+        //     'body' => $body
+        // );
 
-        \Mail::to('harleymdev@gmail.com')->send('email.sendMail', $details, function($message) use ($details) {
-            $message->from($details['email']);
-            $message->subject($details['subject']);
+        \Mail::send('email.sendMail', [
+
+            'body' => $request->input('message')
+        ], function ($mail) use ($request) {
+            $mail->from($request->email, $request->firstname);
+            $mail->to('harleymdev@gmail.com')->subject($request->subject);
+
         });
         return view('email.thanks');
     }
