@@ -30,7 +30,6 @@ Auth::routes();
 Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
-Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/member', 'MemberController@index')->name('member');
 Route::get('/event-manager/index', 'EventsController@index')->name('event');
 Route::get('/author', 'AuthorsController@index');
@@ -49,7 +48,8 @@ Route::get('/admin/contact', 'ContactController@index');
 Route::get('/admin/dashboard', 'DashboardsController@admin');
 Route::get('/admin/pages', 'AdminPagesManagerController@index');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
-Route::post('policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
+Route::post('/policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
+Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);

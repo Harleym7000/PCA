@@ -41,7 +41,7 @@
             <div class="card-body">
               <h5 class="card-title">{{$policy->name}}</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="{{URL::to('/')}}/{{$policy->name}}" target="blank" class="btn btn-primary">Go somewhere</a>
+              <a href="{{route('downloadFile', $policy)}}" target="blank" class="btn btn-primary" download>Go somewhere</a>
             </div>
           </div>
           @endforeach
@@ -50,10 +50,10 @@
           <p>There are currently no policy documents uploaded</p>
           @endif
           <h1>Upload New Policy Document</h1>
-          <form action="/policy/upload" method="POST">
+          <form action="/policy/upload" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
+              <input type="file" class="custom-file-input" id="customFile" name="policyDoc">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>

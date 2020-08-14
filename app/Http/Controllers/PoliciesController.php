@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
+use App\Policy;
 
 class PoliciesController extends Controller
 {
@@ -14,8 +18,8 @@ class PoliciesController extends Controller
      */
     public function index()
     {
-        $policies = DB::table('policies')->get();
         $title = "Policy Documents";
+        $policies = DB::table('policies')->get();
         return view('policy.index')->with([
             'title' => $title,
             'policies' => $policies
@@ -40,8 +44,11 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return ;
+        $policy = new Policy;
+        $name = $request->file('policyDoc')->getClientOriginalName();
+        $policy->name = $name;
+        $policy->save();
+        $storeFile = $request->file('policyDoc')->storeAs('policy', $name);
     }
 
     /**
@@ -87,5 +94,13 @@ class PoliciesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadFile($filename) 
+    {
+        $file = Storage::disk('policy')->get($filename);
+
+        return (new Response($file, 200))
+        ->header('Content-Type', 'application/msword');
     }
 }
