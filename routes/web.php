@@ -44,12 +44,12 @@ Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses');
 Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword');
 Route::get('/admin/getContactMessages', 'ContactController@getMessages');
 Route::resource('/contact-messages', 'ContactController');
-Route::post('/contact-message/mark-as-read', 'ContactController@markRead');
 
 Route::get('/admin/contact', 'ContactController@index');
 Route::get('/admin/dashboard', 'DashboardsController@admin');
 Route::get('/admin/pages', 'AdminPagesManagerController@index');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
+Route::post('policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);

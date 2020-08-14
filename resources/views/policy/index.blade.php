@@ -34,9 +34,10 @@
           @include('inc.admin-nav')
           <h1>Current Policy Documents</h1>
           @if(count($policies) > 0)
+          <div class="row">
           @foreach($policies as $policy)
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <img class="card-img-top" src="/img/pcaLogo.png" alt="Card image cap" style="width: 50px; height:80px;">
             <div class="card-body">
               <h5 class="card-title">{{$policy->name}}</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -44,6 +45,22 @@
             </div>
           </div>
           @endforeach
+        </div>
           @else
           <p>There are currently no policy documents uploaded</p>
           @endif
+          <h1>Upload New Policy Document</h1>
+          <form action="/policy/upload" method="POST">
+            @csrf
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

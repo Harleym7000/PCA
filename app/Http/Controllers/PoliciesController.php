@@ -40,7 +40,8 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        return ;
     }
 
     /**
