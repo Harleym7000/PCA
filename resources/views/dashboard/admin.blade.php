@@ -33,69 +33,76 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
-          <div class="row">
-          <div class="col-4">
-          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
-            <div class="card-header">Total Site Visits</div>
-            <div class="card-body">
-              <h5 class="card-title">{{$totalVisitors}}</h5>
-            </div>
-          </div>
-          </div>
-          <div class="col-4">
-          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
-            <div class="card-header">Unique Visits</div>
-            <div class="card-body">
-              <h5 class="card-title">{{$totalUniqueVisits}}</h5>
-            </div>
-          </div>
-          </div>
-          <div class="col-4">
-          <div class="card text-white bg-secondary mb-3" style="max-width: 22rem;">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h5 class="card-title">Secondary card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          </div>
-          </div>
-          <div class="active-users-card">
-          <div class="card bg-light mb-3" style="max-width: 22rem;">
-            <div class="card-header">Active Users</div>
-            <div class="card-body">
-              <h4 class="card-text">Total Active Users: {{$loggedInUsers}}</h4>
-              <br>
-              <div class="row">
-              <h5 class="card-text col-4">Username</h5>
-              <h5 class="card-text col-8">Last Login Made</h5>
-            </div>
-            <div class="row">
-              @foreach($usersData as $userData)
-              <p class="card-text col-4">{{$userData->name}}</p>
-              <p class="card-text col-8">{{date('d-m-Y H:i', strtotime($userData->time_logged_in))}}</p>
-              @endforeach
-            </div>
-          </div>
-        </div>
-            <div class="total-users-card">
-              <div class="card bg-light mb-3" style="max-width: 22rem;">
-                <div class="card-header">Total Users</div>
-                <div class="card-body">
-                  <h4 class="card-text">Total Users: {{$totalUsers}}</h4>
-                  <br>
-              </div>
-        </div>
-          </div>
-          <div class="committee-members-card">
-            <div class="card bg-light mb-3" style="max-width: 22rem;">
-              <div class="card-header">Committee Members</div>
+          <div class="row justify-content-center">
+          <div class="card-deck" style="margin: 1%;">
+            <div class="card text-white bg-primary mb-3" style="min-width: 20rem;">
               <div class="card-body">
-                <h4 class="card-text">Total Committee Members: {{$totalCommitteeMembers}}</h4>
-                <br>
+                <div class="container">
+                <div class="row">
+                  <div class="col-2 d-flex align-items-center">
+                  <img src="/img/baseline_visibility_white_18dp.png" style="height: 50px;">
+                </div>
+                <div class="col-5">
+                </div>
+                <div class="col-5 justify-content-center">
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUniqueVisits}}</h1>
+                    <h5 class="justify-content-center text-center"><strong>Site Visits</strong></h5>
+                </div>
+              </div>
             </div>
-      </div>
+              </div>
+            </div>
+            <div class="card text-white bg-success mb-3" style="min-width: 20rem;">
+              <div class="card-body">
+                <div class="container">
+                <div class="row">
+                  <div class="col-2 d-flex align-items-center">
+                  <img src="/img/baseline_people_alt_white_18dp.png" style="height: 50px;">
+                </div>
+                <div class="col-5">
+                </div>
+                <div class="col-5 justify-content-center">
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUsers}}</h1>
+                    <h5 class="justify-content-center text-center"><strong>Total Users</strong></h5>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="card text-white bg-info mb-3" style="min-width: 20rem;">
+              <div class="card-body">
+                <div class="container">
+                <div class="row">
+                  <div class="col-2 d-flex align-items-center">
+                  <img src="/img/baseline_person_add_alt_1_white_18dp.png" style="height: 50px;">
+                </div>
+                <div class="col-5">
+                </div>
+                <div class="col-5 justify-content-center">
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$usersThisMonth}}</h1>
+                    <h5 class="justify-content-center text-center"><strong>New Users this month</strong></h5>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+            <div class="card text-white bg-danger mb-3" style="min-width: 20rem;">
+              <div class="card-body">
+                <div class="container">
+                <div class="row">
+                  <div class="col-2 d-flex align-items-center">
+                  <img src="/img/baseline_question_answer_white_18dp.png" style="height: 50px;">
+                </div>
+                <div class="col-5">
+                </div>
+                <div class="col-5 justify-content-center">
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalContactMessages}}</h1>
+                    <h5 class="justify-content-center text-center"><strong>Contact Messages</strong></h5>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
       
