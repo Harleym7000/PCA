@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\SendMail;
 
 class UsersController extends Controller
 {
@@ -59,7 +60,8 @@ class UsersController extends Controller
     public function store(Request $request, User $user)
     {
         $user = new User;
-        $user->name = $request->input('username');
+        $user->firstname = $request->input('firstname');
+        $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $userPass = $request->input('password');
 
@@ -68,6 +70,14 @@ class UsersController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             $user->roles()->sync($request->roles);
+            $email = $request->input('email');
+        \Mail::send('email.credentials', [
+            'email' => $email,
+            'password' => $userPass,
+        ], function ($mail) use ($request) {
+            $mail->from('harleymdev@gmail.com', 'PCA Accounts');
+            $mail->to($request->email)->subject('PCA Account Credentials');
+        });
             $title = 'User Management';
         $roles = Role::all();
         $users = User::paginate(8); 
