@@ -16,14 +16,16 @@ class DashboardsController extends Controller
         $totalUsers = count($totalUsersData);
         $committeeMembers = DB::table('users')
         ->join('role_user', 'user_id', '=', 'users.id')
-        ->select('users.name', 'users.email')
+        ->select('users.firstname', 'users.surname', 'users.email')
         ->where('role_user.role_id', '=', 3)
         ->get();
         $totalCommitteeMembers = count($committeeMembers);
-        $visitors = DB::table('visitors')->get();
-        $totalVisitors = count($visitors);
         $uniqueVisits = DB::table('visitors')->distinct()->get(['ip']);
         $totalUniqueVisits = count($uniqueVisits);
+        $contactMessages = DB::table('contacts')->get();
+        $totalContactMessages = count($contactMessages);
+        $usersThisMonthQuery = DB::select('SELECT * FROM users WHERE users.created_at >= (NOW() - INTERVAL 1 MONTH)');
+        $usersThisMonth = count($usersThisMonthQuery);
         $title = "Admin Dashboard";
         return view('dashboard.admin')->with([
             'title' => $title,
@@ -32,8 +34,9 @@ class DashboardsController extends Controller
             'totalUsers' => $totalUsers,
             'committeeMembers' => $committeeMembers,
             'totalCommitteeMembers' => $totalCommitteeMembers,
-            'totalVisitors' => $totalVisitors,
-            'totalUniqueVisits' => $totalUniqueVisits
+            'totalUniqueVisits' => $totalUniqueVisits,
+            'totalContactMessages' => $totalContactMessages,
+            'usersThisMonth' => $usersThisMonth
             ]);
     }
 }

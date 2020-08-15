@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class MailSend extends Controller
 {
@@ -19,6 +21,9 @@ class MailSend extends Controller
     }
 
     public function contact_us(Request $request) {
+        $request->validate([
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
         $firstname = $request->input('firstname');
         $surname = $request->input('surname');
         $subject = $request->input('subject');
@@ -41,6 +46,15 @@ class MailSend extends Controller
             $mail->replyTo($request->email);
 
         });
-        return view('email.thanks');
+        if( count(\Mail::failures()) > 0) {
+        $request->session()->flash('error', 'Something went wrong');
+        return view('pages.contact');
+        } else {
+            DB::table('contacts')->insert([
+                    'sent' => 1
+                ]);
+        $request->session()->flash('success', 'Thanks. Your message has been sent');
+        return view('pages.contact');
+        }
     }
 }

@@ -28,6 +28,9 @@
                   <label for="inputAddress2">Message</label>
                   <textarea class="form-control" id="inputAddress2" placeholder="Enter Message Here..." rows="8" name="message" required></textarea>
                 </div>
+                <div class="form-group">
+                  {!! NoCaptcha::display() !!}
+                </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

@@ -37,10 +37,18 @@
                       <form action="{{ action('Admin\UsersController@store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
-                            <label for="username" class="col-md-2 col-form-label text-md-right">Username</label>
+                            <label for="username" class="col-md-2 col-form-label text-md-right">First Name:</label>
     
                             <div class="col-9">
-                                <input id="username" type="text" class="form-control" name="username" required autofocus>
+                                <input id="username" type="text" class="form-control" name="firstname" required autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="username" class="col-md-2 col-form-label text-md-right">Surname</label>
+    
+                            <div class="col-9">
+                                <input id="username" type="text" class="form-control" name="surname" required autofocus>
                             </div>
                         </div>
     
