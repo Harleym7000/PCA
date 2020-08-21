@@ -44,7 +44,7 @@
         <div class="divider">
         </div>
         <div class="option">
-          <a href="/admin/users/create"><div class="row no-gutters">
+          <a href="/events/create"><div class="row no-gutters">
               <div class="col-3 my-auto">
               <img src="/img/baseline_event_available_white_18dp.png">
               </div>
@@ -67,7 +67,7 @@
     </div>
     <div class="divider">
     </div>
-  <a href="/admin/users/resetPass"><div class="option">
+  <a href="/users/resetPass"><div class="option">
     <div class="row no-gutters">
         <div class="col-3 my-auto">
           <img src="/img/baseline_security_white_18dp.png">

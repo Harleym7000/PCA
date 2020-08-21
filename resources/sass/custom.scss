@@ -497,6 +497,14 @@ body {
     margin: auto;
   }
 
+  #dashboard {
+    height: 48vh;
+  }
+
+  #dashboard .active-users {
+    margin: 1%;
+  }
+
   //Media Queries 
   // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { 

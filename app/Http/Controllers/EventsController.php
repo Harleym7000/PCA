@@ -41,7 +41,29 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if($request->hasFile('image')) {
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/event_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'pcaLogo.png';
+        }
+
+        $event = new Event;
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->date = $request->input('date');
+        $event->time = $request->input('time');
+        $event->venue = $request->input('location');
+        $event->image = $filenameToStore;
+        $event->managed_by = $request->input('managed_by');
+
+        if($event->save()) {
+            return redirect('/event-manager/index');
+        }
     }
 
     /**

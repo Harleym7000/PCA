@@ -32,7 +32,7 @@ class LoginController extends Controller
         protected function authenticated(Request $request, $user)
         {
             if($user->hasRole('Admin')) {
-                return redirect('/admin/users');
+                return redirect('/admin/dashboard');
             }
             if($user->hasRole('Event Manager')) {
                 return redirect('/event-manager/index');

@@ -139,7 +139,8 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $user->causes()->sync($request->causes);
 
-        $user->name = $request->name;
+        $user->firstname = $request->firstname;
+        $user->surname = $request->surname;
         $user->email = $request->email;
 
         if($user->save()) {
