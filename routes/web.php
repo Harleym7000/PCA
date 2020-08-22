@@ -33,7 +33,6 @@ Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
 Route::get('/member', 'MemberController@index')->name('member');
-Route::get('/event-manager/index', 'EventsController@index')->name('event');
 Route::get('/author', 'AuthorsController@index');
 
 Route::get('/send-mail', 'MailSend@send');
@@ -46,6 +45,12 @@ Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword')
 Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword');
 Route::get('/admin/getContactMessages', 'ContactController@getMessages');
 Route::resource('/contact-messages', 'ContactController');
+
+//Event Manager Links
+Route::get('/event-manager/index', 'EventsController@index')->name('event');
+Route::get('/events/edit/{id}', 'EventsController@edit')->name('event-edit');
+Route::put('/events/edit/{id}', 'EventsController@update');
+Route::get('/events/dashboard', 'DashboardsController@events');
 
 Route::get('/admin/contact', 'ContactController@index');
 Route::get('/admin/dashboard', 'DashboardsController@admin');

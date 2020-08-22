@@ -53,7 +53,7 @@
                          @endcan
 
                          @can('manage-events')
-                            <a class="dropdown-item" href="/event/index">
+                            <a class="dropdown-item" href="/event-manager/index">
                              Manage Events
                          </a>
                          @endcan

@@ -39,4 +39,11 @@ class DashboardsController extends Controller
             'usersThisMonth' => $usersThisMonth
             ]);
     }
+
+    public function events() {
+        $title = 'Events Dashboard';
+        return view('dashboard.event')->with([
+            'title' => $title
+        ]);
+    }
 }

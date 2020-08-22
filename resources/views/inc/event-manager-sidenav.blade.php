@@ -7,7 +7,7 @@
         </div>
         <div class="divider">
         </div>
-            <div class="option">
+            <a href="/events/dashboard"><div class="option">
             <div class="row no-gutters">
                 <div class="col-3 my-auto">
                 <img src="/img/baseline_leaderboard_white_18dp.png">
@@ -16,7 +16,7 @@
                 <span>Dashboard</span>
                 </div>
             </div>
-          </div>
+          </div></a>
           <div class="divider">
           </div>
           <div class="option">

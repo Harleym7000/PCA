@@ -168,10 +168,10 @@ $('tbody').html(output);
                         <td>{{$event->venue}}</td>
                         <td id="action-buttons">
                             @can('manage-events')
-                            <a href=""><button type="button" class="btn btn-dark">Edit Event</button></a>
+                            <a href="/events/edit/{{$event->id}}"><button type="button" class="btn btn-dark">Edit Event</button></a>
                             @endcan
                             @can('manage-events')
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="">Delete Event</button>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#eventdelete{{$event->id}}">Delete Event</button>
                             @endcan
                         </td>
                       </tr>
@@ -194,7 +194,8 @@ $('tbody').html(output);
   </div>
 </div>
   <!-- Modal -->
-  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  @foreach($events as $event)
+  <div class="modal fade" id="eventdelete{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -204,14 +205,19 @@ $('tbody').html(output);
           </button>
         </div>
         <div class="modal-body">
-          This will delete the event. Are you sure you wish to delete this user?
+          This will delete the event {{$event->title}}. Are you sure you wish to delete this event?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
+          {{Form::hidden('_method', 'DELETE')}}
+          {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+          {!!Form::close()!!}
         </div>
       </div>
     </div>
   </div>
 </div>
+@endforeach
 </body>
 </html>
