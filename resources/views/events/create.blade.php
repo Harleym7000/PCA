@@ -25,7 +25,7 @@
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
         <div class="col-2">
-          @include('inc.event-manager-sidenav')
+          @include('inc.admin-sidenav')
         </div>
         <div class="col-10">
           @include('inc.admin-nav')

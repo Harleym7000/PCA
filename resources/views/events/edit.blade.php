@@ -35,7 +35,7 @@
 
                 <div class="card-body">
 
-                  <form action="{{route('event-edit', $event)}}" method="POST">
+                  <form action="{{route('event-edit', $event)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
 

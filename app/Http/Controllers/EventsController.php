@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Event;
+use Carbon\Carbon;
 
 class EventsController extends Controller
 {
@@ -17,9 +18,14 @@ class EventsController extends Controller
     {
         $title = 'Event Management';
         $events = Event::paginate(5);
+        $orgs = DB::table('events')
+        ->select('managed_by', 'title')
+        ->groupBy('managed_by')
+        ->get();
         return view('events.index')->with([
             'title' => $title,
-            'events' => $events
+            'events' => $events,
+            'orgs' => $orgs
         ]);
     }
 

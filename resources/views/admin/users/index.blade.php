@@ -174,15 +174,9 @@ $('tbody').html(output);
                         <td>{{$user->email}}</td>
                         <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons">
-                          @can('edit-users')
                           <button id="view-user{{$user->id}}" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
-                          @endcan
-                            @can('edit-users')
-                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark">Edit User</button></a>
-                            @endcan
-                            @can('delete-users')
+                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark">Edit Roles</button></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}">Delete User</button>
-                            @endcan
                         </td>
                       </tr>
                       @endforeach

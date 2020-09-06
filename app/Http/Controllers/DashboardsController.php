@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\DB;
 class DashboardsController extends Controller
 {
     public function admin() {
-        $usersData = DB::table('users')
-        ->where('logged_in', '=', 1)
-        ->get();
-        $loggedInUsers = count($usersData);
         $totalUsersData = DB::table('users')->get();
         $totalUsers = count($totalUsersData);
         $committeeMembers = DB::table('users')
@@ -26,11 +22,9 @@ class DashboardsController extends Controller
         $totalContactMessages = count($contactMessages);
         $usersThisMonthQuery = DB::select('SELECT * FROM users WHERE users.created_at >= (NOW() - INTERVAL 1 MONTH)');
         $usersThisMonth = count($usersThisMonthQuery);
-        $title = "Admin Dashboard";
-        return view('dashboard.admin')->with([
+        $title = "Dashboard";
+        return view('dashboard.dashboard')->with([
             'title' => $title,
-            'loggedInUsers' => $loggedInUsers,
-            'usersData' => $usersData,
             'totalUsers' => $totalUsers,
             'committeeMembers' => $committeeMembers,
             'totalCommitteeMembers' => $totalCommitteeMembers,
@@ -38,12 +32,5 @@ class DashboardsController extends Controller
             'totalContactMessages' => $totalContactMessages,
             'usersThisMonth' => $usersThisMonth
             ]);
-    }
-
-    public function events() {
-        $title = 'Events Dashboard';
-        return view('dashboard.event')->with([
-            'title' => $title
-        ]);
     }
 }
