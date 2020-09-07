@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
+//Redirect
+
+
+
 //Front-end links
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
