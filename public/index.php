@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -21,7 +23,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../pca/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__.'/../pca/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

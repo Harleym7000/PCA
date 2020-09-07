@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             <div class="col-9">
                 <div class="card">
-                    <div class="card-header">Create New User</div>
+                    <div class="card-header">User Settings</div>
     
                     <div class="card-body">
                         
@@ -89,12 +89,10 @@
                             <label for="roles" class="col-md-2 col-form-label text-md-right">Roles</label>
     
                             <div class="col-9">
-                        @foreach ($roles as $role)
                             <div class="form-check">
-                              <input type="checkbox" name="roles[]" value="{{ $role->id }}">
-                              <label>{{ $role->name }}</label>
+                              <input type="checkbox" name="roles[]" value="">
+                              <label></label>
                             </div>
-                        @endforeach
                         </div>
                     </div>
                         <button type="submit" class="btn btn-primary">Create User</button>

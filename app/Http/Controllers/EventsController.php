@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Event;
+use Carbon\Carbon;
 
 class EventsController extends Controller
 {
@@ -17,9 +18,14 @@ class EventsController extends Controller
     {
         $title = 'Event Management';
         $events = Event::paginate(5);
+        $orgs = DB::table('events')
+        ->select('managed_by', 'title')
+        ->groupBy('managed_by')
+        ->get();
         return view('events.index')->with([
             'title' => $title,
-            'events' => $events
+            'events' => $events,
+            'orgs' => $orgs
         ]);
     }
 
@@ -41,7 +47,30 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if($request->hasFile('image')) {
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/event_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'pcaLogo.png';
+        }
+
+        $event = new Event;
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->date = $request->input('date');
+        $event->time = $request->input('time');
+        $event->venue = $request->input('location');
+        $event->image = $filenameToStore;
+        $event->managed_by = $request->input('managed_by');
+        $event->approved = 1;
+
+        if($event->save()) {
+            return redirect('/event-manager/index');
+        }
     }
 
     /**
@@ -64,7 +93,8 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('events.edit')->with('event', $event);
     }
 
     /**
@@ -76,7 +106,28 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->hasFile('image')) {
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $request->file('image')->storeAs('public/event_images', $filenameToStore);
+        }
+
+        $event = Event::find($id);
+        $event->title = $request->input('title');
+        $event->description = $request->input('desc');
+        $event->date = $request->input('date');
+        $event->time = $request->input('time');
+        $event->venue = $request->input('venue');
+        if($request->hasFile('image')) {
+            $event->image = $filenameToStore;
+        }
+        $event->managed_by = $request->input('organiser');
+
+        if($event->save()) {
+            return redirect('/event-manager/index');
+        }
     }
 
     /**
@@ -87,6 +138,8 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+        return redirect('/event-manager/index');
     }
 }

@@ -110,14 +110,15 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        if(Gate::denies('edit-users')) {
+        if(Gate::denies('manage-users')) {
             return redirect(route('admin.users.index'));
         }
         $roles = Role::all();
         $causes = Cause::all();
         $title = 'Edit Users';
+        $user = User::find($id);
 
         return view('admin.users.edit')->with([
             'user' => $user,
@@ -139,7 +140,8 @@ class UsersController extends Controller
         $user->roles()->sync($request->roles);
         $user->causes()->sync($request->causes);
 
-        $user->name = $request->name;
+        $user->firstname = $request->firstname;
+        $user->surname = $request->surname;
         $user->email = $request->email;
 
         if($user->save()) {

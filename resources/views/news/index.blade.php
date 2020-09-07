@@ -41,23 +41,24 @@ dataType: "json",
 success:function(data){
   var output = '';
                                 var len = data.length;
+                                var totalRoles = data.role_name;
+                                console.log('Total Roles' +totalRoles);
                                 
                                 console.log(len);
                                 //console.log("Data is" +JSON.stringify(data));
-                                
                                 for(var count = 0; count < len; count++) 
                                   {
                                     var userID = data[count].user_id;
-                                    var roles = data[count].role_name;
-                                    console.log(roles)
+                                    
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
                                     output += '<tr>';
-                                    output += '<td>' + data[count].name + '</td>';
+                                    output += '<td>' + data[count].firstname + ' '+ data[count].surname+'</td>';
                                     output += '<td>' + data[count].email + '</td>';
-                                    output += '<td>' + data[count].role_name + '</td>';
+                                    output += '<td>'; + data[count].role_name + '</td>';
                                     output += '<td>';
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark'>Edit User</button></a>";
+                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
+                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
                                     output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
                                     output += "</td>";
                                     output += '</tr>';
@@ -94,11 +95,12 @@ $('tbody').html(output);
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
                                     output += '<tr>';
-                                    output += '<td>' + data[count].name + '</td>';
+                                    output += '<td>' + data[count].firstname + ' '+ data[count].surname+'</td>';
                                     output += '<td>' + data[count].email + '</td>';
                                     output += '<td>' + data[count].role_name + '</td>';
                                     output += '<td>';
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark'>Edit User</button></a>";
+                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
+                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
                                     output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
                                     output += "</td>";
                                     output += '</tr>';
@@ -139,62 +141,43 @@ $('tbody').html(output);
                       <span id="total_records"></span>
                       <thead>
                         <tr>
-                          <th scope="col">Search Events:<input id="event-search" type="text" placeholder="Search event..." class="filter-input"></th>
+                          <th scope="col">Search:<input id="user-search" type="text" placeholder="Search name..." class="filter-input"></th>
                           <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col">Search Organisers:
-                            <select id="event-organiser" name="event-organiser">
-                              <option selected disabled>Choose an option...</option>
-                              @foreach($orgs as $org)
-                              <option id="organiser" value="{{$org->managed_by}}">{{$org->managed_by}}</option>
-                              @endforeach
-                            </select>
+                          <form id="user-form" action="#">
+                            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+            </form>
+          </th>
               <th scope="col"></th>
                       </thead>
                         <thead>
                           <tr>
                             <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Venue</th>
-                            <th scope="col">Organiser</th>
-                            <th style="width: 20%;">Actions</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Story</th>
+                            <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-
                           
   
   <!-- Modal -->
-  @foreach($events as $event)
+  @foreach($news as $newsstory)
                     <tr>
-                        <td><img src="/storage/event_images/{{$event->image}}" style="height: 85px; width: 150px;"></td>
-                        <td>{{$event->title}}</td>
-                        <td>{{\Carbon\Carbon::parse($event->date)->format('d/m/Y')}}</td>
-                        <td>{{\Carbon\Carbon::parse($event->time)->format('H:i')}}</td>
-                        <td>{{$event->venue}}</td>
-                        <td>{{$event->managed_by}}</td>
+                        <td><img src="/img/pcaLogo.png" style="height: 85px; width: 150px;"></td>
+                        <td>{{$newsstory->title}}</td>
+                        <td maxlength="3">{{$newsstory->story}}</td>
                         <td id="action-buttons">
-                            @can('manage-events')
-                            <a href="/events/edit/{{$event->id}}"><button type="button" class="btn btn-dark">Edit Event</button></a>
-                            @endcan
-                            @can('manage-events')
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#eventdelete{{$event->id}}">Delete Event</button>
-                            @endcan
+                            <a href="{{route('edit-news', $newsstory->id)}}"><button type="button" class="btn btn-dark">Edit News Story</button></a>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$newsstory->id}}">Delete News Story</button>
                         </td>
                       </tr>
                       @endforeach
                     </tbody>
                       </table>
-                      
                     
                     </div>
-                    
             </div>
-            <?php echo $events->render(); ?>
+            <?php echo $news->render(); ?>
         </div>
     </div>
 </div>
@@ -204,9 +187,9 @@ $('tbody').html(output);
     </div>
   </div>
 </div>
-  <!-- Modal -->
-  @foreach($events as $event)
-  <div class="modal fade" id="eventdelete{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+@foreach($news as $newsstory)
+  <!-- Delete Modal -->
+  <div class="modal fade" id="delete{{$newsstory->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -216,11 +199,11 @@ $('tbody').html(output);
           </button>
         </div>
         <div class="modal-body">
-          This will delete the event {{$event->title}}. Are you sure you wish to delete this event?
+          This will delete the news story {{$newsstory->title}}. Are you sure you wish to delete this news story?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
+          {!! Form::open(['action' => ['NewsController@destroy', $newsstory->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
           {{Form::hidden('_method', 'DELETE')}}
           {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
           {!!Form::close()!!}
@@ -229,6 +212,6 @@ $('tbody').html(output);
     </div>
   </div>
 </div>
-@endforeach
 </body>
 </html>
+  @endforeach

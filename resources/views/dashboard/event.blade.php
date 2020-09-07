@@ -33,20 +33,21 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
+          <div id="dashboard">
           <div class="row justify-content-center">
           <div class="card-deck" style="margin: 1%;">
             <div class="card text-white bg-primary mb-3" style="min-width: 20rem;">
               <div class="card-body">
                 <div class="container">
                 <div class="row">
-                  <div class="col-2 d-flex align-items-center">
-                  <img src="/img/baseline_visibility_white_18dp.png" style="height: 50px;">
+                  <div class="col-3 d-flex align-items-center">
+                  <img src="/img/baseline_visibility_white_18dp.png" style="height: 70px;">
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                 </div>
                 <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUniqueVisits}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>Site Visits</strong></h5>
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
+                    <h5 class="justify-content-center text-center"><strong>Total Events</strong></h5>
                 </div>
               </div>
             </div>
@@ -56,14 +57,14 @@
               <div class="card-body">
                 <div class="container">
                 <div class="row">
-                  <div class="col-2 d-flex align-items-center">
-                  <img src="/img/baseline_people_alt_white_18dp.png" style="height: 50px;">
+                  <div class="col-3 d-flex align-items-center">
+                  <img src="/img/baseline_people_alt_white_18dp.png" style="height: 80px;">
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                 </div>
                 <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUsers}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>Total Users</strong></h5>
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
+                    <h5 class="justify-content-center text-center"><strong>Events This Month</strong></h5>
                 </div>
               </div>
             </div>
@@ -73,14 +74,14 @@
               <div class="card-body">
                 <div class="container">
                 <div class="row">
-                  <div class="col-2 d-flex align-items-center">
-                  <img src="/img/baseline_person_add_alt_1_white_18dp.png" style="height: 50px;">
+                  <div class="col-3 d-flex align-items-center">
+                  <img src="/img/baseline_person_add_alt_1_white_18dp.png" style="height: 80px;">
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                 </div>
                 <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$usersThisMonth}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>New Users this month</strong></h5>
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
+                    <h5 class="justify-content-center text-center"><strong>Total Event Sign-Ups</strong></h5>
                 </div>
               </div>
             </div>
@@ -90,13 +91,13 @@
               <div class="card-body">
                 <div class="container">
                 <div class="row">
-                  <div class="col-2 d-flex align-items-center">
-                  <img src="/img/baseline_question_answer_white_18dp.png" style="height: 50px;">
+                  <div class="col-3 d-flex align-items-center">
+                  <img src="/img/baseline_question_answer_white_18dp.png" style="height: 70px;">
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                 </div>
                 <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalContactMessages}}</h1>
+                  <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
                     <h5 class="justify-content-center text-center"><strong>Contact Messages</strong></h5>
                 </div>
               </div>
@@ -104,5 +105,38 @@
               </div>
             </div>
           </div>
+          </div>
+          <div class="active-users">
+            <div class="card-header">Active Users: <strong></strong></div>
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Surname</th>
+                  <th scope="col">IP Address</th>
+                  <th scope="col">Time Logged In</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table></div>
+          </div>
         </div>
-      
+        </div>
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      </div>
+    </div>
+</div>
+</div>
+</body>
+            
+
+                  
