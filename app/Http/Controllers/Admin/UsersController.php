@@ -245,4 +245,16 @@ class UsersController extends Controller
         return response()->json($userResult);
     }
 
+    public function brdindex()
+    {
+        $title = 'User Management';
+        $roles = Role::all();
+        $users = User::paginate(8);
+        return view('admin.users.indexcopy')->with([
+            'roles' => $roles,
+            'users'=> $users,
+            'title' => $title
+            ]);
+    }
+
 }

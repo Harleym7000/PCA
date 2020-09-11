@@ -58,6 +58,7 @@ Route::get('/news/edit/{id}', 'NewsController@edit')->name('edit-news');
 
 //Admin links
 Route::get('/admin/contact', 'ContactController@index');
+Route::get('/admin/userstest', 'Admin\UsersController@brdindex');
 Route::get('/admin/dashboard', 'DashboardsController@admin');
 Route::get('/admin/pages', 'AdminPagesManagerController@index');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');

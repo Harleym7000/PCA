@@ -34,155 +34,58 @@
         <div class="col-10">
           @include('inc.admin-nav')
           <div id="dashboard">
+            <h1>Dashboard</h1>
           <div class="row justify-content-center">
-            @can('manage-users')
-          <div class="card-deck" style="margin: 1%;">
-            <div class="card text-white bg-primary mb-3" style="min-width: 20rem;">
-              <div class="card-body">
-                <div class="container">
-                <div class="row">
-                  <div class="col-3 d-flex align-items-center">
-                  <img src="/img/baseline_visibility_white_18dp.png" style="height: 70px;">
+              <div class="col-11">
+            <div class="row">
+              <div id="accordion" style="min-width: 100%;">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Admin
+                      </button>
+                    </h5>
+                  </div>
+              
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                  </div>
                 </div>
-                <div class="col-4">
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Collapsible Group Item #2
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                  </div>
                 </div>
-                <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUniqueVisits}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>Site Visits</strong></h5>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Collapsible Group Item #3
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                  </div>
                 </div>
+              </div>
               </div>
             </div>
-              </div>
-            </div>
-            <div class="card text-white bg-success mb-3" style="min-width: 20rem;">
-              <div class="card-body">
-                <div class="container">
-                <div class="row">
-                  <div class="col-3 d-flex align-items-center">
-                  <img src="/img/baseline_people_alt_white_18dp.png" style="height: 80px;">
-                </div>
-                <div class="col-4">
-                </div>
-                <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalUsers}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>Total Users</strong></h5>
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-            <div class="card text-white bg-info mb-3" style="min-width: 20rem;">
-              <div class="card-body">
-                <div class="container">
-                <div class="row">
-                  <div class="col-3 d-flex align-items-center">
-                  <img src="/img/baseline_person_add_alt_1_white_18dp.png" style="height: 80px;">
-                </div>
-                <div class="col-4">
-                </div>
-                <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$usersThisMonth}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>New Users this month</strong></h5>
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-            <div class="card text-white bg-danger mb-3" style="min-width: 20rem;">
-              <div class="card-body">
-                <div class="container">
-                <div class="row">
-                  <div class="col-3 d-flex align-items-center">
-                  <img src="/img/baseline_question_answer_white_18dp.png" style="height: 70px;">
-                </div>
-                <div class="col-4">
-                </div>
-                <div class="col-5 justify-content-center">
-                  <h1 class="justify-content-center text-center" style="font-size: 78px;">{{$totalContactMessages}}</h1>
-                    <h5 class="justify-content-center text-center"><strong>Contact Messages</strong></h5>
-                </div>
-              </div>
-            </div>
-              </div>
-            </div>
-            @endcan
-
-            @can('manage-events')
-            <div class="card-deck" style="margin: 1%;">
-              <div class="card text-white bg-primary mb-3" style="min-width: 20rem;">
-                <div class="card-body">
-                  <div class="container">
-                  <div class="row">
-                    <div class="col-3 d-flex align-items-center">
-                    <img src="/img/baseline_visibility_white_18dp.png" style="height: 70px;">
-                  </div>
-                  <div class="col-4">
-                  </div>
-                  <div class="col-5 justify-content-center">
-                    <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
-                      <h5 class="justify-content-center text-center"><strong>Total Events</strong></h5>
-                  </div>
-                </div>
-              </div>
-                </div>
-              </div>
-              <div class="card text-white bg-success mb-3" style="min-width: 20rem;">
-                <div class="card-body">
-                  <div class="container">
-                  <div class="row">
-                    <div class="col-3 d-flex align-items-center">
-                    <img src="/img/baseline_people_alt_white_18dp.png" style="height: 80px;">
-                  </div>
-                  <div class="col-4">
-                  </div>
-                  <div class="col-5 justify-content-center">
-                    <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
-                      <h5 class="justify-content-center text-center"><strong>Events This Month</strong></h5>
-                  </div>
-                </div>
-              </div>
-                </div>
-              </div>
-              <div class="card text-white bg-info mb-3" style="min-width: 20rem;">
-                <div class="card-body">
-                  <div class="container">
-                  <div class="row">
-                    <div class="col-3 d-flex align-items-center">
-                    <img src="/img/baseline_person_add_alt_1_white_18dp.png" style="height: 80px;">
-                  </div>
-                  <div class="col-4">
-                  </div>
-                  <div class="col-5 justify-content-center">
-                    <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
-                      <h5 class="justify-content-center text-center"><strong>Total Event Sign-Ups</strong></h5>
-                  </div>
-                </div>
-              </div>
-                </div>
-              </div>
-              <div class="card text-white bg-danger mb-3" style="min-width: 20rem;">
-                <div class="card-body">
-                  <div class="container">
-                  <div class="row">
-                    <div class="col-3 d-flex align-items-center">
-                    <img src="/img/baseline_question_answer_white_18dp.png" style="height: 70px;">
-                  </div>
-                  <div class="col-4">
-                  </div>
-                  <div class="col-5 justify-content-center">
-                    <h1 class="justify-content-center text-center" style="font-size: 78px;"></h1>
-                      <h5 class="justify-content-center text-center"><strong>Contact Messages</strong></h5>
-                  </div>
-                </div>
-              </div>
-                </div>
-              </div>
-            </div>
-            </div>
-            @endcan
-          </div>
-          </div>
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
 </body>
             
 

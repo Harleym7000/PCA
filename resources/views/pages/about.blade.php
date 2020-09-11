@@ -11,63 +11,77 @@
                           of the community.</p>
                         </div>
                       </div>
-                    <div id="about-img">
-                      <div class="row">
-                          <img src="/img/person.jpeg" class="img-fluid" style="width: 30%;">
-                          <img src="/img/person.jpeg" class="img-fluid" style="width: 40%;">
-                          <img src="/img/person.jpeg" class="img-fluid" style="width: 30%;">
+                      <div id="about-projects">
+                      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3">
+                        <div class="col mb-4">
+                          <div class="card">
+                            <img src="/img/red_sails.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h1 class="card-title">Red Sails Festival</h1>
+                              <p class="card-text" style="width: 90%; margin: auto;">Red Sails Festival runs over the course of a week every summer in Portstewart. Live music, dance and activities for everyone to enjoy, finishing with our famous fireworks display</p>
+                            </div>
+                          </div>
                         </div>
+                        <div class="col mb-4">
+                            <div class="card">
+                              <img src="/img/event.jpg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h1 class="card-title">Community Events</h1>
+                                <p class="card-text" style="width: 90%; margin: auto;">Portstewart Community Association hold events of all kinds for people of all ages within the community. Why not go to our <a href="/events">events</a> page to find an event for you?</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col mb-4">
+                            <div class="card">
+                              <img src="/img/cleanup.jpg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <h1 class="card-title">Town Clean-Ups</h1>
+                                <p class="card-text" style="width: 90%; margin: auto;">Once a month, members of the PCA alongside members of the local community commit an hour of their time to helping to keep our town tidy. Refreshments available afterwards</p>
+                              </div>
+                            </div>
+                          </div>
                     </div>
-                    <div id="about-filler">
-                      <h1>- Our causes -</h1>
-                    </div>
-                    <div id="about-projects">
-                      <div class="row">
-                      <div class="img">
-                        <img src="/img/person.jpeg">
                       </div>
-                      <div class="text">
-                        <h1>Red Sails Festival</h1>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur minus doloremque, dolorum quod perspiciatis corporis harum molestias quia assumenda consectetur commodi sapiente, laborum, ratione voluptas ex hic porro saepe velit!</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="text">
-                        <h1>Beach Clean-Ups</h1>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur minus doloremque, dolorum quod perspiciatis corporis harum molestias quia assumenda consectetur commodi sapiente, laborum, ratione voluptas ex hic porro saepe velit!</p>
-                      </div>
-                      <div class="img">
-                        <img src="/img/person.jpeg">
-                      </div>
-                    </div>
-                    </div>
                 <div id="about-team">
                         <h1>- Our Team -</h1>
-                        <div class="row justify-content-center">
-                        <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="/img/person.jpeg" style="height:250px;" alt="Card image cap">
+                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
+                            <div class="col mb-4">
+                              <div class="card">
+                                <img src="/img/person.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                  <p class="card-text">Name here <br> Role here</p>
+                                  <h1 class="card-title">Name Here</h1>
+                                  <p class="card-text" style="width: 90%; margin: auto;">Role Here</p>
                                 </div>
                               </div>
-                              <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="/img/person.jpeg" style="height:250px;" alt="Card image cap">
-                                <div class="card-body">
-                                  <p class="card-text">Name here <br> Role here</p>
+                            </div>
+                            <div class="col mb-4">
+                                <div class="card">
+                                  <img src="/img/person.jpeg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h1 class="card-title">Name Here</h1>
+                                    <p class="card-text" style="width: 90%; margin: auto;">Role Here</p>
+                                  </div>
                                 </div>
                               </div>
-                              <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="/img/person.jpeg" style="height:250px;" alt="Card image cap">
-                                <div class="card-body">
-                                  <p class="card-text">Name here <br> Role here</p>
+                              <div class="col mb-4">
+                                <div class="card">
+                                  <img src="/img/person.jpeg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h1 class="card-title">Name Here</h1>
+                                    <p class="card-text" style="width: 90%; margin: auto;">Role Here</p>
+                                  </div>
                                 </div>
                               </div>
-                              <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="/img/person.jpeg" style="height:250px;" alt="Card image cap">
-                                <div class="card-body">
-                                  <p class="card-text">Name here <br> Role here</p>
+                              <div class="col mb-4">
+                                <div class="card">
+                                  <img src="/img/person.jpeg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <h1 class="card-title">Name Here</h1>
+                                    <p class="card-text" style="width: 90%; margin: auto;">Role Here</p>
+                                  </div>
                                 </div>
                               </div>
+                        </div>
                 </div>
         </div>
 </div>
