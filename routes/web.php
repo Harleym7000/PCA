@@ -26,8 +26,6 @@ Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
 Route::resource('/story', 'NewsController');
 Route::resource('/event', 'EventsController');
-Route::get('/events/create', 'EventsController@create')->middleware('can:manage-events');
-Route::post('/events/create', 'EventsController@store');
 Route::get('/contact-us', 'PagesController@contact');
 Route::post('/contact-submit', 'MailSend@contact_us');
 Route::post('/subscribe', 'MailSend@subscribe');
@@ -38,22 +36,26 @@ Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
 Route::get('/member', 'MemberController@index')->name('member');
-Route::get('/author', 'AuthorsController@index');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 
 
 //Event Manager Links
-Route::get('/event-manager/index', 'EventsController@index')->name('event');
-Route::get('/events/edit/{id}', 'EventsController@edit')->name('event-edit');
-Route::put('/events/edit/{id}', 'EventsController@update');
-Route::get('/events/dashboard', 'DashboardsController@events');
+Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:manage-events')->group(function(){
+    Route::get('/index', 'EventsController@index')->name('event');
+    Route::get('/edit/{id}', 'EventsController@edit')->name('event-edit');
+    Route::put('/edit/{id}', 'EventsController@update');
+    Route::get('/create', 'EventsController@create');
+    Route::post('/create', 'EventsController@store');
+});
+
+// Route::get('/events/dashboard', 'DashboardsController@events');
 
 //User links
-Route::get('/user/profile', 'AccountsController@profile');
-Route::get('/user/settings', 'AccountsController@settings');
+Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
+Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
 
 //Author links
-Route::get('/news/index', 'NewsController@index');
+Route::get('/news/index', 'NewsController@index')->middleware('can:manage-events');
 Route::get('/news/edit/{id}', 'NewsController@edit')->name('edit-news');
 
 //Admin links

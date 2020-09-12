@@ -158,7 +158,7 @@ $('tbody').html(output);
                       </thead>
                         <thead>
                           <tr>
-                            <th scope="col">Name</th>
+                            <th scope="col-sm-2">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
                             <th scope="col">Actions</th>
