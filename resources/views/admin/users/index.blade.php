@@ -136,6 +136,8 @@ $('tbody').html(output);
       @include('inc.admin-nav')
       <div id="manage-users">
         <div class="row justify-content-center">
+          <div class="card">
+            <div class="card-header">All Users</div>
                 <div class="table-responsive">
                     <table class="table" id="user-table">
                       <span id="total_records"></span>
@@ -158,7 +160,7 @@ $('tbody').html(output);
                       </thead>
                         <thead>
                           <tr>
-                            <th scope="col-sm-2">Name</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
                             <th scope="col">Actions</th>
@@ -182,10 +184,12 @@ $('tbody').html(output);
                       @endforeach
                     </tbody>
                       </table>
-                    
+                    </div>
                     </div>
             </div>
+            <div class="render">
             <?php echo $users->render(); ?>
+            </div>
         </div>
     </div>
 </div>

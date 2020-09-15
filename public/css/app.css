@@ -11243,6 +11243,7 @@ body {
 
 #sidenav {
   background-color: #252525;
+  width: auto;
 }
 
 #sidenav .logo img {
@@ -11304,6 +11305,16 @@ body {
   display: none;
 }
 
+#profile {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#profile .card {
+  width: 90%;
+  margin: auto;
+}
+
 #manage-users {
   text-align: center;
   width: 100%;
@@ -11311,15 +11322,25 @@ body {
   margin-top: 5%;
 }
 
-#manage-users .table {
-  width: 80%;
+#manage-users .card {
+  width: 90%;
   text-align: left;
   font-size: 16px;
   margin: auto;
 }
 
+#manage-users .table > thead > tr > th {
+  font-size: 20px;
+}
+
 #manage-users .table > tbody > tr > td {
   font-weight: bolder;
+  font-size: 16px;
+}
+
+#manage-users .render {
+  margin-left: 4%;
+  margin-top: 4%;
 }
 
 #action-buttons .btn {

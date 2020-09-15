@@ -167,7 +167,7 @@ $('tbody').html(output);
                         <td>{{$newsstory->title}}</td>
                         <td maxlength="3">{{$newsstory->story}}</td>
                         <td id="action-buttons">
-                            <a href="{{route('edit-news', $newsstory->id)}}"><button type="button" class="btn btn-dark">Edit News Story</button></a>
+                            <a href="{{route('news.edit-news', $newsstory->id)}}"><button type="button" class="btn btn-dark">Edit News Story</button></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$newsstory->id}}">Delete News Story</button>
                         </td>
                       </tr>

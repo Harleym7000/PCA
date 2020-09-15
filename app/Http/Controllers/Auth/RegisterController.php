@@ -7,11 +7,14 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
 use App\Cause;
+use App\Rules\Name_Validation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Rules\Script_Validation;
+use App\Rules\Password_Validation;
 
 class RegisterController extends Controller
 {
@@ -51,20 +54,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'forename' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'town' => ['required', 'string', 'max:255'],
-            'postcode' => ['required', 'string', 'max:8'],
-            'tel_no' => ['string', 'max:11'],
-            'mobile_no' => ['string', 'max:11'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+
+     protected function validator(array $data)
+     {
+     }
 
     /**
      * Create a new user instance after a valid registration.
@@ -79,12 +72,33 @@ class RegisterController extends Controller
         return view('auth.register')->with('causes', $causes);
     }
 
-    protected function create(Request $data)
+    protected function create(Request $request)
     {
+        $validatedData = $request->validate([
+            'forename' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
+            'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
+            'address' => ['required', 'max:255', new Script_Validation],
+            'town' => ['required', 'max:255', new Script_Validation],
+            'postcode' => ['required', 'max:255', new Script_Validation],
+            'tel_no' => ['max:255', new Script_Validation],
+            'mob_no' => ['max:255', new Script_Validation],
+            'email' => ['required', 'max:255', new Script_Validation],
+            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
+            'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation],
+            'causes[]' => [new Script_Validation]
+        ],
+        $messages = [
+            'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
+            'password.confirmed' => 'Passwords do not match'
+        ]);
 
-        $role = Role::where('name', 'Committee Member')->first();
+        $userpass = request('password');
+        $userconfpass = request('password_confirmation');
+
+        if($userpass === $userconfpass) {
 
         $user = new User();
+        $role = Role::where('name', 'Committee Member')->first();
 
         $user->firstname = request('forename');
         $user->surname = request('surname');
@@ -112,4 +126,10 @@ class RegisterController extends Controller
         $this->guard()->logout();
         return view('auth.login');
     }
+    else {
+        $causes = DB::table('causes')->get();
+        $request->session()->flash('error', 'Error: Passwords do not match');
+        return redirect()->back()->withInput($request->except('password'));
+} 
+}
 }

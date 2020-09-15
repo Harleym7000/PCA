@@ -52,11 +52,14 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 
 //User links
 Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
+Route::post('/user/profile', 'AccountsController@update')->middleware('can:view-policy');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
 
 //Author links
-Route::get('/news/index', 'NewsController@index')->middleware('can:manage-events');
-Route::get('/news/edit/{id}', 'NewsController@edit')->name('edit-news');
+Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){
+Route::get('/index', 'NewsController@index');
+Route::get('/edit/{id}', 'NewsController@edit')->name('edit-news');
+});
 
 //Admin links
 Route::get('/admin/contact', 'ContactController@index');

@@ -65,16 +65,16 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
-<div id="create-user">
+<div id="profile">
+    @include('partials.alerts')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-9">
                 <div class="card">
             <div class="card-header">User Profile - {{$user->firstname}} {{$user->surname}}</div>
     
                     <div class="card-body">
                         
-                      <form action="{{ action('Admin\UsersController@store') }}" method="POST">
+                      <form action="/user/profile" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>
@@ -145,7 +145,6 @@
                                 @enderror
                             </div>
                         </div>
-                        @include('partials.alerts')
 
                         
                         <div class="form-group row">
@@ -164,9 +163,8 @@
                     </div>
                         <button id="editprofile" type="button" class="btn btn-dark" style="margin-right: 67%;">Edit Profile</button>
                         <button id="cancelprofile" type="button" class="btn btn-danger pull-right" style="margin-right: 2%;" disabled>Cancel</button>
-                        <button id="saveprofile" type="button" class="btn btn-primary pull-right" disabled>Save</button>
+                        <button id="saveprofile" type="submit" class="btn btn-primary pull-right" disabled>Save</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
