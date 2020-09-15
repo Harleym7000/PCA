@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2020 at 01:16 AM
+-- Generation Time: Sep 15, 2020 at 09:53 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -29,32 +29,83 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `causes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `causes`
 --
 
-INSERT INTO `causes` (`id`, `name`) VALUES
-(1, 'Red Sails'),
-(2, 'Children\'s Activities'),
-(3, 'Older People\'s Activities'),
-(4, 'Family Activities'),
-(5, 'Christmas Events'),
-(6, 'Health and Well Being'),
-(7, 'Social Enterprise'),
-(8, 'Town Hall'),
-(9, 'Social Housing and Newcomers'),
-(10, 'Town Clean Ups'),
-(11, 'Committee Work'),
-(12, 'Grant Applications'),
-(13, 'First Aid'),
-(14, 'Health and Safety'),
-(15, 'Cultural Heritage'),
-(16, 'Photography'),
-(17, 'Anti-Social Behaviour Monitoring'),
-(18, 'Other');
+INSERT INTO `causes` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Red Sails Festival', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(2, 'Childrens Activities', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(3, 'Older Peoples Activities', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(4, 'Family Activities', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(5, 'Christmas Events', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(6, 'Health and Well Being', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(7, 'Social Enterprise', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(8, 'Town Hall', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(9, 'Social Housing and Newcomers', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(10, 'Town Clean-Ups', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(11, 'Committee Work', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(12, 'Grant Applications', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(13, 'First Aid', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(14, 'Health & Safety', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(15, 'Cultural Heritage', '2020-08-09 13:26:51', '2020-08-09 13:26:51'),
+(16, 'Photography', '2020-08-09 13:26:52', '2020-08-09 13:26:52'),
+(17, 'Anti-Social Behaviour', '2020-08-09 13:26:52', '2020-08-09 13:26:52'),
+(18, 'Other', '2020-08-09 13:26:52', '2020-08-09 13:26:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cause_user`
+--
+
+CREATE TABLE `cause_user` (
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `cause_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cause_user`
+--
+
+INSERT INTO `cause_user` (`user_id`, `cause_id`) VALUES
+(1, 1),
+(1, 11),
+(16, 1),
+(16, 12),
+(16, 14),
+(34, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `sent` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `created_at`, `updated_at`, `sent`) VALUES
+(2, NULL, NULL, 1),
+(3, '2020-08-15 22:59:52', '2020-08-15 22:59:52', 1),
+(4, '2020-08-18 10:23:43', '2020-08-18 10:23:43', 1),
+(5, '2020-08-22 13:37:23', '2020-08-22 13:37:23', 1),
+(6, '2020-09-07 10:12:50', '2020-09-07 10:12:50', 1),
+(7, '2020-09-07 22:32:28', '2020-09-07 22:32:28', 1),
+(8, '2020-09-11 09:50:04', '2020-09-11 09:50:04', 1);
 
 -- --------------------------------------------------------
 
@@ -73,33 +124,6 @@ CREATE TABLE `contact_response` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_us`
---
-
-CREATE TABLE `contact_us` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp(),
-  `mesage_read` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `contact_us`
---
-
-INSERT INTO `contact_us` (`id`, `first_name`, `surname`, `subject`, `message`, `created_at`, `updated_at`, `mesage_read`) VALUES
-(2, 'Harley', 'Mulholland', 'Open Mic Night', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 17:14:37', '2020-07-08 17:14:37', 0),
-(3, 'Harley', 'Mulholland', 'Open Mic Night', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 20:30:39', '2020-07-08 20:30:39', 0),
-(4, 'Test', 'User', 'Test', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-07-08 22:53:01', '2020-07-08 22:53:01', 0),
-(6, 'User', 'Name', 'This is a Test', 'This is a test contact message', '2020-07-09 19:05:29', '2020-07-09 19:05:29', 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `events`
 --
 
@@ -110,24 +134,21 @@ CREATE TABLE `events` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `venue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `approved` tinyint(4) NOT NULL
+  `managed_by` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approved` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `description`, `date`, `time`, `venue`, `created_at`, `updated_at`, `image`, `approved`) VALUES
-(1, 'Event One', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-21', '17:00:00', 'Portstewart Town Hall', '2020-06-06 23:21:05', '2020-06-06 23:21:05', 'template.jpg', 1),
-(2, 'Event Two', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-21', '17:00:00', 'Portstewart Town Hall', '2020-06-06 23:24:42', '2020-06-06 23:24:42', 'template.jpg', 1),
-(3, 'Event Three', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-21', '17:00:00', 'Portstewart Town Hall', '2020-06-06 23:27:09', '2020-06-06 23:27:09', 'template.jpg', 1),
-(4, 'Event Four', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-21', '17:00:00', 'Portstewart Town Hall', '2020-06-06 23:28:47', '2020-06-06 23:28:47', 'pcaLogo.png', 1),
-(5, 'Event Five', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-07', '15:00:00', 'Portstewart Town Hall', '2020-06-07 20:54:54', '2020-06-07 20:54:54', '7dMneGbJqFy8xBRDD24xpM_1591566894.jpg', 0),
-(6, 'Event Five', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-16', '19:30:00', 'Portstewart Town Hall', '2020-06-09 16:37:32', '2020-06-09 16:37:32', 'pcaLogo.png', 1),
-(7, 'Event Six', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', '2020-06-12', '17:00:00', 'Portstewart Town Hall', '2020-06-09 16:37:32', '2020-06-09 16:37:32', 'pcaLogo.png', 1);
+INSERT INTO `events` (`id`, `title`, `description`, `date`, `time`, `venue`, `image`, `managed_by`, `approved`, `created_at`, `updated_at`) VALUES
+(2, 'Portstewart Town Clean-Up', 'This is a test event for demo purposes', '2020-09-19', '10:00:00', 'Witches Hat', 'cleanup.jpg', 'PCA', 1, '2020-08-21 21:58:16', '2020-08-27 12:26:43'),
+(3, 'Red Sails Festival 2021', 'This is event four', '2021-07-25', '10:30:00', 'Witches Hat', 'smkc_1598051353.jpg', 'PCA', 1, '2020-08-21 22:09:13', '2020-08-22 12:13:02'),
+(5, 'Health and Wellbeing', 'Event not organised by PCA', '2020-10-08', '14:00:00', 'Zoom', 'smkc_1598051353.jpg', 'Someone Else', 1, '2020-08-27 14:17:10', '2020-08-27 14:17:17');
 
 -- --------------------------------------------------------
 
@@ -161,25 +182,19 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2020_06_05_182750_create_roles_table', 2),
-(5, '2020_06_05_182833_create_role_user_table', 2),
-(6, '2020_06_07_001410_create_events_table', 3),
-(7, '2020_06_07_002206_add_image_to_events_table', 4),
-(8, '2020_06_07_003429_create_news_table', 5),
-(9, '2020_06_07_005158_create_subs_table', 6),
-(10, '2020_06_07_011943_create_contact_us_table', 7),
-(11, '2020_06_07_235310_add_approved_to_events_table', 7),
-(12, '2020_06_15_101419_add_interest_form_approved_to_users', 8),
-(13, '2020_07_09_173701_add_logged_in_status_to_users_table', 9),
-(14, '2020_07_09_183620_add_timeloggedin_to_users_table', 10),
-(15, '2020_07_10_205651_add_read_to_contact_us_table', 11),
-(16, '2020_08_01_152436_create_visitors_table', 12),
-(17, '2020_08_01_155306_create_policy_table', 13),
-(18, '2020_08_02_174103_create_contact_response_table', 14),
-(19, '2020_08_04_164425_create_causes_table', 14);
+(49, '2014_10_12_000000_create_users_table', 1),
+(50, '2014_10_12_100000_create_password_resets_table', 1),
+(51, '2019_08_19_000000_create_failed_jobs_table', 1),
+(52, '2020_06_07_001410_create_events_table', 1),
+(53, '2020_06_07_003429_create_news_table', 1),
+(54, '2020_06_07_005158_create_subs_table', 1),
+(55, '2020_06_07_011943_create_contact_us_table', 1),
+(56, '2020_08_01_152436_create_visitors_table', 1),
+(57, '2020_08_01_155306_create_policy_table', 1),
+(58, '2020_08_02_174103_create_contact_response_table', 1),
+(59, '2020_08_04_164425_create_causes_table', 1),
+(60, '2020_08_09_124839_laratrust_setup_tables', 1),
+(61, '2020_08_26_162700_create_user_events_table', 2);
 
 -- --------------------------------------------------------
 
@@ -201,9 +216,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `story`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'COVID-19 Response', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 'pcaLogo.png', '2020-06-06 23:37:07', '2020-06-06 23:37:07'),
-(2, 'Project 2', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 'pcaLogo.png', '2020-06-06 23:38:07', '2020-06-06 23:38:07'),
-(3, 'Project 3', '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 'pcaLogo.png', '2020-06-06 23:39:02', '2020-06-06 23:39:02');
+(1, 'Tackling Antisocial Behaviour', 'Recent weekends in Portstewart have seen a definite rise in anti-social behaviour. Portstewart Community Association are taking the appropriate steps to try and tackle this', 'pcaLogo.png', '2020-09-10 17:50:00', '2020-09-10 17:50:00'),
+(2, 'COVID-19 Scrubs', 'To help out our NHS during this difficult time, Portstewart Community Association are helping to make scrubs which will be delivered to to the local hospitals ', 'pcaLogo.png', '2020-08-09 12:26:37', '2020-08-09 12:26:37');
 
 -- --------------------------------------------------------
 
@@ -217,18 +231,119 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('harleymdev@gmail.com', '$2y$10$.Is83Uaf9IycFhEFe1RpzOttxqN0gg4MJJtp7YqvMHEUkYlNKzrTO', '2020-08-27 14:52:04');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `policy`
+-- Table structure for table `permissions`
 --
 
-CREATE TABLE `policy` (
+CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'users-create', 'Create Users', 'Create Users', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(2, 'users-read', 'Read Users', 'Read Users', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(3, 'users-update', 'Update Users', 'Update Users', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(4, 'users-delete', 'Delete Users', 'Delete Users', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(5, 'payments-create', 'Create Payments', 'Create Payments', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(6, 'payments-read', 'Read Payments', 'Read Payments', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(7, 'payments-update', 'Update Payments', 'Update Payments', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(8, 'payments-delete', 'Delete Payments', 'Delete Payments', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(9, 'profile-read', 'Read Profile', 'Read Profile', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(10, 'profile-update', 'Update Profile', 'Update Profile', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(11, 'module_1_name-create', 'Create Module_1_name', 'Create Module_1_name', '2020-08-09 13:26:59', '2020-08-09 13:26:59'),
+(12, 'module_1_name-read', 'Read Module_1_name', 'Read Module_1_name', '2020-08-09 13:26:59', '2020-08-09 13:26:59'),
+(13, 'module_1_name-update', 'Update Module_1_name', 'Update Module_1_name', '2020-08-09 13:26:59', '2020-08-09 13:26:59'),
+(14, 'module_1_name-delete', 'Delete Module_1_name', 'Delete Module_1_name', '2020-08-09 13:26:59', '2020-08-09 13:26:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_role`
+--
+
+CREATE TABLE `permission_role` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_user`
+--
+
+CREATE TABLE `permission_user` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `user_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission_user`
+--
+
+INSERT INTO `permission_user` (`permission_id`, `user_id`, `user_type`) VALUES
+(1, 1, 'App\\Role'),
+(2, 1, 'App\\Role'),
+(3, 1, 'App\\Role'),
+(4, 1, 'App\\Role'),
+(5, 1, 'App\\Role'),
+(6, 1, 'App\\Role'),
+(7, 1, 'App\\Role'),
+(8, 1, 'App\\Role'),
+(9, 1, 'App\\Role'),
+(10, 1, 'App\\Role'),
+(1, 2, 'App\\Role'),
+(2, 2, 'App\\Role'),
+(3, 2, 'App\\Role'),
+(4, 2, 'App\\Role'),
+(9, 2, 'App\\Role'),
+(10, 2, 'App\\Role'),
+(9, 3, 'App\\Role'),
+(10, 3, 'App\\Role'),
+(11, 4, 'App\\Role'),
+(12, 4, 'App\\Role'),
+(13, 4, 'App\\Role'),
+(14, 4, 'App\\Role');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policies`
+--
+
+CREATE TABLE `policies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `policies`
+--
+
+INSERT INTO `policies` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(3, 'PCA Membership form.docx', '2020-08-14 16:51:34', '2020-08-14 16:51:34'),
+(4, 'unnamed.jpg', '2020-08-14 16:53:00', '2020-08-14 16:53:00');
 
 -- --------------------------------------------------------
 
@@ -238,22 +353,22 @@ CREATE TABLE `policy` (
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', '2020-06-06 20:37:10', '2020-06-06 20:37:10'),
-(2, 'Author', '2020-06-06 20:37:10', '2020-06-06 20:37:10'),
-(3, 'Committee Member', '2020-06-06 20:37:10', '2020-06-06 20:37:10'),
-(4, 'Event manager', '2020-06-07 22:02:33', '2020-06-07 22:02:33'),
-(5, 'Content Moderator', '2020-06-08 12:48:21', '2020-06-08 12:48:21'),
-(6, 'Registered Interest', '2020-06-15 10:57:13', '2020-06-15 10:57:13');
+INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'Admin', 'Admin', '2020-08-09 13:26:57', '2020-08-09 13:26:57'),
+(2, 'Event Manager', 'Event Manager', 'Event Manager', '2020-08-09 13:26:58', '2020-08-09 13:26:58'),
+(3, 'Committee Member', 'Committee Member', 'Committee Member', '2020-08-09 13:26:58', '2020-08-09 13:26:58'),
+(4, 'Author', 'Author', 'Author', '2020-08-09 13:26:59', '2020-08-09 13:26:59');
 
 -- --------------------------------------------------------
 
@@ -262,12 +377,31 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `role_user` (
-  `id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `user_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_user`
+--
+
+INSERT INTO `role_user` (`role_id`, `user_id`, `user_type`) VALUES
+(1, 1, 'App\\User'),
+(2, 1, ''),
+(3, 1, ''),
+(4, 1, ''),
+(2, 2, 'App\\User'),
+(3, 3, 'App\\User'),
+(4, 4, 'App\\User'),
+(2, 15, ''),
+(3, 16, ''),
+(3, 17, ''),
+(3, 18, ''),
+(1, 34, ''),
+(2, 34, ''),
+(3, 34, ''),
+(4, 34, '');
 
 -- --------------------------------------------------------
 
@@ -282,6 +416,14 @@ CREATE TABLE `subs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `subs`
+--
+
+INSERT INTO `subs` (`id`, `email`, `created_at`, `updated_at`) VALUES
+(1, 'sub@sub.com', '2020-08-09 13:26:54', '2020-08-09 13:26:54'),
+(2, 'sub2@sub2.com', '2020-08-09 13:26:54', '2020-08-09 13:26:54');
+
 -- --------------------------------------------------------
 
 --
@@ -294,29 +436,56 @@ CREATE TABLE `users` (
   `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `town` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `postcode` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tel_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mob_no` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postcode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tel_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mob_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `logged_in` tinyint(4) NOT NULL,
-  `time_logged_in` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `logged_in` tinyint(4) NOT NULL DEFAULT 0,
+  `time_logged_in` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ip_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `surname`, `address`, `town`, `postcode`, `tel_no`, `mob_no`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `logged_in`, `time_logged_in`, `ip_address`) VALUES
+(1, 'Admin', 'User', '11 superadministrator Road', 'Portstewart', 'BT55 7TU', '02870707070', '07707070707', 'admin@app.com', NULL, '$2y$10$DAkuPKomnEkwmsrys.M/7.LA8wfzN.16KiIYip2vbDFciTrRsiG3i', NULL, '2020-08-09 13:26:58', '2020-08-22 12:41:40', 1, '2020-08-15 14:35:07', '127.0.0.1'),
+(2, 'user', 'Event Manager', '11 administrator Road', 'Portstewart', 'BT55 7TU', '02870707070', '07707070707', 'event@app.com', NULL, '$2y$10$CdWddxSFuoPgWQpRSH/gNuW2Cvk0deyfLg0wy5CfgOQ/ybhlEFi8m', NULL, '2020-08-09 13:26:58', '2020-08-09 13:26:58', 1, '2020-08-15 14:35:07', '86.125.101.32'),
+(3, 'user', 'Committee Member', '11 user Road', 'Portstewart', 'BT55 7TU', '02870707070', '07707070707', 'member@app.com', NULL, '$2y$10$ElA3s2TZoamEQDR5/ymsu.9I/VgxT6tL3k5OZaB40obqdOMCyCRMW', NULL, '2020-08-09 13:26:59', '2020-08-09 13:26:59', 1, '2020-08-15 14:35:07', '90.101.4.583'),
+(4, 'user', 'Author', '11 role_name Road', 'Portstewart', 'BT55 7TU', '02870707070', '07707070707', 'author@app.com', NULL, '$2y$10$UdCKnfuTwZOyyNuQN6Ex..PvAfbHVYr1xc2Q7CIoclwmMqVb7OT/6', NULL, '2020-08-03 13:26:59', '2020-08-03 13:26:59', 1, '2020-08-15 14:35:07', '91.184.1.849'),
+(15, 'Test', 'Event Manager', '', '', '', '', '', 'harleymdev@gmail.com', NULL, '$2y$10$m/qHLxi6Tr6nUmhlvgpDL.yso32SJfRLVFcSD0MiYIGcrxV99SFnG', NULL, '2020-08-22 12:45:27', '2020-08-22 12:45:27', 1, '2020-08-22 13:45:27', ''),
+(16, 'Harley', 'Mulholland', '1 Test Avenue', 'Testingville', 'TEST 1XG', '028212121212', '077212121212', 'harleym7000@gmail.com', NULL, '$2y$10$z6KO/MoSa/hftaObQGicS.DJuKmWENvr63Jg2.yxFl4G3hk63Ym3S', NULL, '2020-08-28 13:22:03', '2020-08-28 13:22:03', 0, '2020-08-28 14:22:03', ''),
+(17, 'Test', 'One', '', '', '', '', '', 'test1@test.com', NULL, '$2y$10$vP26ZExpMlM22vnNOHMlq.2sbnQO66YVpb1Mo0ql.oxpQRUsKV7cS', NULL, '2020-09-07 21:05:36', '2020-09-07 21:05:36', 0, '2020-09-07 22:05:36', ''),
+(18, 'Test', 'Two', '', '', '', '', '', 'test2@test.com', NULL, '$2y$10$O8hvZk4hKsHxuwYghp/ArOZWp43CW8vWhBldCiYXsILBJgHeXR0YO', NULL, '2020-09-07 21:06:02', '2020-09-07 21:06:02', 0, '2020-09-07 22:06:02', ''),
+(20, 'Test', 'Three', '', '', '', '', '', 'test3@test.com', NULL, '$2y$10$9.tLOue4mkC3PkU7ul5hCOE.u.j7i.YLSzGao/EEz6lIPZOyVrWDK', NULL, '2020-09-07 21:06:42', '2020-09-07 21:06:42', 0, '2020-09-07 22:06:42', ''),
+(34, 'Portstew', 'CA', '', '', '', '', '', '_mainaccount@portstewartca.org.uk', NULL, '$2y$10$Zw9nr4DfQV2oGafb6OmiAOcMy0O6I/Q3T2Q5j9tb57ShKx/G6PRLq', NULL, '2020-09-13 14:10:21', '2020-09-15 15:40:44', 0, '2020-09-13 15:10:21', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_causes`
+-- Table structure for table `user_events`
 --
 
-CREATE TABLE `user_causes` (
+CREATE TABLE `user_events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `cause_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `event_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_events`
+--
+
+INSERT INTO `user_events` (`id`, `user_id`, `event_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -335,30 +504,344 @@ CREATE TABLE `visitors` (
 --
 
 INSERT INTO `visitors` (`id`, `ip`, `last_visited`) VALUES
-(1, '86.129.104.93', '2020-08-01 16:27:04'),
-(2, '127.0.0.1', '2020-08-01 16:37:49'),
-(3, '127.0.0.1', '2020-08-01 16:38:20'),
-(4, '127.0.0.1', '2020-08-01 19:00:13'),
-(5, '127.0.0.1', '2020-08-01 23:38:00'),
-(6, '127.0.0.1', '2020-08-01 23:45:33'),
-(7, '127.0.0.1', '2020-08-02 00:25:24'),
-(8, '127.0.0.1', '2020-08-02 00:26:08'),
-(9, '127.0.0.1', '2020-08-02 00:46:39'),
-(10, '127.0.0.1', '2020-08-02 01:07:41'),
-(11, '127.0.0.1', '2020-08-02 01:13:27'),
-(12, '127.0.0.1', '2020-08-02 17:57:33'),
-(13, '127.0.0.1', '2020-08-02 17:58:38'),
-(14, '127.0.0.1', '2020-08-03 08:50:52'),
-(15, '127.0.0.1', '2020-08-03 09:21:16'),
-(16, '127.0.0.1', '2020-08-03 10:56:56'),
-(17, '127.0.0.1', '2020-08-04 15:36:16'),
-(18, '127.0.0.1', '2020-08-04 15:39:56'),
-(19, '127.0.0.1', '2020-08-04 15:40:36'),
-(20, '127.0.0.1', '2020-08-04 15:41:35'),
-(21, '127.0.0.1', '2020-08-04 15:42:45'),
-(22, '127.0.0.1', '2020-08-04 15:42:49'),
-(23, '127.0.0.1', '2020-08-04 15:44:09'),
-(24, '127.0.0.1', '2020-08-04 17:38:34');
+(1, '127.0.0.1', '0000-00-00 00:00:00'),
+(2, '127.0.0.1', '0000-00-00 00:00:00'),
+(3, '127.0.0.1', '0000-00-00 00:00:00'),
+(4, '127.0.0.1', '0000-00-00 00:00:00'),
+(5, '127.0.0.1', '0000-00-00 00:00:00'),
+(6, '127.0.0.1', '0000-00-00 00:00:00'),
+(7, '127.0.0.1', '0000-00-00 00:00:00'),
+(8, '127.0.0.1', '0000-00-00 00:00:00'),
+(9, '127.0.0.1', '0000-00-00 00:00:00'),
+(10, '127.0.0.1', '0000-00-00 00:00:00'),
+(11, '127.0.0.1', '0000-00-00 00:00:00'),
+(12, '127.0.0.1', '0000-00-00 00:00:00'),
+(13, '127.0.0.1', '0000-00-00 00:00:00'),
+(14, '127.0.0.1', '0000-00-00 00:00:00'),
+(15, '127.0.0.1', '0000-00-00 00:00:00'),
+(16, '127.0.0.1', '0000-00-00 00:00:00'),
+(17, '127.0.0.1', '0000-00-00 00:00:00'),
+(18, '127.0.0.1', '0000-00-00 00:00:00'),
+(19, '127.0.0.1', '0000-00-00 00:00:00'),
+(20, '127.0.0.1', '0000-00-00 00:00:00'),
+(21, '127.0.0.1', '0000-00-00 00:00:00'),
+(22, '127.0.0.1', '0000-00-00 00:00:00'),
+(23, '127.0.0.1', '0000-00-00 00:00:00'),
+(24, '127.0.0.1', '0000-00-00 00:00:00'),
+(25, '127.0.0.1', '0000-00-00 00:00:00'),
+(26, '127.0.0.1', '0000-00-00 00:00:00'),
+(27, '127.0.0.1', '0000-00-00 00:00:00'),
+(28, '127.0.0.1', '0000-00-00 00:00:00'),
+(29, '127.0.0.1', '0000-00-00 00:00:00'),
+(30, '127.0.0.1', '0000-00-00 00:00:00'),
+(31, '127.0.0.1', '0000-00-00 00:00:00'),
+(32, '127.0.0.1', '0000-00-00 00:00:00'),
+(33, '127.0.0.1', '0000-00-00 00:00:00'),
+(34, '127.0.0.1', '0000-00-00 00:00:00'),
+(35, '127.0.0.1', '0000-00-00 00:00:00'),
+(36, '127.0.0.1', '0000-00-00 00:00:00'),
+(37, '127.0.0.1', '0000-00-00 00:00:00'),
+(38, '127.0.0.1', '0000-00-00 00:00:00'),
+(39, '127.0.0.1', '0000-00-00 00:00:00'),
+(40, '127.0.0.1', '0000-00-00 00:00:00'),
+(41, '127.0.0.1', '0000-00-00 00:00:00'),
+(42, '127.0.0.1', '0000-00-00 00:00:00'),
+(43, '127.0.0.1', '0000-00-00 00:00:00'),
+(44, '127.0.0.1', '0000-00-00 00:00:00'),
+(45, '127.0.0.1', '0000-00-00 00:00:00'),
+(46, '127.0.0.1', '0000-00-00 00:00:00'),
+(47, '127.0.0.1', '0000-00-00 00:00:00'),
+(48, '127.0.0.1', '0000-00-00 00:00:00'),
+(49, '127.0.0.1', '0000-00-00 00:00:00'),
+(50, '127.0.0.1', '0000-00-00 00:00:00'),
+(51, '127.0.0.1', '0000-00-00 00:00:00'),
+(52, '127.0.0.1', '0000-00-00 00:00:00'),
+(53, '127.0.0.1', '0000-00-00 00:00:00'),
+(54, '127.0.0.1', '0000-00-00 00:00:00'),
+(55, '127.0.0.1', '0000-00-00 00:00:00'),
+(56, '127.0.0.1', '0000-00-00 00:00:00'),
+(57, '127.0.0.1', '0000-00-00 00:00:00'),
+(58, '127.0.0.1', '0000-00-00 00:00:00'),
+(59, '127.0.0.1', '0000-00-00 00:00:00'),
+(60, '127.0.0.1', '0000-00-00 00:00:00'),
+(61, '127.0.0.1', '0000-00-00 00:00:00'),
+(62, '127.0.0.1', '0000-00-00 00:00:00'),
+(63, '127.0.0.1', '0000-00-00 00:00:00'),
+(64, '127.0.0.1', '0000-00-00 00:00:00'),
+(65, '127.0.0.1', '0000-00-00 00:00:00'),
+(66, '127.0.0.1', '0000-00-00 00:00:00'),
+(67, '127.0.0.1', '0000-00-00 00:00:00'),
+(68, '127.0.0.1', '0000-00-00 00:00:00'),
+(69, '127.0.0.1', '0000-00-00 00:00:00'),
+(70, '127.0.0.1', '0000-00-00 00:00:00'),
+(71, '127.0.0.1', '0000-00-00 00:00:00'),
+(72, '127.0.0.1', '0000-00-00 00:00:00'),
+(73, '127.0.0.1', '0000-00-00 00:00:00'),
+(74, '127.0.0.1', '0000-00-00 00:00:00'),
+(75, '127.0.0.1', '0000-00-00 00:00:00'),
+(76, '127.0.0.1', '0000-00-00 00:00:00'),
+(77, '127.0.0.1', '0000-00-00 00:00:00'),
+(78, '127.0.0.1', '0000-00-00 00:00:00'),
+(79, '127.0.0.1', '0000-00-00 00:00:00'),
+(80, '127.0.0.1', '0000-00-00 00:00:00'),
+(81, '127.0.0.1', '0000-00-00 00:00:00'),
+(82, '127.0.0.1', '0000-00-00 00:00:00'),
+(83, '127.0.0.1', '0000-00-00 00:00:00'),
+(84, '127.0.0.1', '0000-00-00 00:00:00'),
+(85, '86.147.1.101', '2020-08-15 19:10:26'),
+(86, '91.432.2.183', '0000-00-00 00:00:00'),
+(87, '86.147.1.101', '2020-08-15 19:10:26'),
+(88, '91.432.2.183', '2020-08-15 19:10:26'),
+(89, '127.0.0.1', '0000-00-00 00:00:00'),
+(90, '127.0.0.1', '0000-00-00 00:00:00'),
+(91, '127.0.0.1', '0000-00-00 00:00:00'),
+(92, '127.0.0.1', '0000-00-00 00:00:00'),
+(93, '127.0.0.1', '0000-00-00 00:00:00'),
+(94, '127.0.0.1', '0000-00-00 00:00:00'),
+(95, '127.0.0.1', '0000-00-00 00:00:00'),
+(96, '127.0.0.1', '0000-00-00 00:00:00'),
+(97, '127.0.0.1', '0000-00-00 00:00:00'),
+(98, '127.0.0.1', '0000-00-00 00:00:00'),
+(99, '127.0.0.1', '0000-00-00 00:00:00'),
+(100, '127.0.0.1', '0000-00-00 00:00:00'),
+(101, '127.0.0.1', '0000-00-00 00:00:00'),
+(102, '127.0.0.1', '0000-00-00 00:00:00'),
+(103, '127.0.0.1', '0000-00-00 00:00:00'),
+(104, '127.0.0.1', '0000-00-00 00:00:00'),
+(105, '127.0.0.1', '0000-00-00 00:00:00'),
+(106, '127.0.0.1', '0000-00-00 00:00:00'),
+(107, '127.0.0.1', '0000-00-00 00:00:00'),
+(108, '127.0.0.1', '0000-00-00 00:00:00'),
+(109, '127.0.0.1', '0000-00-00 00:00:00'),
+(110, '127.0.0.1', '0000-00-00 00:00:00'),
+(111, '127.0.0.1', '0000-00-00 00:00:00'),
+(112, '127.0.0.1', '0000-00-00 00:00:00'),
+(113, '127.0.0.1', '0000-00-00 00:00:00'),
+(114, '127.0.0.1', '0000-00-00 00:00:00'),
+(115, '127.0.0.1', '0000-00-00 00:00:00'),
+(116, '127.0.0.1', '0000-00-00 00:00:00'),
+(117, '127.0.0.1', '0000-00-00 00:00:00'),
+(118, '127.0.0.1', '0000-00-00 00:00:00'),
+(119, '127.0.0.1', '0000-00-00 00:00:00'),
+(120, '127.0.0.1', '0000-00-00 00:00:00'),
+(121, '127.0.0.1', '0000-00-00 00:00:00'),
+(122, '127.0.0.1', '0000-00-00 00:00:00'),
+(123, '127.0.0.1', '0000-00-00 00:00:00'),
+(124, '127.0.0.1', '0000-00-00 00:00:00'),
+(125, '127.0.0.1', '0000-00-00 00:00:00'),
+(126, '127.0.0.1', '0000-00-00 00:00:00'),
+(127, '127.0.0.1', '0000-00-00 00:00:00'),
+(128, '127.0.0.1', '0000-00-00 00:00:00'),
+(129, '127.0.0.1', '0000-00-00 00:00:00'),
+(130, '127.0.0.1', '0000-00-00 00:00:00'),
+(131, '127.0.0.1', '0000-00-00 00:00:00'),
+(132, '127.0.0.1', '0000-00-00 00:00:00'),
+(133, '127.0.0.1', '0000-00-00 00:00:00'),
+(134, '127.0.0.1', '0000-00-00 00:00:00'),
+(135, '127.0.0.1', '0000-00-00 00:00:00'),
+(136, '127.0.0.1', '0000-00-00 00:00:00'),
+(137, '127.0.0.1', '0000-00-00 00:00:00'),
+(138, '127.0.0.1', '0000-00-00 00:00:00'),
+(139, '127.0.0.1', '0000-00-00 00:00:00'),
+(140, '127.0.0.1', '0000-00-00 00:00:00'),
+(141, '127.0.0.1', '0000-00-00 00:00:00'),
+(142, '127.0.0.1', '0000-00-00 00:00:00'),
+(143, '127.0.0.1', '0000-00-00 00:00:00'),
+(144, '127.0.0.1', '0000-00-00 00:00:00'),
+(145, '127.0.0.1', '0000-00-00 00:00:00'),
+(146, '127.0.0.1', '0000-00-00 00:00:00'),
+(147, '127.0.0.1', '0000-00-00 00:00:00'),
+(148, '127.0.0.1', '0000-00-00 00:00:00'),
+(149, '127.0.0.1', '0000-00-00 00:00:00'),
+(150, '127.0.0.1', '0000-00-00 00:00:00'),
+(151, '127.0.0.1', '0000-00-00 00:00:00'),
+(152, '127.0.0.1', '0000-00-00 00:00:00'),
+(153, '127.0.0.1', '0000-00-00 00:00:00'),
+(154, '127.0.0.1', '0000-00-00 00:00:00'),
+(155, '127.0.0.1', '0000-00-00 00:00:00'),
+(156, '127.0.0.1', '0000-00-00 00:00:00'),
+(157, '86.148.24.106', '0000-00-00 00:00:00'),
+(158, '86.148.24.106', '0000-00-00 00:00:00'),
+(159, '86.148.24.106', '0000-00-00 00:00:00'),
+(160, '86.148.24.106', '0000-00-00 00:00:00'),
+(161, '86.148.24.106', '0000-00-00 00:00:00'),
+(162, '86.148.24.106', '0000-00-00 00:00:00'),
+(163, '86.148.24.106', '0000-00-00 00:00:00'),
+(164, '86.148.24.106', '0000-00-00 00:00:00'),
+(165, '45.63.19.185', '0000-00-00 00:00:00'),
+(166, '199.167.30.187', '0000-00-00 00:00:00'),
+(167, '86.148.24.106', '0000-00-00 00:00:00'),
+(168, '86.148.24.106', '0000-00-00 00:00:00'),
+(169, '86.148.24.106', '0000-00-00 00:00:00'),
+(170, '2.236.112.207', '0000-00-00 00:00:00'),
+(171, '2.236.112.207', '0000-00-00 00:00:00'),
+(172, '2.236.112.207', '2020-09-07 12:32:34'),
+(173, '216.55.138.235', '2020-09-07 13:22:33'),
+(174, '206.225.80.193', '2020-09-07 13:22:36'),
+(175, '206.225.80.193', '2020-09-07 13:22:37'),
+(176, '31.13.115.23', '2020-09-07 14:01:01'),
+(177, '31.13.115.1', '2020-09-07 14:01:01'),
+(178, '31.13.115.7', '2020-09-07 14:01:08'),
+(179, '81.101.175.225', '2020-09-07 14:01:25'),
+(180, '81.101.175.225', '2020-09-07 14:02:37'),
+(181, '86.148.24.106', '2020-09-07 18:48:45'),
+(182, '86.148.24.106', '2020-09-07 22:35:55'),
+(183, '86.148.24.106', '2020-09-07 23:03:21'),
+(184, '86.148.24.106', '2020-09-07 23:09:19'),
+(185, '86.148.24.106', '2020-09-07 23:22:05'),
+(186, '86.148.24.106', '2020-09-07 23:45:21'),
+(187, '86.148.24.106', '2020-09-07 23:47:33'),
+(188, '86.148.24.106', '2020-09-07 23:47:46'),
+(189, '86.148.24.106', '2020-09-07 23:49:02'),
+(190, '86.148.24.106', '2020-09-07 23:51:09'),
+(191, '86.148.24.106', '2020-09-07 23:54:18'),
+(192, '86.148.24.106', '2020-09-07 23:54:23'),
+(193, '86.148.24.106', '2020-09-07 23:59:43'),
+(194, '86.148.24.106', '2020-09-08 00:06:09'),
+(195, '86.148.24.106', '2020-09-08 09:34:33'),
+(196, '86.148.24.106', '2020-09-08 09:59:40'),
+(197, '86.148.24.106', '2020-09-08 20:11:00'),
+(198, '86.148.24.106', '2020-09-08 21:57:30'),
+(199, '86.148.24.106', '2020-09-08 21:57:49'),
+(200, '86.148.24.106', '2020-09-09 18:51:08'),
+(201, '86.148.24.106', '2020-09-09 21:42:09'),
+(202, '86.148.24.106', '2020-09-09 23:37:00'),
+(203, '86.148.24.106', '2020-09-10 01:32:55'),
+(204, '86.148.24.106', '2020-09-10 23:47:50'),
+(205, '86.148.24.106', '2020-09-10 23:48:46'),
+(206, '86.148.24.106', '2020-09-10 23:48:53'),
+(207, '86.148.24.106', '2020-09-10 23:48:56'),
+(208, '86.148.24.106', '2020-09-10 23:49:09'),
+(209, '86.148.24.106', '2020-09-10 23:49:10'),
+(210, '86.148.24.106', '2020-09-10 23:50:02'),
+(211, '86.148.24.106', '2020-09-10 23:50:33'),
+(212, '86.148.24.106', '2020-09-10 23:50:36'),
+(213, '86.148.24.106', '2020-09-10 23:51:28'),
+(214, '86.148.24.106', '2020-09-10 23:53:30'),
+(215, '86.148.24.106', '2020-09-10 23:53:31'),
+(216, '86.148.24.106', '2020-09-10 23:53:32'),
+(217, '86.148.24.106', '2020-09-10 23:53:33'),
+(218, '86.148.24.106', '2020-09-10 23:53:35'),
+(219, '86.148.24.106', '2020-09-10 23:53:36'),
+(220, '86.148.24.106', '2020-09-10 23:53:37'),
+(221, '86.148.24.106', '2020-09-10 23:53:38'),
+(222, '86.148.24.106', '2020-09-10 23:53:39'),
+(223, '86.148.24.106', '2020-09-10 23:53:43'),
+(224, '86.148.24.106', '2020-09-10 23:53:43'),
+(225, '86.148.24.106', '2020-09-10 23:54:07'),
+(226, '86.148.24.106', '2020-09-10 23:54:12'),
+(227, '86.148.24.106', '2020-09-10 23:54:13'),
+(228, '86.148.24.106', '2020-09-10 23:54:43'),
+(229, '86.148.24.106', '2020-09-10 23:54:49'),
+(230, '86.148.24.106', '2020-09-10 23:56:10'),
+(231, '86.148.24.106', '2020-09-10 23:56:14'),
+(232, '86.148.24.106', '2020-09-10 23:56:33'),
+(233, '86.148.24.106', '2020-09-10 23:56:38'),
+(234, '86.148.24.106', '2020-09-10 23:56:48'),
+(235, '86.148.24.106', '2020-09-10 23:56:51'),
+(236, '86.148.24.106', '2020-09-10 23:57:19'),
+(237, '86.148.24.106', '2020-09-10 23:59:47'),
+(238, '86.148.24.106', '2020-09-11 00:01:46'),
+(239, '86.148.24.106', '2020-09-11 00:01:50'),
+(240, '86.148.24.106', '2020-09-11 01:00:19'),
+(241, '86.148.24.106', '2020-09-11 01:01:02'),
+(242, '86.148.24.106', '2020-09-11 01:01:20'),
+(243, '86.148.24.106', '2020-09-11 01:01:51'),
+(244, '86.148.24.106', '2020-09-11 01:04:21'),
+(245, '86.148.24.106', '2020-09-11 01:04:36'),
+(246, '86.148.24.106', '2020-09-11 01:07:55'),
+(247, '86.148.24.106', '2020-09-11 01:09:40'),
+(248, '86.148.24.106', '2020-09-11 01:17:58'),
+(249, '86.148.24.106', '2020-09-11 01:22:46'),
+(250, '86.148.24.106', '2020-09-11 01:23:49'),
+(251, '138.246.253.15', '2020-09-11 01:24:05'),
+(252, '86.148.24.106', '2020-09-11 01:25:43'),
+(253, '86.148.24.106', '2020-09-11 01:27:21'),
+(254, '86.148.24.106', '2020-09-11 01:28:46'),
+(255, '86.148.24.106', '2020-09-11 01:29:08'),
+(256, '86.148.24.106', '2020-09-11 01:33:10'),
+(257, '86.148.24.106', '2020-09-11 01:33:24'),
+(258, '86.148.24.106', '2020-09-11 01:33:55'),
+(259, '86.148.24.106', '2020-09-11 01:33:57'),
+(260, '86.148.24.106', '2020-09-11 01:33:58'),
+(261, '86.148.24.106', '2020-09-11 01:34:01'),
+(262, '86.148.24.106', '2020-09-11 01:34:29'),
+(263, '86.148.24.106', '2020-09-11 01:34:44'),
+(264, '86.148.24.106', '2020-09-11 01:38:19'),
+(265, '86.148.24.106', '2020-09-11 01:39:00'),
+(266, '86.148.24.106', '2020-09-11 01:40:03'),
+(267, '86.148.24.106', '2020-09-11 01:40:21'),
+(268, '86.148.24.106', '2020-09-11 01:41:39'),
+(269, '86.148.24.106', '2020-09-11 01:41:55'),
+(270, '86.148.24.106', '2020-09-11 01:44:04'),
+(271, '86.148.24.106', '2020-09-11 01:47:06'),
+(272, '86.148.24.106', '2020-09-11 01:48:33'),
+(273, '86.148.24.106', '2020-09-11 01:49:24'),
+(274, '86.148.24.106', '2020-09-11 01:51:36'),
+(275, '86.148.24.106', '2020-09-11 01:51:53'),
+(276, '86.148.24.106', '2020-09-11 01:51:56'),
+(277, '86.148.24.106', '2020-09-11 01:52:35'),
+(278, '86.148.24.106', '2020-09-11 01:53:29'),
+(279, '86.148.24.106', '2020-09-11 01:54:38'),
+(280, '31.13.103.8', '2020-09-11 01:58:58'),
+(281, '31.13.103.10', '2020-09-11 01:58:59'),
+(282, '86.148.24.106', '2020-09-11 01:59:12'),
+(283, '146.199.79.225', '2020-09-11 02:00:09'),
+(284, '146.199.79.225', '2020-09-11 02:00:16'),
+(285, '86.148.24.106', '2020-09-11 02:02:34'),
+(286, '86.148.24.106', '2020-09-11 02:03:56'),
+(287, '86.148.24.106', '2020-09-11 02:11:26'),
+(288, '86.148.24.106', '2020-09-11 02:14:57'),
+(289, '146.199.79.225', '2020-09-11 02:15:40'),
+(290, '146.199.79.225', '2020-09-11 02:15:51'),
+(291, '86.148.24.106', '2020-09-11 09:51:00'),
+(292, '86.173.176.156', '2020-09-11 10:08:52'),
+(293, '86.148.24.106', '2020-09-11 10:16:44'),
+(294, '86.148.24.106', '2020-09-11 10:16:55'),
+(295, '86.148.24.106', '2020-09-11 10:16:56'),
+(296, '86.148.24.106', '2020-09-11 10:17:00'),
+(297, '86.148.24.106', '2020-09-11 10:24:35'),
+(298, '86.148.24.106', '2020-09-11 10:25:27'),
+(299, '86.148.24.106', '2020-09-11 10:45:33'),
+(300, '90.249.183.38', '2020-09-11 11:04:34'),
+(301, '86.148.24.106', '2020-09-11 11:05:06'),
+(302, '90.201.216.56', '2020-09-11 11:05:43'),
+(303, '78.105.21.197', '2020-09-11 11:05:50'),
+(304, '86.182.119.151', '2020-09-11 11:05:56'),
+(305, '90.201.216.56', '2020-09-11 11:05:58'),
+(306, '86.148.24.106', '2020-09-11 11:10:19'),
+(307, '86.161.237.76', '2020-09-11 14:31:25'),
+(308, '86.161.237.76', '2020-09-11 14:34:48'),
+(309, '86.173.176.156', '2020-09-11 15:40:51'),
+(310, '213.205.202.53', '2020-09-11 16:58:36'),
+(311, '86.148.24.106', '2020-09-11 22:12:11'),
+(312, '86.148.24.106', '2020-09-11 23:28:24'),
+(313, '86.148.24.106', '2020-09-11 23:57:08'),
+(314, '86.173.176.156', '2020-09-12 10:32:51'),
+(315, '86.141.247.114', '2020-09-12 14:39:14'),
+(316, '92.14.240.130', '2020-09-12 15:38:00'),
+(317, '92.14.240.130', '2020-09-12 15:38:20'),
+(318, '92.14.240.130', '2020-09-12 15:39:02'),
+(319, '86.141.247.114', '2020-09-12 16:56:21'),
+(320, '86.141.247.114', '2020-09-12 16:56:48'),
+(321, '86.141.247.114', '2020-09-12 16:57:07'),
+(322, '86.141.247.114', '2020-09-12 16:57:43'),
+(323, '86.141.247.114', '2020-09-12 19:16:31'),
+(324, '127.0.0.1', '2020-09-12 22:38:29'),
+(325, '127.0.0.1', '2020-09-12 22:42:17'),
+(326, '127.0.0.1', '2020-09-12 22:56:43'),
+(327, '127.0.0.1', '2020-09-12 22:57:45'),
+(328, '127.0.0.1', '2020-09-12 22:58:08'),
+(329, '127.0.0.1', '2020-09-12 23:02:36'),
+(330, '127.0.0.1', '2020-09-12 23:33:40'),
+(331, '127.0.0.1', '2020-09-12 23:37:16'),
+(332, '127.0.0.1', '2020-09-13 00:22:13'),
+(333, '127.0.0.1', '2020-09-13 00:22:16'),
+(334, '127.0.0.1', '2020-09-13 16:12:04'),
+(335, '127.0.0.1', '2020-09-13 18:38:56'),
+(336, '127.0.0.1', '2020-09-13 19:59:10'),
+(337, '127.0.0.1', '2020-09-13 20:56:15'),
+(338, '127.0.0.1', '2020-09-13 21:16:37');
 
 --
 -- Indexes for dumped tables
@@ -371,15 +854,22 @@ ALTER TABLE `causes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contact_response`
+-- Indexes for table `cause_user`
 --
-ALTER TABLE `contact_response`
+ALTER TABLE `cause_user`
+  ADD KEY `cause_id` (`cause_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contact_us`
+-- Indexes for table `contact_response`
 --
-ALTER TABLE `contact_us`
+ALTER TABLE `contact_response`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -413,24 +903,45 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `policy`
+-- Indexes for table `permissions`
 --
-ALTER TABLE `policy`
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_unique` (`name`);
+
+--
+-- Indexes for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `permission_role_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `permission_user`
+--
+ALTER TABLE `permission_user`
+  ADD PRIMARY KEY (`user_id`,`permission_id`,`user_type`),
+  ADD KEY `permission_user_permission_id_foreign` (`permission_id`);
+
+--
+-- Indexes for table `policies`
+--
+ALTER TABLE `policies`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_unique` (`name`);
 
 --
 -- Indexes for table `role_user`
 --
 ALTER TABLE `role_user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `role_id` (`role_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`user_id`,`role_id`,`user_type`),
+  ADD KEY `role_user_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `subs`
@@ -446,11 +957,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Indexes for table `user_causes`
+-- Indexes for table `user_events`
 --
-ALTER TABLE `user_causes`
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `cause_id` (`cause_id`);
+ALTER TABLE `user_events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `visitors`
@@ -469,22 +981,22 @@ ALTER TABLE `causes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `contact_response`
 --
 ALTER TABLE `contact_response`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `contact_us`
---
-ALTER TABLE `contact_us`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -496,67 +1008,92 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `policy`
+-- AUTO_INCREMENT for table `permissions`
 --
-ALTER TABLE `policy`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `policies`
+--
+ALTER TABLE `policies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `role_user`
---
-ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subs`
 --
 ALTER TABLE `subs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `user_events`
+--
+ALTER TABLE `user_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `cause_user`
+--
+ALTER TABLE `cause_user`
+  ADD CONSTRAINT `cause_user_ibfk_1` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`id`),
+  ADD CONSTRAINT `cause_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `permission_role`
+--
+ALTER TABLE `permission_role`
+  ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `permission_user`
+--
+ALTER TABLE `permission_user`
+  ADD CONSTRAINT `permission_user_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `role_user`
 --
 ALTER TABLE `role_user`
-  ADD CONSTRAINT `role_user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `role_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `user_causes`
+-- Constraints for table `user_events`
 --
-ALTER TABLE `user_causes`
-  ADD CONSTRAINT `user_causes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `user_causes_ibfk_2` FOREIGN KEY (`cause_id`) REFERENCES `causes` (`id`);
+ALTER TABLE `user_events`
+  ADD CONSTRAINT `user_events_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `user_events_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
