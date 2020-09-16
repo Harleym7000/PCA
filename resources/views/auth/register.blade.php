@@ -86,7 +86,7 @@
                         <div class="col-md-6">
                             <input id="tel_no" type="text" class="form-control @error('tel_no') is-invalid @enderror" name="tel_no" value="{{ old('tel_no') }}" placeholder="Telephone Number" required autocomplete="tel_no">
 
-                            @error('email')
+                            @error('tel_no')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                             <input id="mob_no" type="text" class="form-control @error('mob_no') is-invalid @enderror" name="mob_no" value="{{ old('mob_no') }}" placeholder="Mobile Number" required autocomplete="mob_no">
 
-                            @error('email')
+                            @error('mob_no')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
