@@ -404,6 +404,39 @@ body {
         display: none;
     }
 
+    #test {
+      width: 100%;
+      background-color: #fff;
+      height: 3%;
+    }
+
+    #test .navbar {
+      background: #fff !important;
+      border-bottom: 3px solid #d3d3d3;
+    }
+
+    #test .navbar-toggler {
+      margin-left: 5%;
+    }
+
+    #dashboard {
+      margin-top: 3%;
+    }
+
+    #dashboard h1 {
+      margin-left: 4%;
+    }
+
+    #dashboard .widget-img img {
+      margin-top: 35%;
+      height: 50%; 
+      width: 50%;
+    }
+
+    .total {
+      font-size: 62px;
+    }
+
     #mobile-nav {
         display: none;
     }

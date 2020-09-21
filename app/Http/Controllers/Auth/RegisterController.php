@@ -79,8 +79,8 @@ class RegisterController extends Controller
             'address' => ['required', 'min:8', 'max:255', new Script_Validation],
             'town' => ['required', 'min:2', 'max:255', new Script_Validation],
             'postcode' => ['required', 'min:7', 'max:8', new Script_Validation, new Postcode_Validation],
-            'tel_no' => ['min:11', 'max:11', new Script_Validation, new Phone_Vaidation],
-            'mob_no' => ['min:11', 'max:11', new Script_Validation, new Phone_Vaidation],
+            'tel_no' => ['min:11', 'max:11', 'regex:/^\d{11}$/', new Script_Validation, new Phone_Vaidation],
+            'mob_no' => ['min:11', 'max:11', 'regex:/^\d{11}$/', new Script_Validation, new Phone_Vaidation],
             'email' => ['required', 'email', 'max:255', new Script_Validation],
             'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
             'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation],
@@ -88,7 +88,9 @@ class RegisterController extends Controller
         ],
         $messages = [
             'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
-            'password.confirmed' => 'Passwords do not match'
+            'password.confirmed' => 'Passwords do not match',
+            'tel_no.regex' => 'Tel_No must only contain numerical charavters',
+            'mob_no.regex' => 'Mob_No must only contain numerical characters'
         ]);
 
         $userpass = request('password');
