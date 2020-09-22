@@ -34,6 +34,20 @@
         <div class="col-10">
           @include('inc.admin-nav')
           <div id="dashboard">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Active</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+              </li>
+            </ul>
             <h1>Dashboard</h1>
           <div class="row justify-content-center">
               <div class="col-11">
@@ -54,7 +68,7 @@
                         <div class="card-body ">
                           <div class="row">
                             <div class="widget-img col-4">
-                              <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
+                              <img src="/img/baseline_people_alt_white_18dp.png" class="img-fluid">
                             </div>
                             <div class="col-8">
                               <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Committee Members</h1>
@@ -69,7 +83,7 @@
                               <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
                             </div>
                             <div class="col-8">
-                              <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Site Visits</h1>
+                              <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Total Users</h1>
                             </div>
                           </div>
                       </div>
