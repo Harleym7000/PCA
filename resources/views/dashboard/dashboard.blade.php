@@ -36,10 +36,10 @@
           <div id="dashboard">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
+                <a class="nav-link active" href="/admin/dashboard">Admin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="/events/dashboard">Events</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -55,10 +55,10 @@
                       <div class="card text-white bg-primary ">
                         <div class="card-body ">
                           <div class="row">
-                            <div class="widget-img col-4">
+                            <div class="widget-img col-lg-4">
                               <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
                             </div>
-                            <div class="col-8">
+                            <div class="widget-text col-lg-8">
                               <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Site Visits</h1>
                             </div>
                           </div>
@@ -67,10 +67,10 @@
                       <div class="card text-white bg-success ">
                         <div class="card-body ">
                           <div class="row">
-                            <div class="widget-img col-4">
+                            <div class="widget-img col-lg-4">
                               <img src="/img/baseline_people_alt_white_18dp.png" class="img-fluid">
                             </div>
-                            <div class="col-8">
+                            <div class="widget-text col-lg-8">
                               <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Committee Members</h1>
                             </div>
                           </div>
@@ -79,10 +79,10 @@
                       <div class="card text-white bg-danger">
                         <div class="card-body ">
                           <div class="row">
-                            <div class="widget-img col-4">
+                            <div class="widget-img col-lg-4">
                               <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
                             </div>
-                            <div class="col-8">
+                            <div class="widget-text col-lg-8">
                               <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Total Users</h1>
                             </div>
                           </div>

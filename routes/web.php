@@ -38,6 +38,8 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/member', 'MemberController@index')->name('member');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 
+Route::get('/events/dashboard', 'DashboardsController@event');
+
 
 //Event Manager Links
 Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:manage-events')->group(function(){

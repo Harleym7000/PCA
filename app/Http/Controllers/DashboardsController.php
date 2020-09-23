@@ -33,4 +33,8 @@ class DashboardsController extends Controller
             'usersThisMonth' => $usersThisMonth
             ]);
     }
+
+    public function event() {
+        return view('dashboard.event');
+    }
 }

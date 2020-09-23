@@ -349,9 +349,14 @@ body {
         width: auto;
     }
 
+    #sidenav .logo {
+      text-align: center;
+    }
+
     #sidenav .logo img{
-        height: 50%;
-        width: 55%;
+      height: 227px;
+      width: 200px;
+      margin-left: -4%;
     }
 
     #sidenav .title {
@@ -425,6 +430,8 @@ body {
 
     #dashboard h1 {
       margin-left: 4%;
+      margin-top: 2%;
+      margin-bottom: 2%;
     }
 
     #dashboard .widget-img img {
@@ -739,6 +746,29 @@ body {
 #register-form .form-control {
   margin-bottom: 10%;
 }
+
+#dashboard .card-deck .card {
+  font-size: 22px;
+  height: 300px;
+  text-align: center;
+}
+
+#dashboard .widget-img img {
+  height: 100%;
+  width: 30%;
+  margin-top: 3%;
+}
+
+#dashboard .nav {
+  margin-top: 25%;
+  display: flex;
+}
+
+#dashboard h1 {
+  margin-left: 4%;
+  margin-top: 7%;
+  margin-bottom: 5%;
+}
 }
 
   // Small devices (landscape phones, less than 768px)
@@ -822,7 +852,7 @@ body {
     }
 
     #sidenav .option {
-        padding-left: 12%;
+        padding-left: 0%;
         margin-top: 15%;
         margin-bottom: 15%;
         width: 100%;
@@ -831,11 +861,15 @@ body {
     #sidenav {
         overflow-x: hidden;
         text-align: center;
-        width: 70%;
     }
 
     #sidenav .logo {
         text-align: center;
+    }
+
+    #sidenav .logo img {
+      height: 127px;
+      width: 100px;
     }
 
     #sidenav .title {
@@ -853,10 +887,10 @@ body {
     }
 
     #sidenav .label {
-        display: inline;
-        font-size: 14px;
+        display: inline-block;
+        margin-top: 5%;
+        font-size: 18px;
         text-align: center;
-        margin-top: 12%;
     }
 
     #sidenav span {
@@ -866,7 +900,7 @@ body {
     #sidenav .option-label {
         width: 53%;
         margin: auto;
-        font-size: 12px;
+        font-size: 20px;
         text-align: center;
     }
 
@@ -893,5 +927,15 @@ body {
 
    #login .btn {
     width: 71%;
+  }
+
+  #dashboard .widget-img img {
+    height: 50%;
+    width: 100%;
+    margin-top: 3%;
+  }
+
+  #dashboard .widget-text h1 {
+    font-size: 22px;
   }
  }
