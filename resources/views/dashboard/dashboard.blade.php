@@ -22,6 +22,69 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawMembersChart);
+      google.charts.setOnLoadCallback(drawTrafficChart);
+
+      function drawMembersChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Committee Members'],
+          ['Jan',  0,      ],
+          ['Feb',  0,      ],
+          ['Mar',  0,      ],
+          ['Apr',  0,      ],
+          ['May',  0,      ],
+          ['Jun',  0,      ],
+          ['Jul',  0,      ],
+          ['Aug',  0,      ],
+          ['Sep',  6,      ],
+          ['Oct',  0,      ],
+          ['Nov',  0,      ],
+          ['Dec',  0,      ]
+        ]);
+
+        var options = {
+          title: 'Committee Member Growth Pattern',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('members_curve_chart'));
+
+        chart.draw(data, options);
+      }
+
+      function drawTrafficChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Visits Per Month'],
+          ['Jan',  20,      ],
+          ['Feb',  40,      ],
+          ['Mar',  76,      ],
+          ['Apr',  120      ],
+          ['May',  130,      ],
+          ['Jun',  70,      ],
+          ['Jul',  110,      ],
+          ['Aug',  86,      ],
+          ['Sep',  210,      ],
+          ['Oct',  290,      ],
+          ['Nov',  258,      ],
+          ['Dec',  237,      ]
+        ]);
+
+        var options = {
+          title: 'Site Traffic',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('traffic_curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
 </head>
 <body>
 
@@ -51,50 +114,72 @@
             <h1>Dashboard</h1>
           <div class="row justify-content-center">
               <div class="col-11">
-                    <div class="card-deck">
-                      <div class="card text-white bg-primary ">
-                        <div class="card-body ">
-                          <div class="row">
-                            <div class="widget-img col-lg-4">
-                              <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
-                            </div>
-                            <div class="widget-text col-lg-8">
-                              <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Site Visits</h1>
-                            </div>
-                          </div>
-                      </div>
-                      </div>
-                      <div class="card text-white bg-success ">
-                        <div class="card-body ">
-                          <div class="row">
-                            <div class="widget-img col-lg-4">
-                              <img src="/img/baseline_people_alt_white_18dp.png" class="img-fluid">
-                            </div>
-                            <div class="widget-text col-lg-8">
-                              <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Committee Members</h1>
-                            </div>
-                          </div>
-                      </div>
-                      </div>
-                      <div class="card text-white bg-danger">
-                        <div class="card-body ">
-                          <div class="row">
-                            <div class="widget-img col-lg-4">
-                              <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
-                            </div>
-                            <div class="widget-text col-lg-8">
-                              <h1 class="text-center"><strong><span class="total">{{$totalUsers}}</span></strong> <br>Total Users</h1>
-                            </div>
-                          </div>
+                <div class="card-deck">
+                  <div class="card text-white bg-primary">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-9">
+                      <img src="/img/baseline_visibility_white_18dp.png">
+                        </div>
+                        <div class="col-3">
+                      <h1 class="card-text">{{$totalUniqueVisits}}
+                        <p class="card-text">Site Visits</p>
                       </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="card text-white bg-success">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-7">
+                      <img src="/img/baseline_people_alt_white_18dp.png">
+                        </div>
+                        <div class="col-5">
+                      <h1 class="card-text">{{$totalCommitteeMembers}}
+                        <p class="card-text">Committee Members</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card text-white bg-danger">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6">
+                      <img src="/img/baseline_person_add_alt_1_white_18dp.png">
+                        </div>
+                        <div class="col-6">
+                      <h1 class="card-text">{{$usersThisMonth}}
+                        <p class="card-text">Registered This Month</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-deck">
+                  <div class="card">
+                    <div class="card-header">
+                      Commitee Member Growth Pattern
+                    </div>
+                    <div class="card-body">
+                      <div id="members_curve_chart" style="width: 650px; height: 300px"></div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      Site Traffic
+                    </div>
+                    <div class="card-body">
+                      <div id="traffic_curve_chart" style="width: 650px; height: 300px"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              
+          </div>
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
 </div>
 </body>
             
