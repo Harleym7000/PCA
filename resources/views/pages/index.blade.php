@@ -23,7 +23,9 @@
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">{{$event->venue}}</h3>
                   <div class="row">
                     <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
-                <a href="/event/register/{{$event->id}}" class="btn btn-light col-5">Register</a>
+                    <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}">
+                      Register
+                    </button>
               </div>
                 </div>
               </div>
@@ -50,4 +52,59 @@
               @endforeach
             @endif
           </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($events as $event)
+<div class="modal fade" id="event{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{$event->title}} Event Registration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <label class="col">First Name:</label>
+            <label class="col">Surname:</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last name">
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col">Email Address:</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Email Address">
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="col">Contact Number:</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Contact Number">
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 @endsection

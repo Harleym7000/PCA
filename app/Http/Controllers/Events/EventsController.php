@@ -143,4 +143,9 @@ class EventsController extends Controller
         $event->delete();
         return redirect('/event-manager/index');
     }
+
+    public function registerEventUser(Request $request) 
+    {
+
+    }
 }

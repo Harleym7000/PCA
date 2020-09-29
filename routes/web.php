@@ -24,6 +24,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
+Route::get('/events/register/{id}', 'Events\EventsController@register');
 Route::resource('/story', 'NewsController');
 Route::resource('/event', 'EventsController');
 Route::get('/contact-us', 'PagesController@contact');
@@ -77,6 +78,7 @@ Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
 Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers');
 Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName');
 Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses');
+Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

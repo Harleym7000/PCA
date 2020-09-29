@@ -37,4 +37,15 @@ class DashboardsController extends Controller
     public function event() {
         return view('dashboard.event');
     }
+
+    public function getCommitteeGrowth() 
+    {
+        $janMembers = DB::table('users')
+                      ->join('role_user', 'role_user.user_id', '=', 'users.id')
+                      ->where('role_user.role_id', '=', 3)
+                      ->whereMonth('users.created_at', '=', 1)
+                      ->get();
+        $janMembersTotal = count($janMembers);
+        return response()->json($janMembersTotal);
+    }
 }

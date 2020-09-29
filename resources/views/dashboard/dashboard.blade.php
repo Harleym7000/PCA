@@ -23,66 +23,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawMembersChart);
-      google.charts.setOnLoadCallback(drawTrafficChart);
-
-      function drawMembersChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Committee Members'],
-          ['Jan',  0,      ],
-          ['Feb',  0,      ],
-          ['Mar',  0,      ],
-          ['Apr',  0,      ],
-          ['May',  0,      ],
-          ['Jun',  0,      ],
-          ['Jul',  0,      ],
-          ['Aug',  0,      ],
-          ['Sep',  6,      ],
-          ['Oct',  0,      ],
-          ['Nov',  0,      ],
-          ['Dec',  0,      ]
-        ]);
-
-        var options = {
-          title: 'Committee Member Growth Pattern',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('members_curve_chart'));
-
-        chart.draw(data, options);
+    <script>
+       // Load the Visualization API and the piechart package.
+    google.charts.load('current', {'packages':['corechart']});
+      
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+        
+      function drawChart() {
+        var jsonData = $.ajax({
+            url: "/admin/getCommitteeGrowth",
+            dataType: "json",
+            async: false
+            }).responseText;
+            
+        // Create our data table out of JSON data loaded from server.
+        var data = new google.visualization.DataTable(jsonData);
+  
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('members_curve_chart'));
+        chart.draw(data, {width: 400, height: 240});
       }
-
-      function drawTrafficChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Visits Per Month'],
-          ['Jan',  20,      ],
-          ['Feb',  40,      ],
-          ['Mar',  76,      ],
-          ['Apr',  120      ],
-          ['May',  130,      ],
-          ['Jun',  70,      ],
-          ['Jul',  110,      ],
-          ['Aug',  86,      ],
-          ['Sep',  210,      ],
-          ['Oct',  290,      ],
-          ['Nov',  258,      ],
-          ['Dec',  237,      ]
-        ]);
-
-        var options = {
-          title: 'Site Traffic',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('traffic_curve_chart'));
-
-        chart.draw(data, options);
-      }
+  
     </script>
 
 </head>
