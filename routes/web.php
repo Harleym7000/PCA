@@ -24,7 +24,8 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
-Route::get('/events/register/{id}', 'Events\EventsController@register');
+Route::post('/events/register/guest', 'Events\EventsController@register');
+Route::post('/events/register', 'Events\EventsController@registerEventUser');
 Route::resource('/story', 'NewsController');
 Route::resource('/event', 'EventsController');
 Route::get('/contact-us', 'PagesController@contact');
@@ -57,6 +58,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
 Route::post('/user/profile', 'AccountsController@update')->middleware('can:view-policy');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
+Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
 
 //Author links
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){

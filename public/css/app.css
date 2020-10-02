@@ -11440,6 +11440,30 @@ body {
   max-height: 30px;
 }
 
+#my-events .card-deck {
+  width: 70%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+#my-events .card-body {
+  background-color: #252525;
+  border: none;
+  color: #fff;
+}
+
+#my-events .card {
+  width: 40%;
+  margin: 3%;
+  font-size: 18px;
+}
+
+#my-events .card img {
+  background-color: #fff;
+  width: 40%;
+  margin: auto;
+}
+
 footer {
   background: #191919;
 }

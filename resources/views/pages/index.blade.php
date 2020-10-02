@@ -57,6 +57,7 @@
 
 
 <!-- Modal -->
+
 @foreach($events as $event)
 <div class="modal fade" id="event{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -68,17 +69,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+          @auth
+                              <form class="userEventReg">
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" value="{{auth()->user()->id}}" id="userRegID" checked>
+    <label class="form-check-label" for="exampleCheck1">Register using my account</label>
+  </div>
+  <button type="submit" value="{{$event->id}}" class="btn btn-primary eventRegUser">Submit</button>
+</form>
+      @endauth
+          @guest
+          <form action="/events/register/guest" method="POST">
+            @csrf 
           <div class="form-row">
             <label class="col">First Name:</label>
             <label class="col">Surname:</label>
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" class="form-control" placeholder="First name">
+              <input type="text" name="forename" class="form-control" placeholder="First name">
             </div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Last name">
+              <input type="text" name="surname" class="form-control" placeholder="Last name">
             </div>
           </div>
           <div class="form-row">
@@ -86,7 +98,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" class="form-control" placeholder="Email Address">
+              <input type="text" name="email" class="form-control" placeholder="Email Address">
             </div>
           </div>
           <div class="form-row">
@@ -94,17 +106,39 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" class="form-control" placeholder="Contact Number">
+              <input type="text" name="phone" class="form-control" placeholder="Contact Number">
             </div>
           </div>
       </div>
+      <input type="hidden" name="eventID" value="{{$event->id}}">
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">Register</button>
       </form>
+      @endguest
       </div>
     </div>
   </div>
 </div>
 @endforeach
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                          <script>
+                            $(document).ready(function(){
+                              $('.eventRegUser').click(function() {
+                                var eventID = $(this).val();
+                                var userID = $('#userRegID').val();
+                                //alert('Event ID ' + eventID + 'User ID ' + userID);
+                                $.ajax({
+                                  type: 'POST',
+                                  url: '/events/register',
+                                  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                  data: {EID: eventID, UID: userID},
+                                  dataType: 'json',
+                                  success: function(data) {
+                                    console.log('success');
+                                  }
+                                });
+                              });
+                            });
+                          </script>
 @endsection

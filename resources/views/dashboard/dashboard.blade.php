@@ -136,7 +136,7 @@
                   </div>
                 </div>
               </div>
-              
+              <h3 class="text-center">More coming soon</h3>
           </div>
           </div>
         </div>
