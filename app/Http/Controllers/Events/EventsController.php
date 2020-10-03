@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Event;
+use App\News;
 use Carbon\Carbon;
 
 class EventsController extends Controller
@@ -142,5 +143,37 @@ class EventsController extends Controller
         $event = Event::find($id);
         $event->delete();
         return redirect('/event-manager/index');
+    }
+
+    public function registerEventUser(Request $request) 
+    {
+        $userID = $_POST['UID'];
+        $eventID = $_POST['EID'];
+
+        DB::table('user_event_registrations')
+        ->insert(['user_id' => $userID, 'event_id' => $eventID]);
+
+        $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
+        return redirect()->back();
+    }
+
+    public function register(Request $request)
+    {
+        $forename = $request->input('forename');
+        $surname = $request->input('surname');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $eventID = $request->input('eventID');
+
+        DB::table('guest_event_registrations')
+        ->insert(['event_id' => $eventID, 
+                  'forename' => $forename, 
+                  'surname' => $surname, 
+                  'email' => $email, 
+                  'contact_no' => $phone
+                  ]);
+
+        $request->session()->flash('success', 'You have been successfully registered for this event.');
+        return redirect()->back();
     }
 }

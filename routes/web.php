@@ -24,6 +24,8 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
+Route::post('/events/register/guest', 'Events\EventsController@register');
+Route::post('/events/register', 'Events\EventsController@registerEventUser');
 Route::resource('/story', 'NewsController');
 Route::resource('/event', 'EventsController');
 Route::get('/contact-us', 'PagesController@contact');
@@ -37,6 +39,8 @@ Route::post('/register', 'Auth\RegisterController@create');
 
 Route::get('/member', 'MemberController@index')->name('member');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
+
+Route::get('/events/dashboard', 'DashboardsController@event');
 
 
 //Event Manager Links
@@ -54,6 +58,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
 Route::post('/user/profile', 'AccountsController@update')->middleware('can:view-policy');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
+Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
 
 //Author links
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){
@@ -75,6 +80,7 @@ Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
 Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers');
 Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName');
 Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses');
+Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

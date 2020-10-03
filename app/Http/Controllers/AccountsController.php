@@ -51,4 +51,15 @@ class AccountsController extends Controller
     public function settings($id) {
         return view('user.settings');
     }
+
+    public function events() {
+        $userID = Auth::user()->id;
+        $events = DB::table('user_event_registrations')->
+        join('events', 'user_event_registrations.event_id', '=', 'events.id')->
+        select('events.title', 'events.date', 'events.time', 'events.venue', 'events.image')->
+        where('user_event_registrations.user_id', '=', $userID)->
+        get();
+
+        return view('user.events')->with('events', $events);
+    }
 }

@@ -10,13 +10,13 @@ use App\News;
 class PagesController extends Controller
 {
     public function index() {
-        $events = DB::select('SELECT * FROM `events` WHERE `events`.`approved` = 1 ORDER BY `events`.`id` LIMIT 4');
+        $events = DB::select('SELECT * FROM `events` WHERE `events`.`approved` = 1 ORDER BY `events`.`id` LIMIT 3');
         $news = News::orderBy('id', 'desc')->get();
         $visitor_ip = $_SERVER['REMOTE_ADDR'];
         DB::table('visitors')->insert(
             ['ip' => $visitor_ip]
         );
-        return view('pages.index')->with('events', $events)->with('news', $news);
+        return view('pages.index')->with('events', $events)->with('news', $news)->with('eventsCount', count($events));
 }
 
 public function about() {

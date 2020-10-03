@@ -117,8 +117,7 @@
       <div class="logo justify-content-center">
     <div class="row">
       <div class="col-12 my-auto">
-        <img src="/img/pcaLogo.png">
-        <span class="title">PCA</span>
+        <img src="/img/pcaLogoDarkTransparent.png">
       </div>
           </div>
         </div>
@@ -275,7 +274,7 @@
     <h5 class="section">Committee Member</h5>
     <div class="divider">
     </div>
-    <a href=""><div class="option">
+    <a href="/user/events"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">
           <img class="d-block mx-auto mx-xl-0" src="/img/baseline_confirmation_number_white_18dp.png">
