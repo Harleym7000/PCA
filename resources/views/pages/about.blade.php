@@ -12,7 +12,7 @@
                         </div>
                       </div>
                       <div id="about-projects">
-                      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3">
+                      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 justify-content-center">
                         <div class="col mb-4">
                           <div class="card">
                             <img src="/img/red_sails.jpg" class="card-img-top" alt="...">

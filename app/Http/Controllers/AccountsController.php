@@ -20,6 +20,20 @@ class AccountsController extends Controller
         ]);
     }
 
+    public function cancelReg(Request $request, $id)
+    {
+        $eventID = $id;
+        $userID = Auth::user()->id;
+
+        DB::table('user_event_registrations')-> 
+        where('user_event_registrations.event_id', '=', $eventID)->
+        where('user_event_registrations.user_id', '=', $userID)-> 
+        delete();
+
+        $request->session()->flash('success', ' You have successfully cancelled your registration for this event');
+        return redirect()->back();
+    }
+
     public function update(Request $request) {
         $user = Auth::user();
         $causes = Cause::all();
@@ -56,7 +70,7 @@ class AccountsController extends Controller
         $userID = Auth::user()->id;
         $events = DB::table('user_event_registrations')->
         join('events', 'user_event_registrations.event_id', '=', 'events.id')->
-        select('events.title', 'events.date', 'events.time', 'events.venue', 'events.image')->
+        select('events.id', 'events.title', 'events.date', 'events.time', 'events.venue', 'events.image')->
         where('user_event_registrations.user_id', '=', $userID)->
         get();
 

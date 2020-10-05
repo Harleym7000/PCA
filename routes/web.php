@@ -59,6 +59,9 @@ Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-
 Route::post('/user/profile', 'AccountsController@update')->middleware('can:view-policy');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
 Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
+Route::delete('cancel_reg/{id}', [
+    'uses' => 'AccountsController@cancelReg'
+]);
 
 //Author links
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){

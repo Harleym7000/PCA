@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -10987,6 +10982,8 @@ body {
 }
 
 #events {
+  width: 90%;
+  margin: auto;
   margin-top: 5%;
 }
 
@@ -10994,11 +10991,17 @@ body {
   text-align: center;
   font-family: "Montserrat", sans-serif;
   font-size: 48px;
+  margin-bottom: 3%;
+}
+
+#events .card h1 {
+  font-size: 22px;
 }
 
 #events h3,
 #events h5 {
   font-family: "Montserrat", sans-serif;
+  font-size: 18px;
 }
 
 #events h5 {
@@ -11007,7 +11010,7 @@ body {
 }
 
 #events .card-deck {
-  width: 70%;
+  width: 100%;
   margin: auto;
   margin-top: 2%;
 }
@@ -11026,8 +11029,7 @@ body {
 
 #events .card img {
   background-color: #fff;
-  width: 75%;
-  max-height: 400px;
+  width: 40%;
   margin: auto;
 }
 
@@ -11119,16 +11121,29 @@ body {
   padding-top: 7%;
 }
 
+#about-projects {
+  width: 95%;
+  margin: auto;
+}
+
 #about-projects .card img {
-  height: 350px;
+  height: 250px;
+}
+
+#about-projects .card h1 {
+  font-size: 30px;
+  color: #000;
 }
 
 #about-projects .card p {
-  color: #000;
+  color: #222222;
   font-family: sans-serif;
+  font-size: 14px;
 }
 
 #about-team {
+  width: 90%;
+  margin: auto;
   margin-top: 5%;
 }
 

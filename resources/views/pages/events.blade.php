@@ -27,8 +27,8 @@
             <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
             <div class="card-body">
               <h1 class="card-title">{{$event->title}}</h1>
-              <h3 class="card-title text-center">{{$event->date}} - {{$event->time}}</h3>
-              <h3 class="card-text text-center" style="width: 90%; margin: auto;">{{$event->venue}}</h3>
+              <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
+                  <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
               <div class="row">
                 <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
                 <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}">
@@ -63,6 +63,7 @@
   <div class="form-check">
     <input type="checkbox" class="form-check-input" value="{{auth()->user()->id}}" id="userRegID" checked>
     <label class="form-check-label" for="exampleCheck1">Register using my account</label>
+    <label class="form-check-label">We'll use the information on your account to register you for this event. If anything has changed, please update your profile first</label>
   </div>
   <button type="submit" value="{{$event->id}}" class="btn btn-primary eventRegUser">Submit</button>
 </form>
