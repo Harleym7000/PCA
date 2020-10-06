@@ -50,21 +50,28 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @can('manage-users')
                         <a class="dropdown-item" href="{{ route('admin.users.index') }}">
-                         User Management
+                         Admin
                      </a>
                      @endcan
 
                      @can('manage-events')
                         <a class="dropdown-item" href="/event-manager/index">
-                         Manage Events
+                         Event Management
                      </a>
                      @endcan
 
-                     @can('manage-events')
-                        <a class="dropdown-item" href="/events/create">
-                         Add New Event
-                     </a>
-                     @endcan
+                     @can('manage-news')
+                     <a class="dropdown-item" href="/event-manager/index">
+                        Manage News 
+                    </a>
+                    @endcan
+
+                    @can('view-policy')
+                    <a class="dropdown-item" href="/member">
+                        Members Dashboard
+                    </a>
+                    @endcan
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
