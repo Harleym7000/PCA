@@ -10926,7 +10926,7 @@ body {
 
 .navbar .navbar-brand img {
   height: 147px;
-  width: 120px;
+  width: 106px;
 }
 
 .navbar .navbar-nav .nav-item .nav-link {
@@ -11252,9 +11252,14 @@ body {
   margin-bottom: 5%;
 }
 
-#login .btn {
-  width: 40%;
+#login .btn-primary {
+  width: 100%;
   font-size: 18px;
+  margin-bottom: 5%;
+}
+
+#login .login-actions a {
+  font-size: 14px;
 }
 
 #register {
