@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Re-type your Password" required autocomplete="new-password">
+                                <input id="password_conf" type="password" class="form-control @error('password_conf') is-invalid @enderror" name="password_confirmation" placeholder="Re-type your Password" required autocomplete="new-password">
                     
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <div class="text-center">
+                            <div class="captcha text-center">
                             {!! NoCaptcha::display() !!}
                         </div>
                           </div>

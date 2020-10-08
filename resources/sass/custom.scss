@@ -382,6 +382,15 @@ body {
       font-weight: bolder;
     }
 
+    #register .form-check {
+      width: 55%;
+      margin: auto;
+    }
+
+    #register .g-recaptcha {
+      display: inline-block;
+    }
+
 
     #register .btn-primary {
       width: 50%;

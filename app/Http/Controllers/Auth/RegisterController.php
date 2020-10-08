@@ -74,6 +74,7 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $validatedData = $request->validate([
+            'g-recaptcha-response' => 'required|captcha',
             'email' => ['required', 'email', 'max:255', new Script_Validation],
             'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
             'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation]
@@ -96,12 +97,25 @@ class RegisterController extends Controller
         $user->password = Hash::make(request('password'));
 
         $user->save();
+        $user->attachRole($role);
+        $this->guard()->logout();
+
+        \Mail::send('email.verify-email', [
+
+            'body' => 'Hello. You are receiving this email because you wish to register as a committee member for PCA. Great! We would love to have you on board. Before we continue, please verify your email address using the link below. If you did not register, we apologise for the inconvenience. Simply ignore this email and your data will be deleted after 24 hours.'
+        ], function ($mail) use ($request) {
+            $mail->from('harleymdev@gmail.com');
+            $mail->to($request->email)->subject('Verify Email Address');
+        });
+        if( count(\Mail::failures()) > 0) {
+        $request->session()->flash('error', 'Something went wrong');
+        return view('auth.register');
+        } elseif( count(\Mail::failures()) == 0){
+        return view('auth.conf-email');
     } else {
         $request->session()->flash('error', 'Error: Passwords do not match');
         return redirect()->back()->withInput($request->except('password'));
     }
-        $user->attachRole($role);
-        $this->guard()->logout();
-        return view('auth.conf-email');
     }
 } 
+}

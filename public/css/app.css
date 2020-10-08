@@ -2164,6 +2164,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11275,6 +11280,15 @@ body {
 #register h2 {
   margin-top: 5%;
   font-weight: bolder;
+}
+
+#register .form-check {
+  width: 55%;
+  margin: auto;
+}
+
+#register .g-recaptcha {
+  display: inline-block;
 }
 
 #register .btn-primary {
