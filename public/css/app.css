@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11272,10 +11267,22 @@ body {
   margin-bottom: 5%;
 }
 
+#register form {
+  width: 80%;
+  margin: auto;
+}
+
+#register h2 {
+  margin-top: 5%;
+  font-weight: bolder;
+}
+
 #register .btn-primary {
-  width: 100%;
+  width: 50%;
   font-size: 18px;
+  margin-top: 2%;
   margin-bottom: 5%;
+  border-radius: 30px;
 }
 
 #sidenav {
