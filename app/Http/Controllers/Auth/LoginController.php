@@ -38,7 +38,7 @@ class LoginController extends Controller
                 return redirect('/event-manager/index');
             }
             if($user->hasRole('Committee Member')) {
-                return redirect('/');
+                return redirect('/member');
             }
             if($user->hasRole('Author')) {
                 return redirect('/author');

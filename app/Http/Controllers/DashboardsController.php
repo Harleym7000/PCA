@@ -7,12 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+    
     public function admin() {
         $totalUsersData = DB::table('users')->get();
         $totalUsers = count($totalUsersData);
         $committeeMembers = DB::table('users')
         ->join('role_user', 'user_id', '=', 'users.id')
-        ->select('users.firstname', 'users.surname', 'users.email')
+        ->select('users.email')
         ->where('role_user.role_id', '=', 3)
         ->get();
         $totalCommitteeMembers = count($committeeMembers);

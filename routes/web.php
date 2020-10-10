@@ -33,7 +33,7 @@ Route::post('/contact-submit', 'MailSend@contact_us');
 Route::post('/subscribe', 'MailSend@subscribe');
 
 //Auth Routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
