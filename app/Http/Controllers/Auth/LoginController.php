@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,14 @@ class LoginController extends Controller
     
         protected function authenticated(Request $request, $user)
         {
+                $userID = Auth::user()->id;
+                $query = DB::table('users')
+                ->select('profile_set')
+                ->where('users.id', $userID)->first();
+                if($query->profile_set == 0) {
+                    return redirect('/user/profile/create');
+                }
+
             if($user->hasRole('Admin')) {
                 return redirect('/admin/dashboard');
             }

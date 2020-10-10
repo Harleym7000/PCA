@@ -526,6 +526,22 @@ body {
         display: none;
     }
 
+    #user-profile {
+      margin-top: 7%;
+    }
+
+    #user-profile h1 {
+      margin-bottom: 3%;
+    }
+
+    #user-profile .card {
+      box-shadow: 10px 10px 5px #aaaaaa;
+    }
+
+    #user-profile .col-11 .btn {
+      margin-top: 2%;
+    }
+
     #profile {
       width: 100%;
       margin: 0 auto;
