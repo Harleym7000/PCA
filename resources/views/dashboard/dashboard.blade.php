@@ -21,32 +21,120 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-       // Load the Visualization API and the piechart package.
-    google.charts.load('current', {'packages':['corechart']});
-      
-      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
-        
-      function drawChart() {
-        var jsonData = $.ajax({
-            url: "/admin/getCommitteeGrowth",
-            dataType: "json",
-            async: false
-            }).responseText;
-            
-        // Create our data table out of JSON data loaded from server.
-        var data = new google.visualization.DataTable(jsonData);
-  
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('members_curve_chart'));
-        chart.draw(data, {width: 400, height: 240});
+
+
+    function drawChart() {
+      $.ajax({
+type : 'GET',
+url : '/admin/getCommitteeGrowth',
+headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+dataType: "json",
+success:function(response){
+  console.log(JSON.stringify(response));
+  var jan = response.janMembers;
+  var feb = response.febMembers;
+  var mar = response.marMembers;
+  var apr = response.aprMembers;
+  var may = response.mayMembers;
+  var jun = response.junMembers;
+  var jul = response.julMembers;
+  var aug = response.augMembers;
+  var sep = response.sepMembers;
+  var oct = response.octMembers;
+  var nov = response.novMembers;
+  var dec = response.decMembers;
+      
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'New Members'],
+          ['Jan',  jan],
+          ['Feb',  feb],
+          ['Mar',  mar],
+          ['Apr',  apr],
+          ['May',  may],
+          ['Jun',  jun],
+          ['Jul',  jul],
+          ['Aug',  aug],
+          ['Sep',  sep],
+          ['Oct',  oct],
+          ['Nov',  nov],
+          ['Dec',  dec],
+        ]);
+
+        var options = {
+          title: 'Committee Member Growth This Year',
+          curveType: 'function',
+          colors:['red','#004411'],
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('members_curve_chart'));
+
+        chart.draw(data, options);
+}
+      });
       }
   
     </script>
+    <script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+
+    function drawChart() {
+      $.ajax({
+type : 'GET',
+url : '/admin/getSiteTraffic',
+headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+dataType: "json",
+success:function(response){
+  console.log(JSON.stringify(response));
+  var jan = response.janVisitors;
+  var feb = response.febVisitors;
+  var mar = response.marVisitors;
+  var apr = response.aprVisitors;
+  var may = response.mayVisitors;
+  var jun = response.junVisitors;
+  var jul = response.julVisitors;
+  var aug = response.augVisitors;
+  var sep = response.sepVisitors;
+  var oct = response.octVisitors;
+  var nov = response.novVisitors;
+  var dec = response.decVisitors;
+      
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Site Visits'],
+          ['Jan',  jan],
+          ['Feb',  feb],
+          ['Mar',  mar],
+          ['Apr',  apr],
+          ['May',  may],
+          ['Jun',  jun],
+          ['Jul',  jul],
+          ['Aug',  aug],
+          ['Sep',  sep],
+          ['Oct',  oct],
+          ['Nov',  nov],
+          ['Dec',  dec],
+        ]);
+
+        var options = {
+          title: 'Site Visits This Year',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('traffic_curve_chart'));
+
+        chart.draw(data, options);
+}
+      });
+      }
+  
+    </script>
 </head>
 <body>
 
@@ -120,7 +208,7 @@
                 <div class="card-deck">
                   <div class="card">
                     <div class="card-header">
-                      Commitee Member Growth Pattern
+                      <strong>Commitee Member Growth Pattern</strong>
                     </div>
                     <div class="card-body">
                       <div id="members_curve_chart" style="width: 650px; height: 300px"></div>
@@ -128,7 +216,7 @@
                   </div>
                   <div class="card">
                     <div class="card-header">
-                      Site Traffic
+                      <strong>Site Traffic</strong>
                     </div>
                     <div class="card-body">
                       <div id="traffic_curve_chart" style="width: 650px; height: 300px"></div>

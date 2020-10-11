@@ -37,10 +37,10 @@ Auth::routes(['verify' => true]);
 Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
-Route::get('/member', 'MemberController@index')->name('member');
+Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 
-Route::get('/events/dashboard', 'DashboardsController@event');
+Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
 
 
 //Event Manager Links
@@ -55,14 +55,14 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 // Route::get('/events/dashboard', 'DashboardsController@events');
 
 //User links
-Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
-Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('can:view-policy');
-Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
-Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
-Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('can:view-policy');
+Route::get('/user/profile', 'AccountsController@profile')->middleware('auth');
+Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('auth');
+Route::get('/user/settings', 'AccountsController@settings')->middleware('auth');
+Route::get('/user/events', 'AccountsController@events')->middleware('auth');
+Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
-]);
+])->middleware('auth');
 
 //Author links
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){
@@ -71,20 +71,21 @@ Route::get('/edit/{id}', 'NewsController@edit')->name('edit-news');
 });
 
 //Admin links
-Route::get('/admin/contact', 'ContactController@index');
-Route::get('/admin/userstest', 'Admin\UsersController@brdindex');
-Route::get('/admin/dashboard', 'DashboardsController@admin');
-Route::get('/admin/pages', 'AdminPagesManagerController@index');
+Route::get('/admin/contact', 'ContactController@index')->middleware('can:manage-users');
+Route::get('/admin/userstest', 'Admin\UsersController@brdindex')->middleware('can:manage-users');
+Route::get('/admin/dashboard', 'DashboardsController@admin')->middleware('can:manage-users');
+Route::get('/admin/pages', 'AdminPagesManagerController@index')->middleware('can:manage-users');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
 Route::post('/policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
-Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile');
-Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword');
-Route::get('/admin/getContactMessages', 'ContactController@getMessages');
-Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole');
-Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers');
-Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName');
-Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses');
-Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth');
+Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile')->middleware('can:manage-users');
+Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword')->middleware('can:manage-users');
+Route::get('/admin/getContactMessages', 'ContactController@getMessages')->middleware('can:manage-users');
+Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole')->middleware('can:manage-users');
+Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers')->middleware('can:manage-users');
+Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName')->middleware('can:manage-users');
+Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses')->middleware('can:manage-users');
+Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth')->middleware('can:manage-users');
+Route::get('/admin/getSiteTraffic', 'DashboardsController@getSiteTraffic')->middleware('can:manage-users');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');
