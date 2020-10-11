@@ -33,8 +33,17 @@ class AccountsController extends Controller
     }
 
     public function profile() {
-
         $userID = Auth::user()->id;
+        $query = DB::table('users')
+        ->where('users.id', $userID)
+        ->first();
+        $query2 = DB::table('users')
+        ->select('email')
+        ->where('users.id', $userID)->first();
+        $userEmail = $query2->email;
+        if($query->profile_set == 0) {
+            return view('user.createProfile')->with('userEmail', $userEmail);
+        }
         $profileInfo = DB::table('user_profile')
         ->where('user_profile.user_id', $userID)
         ->first();

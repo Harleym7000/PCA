@@ -556,6 +556,14 @@ body {
       margin: auto;
     }
 
+    #members {
+      margin-top: 5%;
+    }
+
+    #members h1 {
+      margin-left: 3%;
+    }
+
     #manage-users {
       text-align: center;
       width: 100%;
@@ -624,29 +632,53 @@ body {
       max-height: 30px;
     }
 
-    #my-events .card-deck {
-      width: 70%;
-      margin: auto;
-      margin-top: 2%;
+    #my-events {
+      margin-top: 5%;
+    }
+
+    #my-events h1 {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 48px;
+      margin-bottom: 3%;
   }
 
-#my-events .card-body {
-    background-color: #252525;
-    border: none;
-    color: #fff;
-}
+    #my-events .card h1 {
+      font-size: 22px;
+    }
 
-#my-events .card {
-    width: 40%;
-    margin: 3%;
-    font-size: 18px;
-}
+    #my-events h3, #events h5 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+    }
 
-#my-events .card img {
-    background-color: #fff;
-    width: 40%;
-    margin: auto;
-}
+    #my-events h5 {
+        color: #5df5f5;
+        line-height: 1.4;
+    }
+
+    #my-events .card-deck {
+        width: 100%;
+        margin: auto;
+    }
+
+  #my-events .card-body {
+      background-color: #252525;
+      border: none;
+      color: #fff;
+  }
+
+  #my-events .card .btn {
+      margin-top: 6%;
+      width: 100%;
+      font-size: 18px;
+  }
+
+  #my-events .card img {
+      background-color: #fff;
+      width: 40%;
+      margin: auto;
+  }
   
     //Footer styles*/
   footer {

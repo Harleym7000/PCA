@@ -35,11 +35,11 @@
           @include('inc.admin-nav')
           <div id="my-events">
             @include('partials.alerts')
-            <h1>My Events</h1>
+            <h1 class="text-center">My Events</h1>
           @if(count($events) > 0)
           <div class="card-deck">
             @foreach($events as $event)
-            <div class="col mb-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
               <div class="card">
                 <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
                 <div class="card-body">

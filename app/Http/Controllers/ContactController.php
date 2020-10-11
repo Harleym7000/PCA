@@ -17,14 +17,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $title = "Inbox";
-        $contacts = DB::table('contact_us')
-        ->groupBy('first_name')
-        ->get();
-        return view('contact.index')->with([
-            'title' => $title,
-            'contacts' => $contacts
-            ]);
+        return view('contact.index');
     }
 
     /**
@@ -119,22 +112,5 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getMessages() {
-       $messages = DB::table('contact_us')
-       ->groupBy('first_name')
-       ->orderBy('created_at', 'desc');
-       $result = $messages->get();
-
-       return response()->json($result);
-    }
-
-    public function markRead() 
-    {
-        $id = $_POST['id'];
-        DB::table('contact_us')
-        ->where('id', $id)
-        ->update(['message_read' => 1]);
     }
 }

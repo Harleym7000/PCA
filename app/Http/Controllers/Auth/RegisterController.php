@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Rules\Script_Validation;
 use App\Rules\Postcode_Validation;
 use App\Rules\Phone_Vaidation;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -97,6 +98,12 @@ class RegisterController extends Controller
         $user->password = Hash::make(request('password'));
 
         $user->save();
+        $month = Carbon::now()->format('M');
+        $year = Carbon::now()->year;
+        DB::table('user_reg')
+        ->insert(
+            ['month' => $month, 'year' => $year]
+        );
         $user->attachRole($role);
         return redirect('/email/verify');
         }
