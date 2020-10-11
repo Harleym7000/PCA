@@ -15,38 +15,8 @@
 
 <script>
         $(document).ready(function() {
-
-        
-        $("#editprofile").click(function() {
-            $('#firstname').removeAttr('disabled');
-            $('#surname').removeAttr('disabled');
-            $('#address').removeAttr('disabled');
-            $('#town').removeAttr('disabled');
-            $('#postcode').removeAttr('disabled');
-            $('#tel_no').removeAttr('disabled');
-            $('#mob_no').removeAttr('disabled');
-            $('#email').removeAttr('disabled');
-            $('.roles').removeAttr('disabled');
-            $('#saveprofile').removeAttr('disabled');
-            $('#cancelprofile').removeAttr('disabled');
-            $('#editprofile').attr('disabled', 'disabled');
-    });
-
-    $("#cancelprofile").click(function() {
-            $('#firstname').attr('disabled', 'disabled');
-            $('#surname').attr('disabled', 'disabled');
-            $('#address').attr('disabled', 'disabled');
-            $('#town').attr('disabled', 'disabled');
-            $('#postcode').attr('disabled', 'disabled');
-            $('#tel_no').attr('disabled', 'disabled');
-            $('#mob_no').attr('disabled', 'disabled');
-            $('#email').attr('disabled', 'disabled');
-            $('.roles').attr('disabled', 'disabled');
-            $('#saveprofile').attr('disabled', 'disabled');
-            $('#cancelprofile').attr('disabled', 'disabled');
-            $('#editprofile').removeAttr('disabled');
-    });
-});
+            $('.modal').modal('show');
+        });
 
 </script>
 
@@ -69,10 +39,26 @@
 <div id="profile">
     @include('partials.alerts')
     <div class="container">
-        <div id="user-profile">
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">Welcome to PCA</h3>
+                </div>
+                <div class="modal-body">
+                  <h5>Hi there! Welcome to PCA. We're delighted to have you as a Committee Member. Before you begin exploring the site, we just need to collect some details from you. Please fill in the form to complete your profile.</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="user-profile">
         <div class="row justify-content-center">
+            <h1>Create Your Profile</h1>
                 <div class="card">
-            <div class="card-header">User Profile - {{$profileInfo->firstname}} {{$profileInfo->surname}}</div>
+            <div class="card-header">User Profile</div>
     
                     <div class="card-body">
                         
@@ -82,7 +68,7 @@
                             <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>
     
                             <div class="col-9">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{$profileInfo->firstname}}" required autofocus disabled>
+                                <input id="firstname" type="text" class="form-control" name="firstname" required autofocus>
                             </div>
                         </div>
 
@@ -90,7 +76,7 @@
                             <label for="surname" class="col-md-2 col-form-label text-md-right">Surname:</label>
     
                             <div class="col-9">
-                                <input id="surname" type="text" class="form-control" name="surname" value="{{$profileInfo->surname}}" required autofocus disabled>
+                                <input id="surname" type="text" class="form-control" name="surname" required autofocus>
                             </div>
                         </div>
 
@@ -98,7 +84,7 @@
                             <label for="surname" class="col-md-2 col-form-label text-md-right">Address:</label>
     
                             <div class="col-9">
-                                <input id="address" type="text" class="form-control" name="address" value="{{$profileInfo->address}}" required autofocus disabled>
+                                <input id="address" type="text" class="form-control" name="address" required autofocus>
                             </div>
                         </div>
 
@@ -106,7 +92,7 @@
                             <label for="town" class="col-md-2 col-form-label text-md-right">Town:</label>
     
                             <div class="col-9">
-                                <input id="town" type="text" class="form-control" name="town" value="{{$profileInfo->town}}" required autofocus disabled>
+                                <input id="town" type="text" class="form-control" name="town" required autofocus>
                             </div>
                         </div>
 
@@ -114,23 +100,23 @@
                             <label for="surname" class="col-md-2 col-form-label text-md-right">Postcode:</label>
     
                             <div class="col-9">
-                                <input id="postcode" type="text" class="form-control" name="postcode" value="{{$profileInfo->postcode}}" required autofocus disabled>
+                                <input id="postcode" type="text" class="form-control" name="postcode" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Telephone:</label>
+                            <label for="surname" class="col-md-2 col-form-label text-md-right">Contact No:</label>
     
                             <div class="col-9">
-                                <input id="tel_no" type="text" class="form-control" name="tel_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
+                                <input id="contact_no" type="text" class="form-control" name="contact_no" autofocus>
                             </div>
                         </div>
     
                         <div class="form-group row">
-                            <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
+                            <label for="email" class="col-md-2 col-form-label text-md-right">Email:</label>
     
                             <div class="col-9">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$userEmail}}" required disabled>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$userEmail}}" required>
     
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -139,9 +125,11 @@
                                 @enderror
                             </div>
                         </div>
-                        <button id="editprofile" type="button" class="btn btn-dark" style="margin-right: 67%;">Edit Profile</button>
-                        <button id="cancelprofile" type="button" class="btn btn-danger pull-right" style="margin-right: 2%;" disabled>Cancel</button>
-                        <button id="saveprofile" type="submit" class="btn btn-primary pull-right" disabled>Save</button>
+                        <div class="form-group row text-right">
+                            <div class="col-11">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -56,9 +56,10 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 
 //User links
 Route::get('/user/profile', 'AccountsController@profile')->middleware('can:view-policy');
-Route::post('/user/profile', 'AccountsController@update')->middleware('can:view-policy');
+Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('can:view-policy');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('can:view-policy');
 Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
+Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('can:view-policy');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ]);
