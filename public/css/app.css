@@ -11267,6 +11267,10 @@ body {
   margin-bottom: 5%;
 }
 
+#register .card {
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
 #register form {
   width: 80%;
   margin: auto;

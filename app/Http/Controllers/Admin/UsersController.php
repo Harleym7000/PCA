@@ -159,7 +159,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         if(Gate::denies('manage-users')) {
             return redirect('admin.users.index');
@@ -168,7 +168,12 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->roles()->detach();
         $user->causes()->detach();
-        $user->delete();
+        
+        if($user->delete()) {
+            $request->session()->flash('success', 'The user was deleted successfully');
+        } else {
+            $request->session()->flash('error', 'There was an error deleting the user. Please try again');
+        }
 
         return redirect()->route('admin.users.index');
     }

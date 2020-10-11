@@ -135,6 +135,7 @@ $('tbody').html(output);
     <div class="col-10">
       @include('inc.admin-nav')
       <div id="manage-users">
+        @include('partials.alerts')
         <div class="row justify-content-center">
           <div class="card">
             <div class="card-header">All Users</div>
