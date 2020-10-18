@@ -42,7 +42,7 @@
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->firstname. " " .Auth::user()->surname}} <span class="caret"></span>
+                        {{ implode('', Auth::user()->profile()->pluck('firstname')->toArray())}} {{ implode('', Auth::user()->profile()->pluck('surname')->toArray())}} <span class="caret"></span>
                     </a>
 
                     

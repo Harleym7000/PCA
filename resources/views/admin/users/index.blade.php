@@ -173,7 +173,7 @@ $('tbody').html(output);
   <!-- Modal -->
   @foreach($users as $user)
                     <tr>
-                        <td>{{$user->firstname}} {{$user->surname}}</td>
+                        <td>{{implode('', $user->profile()->get()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->get()->pluck('surname')->toArray())}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons">

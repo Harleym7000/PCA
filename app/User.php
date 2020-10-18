@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'firstname', 'surname', 'address', 'town', 'postcode', 'tel_no', 'mob_no', 'email', 'password',
+        'email', 'password'
     ];
 
     /**
@@ -87,5 +87,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function assignCause(Cause $cause)
     {
         return $this->cause()->save($cause);
+    }
+
+    public function profile() {
+        return $this->hasOne('App\Profile');
     }
 }

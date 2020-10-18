@@ -37,23 +37,7 @@
                     <div class="card-body">
                         
                       <form action="{{ action('Admin\UsersController@store') }}" method="POST">
-                        @csrf
-                        <div class="form-group row">
-                            <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>
-    
-                            <div class="col-9">
-                                <input id="firstname" type="text" class="form-control" name="firstname" required autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Surname:</label>
-    
-                            <div class="col-9">
-                                <input id="surname" type="text" class="form-control" name="surname" required autofocus>
-                            </div>
-                        </div>
-    
+                        @csrf   
                         <div class="form-group row">
                             <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
     

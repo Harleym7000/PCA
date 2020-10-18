@@ -69,28 +69,19 @@
         </button>
       </div>
       <div class="modal-body">
-          @auth
-                              <form class="userEventReg">
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" value="{{auth()->user()->id}}" id="userRegID" checked>
-    <label class="form-check-label" for="exampleCheck1">Register using my account</label>
-  </div>
-  <button type="submit" value="{{$event->id}}" class="btn btn-primary eventRegUser">Submit</button>
-</form>
-      @endauth
-          @guest
-          <form action="/events/register/guest" method="POST">
-            @csrf 
+        @auth
+        <form class="userEventReg" action="/events/register" method="POST">
+          @csrf
           <div class="form-row">
             <label class="col">First Name:</label>
             <label class="col">Surname:</label>
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="forename" class="form-control" placeholder="First name">
+              <input type="text" name="forename" class="form-control" value="{{implode('', auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
             </div>
             <div class="col">
-              <input type="text" name="surname" class="form-control" placeholder="Last name">
+              <input type="text" name="surname" class="form-control" value="{{implode('', auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
             </div>
           </div>
           <div class="form-row">
@@ -98,7 +89,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="email" class="form-control" placeholder="Email Address">
+              <input type="text" name="email" class="form-control" value="{{auth::user()->email}}" placeholder="Email Address">
             </div>
           </div>
           <div class="form-row">
@@ -106,16 +97,60 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="phone" class="form-control" placeholder="Contact Number">
+              <input type="text" name="phone" class="form-control" value="{{implode('', auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
             </div>
           </div>
       </div>
-      <input type="hidden" name="eventID" value="{{$event->id}}">
+      <div class="form-check">
+        <div class="col">
+        <input type="checkbox" class="form-check-input" value="{{auth()->user()->id}}" name="UID" id="userRegID">
+        <label class="form-check-label" for="exampleCheck1">This information is correct</label>
+      </div>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Register</button>
-      </form>
-      @endguest
+        <button type="submit" class="btn btn-primary" name="EID" value="{{$event->id}}">Register</button>
+      </div>
+</form>
+@endauth
+@guest
+<form action="/events/register/guest" method="POST">
+@csrf 
+<div class="form-row">
+<label class="col">First Name:</label>
+<label class="col">Surname:</label>
+</div>
+<div class="form-row">
+<div class="col">
+<input type="text" name="forename" class="form-control" placeholder="First name">
+</div>
+<div class="col">
+<input type="text" name="surname" class="form-control" placeholder="Last name">
+</div>
+</div>
+<div class="form-row">
+<label class="col">Email Address:</label>
+</div>
+<div class="form-row">
+<div class="col">
+<input type="text" name="email" class="form-control" placeholder="Email Address">
+</div>
+</div>
+<div class="form-row">
+<label class="col">Contact Number:</label>
+</div>
+<div class="form-row">
+<div class="col">
+<input type="text" name="phone" class="form-control" placeholder="Contact Number">
+</div>
+</div>
+</div>
+<input type="hidden" name="eventID" value="{{$event->id}}">
+<div class="modal-footer">
+<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+<button type="submit" class="btn btn-primary">Register</button>
+</form>
+@endguest
       </div>
     </div>
   </div>

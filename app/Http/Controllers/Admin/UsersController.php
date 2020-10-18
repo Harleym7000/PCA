@@ -60,8 +60,6 @@ class UsersController extends Controller
     public function store(Request $request, User $user)
     {
         $user = new User;
-        $user->firstname = $request->input('firstname');
-        $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $userPass = $request->input('password');
 
@@ -139,14 +137,11 @@ class UsersController extends Controller
     {
         $user->roles()->sync($request->roles);
         $user->causes()->sync($request->causes);
-
-        $user->firstname = $request->firstname;
-        $user->surname = $request->surname;
         $user->email = $request->email;
 
         if($user->save()) {
 
-        $request->session()->flash('success', $user->name . ' has been updated');
+        $request->session()->flash('success', 'The user has been updated successfully');
         } else {
             $request->session()->flash('error', 'There was an error updating the user');
         }
@@ -168,6 +163,7 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->roles()->detach();
         $user->causes()->detach();
+        $user->profile()->delete();
         
         if($user->delete()) {
             $request->session()->flash('success', 'The user was deleted successfully');
@@ -183,7 +179,8 @@ class UsersController extends Controller
         $query = DB::table('users')
         ->join('role_user', 'users.id', '=', 'role_user.user_id')
         ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.id AS user_id', 'users.firstname', 'users.surname', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
+        ->join('profiles', 'profiles.user_id', '=', 'users.id')
+        ->select('users.id AS user_id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
         ->where('role_user.role_id', '=', $role_id);
 
         $result = $query->get();
@@ -196,9 +193,10 @@ class UsersController extends Controller
         $query = DB::table('users')
         ->join('role_user', 'users.id', '=', 'role_user.user_id')
         ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->select('users.id AS user_id', 'users.firstname', 'users.surname', 'users.email', 'role_user.role_id', 'role_user.user_id AS role_user_id', 'roles.name AS role_name')
-        ->where('users.firstname', 'like', '%'.$name.'%')
-        ->orWhere('users.surname', 'like', '%'.$name.'%')
+        ->join('profiles', 'profiles.user_id', '=', 'users.id')
+        ->select('users.id AS user_id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'role_user.user_id AS role_user_id', 'roles.name AS role_name')
+        ->where('profiles.firstname', 'like', '%'.$name.'%')
+        ->orWhere('profiles.surname', 'like', '%'.$name.'%')
         ->groupBy('users.id');
 
         $result = $query->get();
@@ -241,25 +239,4 @@ class UsersController extends Controller
 
         return response()->json($result);
     }
-
-    public function getAllUsers() {
-        $userQuery = DB::table('users')
-        ->select('users.id', 'users.firstname', 'users.surname', 'users.address', 'users.town', 'users.postcode', 'users.tel_no', 'users.mob_no', 'users.email');
-        $userResult = $userQuery->get();
-
-        return response()->json($userResult);
-    }
-
-    public function brdindex()
-    {
-        $title = 'User Management';
-        $roles = Role::all();
-        $users = User::paginate(8);
-        return view('admin.users.indexcopy')->with([
-            'roles' => $roles,
-            'users'=> $users,
-            'title' => $title
-            ]);
-    }
-
 }

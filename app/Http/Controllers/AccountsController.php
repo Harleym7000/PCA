@@ -44,8 +44,8 @@ class AccountsController extends Controller
         if($query->profile_set == 0) {
             return view('user.createProfile')->with('userEmail', $userEmail);
         }
-        $profileInfo = DB::table('user_profile')
-        ->where('user_profile.user_id', $userID)
+        $profileInfo = DB::table('profiles')
+        ->where('profiles.user_id', $userID)
         ->first();
         $userEmailQuery = DB::table('users')
         ->where('users.id', $userID)
@@ -78,7 +78,7 @@ class AccountsController extends Controller
         $contact_no = $request->contact_no;
         $email = $request->email;
 
-        $createProfile = DB::table('user_profile')
+        $createProfile = DB::table('profiles')
         ->insert( 
             ['user_id' => $userID, 'firstname' => $firstname, 'surname' => $surname, 'address' => $address, 'town' => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]
         );

@@ -132,7 +132,7 @@ $('tbody').html(output);
     </div>
     <div class="col-10">
       @include('inc.admin-nav')
-      <div id="manage-users">
+      <div id="manage-events">
         <div class="row justify-content-center">
                 <div class="table-responsive">
                     <table class="table" id="user-table">

@@ -68,6 +68,8 @@ Route::delete('cancel_reg/{id}', [
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){
 Route::get('/index', 'NewsController@index');
 Route::get('/edit/{id}', 'NewsController@edit')->name('edit-news');
+Route::get('/create', 'NewsController@create');
+Route::post('/create', 'NewsController@store');
 });
 
 //Admin links

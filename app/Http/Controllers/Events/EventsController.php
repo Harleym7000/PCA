@@ -150,11 +150,23 @@ class EventsController extends Controller
         $userID = $_POST['UID'];
         $eventID = $_POST['EID'];
 
-        DB::table('user_event_registrations')
-        ->insert(['user_id' => $userID, 'event_id' => $eventID]);
+        $regQuery = DB::table('user_event_registrations')
+        ->where('user_id', '=', $userID)
+        ->where('event_id', '=', $eventID)
+        ->get();
 
-        $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
+        $regExists = count($regQuery);
+
+        if($regExists > 0) {
+            $request->session()->flash('error', 'You have already registered for this event. You can view this under the My Events Section of your account');
         return redirect()->back();
+        } else {
+            DB::table('user_event_registrations')
+            ->insert(['user_id' => $userID, 'event_id' => $eventID]);
+    
+            $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
+            return redirect()->back();
+        }
     }
 
     public function register(Request $request)

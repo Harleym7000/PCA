@@ -29,8 +29,10 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
+          <div id="create-event">
+          <div class="card">
+            <div class="card-header">Create Event</div>
     <div id="add-event-form">
-<h1>Add new Event</h1>
 {!! Form::open(['method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('title', 'Event Title')}}
@@ -48,7 +50,16 @@
         {{Form::label('title', 'Event Image')}}
         {{Form::file('image', ['class' => 'btn btn-default'])}}
     </div>
-    {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+    <div class="form-group row text-right">
+      <div class="col-12">
+    {{Form::submit('Create Event', ['class' => 'btn btn-primary'])}}
+  </div>
+</div>
+    </div>
 {!! Form::close() !!}
 </div>
+</div>
+</div>
+</div>
+    </div>
 </div>

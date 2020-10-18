@@ -592,8 +592,51 @@ body {
       margin-top: 4%;
     }
 
+    #create-user {
+      margin-top: 5%;
+    }
+
+    #manage-events {
+      width: 90%;
+      margin: auto;
+      margin-top: 5%;
+    }
+
+    #create-event {
+      width: 90%;
+      margin: auto;
+      margin-top: 5%;
+    }
+
+    #create-event .card {
+      box-shadow: 10px 10px 5px #aaaaaa;
+    }
+
+    #add-event-form {
+      width: 80%;
+      margin: auto;
+      margin-top: 3%;
+      margin-bottom: 3%;
+    }
+
     #action-buttons .btn {
       margin-left: 10px;
+    }
+
+    #account-reset {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    #send-link {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    #termsandconditions .modal-body {
+      background-color: #dfdfdf;
+      max-height: 400px;
+      overflow-y: scroll;
     }
 
     #inbox-display {

@@ -231,7 +231,7 @@
     <div class="divider">
     </div>
       <div class="option">
-        <a href="/event-manager/index"><div class="row no-gutters">
+        <a href="/events/index"><div class="row no-gutters">
           <div class="col-xl-3 my-auto">
             <img class="d-block mx-auto mx-xl-0" src="/img/baseline_event_white_18dp.png">
             </div>
