@@ -83,8 +83,7 @@ class RegisterController extends Controller
         ],
         $messages = [
             'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
-            'password.confirmed' => 'Passwords do not match',
-            'agree.required' => 'Please accept the '
+            'password.confirmed' => 'Passwords do not match'
         ]);
 
         $userpass = request('password');

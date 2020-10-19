@@ -12,7 +12,7 @@
 
                 <div class="card-body">
                     <div class="text-center">
-                    <h2>Become a Committee Member Today</h2>
+                    <h2>Become a Member Today</h2>
                     <p>It's quick and easy to sign up</p>
                 </div>
                     <form method="POST" action="/register">
@@ -70,7 +70,7 @@
                           <div class="col-md-12">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input @error('agree') is-invalid @enderror" id="agree" name="agree">
-                                <label class="form-check-label" for="exampleCheck1">I have read and agreed to the <button type="button" class="btn btn-link" data-toggle="modal" data-target="#termsandconditions">Terms and Conditions</button></div></label>
+                                <label class="form-check-label" for="exampleCheck1">I have read and agreed to the <button type="button" class="btn btn-link" data-toggle="modal" data-target="#termsandconditions">Terms and Conditions</button></label>
                               </div>
                             </div>
                             @error('agree')
@@ -134,15 +134,4 @@ Protection Policies are available on request
       </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-      $('.modal-body').scroll(function () {
-    if ($('#terms').height() == ($(this).scrollTop() + $(this).height())) {         
-        $('.btn-primary').removeAttr('disabled');
-    }
-});
-    $('.btn-primary').click(function() {
-        $('#agree').prop('checked', true);
-    });
-      </script>
 @endsection

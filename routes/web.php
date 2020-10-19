@@ -26,8 +26,6 @@ Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
 Route::post('/events/register/guest', 'Events\EventsController@register');
 Route::post('/events/register', 'Events\EventsController@registerEventUser');
-Route::resource('/story', 'NewsController');
-Route::resource('/event', 'EventsController');
 Route::get('/contact-us', 'PagesController@contact');
 Route::post('/contact-submit', 'MailSend@contact_us');
 Route::post('/subscribe', 'MailSend@subscribe');
@@ -46,7 +44,7 @@ Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:m
 //Event Manager Links
 Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:manage-events')->group(function(){
     Route::get('/index', 'EventsController@index')->name('event');
-    Route::get('/edit/{id}', 'EventsController@edit')->name('event-edit');
+    Route::get('/edit/{id}', 'EventsController@edit');
     Route::put('/edit/{id}', 'EventsController@update');
     Route::get('/create', 'EventsController@create');
     Route::post('/create', 'EventsController@store');

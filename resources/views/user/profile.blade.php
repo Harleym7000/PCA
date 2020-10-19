@@ -122,7 +122,7 @@
                             <label for="surname" class="col-md-2 col-form-label text-md-right">Telephone:</label>
     
                             <div class="col-9">
-                                <input id="tel_no" type="text" class="form-control" name="tel_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
+                                <input id="tel_no" type="text" class="form-control" name="contact_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
                             </div>
                         </div>
     
