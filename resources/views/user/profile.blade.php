@@ -76,7 +76,7 @@
     
                     <div class="card-body">
                         
-                      <form action="/user/profile" method="POST">
+                      <form action="/user/profile/update" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>

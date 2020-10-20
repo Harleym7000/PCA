@@ -55,6 +55,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 //User links
 Route::get('/user/profile', 'AccountsController@profile')->middleware('auth');
 Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('auth');
+Route::post('/user/profile/update', 'AccountsController@updateProfile')->middleware('auth');
 Route::get('/user/settings', 'AccountsController@settings')->middleware('auth');
 Route::get('/user/events', 'AccountsController@events')->middleware('auth');
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
@@ -74,7 +75,6 @@ Route::post('/create', 'NewsController@store');
 Route::get('/admin/contact', 'ContactController@index')->middleware('can:manage-users');
 Route::get('/admin/userstest', 'Admin\UsersController@brdindex')->middleware('can:manage-users');
 Route::get('/admin/dashboard', 'DashboardsController@admin')->middleware('can:manage-users');
-Route::get('/admin/pages', 'AdminPagesManagerController@index')->middleware('can:manage-users');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
 Route::post('/policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
 Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile')->middleware('can:manage-users');

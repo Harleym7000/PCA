@@ -211,7 +211,7 @@ success:function(response){
                       <strong>Commitee Member Growth Pattern</strong>
                     </div>
                     <div class="card-body">
-                      <div id="members_curve_chart" style="width: 650px; height: 300px"></div>
+                      <div id="members_curve_chart"></div>
                     </div>
                   </div>
                   <div class="card">
@@ -219,7 +219,7 @@ success:function(response){
                       <strong>Site Traffic</strong>
                     </div>
                     <div class="card-body">
-                      <div id="traffic_curve_chart" style="width: 650px; height: 300px"></div>
+                      <div id="traffic_curve_chart"></div>
                     </div>
                   </div>
                 </div>

@@ -37,12 +37,6 @@
         </li>
         <li class="nav-item">
           <div class="row">
-            <img src="/img/baseline_text_snippet_white_18dp.png">
-          <a class="nav-link" href="/admin/pages">Manage Pages</a>
-        </div>
-        </li>
-        <li class="nav-item">
-          <div class="row">
             <img src="/img/baseline_folder_white_18dp.png">
           <a class="nav-link" href="/policy-docs">Policy Documents</a>
         </div>
@@ -199,19 +193,6 @@
         </div></a>
         <div class="divider">
         </div>
-      <a href="/admin/pages"><div class="option">
-        <div class="row no-gutters">
-          <div class="col-xl-3 my-auto">
-            <img class="d-block mx-auto mx-xl-0" src="/img/baseline_text_snippet_white_18dp.png">
-            </div>
-            <div class="col-9 my-auto">
-            <span>Manage Pages</span>
-            </div>
-        </div>
-        <h5 class="label">Manage Pages</h5>
-    </div></a>
-    <div class="divider">
-    </div>
     <a href="/policy-docs"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">

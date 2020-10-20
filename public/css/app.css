@@ -11460,6 +11460,18 @@ body {
   margin-top: 5%;
 }
 
+#manage-users .table tr .col-2 {
+  width: 10%;
+}
+
+#manage-users .table tr .col-3 {
+  width: 20%;
+}
+
+#manage-users .table tr .col-4 {
+  width: 50%;
+}
+
 #manage-users .card {
   width: 90%;
   text-align: left;
@@ -11468,7 +11480,7 @@ body {
 }
 
 #manage-users .table > thead > tr > th {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #manage-users .table > tbody > tr > td {
@@ -11483,6 +11495,10 @@ body {
 
 #create-user {
   margin-top: 5%;
+}
+
+#create-user .card {
+  box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 #manage-events {

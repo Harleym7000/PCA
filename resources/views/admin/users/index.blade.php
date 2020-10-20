@@ -140,11 +140,11 @@ $('tbody').html(output);
           <div class="card">
             <div class="card-header">All Users</div>
                 <div class="table-responsive">
-                    <table class="table" id="user-table">
+                    <table class="table table-striped" id="user-table">
                       <span id="total_records"></span>
                       <thead>
                         <tr>
-                          <th scope="col">Search:<input id="user-search" type="text" placeholder="Search name..." class="filter-input"></th>
+                          <th scope="col-4">Search:<input id="user-search" type="text" placeholder="Search name..." class="filter-input"></th>
                           <th scope="col"></th>
                           <form id="user-form" action="#">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
@@ -161,10 +161,10 @@ $('tbody').html(output);
                       </thead>
                         <thead>
                           <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Roles</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col" class="col-2">Name</th>
+                            <th scope="col" class="col-3">Email</th>
+                            <th scope="col" class="col-3">Roles</th>
+                            <th scope="col" class="col-4">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -212,10 +212,9 @@ $('tbody').html(output);
         </button>
       </div>
       <div class="modal-body">
-        <h3>Name: {{$user->firstname}} {{$user->surname}}</h3>
-        <h3>Address: {{$user->address}}, {{$user->town}}, {{$user->postcode}}</h3>
-        <h3>Tel: {{$user->tel_no}}</h3>
-        <h3>Mob: {{$user->mob_no}}</h3>
+        <h3>Name: {{implode('',$user->profile()->pluck('firstname')->toArray())}} {{implode('',$user->profile()->pluck('surname')->toArray())}}</h3>
+        <h3>Address: {{implode('',$user->profile()->pluck('address')->toArray())}}, {{implode('',$user->profile()->pluck('town')->toArray())}}, {{implode('',$user->profile()->pluck('postcode')->toArray())}}</h3>
+        <h3>Contact No: {{implode('',$user->profile()->pluck('contact_no')->toArray())}}</h3>
         <h3>Causes Supporting:
             {{ implode(', ',$user->causes()->get()->pluck('name')->toArray())}}  
         </h3> 

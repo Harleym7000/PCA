@@ -97,6 +97,38 @@ class AccountsController extends Controller
             return redirect()->back();
     }
 
+    public function updateProfile(Request $request) {
+        $userID = Auth::user()->id;
+        $firstname = $request->firstname;
+        $surname = $request->surname;
+        $address = $request->address;
+        $town = $request->town;
+        $postcode = $request->postcode;
+        $contact_no = $request->contact_no;
+        $email = $request->email;
+
+        $updateProfile = DB::table('profiles')
+        ->where('user_id', $userID)
+        ->update(['firstname' => $firstname, 'surname' => $surname, 'address' => $address, 'town'  => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]);
+
+        $updateEmail = DB::table('users')
+        ->where('id', $userID)
+        ->update(['email' => $email]);
+
+        if($updateProfile) {
+                $request->session()->flash('success', ' Your profile was updated successfully');
+                return redirect()->back();
+        } 
+
+        if($updateEmail) {
+            $request->session()->flash('success', ' Your email was updated successfully');
+                return redirect()->back();
+        }
+
+        $request->session()->flash('error', ' There was an error updating your profile. Please try again');
+            return redirect()->back();
+    }
+
     public function settings($id) {
         return view('user.settings');
     }

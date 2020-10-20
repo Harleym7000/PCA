@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit User Roles for {{$user->firstname}} {{$user->surname}}</div>
+                <div class="card-header">Edit User Roles for {{implode('',$user->profile()->pluck('firstname')->toArray())}} {{implode('',$user->profile()->pluck('surname')->toArray())}}</div>
 
                 <div class="card-body">
 

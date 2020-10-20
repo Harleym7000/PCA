@@ -44,11 +44,13 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
-        $policy = new Policy;
-        $name = $request->file('policyDoc')->getClientOriginalName();
-        $policy->name = $name;
-        $policy->save();
-        $storeFile = $request->file('policyDoc')->storeAs('policy', $name);
+        if($request->file->store('public')) {
+            $request->session()->flash('success', ' File uploaded successfully');
+                return redirect()->back();
+        }
+        
+        $request->session()->flash('error', ' There was an error');
+                return redirect()->back();
     }
 
     /**

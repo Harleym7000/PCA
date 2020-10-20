@@ -29,7 +29,7 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(8);
+        $users = User::paginate(15);
         return view('admin.users.index')->with([
             'roles' => $roles,
             'users'=> $users,
@@ -78,7 +78,7 @@ class UsersController extends Controller
         });
             $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(8); 
+        $users = User::paginate(15); 
         return view('admin.users.index')->with([
             'success', 'New User created successfully',
             'roles' => $roles,
