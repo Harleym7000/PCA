@@ -86,6 +86,8 @@ Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName')->mid
 Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses')->middleware('can:manage-users');
 Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth')->middleware('can:manage-users');
 Route::get('/admin/getSiteTraffic', 'DashboardsController@getSiteTraffic')->middleware('can:manage-users');
+Route::get('/admin/contact/reply/{id}', 'ContactController@show')->middleware('can:manage-users');
+Route::post('/admin/contact/reply/{id}', 'ContactController@reply')->middleware('can:manage-users');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

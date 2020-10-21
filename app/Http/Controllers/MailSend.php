@@ -14,11 +14,15 @@ class MailSend extends Controller
         $request->validate([
             'g-recaptcha-response' => 'required|captcha'
         ]);
-        $firstname = $request->input('firstname');
-        $surname = $request->input('surname');
-        $subject = $request->input('subject');
-        $body = $request->input('message');
-        $email = $request->input('email');
+        $contactfirst_name = $request->input('firstname');
+        $contactemail = $request->input('email');
+        $contactsurname = $request->input('surname');
+        $contactsubject = $request->input('subject');
+        $contactmessage = $request->input('message');
+
+        DB::table('contacts')->insert(
+            ['firstname' => $contactfirst_name, 'surname' => $contactsurname, 'email' => $contactemail, 'subject' => $contactsubject, 'message' => $contactmessage]
+        );
 
         // $details = array(
         //     'title' => 'Contact Message from '.$firstname.' '.$surname,
@@ -40,9 +44,6 @@ class MailSend extends Controller
         $request->session()->flash('error', 'Something went wrong');
         return view('pages.contact');
         } else {
-            DB::table('contacts')->insert([
-                    'sent' => 1
-                ]);
         $request->session()->flash('success', 'Thanks. Your message has been sent');
         return view('pages.contact');
         }

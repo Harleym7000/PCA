@@ -32,7 +32,14 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
-<h1>{{$details['title']}}</h1>
-<p>{{$details['body']}}</p>
-<p>Thank you</p>
-
+          <div id="inbox-display">
+            @foreach($message as $m)
+            <form action="/admin/contact/reply/{{$m->id}}" method="POST">
+              @csrf
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </form>
+            @endforeach
+    </div>

@@ -7,6 +7,7 @@ use App\Contact;
 use Illuminate\Support\Facades\DB;
 use App\Rules\Captcha;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -17,7 +18,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact.index');
+        $messages = DB::table('contacts')->orderBy('id', 'DESC')->get();
+        return view('contact.index')->with('messages', $messages);
     }
 
     /**
@@ -44,14 +46,7 @@ class ContactController extends Controller
         // if(strlen($token) > 0) {
             // successfully submitted
 
-        $contactfirst_name = $request->input('firstname');
-        $contactsurname = $request->input('surname');
-        $contactsubject = $request->input('subject');
-        $contactmessage = $request->input('message');
-
-        DB::table('contact_us')->insert(
-            ['first_name' => $contactfirst_name, 'surname' => $contactsurname, 'subject' => $contactsubject, 'message' => $contactmessage]
-        );
+        
         
 
         // $request->session()->flash('success', 'Your message has been sent');
@@ -68,16 +63,15 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($first_name)
+    public function show($id)
     {
-        $title = $first_name;
-        $contact = DB::table('contact_us')
-        ->where('first_name', '=', $first_name)
+        $messageID = $id;
+
+        $message = DB::table('contacts')
+        ->where('id', $messageID)
         ->get();
-        return view('contact.show')->with([
-            'contact' => $contact,
-            'title' => $title
-            ]);
+
+        return view('contact.show')->with('message', $message);
     }
 
     /**
@@ -98,9 +92,11 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function reply(Request $request, $id)
     {
-        //
+        $messageID = $id;
+        $userID = Auth::user()->id;
+        DB::table
     }
 
     /**

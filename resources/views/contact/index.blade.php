@@ -21,6 +21,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+  </script>
 </head>
 <body>
 
@@ -35,7 +40,20 @@
           <div id="inbox-display">
             <div class="col-12">
           <ul class="list-group">
-            <li class="list-group-item"></li>
+            @foreach($messages as $message)
+            <li class="list-group-item my-auto">
+              <div class="row">
+              <p class="col-2">{{$message->subject}}</p> <p class="col-2">{{$message->firstname}} {{$message->surname}} <p class="col-4">{{$message->message}}</p>
+              <div class="col-2 text-right">
+              <a href="/admin/contact/reply/{{$message->id}}" data-toggle="tooltip" data-placement="bottom" title="Reply"><button type="button" id="reply" class="btn btn-btn-link"><img src="/img/baseline_reply_black_18dp.png"></button></a>
+              <a href="" data-toggle="tooltip" data-placement="bottom" title="Mark as Read"><button type="button" class="btn btn-link"><img src="/img/baseline_mark_email_read_black_18dp.png"></button></a>
+              <a href="" data-toggle="tooltip" data-placement="bottom" title="Delete"><button type="button" class="btn btn-link"><img src="/img/baseline_delete_black_18dp.png"></button></a>
+              
+            </div>
+            <p class="col-2">{{\Carbon\Carbon::parse($message->created_at)->format('D jS M H:i')}}</p>
+              </div>
+            </li>
+            @endforeach
           </ul>
         </div>
     </div>

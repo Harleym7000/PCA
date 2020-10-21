@@ -20,7 +20,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
-        "santigarcor/laratrust": "^6.1"
+        "santigarcor/laratrust": "^6.1",
+        "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

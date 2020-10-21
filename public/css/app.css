@@ -2164,6 +2164,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11546,6 +11551,10 @@ body {
 
 #inbox-display {
   margin-top: 3%;
+}
+
+#inbox-display .row p {
+  padding-top: 12px;
 }
 
 .list-group a {
