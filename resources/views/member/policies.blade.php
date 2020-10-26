@@ -21,17 +21,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function() {
-  
-  $('#customFile').on('change',function(){
-      //get the file name
-      var fileName = $(this).val();
-      //replace the "Choose a file" label
-      $('.custom-file-label').html(fileName);
-  });
-});
-</script>
 </head>
 <body>
 
@@ -45,21 +34,22 @@
           @include('inc.admin-nav')
           <div id="policy">
             @include('partials.alerts')
-          <h1>Current Policy Documents</h1>
+          <h1>Current PCA Policy Documents</h1>
           <div class="row">
         </div>
         @if(count($policies) > 0)
-        <div class="row">
+        <div class="card-deck">
         @foreach($policies as $p)
         <div class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="card">
-          <img class="card-img-top" src="img/pdf.png" alt="Card image cap">
+          <img class="card-img-top" src="/img/833px-PDF_file_icon.svg.png" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">{{$p->name}}</h4>
-            <form action="/policy/delete/{{$p->name}}" method="POST">
+            <form action="/policy/download/{{$p->name}}" method="POST">
               @csrf
-            <button type="submit" class="col-12 btn btn-danger" value="{{$p->name}}" name="deletefile">Delete</button>
-            </form>
+            <input type="hidden" value="{{$p->name}}">
+            <button type="submit" class="col-12 btn btn-primary">Download</button>
+          </form>
           </div>
         </div>
         </div>
@@ -68,22 +58,6 @@
         @else
           <p>There are currently no policy documents uploaded</p>
           @endif
-          <br>
-          <br>
-          <h1>Upload New Policy Document</h1>
-          <form action="/policy/upload" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group row">
-              <div class="col-10">
-              <input type="file" class="custom-file-input" id="customFile" name="file">
-              <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <br>
-            <div class="col-2">
-              <button type="submit" class="btn btn-primary">Upload</button>
-              </div>
-          </div>
-          </form>
         </div>
       </div>
     </div>

@@ -28,6 +28,7 @@
         <div class="col-10">
           @include('inc.admin-nav')
 <div id="create-user">
+    @include('partials.alerts')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-9">
@@ -67,7 +68,6 @@
                                 <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
                             </div>
                         </div>
-                        @include('partials.alerts')
 
                         <div class="form-group row">
                             <label for="roles" class="col-md-2 col-form-label text-md-right">Roles</label>

@@ -76,18 +76,28 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'email' => ['required', 'email', 'max:255', new Script_Validation],
+            'email' => ['required', 'unique:users', 'email', 'max:255', new Script_Validation],
             'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
             'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation],
             'agree' => ['accepted', 'required']
         ],
         $messages = [
             'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
-            'password.confirmed' => 'Passwords do not match'
+            'password.confirmed' => 'Passwords do not match',
+            'email.unique' => 'A user with the email address '.$request->email.' already exists'
         ]);
 
         $userpass = request('password');
         $userconfpass = request('password_confirmation');
+
+        $userExistsQuery = DB::table('users')
+        ->where('email', $request->email)
+        ->get();
+        $userExists = count($userExistsQuery);
+        if($userExists > 0) {
+            $request->session()->flash('error', 'Error: A user with this email address already exists');
+            return redirect()->back();
+        }
 
         if($userpass === $userconfpass) {
 

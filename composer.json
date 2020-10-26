@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "santigarcor/laratrust": "^6.1",
         "unisharp/laravel-ckeditor": "^4.7"
     },

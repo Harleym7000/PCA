@@ -64,6 +64,14 @@ class UsersController extends Controller
         $userPass = $request->input('password');
 
         $userPassConf = $request->input('passwordCon');
+        $userExistsQuery = DB::table('users')
+        ->where('email', $user->email)
+        ->get();
+        $userExists = count($userExistsQuery);
+        if($userExists > 0) {
+            $request->session()->flash('error', 'Error: A user with this email address already exists');
+            return redirect()->back();
+        }
         if($userPass === $userPassConf) {
             $user->password = Hash::make($request->password);
             $user->save();
@@ -79,12 +87,8 @@ class UsersController extends Controller
             $title = 'User Management';
         $roles = Role::all();
         $users = User::paginate(15); 
-        return view('admin.users.index')->with([
-            'success', 'New User created successfully',
-            'roles' => $roles,
-            'users'=> $users,
-            'title' => $title
-            ]);
+        $request->session()->flash('success', 'New user created successfully');
+        return redirect()->back();
         } else {
             $title = "Create New User";
         $roles = Role::all()->except(6);

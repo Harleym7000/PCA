@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
@@ -44,13 +44,29 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->file->store('public')) {
+        $fileName = $request->file->getClientOriginalName();
+        $fileExt = \File::extension($fileName);
+        //dd($fileExt);
+
+        $fileExists = DB::table('policies')
+        ->where('name', $fileName)
+        ->first();
+        if(!is_null($fileExists)) {
+            $request->session()->flash('error', 'This file already exists');
+            return redirect()->back();
+        }
+        if($fileExt === 'pdf') {
+        $storeFile = $request->file->storeAs('public/policy', $fileName);
+        if($storeFile) {
+            DB::table('policies')
+            ->insert(['name' => $fileName]);
             $request->session()->flash('success', ' File uploaded successfully');
                 return redirect()->back();
         }
-        
-        $request->session()->flash('error', ' There was an error');
+    } else {
+        $request->session()->flash('error', 'You can only upload files in pdf format');
                 return redirect()->back();
+    }
     }
 
     /**
@@ -100,9 +116,8 @@ class PoliciesController extends Controller
 
     public function downloadFile($filename) 
     {
-        $file = Storage::disk('policy')->get($filename);
+        $file = Storage::download('/public/policy/'.$filename);
 
-        return (new Response($file, 200))
-        ->header('Content-Type', 'application/msword');
+        return $file;
     }
 }

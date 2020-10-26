@@ -32,14 +32,46 @@
         </div>
         <div class="col-10">
           @include('inc.admin-nav')
-          <div id="inbox-display">
-            @foreach($message as $m)
+          <div id="message-reply">
+            @include('partials.alerts')
+            <div class="card">
+              @foreach($message as $m)
+              <div class="card-header">{{$m->subject}}</div>
+              <div class="card-body">
+                <div class="text-left">
+            <h1>{{$m->subject}}</h1>
+            <strong><p>{{$m->firstname}} {{$m->surname}} ({{$m->email}})</p></strong>
+            <h4>{{$m->message}}</h4>
+          </div>
+            <br>
+            @if(count($response) > 0)
+            @foreach($response as $r)
+            <strong><p>{{implode('', auth::user()->profile()->pluck('firstname')->toArray())}} {{implode('', auth::user()->profile()->pluck('surname')->toArray())}} ({{Auth::user()->email}})</p></strong>
+            <h4>{{$r->response}}</h4>
+              @endforeach
+            
+            @endif
             <form action="/admin/contact/reply/{{$m->id}}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <label>Enter response</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="9" name="response" placeholder="Type your response here..."></textarea>
               </div>
+              <br>
+              <input type="hidden" value="{{$m->email}}" name="from">
+              <input type="hidden" value="{{$m->subject}}" name="subject">
+              <div class="form-group text-right">
+              <button type="submit" class="btn btn-primary">Reply</button>
+            </div>
+          </div>
             </form>
             @endforeach
     </div>
+  </div>
+  </div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

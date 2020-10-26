@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MailSend extends Controller
 {
@@ -46,6 +47,34 @@ class MailSend extends Controller
         } else {
         $request->session()->flash('success', 'Thanks. Your message has been sent');
         return view('pages.contact');
+        }
+    }
+
+    public function contact_response(Request $request, $id)
+    {
+        $messageID = $id;
+        $userID = Auth::user()->id;
+        $response = $request->response;
+        DB::table('contact_response')
+        ->insert(['message_id' => $messageID, 'response' => $response, 'respondee_user_id' => $userID]);
+
+        $email = $request->from;
+
+        \Mail::send('email.sendMail', [
+
+            'body' => $request->input('response')
+        ], function ($mail) use ($request) {
+            $mail->from('harleymdev@gmail.com');
+            $mail->to($request->from)->subject('RE: '.$request->subject);
+            $mail->replyTo('harleymdev@gmail.com');
+
+        });
+        if( count(\Mail::failures()) > 0) {
+        $request->session()->flash('error', 'Something went wrong');
+        return redirect()->back();
+        } else {
+        $request->session()->flash('success', 'Your response has been sent');
+        return redirect()->back();
         }
     }
 

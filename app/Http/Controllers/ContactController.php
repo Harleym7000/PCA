@@ -71,18 +71,14 @@ class ContactController extends Controller
         ->where('id', $messageID)
         ->get();
 
-        return view('contact.show')->with('message', $message);
-    }
+        $response = DB::table('contact_response')
+        ->where('message_id', $messageID)
+        ->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('contact.show')->with([
+            'message' => $message,
+            'response' => $response
+        ]);
     }
 
     /**
@@ -92,12 +88,6 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function reply(Request $request, $id)
-    {
-        $messageID = $id;
-        $userID = Auth::user()->id;
-        DB::table
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -412,6 +412,7 @@ body {
     #sidenav {
         background-color: #252525;
         width: auto;
+        min-height: 100vh;
     }
 
     #sidenav .logo {
@@ -663,6 +664,12 @@ body {
       padding-top: 12px;
     }
 
+    #message-reply {
+      width: 90%;
+      margin: auto;
+      margin-top: 5%;
+    }
+
     .list-group a {
       text-decoration: none;
       color: #000;
@@ -695,6 +702,25 @@ body {
       max-height: 30px;
     }
 
+    #policy {
+      width: 90%;
+      margin: auto;
+      margin-top: 5%;
+    }
+
+    #policy .card {
+      box-shadow: 10px 10px 5px #aaaaaa;
+      width: 90%;
+    }
+
+    #policy .card img {
+      height: 300px;
+    }
+
+    #policy .btn-primary {
+      width: 80%;
+    }
+      
     #my-events {
       margin-top: 5%;
     }
@@ -784,6 +810,21 @@ body {
   footer #subscribe-form {
     width: 40%;
     margin: auto;
+  }
+
+  footer #subscribe-form .btn {
+    max-height: 38px;
+  }
+
+  footer #subscribe-form .col-xl-2 {
+    max-height: 38px;
+  }
+
+  footer #subscribe-form .captcha {
+    
+    width: 40%;
+    margin: auto;
+    margin-top: 4%;
   }
 
   #dashboard {

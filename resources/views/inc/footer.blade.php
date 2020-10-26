@@ -109,6 +109,11 @@
         <input class="form-control col-12 col-xl-9" type="text" placeholder="Enter email address...">
         <button type="submit" class="btn btn-primary col-12 col-xl-3">Subscribe</button>
       </div>
+      <div class="form-group">
+        <div class="captcha text-center">
+          {!! NoCaptcha::display() !!}
+      </div>
+      </div>
     </form>
 </div>
 </div>
