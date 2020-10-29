@@ -40,7 +40,7 @@
         @if(count($policies) > 0)
         <div class="card-deck">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="card">
           <img class="card-img-top" src="/img/833px-PDF_file_icon.svg.png" alt="Card image cap">
           <div class="card-body">

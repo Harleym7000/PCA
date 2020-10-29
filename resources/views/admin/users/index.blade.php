@@ -144,7 +144,8 @@ $('tbody').html(output);
                       <span id="total_records"></span>
                       <thead>
                         <tr>
-                          <th scope="col-4">Search:<input id="user-search" type="text" placeholder="Search name..." class="filter-input"></th>
+                          
+                          <th scope="col-4"><div class="row"><label>Search:</label><input id="user-search" type="text" placeholder="Search name..." class="filter-input"></div></th>
                           <th scope="col"></th>
                           <form id="user-form" action="#">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />

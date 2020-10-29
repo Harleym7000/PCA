@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
   }
   body {
-    position: relative
+    position: relative;
   }
 
   .asterisk {
@@ -413,6 +413,9 @@ body {
         background-color: #252525;
         width: auto;
         min-height: 100vh;
+        max-height: 120vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     #sidenav .logo {
@@ -475,6 +478,26 @@ body {
         display: none;
     }
 
+    #sidenav::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 3px grey; 
+      border-radius: 3px;
+      max-height: 30px;
+      overflow-y: scroll;
+    }
+
+    #sidenav::-webkit-scrollbar {
+      background: #252525; 
+      border-radius: 3px;
+      width: 12px;
+      max-height: 30px;
+      overflow-y: scroll;
+    }
+    
+    #sidenav::-webkit-scrollbar-thumb {
+      background: #3490dc; 
+      border-radius: 3px;
+    }
+
     #test {
       width: 100%;
       background-color: #fff;
@@ -535,6 +558,10 @@ body {
       margin-top: 7%;
     }
 
+    #user-profile > .row {
+      height: 80vh;
+    }
+
     #user-profile h1 {
       margin-bottom: 3%;
     }
@@ -553,8 +580,8 @@ body {
     }
 
     #profile .card {
-      width: 90%;
       margin: auto;
+      margin-top: 7%;
     }
 
     #members {
@@ -572,16 +599,26 @@ body {
       margin-top: 5%;
     }
 
-    #manage-users .table tr .col-2 {
-      width: 10%;
+    #manage-users .table label {
+      margin-left: 5%;
+      margin-right: 3%;
     }
 
-    #manage-users .table tr .col-3 {
+    #manage-users .table input[type="text"] {
+      width: 70%;
+      height: 30px;
+    }
+
+    #manage-users .table tr .col-2 {
       width: 20%;
     }
 
+    #manage-users .table tr .col-3 {
+      width: 22.5%;
+    }
+
     #manage-users .table tr .col-4 {
-      width: 50%;
+      width: 35%;
     }
 
     #manage-users .card {
@@ -714,11 +751,10 @@ body {
     }
 
     #policy .card img {
-      height: 300px;
-    }
-
-    #policy .btn-primary {
-      width: 80%;
+      height: 200px;
+      width: 70%;
+      margin: auto;
+      margin-top: 5%;
     }
       
     #my-events {
@@ -795,6 +831,10 @@ body {
     color: #fff;
     padding-top: 20%;
   }
+
+  footer img {
+    margin-right: 20px;
+  }
   
   footer .footer-copyright {
     color: #fff;
@@ -812,8 +852,16 @@ body {
     margin: auto;
   }
 
+  footer #subscribe-form input {
+    height: 40px;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2%;
+  }
+
   footer #subscribe-form .btn {
-    max-height: 38px;
+    font-size: 18px;
   }
 
   footer #subscribe-form .col-xl-2 {
@@ -821,10 +869,9 @@ body {
   }
 
   footer #subscribe-form .captcha {
-    
-    width: 40%;
+    width: 44%;
     margin: auto;
-    margin-top: 4%;
+    margin-bottom: 2%;
   }
 
   #dashboard {

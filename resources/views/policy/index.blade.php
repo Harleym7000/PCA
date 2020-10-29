@@ -51,7 +51,7 @@
         @if(count($policies) > 0)
         <div class="row">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="card">
           <img class="card-img-top" src="img/pdf.png" alt="Card image cap">
           <div class="card-body">
@@ -75,7 +75,7 @@
             @csrf
             <div class="form-group row">
               <div class="col-10">
-              <input type="file" class="custom-file-input" id="customFile" name="file">
+              <input type="file" class="custom-file-input" id="customFile" name="file[]" multiple>
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
             <br>

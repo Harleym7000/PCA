@@ -99,4 +99,21 @@ class ContactController extends Controller
     {
         //
     }
-}
+
+    public function closeRequest(Request $request)
+    {
+        $messageID = $request->contactClose;
+
+        //dd($messageID);
+
+       $close = DB::table('contacts')
+        ->where('id', $messageID)
+        ->update(['closed' => 1]);
+
+        if($close) {
+            $request->session()->flash('success', 'The request has now been marked as closed');
+                    return redirect()->back();
+        }
+
+        }
+    }

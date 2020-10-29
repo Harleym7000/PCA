@@ -70,10 +70,10 @@
     @include('partials.alerts')
     <div class="container">
         <div id="user-profile">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-flex align-items-middle">
+            <div class="col-12">
                 <div class="card">
             <div class="card-header">User Profile - {{$profileInfo->firstname}} {{$profileInfo->surname}}</div>
-    
                     <div class="card-body">
                         
                       <form action="/user/profile/update" method="POST">
@@ -151,6 +151,7 @@
         </div>
       </div>
     </div>
+</div>
 </div>
 </body>
 </html>

@@ -39,6 +39,16 @@
               <div class="card-header">{{$m->subject}}</div>
               <div class="card-body">
                 <div class="text-left">
+                  <h3>Assigned To:</h3>
+                  <h5>Status: @if($m->closed === 0)Open @else Closed @endif </h3>
+                  @if($m->closed === 0)
+                  <form action="/admin/contact/close" method="POST">
+                    @csrf
+                  <button type="submit" id="close" class="btn btn-primary" name="contactClose" value="{{$m->id}}">Close Request</button>
+                  </form>
+                  <br>
+                  <br>
+                  @endif
             <h1>{{$m->subject}}</h1>
             <strong><p>{{$m->firstname}} {{$m->surname}} ({{$m->email}})</p></strong>
             <h4>{{$m->message}}</h4>
@@ -51,6 +61,7 @@
               @endforeach
             
             @endif
+            @if($m->closed === 0)
             <form action="/admin/contact/reply/{{$m->id}}" method="POST">
               @csrf
               <div class="form-group">
@@ -65,6 +76,7 @@
             </div>
           </div>
             </form>
+            @endif
             @endforeach
     </div>
   </div>

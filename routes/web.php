@@ -38,7 +38,7 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('can:view-policy');
-Route::post('/policy/delete/{filename}', 'Policy')
+Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:view-policy');
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('can:view-policy');
 Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
 
@@ -90,6 +90,7 @@ Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth
 Route::get('/admin/getSiteTraffic', 'DashboardsController@getSiteTraffic')->middleware('can:manage-users');
 Route::get('/admin/contact/reply/{id}', 'ContactController@show')->middleware('can:manage-users');
 Route::post('/admin/contact/reply/{id}', 'MailSend@contact_response')->middleware('can:manage-users');
+Route::post('/admin/contact/close', 'ContactController@closeRequest')->middleware('can:manage-users');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

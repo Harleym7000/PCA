@@ -33,7 +33,7 @@
       @include('inc.admin-nav')
       <div id="members">
           @include('partials.alerts')
-        <h1>Committee Members - Home</h1>
+        <h1>Members - Home</h1>
       </div>
     </div>
   </div>

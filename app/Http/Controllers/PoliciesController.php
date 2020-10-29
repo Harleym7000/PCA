@@ -44,30 +44,34 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
-        $fileName = $request->file->getClientOriginalName();
-        $fileExt = \File::extension($fileName);
+        
+        foreach($request->file as $file) {
+         $fileName = $file->getClientOriginalName();
+         $fileExt = \File::extension($fileName);
         //dd($fileExt);
 
         $fileExists = DB::table('policies')
         ->where('name', $fileName)
         ->first();
         if(!is_null($fileExists)) {
-            $request->session()->flash('error', 'This file already exists');
+            $request->session()->flash('error', 'The file '.$fileName. ' already exists');
             return redirect()->back();
         }
         if($fileExt === 'pdf') {
-        $storeFile = $request->file->storeAs('public/policy', $fileName);
-        if($storeFile) {
-            DB::table('policies')
-            ->insert(['name' => $fileName]);
-            $request->session()->flash('success', ' File uploaded successfully');
-                return redirect()->back();
-        }
-    } else {
-        $request->session()->flash('error', 'You can only upload files in pdf format');
-                return redirect()->back();
+            $storeFile = $file->storeAs('public/policy', $fileName);
+            if($storeFile) {
+                DB::table('policies')
+                ->insert(['name' => $fileName]);
+            } else {
+                $request->session()->flash('error', 'You can only upload files in pdf format');
+                        return redirect()->back();
+            }
+        //print_r($fileName);
     }
-    }
+}
+$request->session()->flash('success', 'Files uploaded successfully');
+                    return redirect()->back();
+}
 
     /**
      * Display the specified resource.
@@ -109,9 +113,19 @@ class PoliciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $filename)
     {
-        //
+        $fileToDelete = $filename;
+        $deleteFile = Storage::delete('/public/policy/'.$fileToDelete);
+        DB::table('policies')
+        ->where('name', $fileToDelete)
+        ->delete();
+        if($deleteFile) {
+            $request->session()->flash('success', ' File deleted successfully');
+                return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error deleting the file. Please try again later');
+                return redirect()->back();
     }
 
     public function downloadFile($filename) 
