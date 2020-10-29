@@ -75,9 +75,17 @@ class ContactController extends Controller
         ->where('message_id', $messageID)
         ->get();
 
+        $assignedTo = DB::table('contacts')
+        ->where('contacts.id', $messageID)
+        ->join('users', 'contacts.assigned_to', '=', 'users.id')
+        ->join('profiles', 'profiles.user_id', '=', 'contacts.assigned_to')
+        ->select('profiles.firstname', 'profiles.surname')
+        ->get();
+
         return view('contact.show')->with([
             'message' => $message,
-            'response' => $response
+            'response' => $response,
+            'assignedTo' => $assignedTo
         ]);
     }
 

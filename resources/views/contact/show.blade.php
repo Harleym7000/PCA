@@ -39,7 +39,7 @@
               <div class="card-header">{{$m->subject}}</div>
               <div class="card-body">
                 <div class="text-left">
-                  <h3>Assigned To:</h3>
+                  <h3>Assigned To: @foreach($assignedTo as $a){{$a->firstname}} {{$a->surname}}@endforeach</h3>
                   <h5>Status: @if($m->closed === 0)Open @else Closed @endif </h3>
                   @if($m->closed === 0)
                   <form action="/admin/contact/close" method="POST">
