@@ -42,6 +42,7 @@
       <div id="members">
           @include('partials.alerts')
               <h1>Welcome {{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}</h1>
+              
           </div>
       </div>
     </div>
