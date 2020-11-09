@@ -21,13 +21,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+      drawMembersChart();
+      drawTrafficChart();
+    });
+  });
+  </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawMembersChart);
 
 
-    function drawChart() {
+    function drawMembersChart() {
       $.ajax({
 type : 'GET',
 url : '/admin/getCommitteeGrowth',
@@ -75,16 +85,16 @@ success:function(response){
 
         chart.draw(data, options);
 }
-      });
+});
       }
   
     </script>
     <script>
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawTrafficChart);
 
 
-    function drawChart() {
+    function drawTrafficChart() {
       $.ajax({
 type : 'GET',
 url : '/admin/getSiteTraffic',
@@ -132,6 +142,10 @@ success:function(response){
         chart.draw(data, options);
 }
       });
+      $(window).resize(function(){
+  drawMembersChart();
+  drawTrafficChart();
+});
       }
   
     </script>
@@ -141,10 +155,10 @@ success:function(response){
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="dashboard">
             <ul class="nav nav-tabs">
@@ -162,51 +176,51 @@ success:function(response){
               </li>
             </ul>
             <h1>Dashboard</h1>
-          <div class="row justify-content-center">
-              <div class="col-11">
-                <div class="card-deck">
-                  <div class="card text-white bg-primary">
+              <div class="content col-12">
+                <div class="row justify-content-center">
+                  <div class="card col-12 col-xl-3 text-white bg-primary">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-9">
+                        <div class="col-12 col-lg-7" style="height: 98%; margin:auto">
                       <img src="/img/baseline_visibility_white_18dp.png">
                         </div>
-                        <div class="col-3">
-                      <h1 class="card-text">{{$totalUniqueVisits}}
-                        <p class="card-text">Site Visits</p>
+                        <div class="col-12 col-lg-5">
+                      <h1 class="card-text text-right">{{$totalUniqueVisits}}
+                        <p class="card-text text-right">Site Visits</p>
                       </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card text-white bg-success">
+                  <div class="card col-12 col-xl-3 text-white bg-success">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-7">
+                        <div class="col-12 col-lg-5" style="height: 98%; margin:auto">
                       <img src="/img/baseline_people_alt_white_18dp.png">
                         </div>
-                        <div class="col-5">
+                        <div class="col-12 col-lg-7">
                       <h1 class="card-text">{{$totalCommitteeMembers}}
-                        <p class="card-text">Committee Members</p>
+                        <p class="card-text">Members</p>
                       </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card text-white bg-danger">
+                  <div class="card col-12 col-xl-3 text-white bg-danger">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col-6" style="height: 98%; margin:auto">
                       <img src="/img/baseline_person_add_alt_1_white_18dp.png">
                         </div>
                         <div class="col-6">
-                      <h1 class="card-text">{{$usersThisMonth}}
-                        <p class="card-text">Registered This Month</p>
+                      <h1 class="card-text">+{{$usersThisMonth}}
+                        <p class="card-text">This Month</p>
                       </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-deck">
-                  <div class="card">
+              </div>
+                <div class="charts row justify-content-center">
+                  <div class="card col-12 col-lg-5">
                     <div class="card-header">
                       <strong>Commitee Member Growth Pattern</strong>
                     </div>
@@ -214,7 +228,7 @@ success:function(response){
                       <div id="members_curve_chart"></div>
                     </div>
                   </div>
-                  <div class="card">
+                  <div class="card col-12 col-lg-5">
                     <div class="card-header">
                       <strong>Site Traffic</strong>
                     </div>
@@ -223,8 +237,7 @@ success:function(response){
                     </div>
                   </div>
                 </div>
-              </div>
-              <h3 class="text-center">More coming soon</h3>
+              <h3 class="info-header text-center">More coming soon</h3>
           </div>
           </div>
         </div>

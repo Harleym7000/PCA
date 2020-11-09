@@ -102,16 +102,17 @@ class RegisterController extends Controller
         if($userpass === $userconfpass) {
 
         $user = new User();
-        $role = Role::where('name', 'Committee Member')->first();
+        $role = Role::where('name', 'Member')->first();
         $user->email = request('email');
         $user->password = Hash::make(request('password'));
 
         $user->save();
+        $userID = $user->id;
         $month = Carbon::now()->format('M');
         $year = Carbon::now()->year;
         DB::table('user_reg')
         ->insert(
-            ['month' => $month, 'year' => $year]
+            ['month' => $month, 'year' => $year, 'user_id' => $userID]
         );
         $user->attachRole($role);
         return redirect('/email/verify');

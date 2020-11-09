@@ -30,6 +30,13 @@
 });
                       
                         $(document).ready(function(){
+                          $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+      drawMembersChart();
+      drawTrafficChart();
+    });
+
                           $('#user-search').on('keyup',function(){
                             var value = $('#user-search').val();
 $.ajax({
@@ -127,15 +134,15 @@ $('tbody').html(output);
   <div id="app">
 <div class="container-fluid" style="text-align: left; color: #000;">
   <div class="row no-gutters">
-    <div class="col-2">
+    <div class="sidenav-holder col-12 col-lg-2">
       @include('inc.admin-sidenav')
     </div>
-    <div class="col-10">
+    <div class="content-holder col-12 col-lg-10">
       @include('inc.admin-nav')
       <div id="manage-events">
         <div class="row justify-content-center">
                 <div class="table-responsive">
-                    <table class="table" id="user-table">
+                    <table class="table table-striped" id="user-table">
                       <span id="total_records"></span>
                       <thead>
                         <tr>
@@ -172,17 +179,15 @@ $('tbody').html(output);
   @foreach($events as $event)
                     <tr>
                         <td><img src="/storage/event_images/{{$event->image}}" style="height: 85px; width: 150px;"></td>
-                        <td>{{$event->title}}</td>
-                        <td>{{\Carbon\Carbon::parse($event->date)->format('d/m/Y')}}</td>
-                        <td>{{\Carbon\Carbon::parse($event->time)->format('H:i')}}</td>
-                        <td>{{$event->venue}}</td>
-                        <td>{{$event->managed_by}}</td>
+                        <td><strong>{{$event->title}}</strong></td>
+                        <td><strong>{{\Carbon\Carbon::parse($event->date)->format('D d M Y')}}</strong></td>
+                        <td><strong>{{\Carbon\Carbon::parse($event->time)->format('H:i')}}</strong></td>
+                        <td><strong>{{$event->venue}}</strong></td>
+                        <td><strong>{{$event->managed_by}}</strong></td>
                         <td id="action-buttons">
                             @can('manage-events')
-                            <a href="/events/edit/{{$event->id}}"><button type="button" class="btn btn-dark">Edit Event</button></a>
-                            @endcan
-                            @can('manage-events')
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#eventdelete{{$event->id}}">Delete Event</button>
+                              <a href="/events/edit/{{$event->id}}"><button type="button" class="btn btn-dark">Edit</button></a>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#eventdelete{{$event->id}}">Delete</button>
                             @endcan
                         </td>
                       </tr>
@@ -220,10 +225,10 @@ $('tbody').html(output);
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          {!! Form::open(['action' => ['EventsController@destroy', $event->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
-          {{Form::hidden('_method', 'DELETE')}}
-          {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-          {!!Form::close()!!}
+          <form action="/events/delete" method="POST">
+          @csrf
+          <button type="submit" class="btn btn-danger" name="eid" value="{{$event->id}}">Delete</button>
+          </form>
         </div>
       </div>
     </div>

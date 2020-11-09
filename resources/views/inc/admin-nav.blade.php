@@ -2,7 +2,7 @@
     <div class="collapse" id="sidenav">
     </div>
     <nav class="navbar navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="toggle" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" id="toggle-sidenav" data-toggle="toggle" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <form class="form-inline my-2 my-lg-0">
@@ -11,3 +11,4 @@
       </form>
     </nav>
 </div>
+

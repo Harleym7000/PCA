@@ -1,6 +1,6 @@
 <div id="mobile-nav">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" id="mobNavToggle" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -63,6 +63,12 @@
           <div class="row">
             <img src="/img/baseline_event_note_white_18dp.png">
           <a class="nav-link" href="#">Event Applications</a>
+        </div>
+        </li>
+        <li class="nav-item">
+          <div class="row">
+            <img src="/img/baseline_dashboard_white_18dp.png">
+          <a class="nav-link" href="/user/events">Members Dashboard</a>
         </div>
         </li>
         <li class="nav-item">
@@ -282,9 +288,22 @@
     <br>
     <br>
     @endcan
-    <h5 class="section">Committee Member</h5>
+    <h5 class="section">PCA Member</h5>
     <div class="divider">
     </div>
+    <a href="/member"><div class="option">
+      <div class="row no-gutters">
+        <div class="col-xl-3 my-auto">
+          <img class="d-block mx-auto mx-xl-0" src="/img/baseline_dashboard_white_18dp.png">
+          </div>
+          <div class="col-9 my-auto">
+          <span>Members Dashboard</span>
+          </div>
+      </div>
+      <h5 class="label">My Events</h5>
+      </div></a>
+      <div class="divider">
+      </div>
     <a href="/user/events"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">
@@ -298,6 +317,19 @@
       </div></a>
       <div class="divider">
       </div>
+      <a href="/user/events"><div class="option">
+        <div class="row no-gutters">
+          <div class="col-xl-3 my-auto">
+            <img class="d-block mx-auto mx-xl-0" src="/img/baseline_people_alt_white_18dp.png">
+            </div>
+            <div class="col-9 my-auto">
+            <span>My Committies</span>
+            </div>
+        </div>
+        <h5 class="label">My Committies</h5>
+        </div></a>
+        <div class="divider">
+        </div>
       <a href="/policies"><div class="option">
         <div class="row no-gutters">
           <div class="col-xl-3 my-auto">

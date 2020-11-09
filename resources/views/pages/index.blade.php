@@ -18,7 +18,7 @@
               <div class="card">
                 <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h1 class="card-title">{{$event->title}}</h1>
+                  <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
                   <div class="row">
@@ -41,7 +41,7 @@
             @if(count($news) > 0)
             @foreach($news as $story)
             <div class="media">
-              <img class="media-object mr-3 img-responsive" src="img/pcaLogo.png" alt="Generic placeholder image" style="height: 240px; width:180px;">
+              <img class="media-object mr-3 img-responsive" src="img/cleanup.jpg" alt="Generic placeholder image" >
               <div class="media-body">
                 <a href="/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
@@ -78,10 +78,10 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="forename" class="form-control" value="{{implode('', auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
+              <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
             </div>
             <div class="col">
-              <input type="text" name="surname" class="form-control" value="{{implode('', auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
+              <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
             </div>
           </div>
           <div class="form-row">
@@ -89,7 +89,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="email" class="form-control" value="{{auth::user()->email}}" placeholder="Email Address">
+              <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address">
             </div>
           </div>
           <div class="form-row">
@@ -97,7 +97,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="phone" class="form-control" value="{{implode('', auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
+              <input type="text" name="phone" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
             </div>
           </div>
       </div>

@@ -15,19 +15,31 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
+  });
+    </script>
+</head>
+    <body>
     <div id="app">
-<div class="container-fluid" style="text-align: left; color: #000;">
-  <div class="row">
-    <div class="col-2">
-      @include('inc.admin-sidenav')
-    </div>
-    <div class="col-10">
-        @include('inc.admin-nav')
+        <div class="container-fluid" style="text-align: left; color: #000;">
+          <div class="row no-gutters">
+            <div class="sidenav-holder col-12 col-lg-2">
+              @include('inc.admin-sidenav')
+            </div>
+            <div class="content-holder col-12 col-lg-10">
+              @include('inc.admin-nav')
 <div id="create-user">
-    <div class="container">
     @include('partials.alerts')
         <div class="row justify-content-center">
             <div class="col-9">
@@ -40,24 +52,30 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-2 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-12 col-md-3 col-lg-2 col-form-label text-md-right">Password</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-md-8 col-lg-9">
                                 <input id="password" type="password" class="form-control" name="password" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="passwordCon" class="col-md-2 col-form-label text-md-right">Confirm Password</label>
+                            <label for="passwordCon" class="col-md-3 col-lg-2 col-form-label text-md-right">Confirm Password</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-md-8 col-lg-9">
                                 <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Reset Password</button>
+                        <div class="text-right">
+                        <button type="submit" class="col-12 col-md-3 col-lg-3 col-xl-2 btn btn-primary">Reset Password</button>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>

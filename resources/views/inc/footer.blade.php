@@ -81,7 +81,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank">Facebook</a>
+            <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank"><img src="/img/baseline_facebook_white_18dp.png">Facebook</a>
           </li>
         </ul>
 
@@ -100,19 +100,14 @@
   <div class="subscribe">
   <ul class="list-unstyled list-inline text-center py-2">
     <li class="list-inline-item">
-      <h3 class="mb-1">Subsribe to Our Newsletter</h3>
+      <h3 class="mb-1">Subscribe to Our Newsletter</h3>
     </li>
   </ul>
   <div id="subscribe-form">
     <form action="" method="POST">
-      <div class="row">
-        <input class="form-control col-12 col-xl-9" type="text" placeholder="Enter email address...">
-        <button type="submit" class="btn btn-primary col-12 col-xl-3">Subscribe</button>
-      </div>
-      <div class="form-group">
-        <div class="captcha text-center">
-          {!! NoCaptcha::display() !!}
-      </div>
+        <input class="form-control col-9" type="text" placeholder="Enter email address...">
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary col-9">Subscribe</button>
       </div>
     </form>
 </div>

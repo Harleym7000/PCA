@@ -30,6 +30,7 @@
 });
                       
                         $(document).ready(function(){
+
                           $('#user-search').on('keyup',function(){
                             var value = $('#user-search').val();
 $.ajax({
@@ -41,16 +42,18 @@ dataType: "json",
 success:function(data){
   var output = '';
                                 var len = data.length;
-                                var totalRoles = data.role_name;
-                                console.log('Total Roles' +totalRoles);
                                 
                                 console.log(len);
                                 //console.log("Data is" +JSON.stringify(data));
                                 for(var count = 0; count < len; count++) 
                                   {
                                     var userID = data[count].user_id;
+<<<<<<< HEAD
                                     var totalRoles = data[count].role_name;
                                     console.log(totalRoles);
+=======
+                                    console.log(data[count].role_name);
+>>>>>>> dbc3ac08fd8313990d5c8eac425d3e34b7104513
                                     
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
@@ -122,7 +125,10 @@ $('tbody').html(output);
                             //console.log(role);
                             
                           });
-                          
+                          $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
                         });
                         
                       </script>
@@ -131,14 +137,15 @@ $('tbody').html(output);
   <div id="app">
 <div class="container-fluid" style="text-align: left; color: #000;">
   <div class="row no-gutters">
-    <div class="col-2">
+    <div class="sidenav-holder col-12 col-lg-2">
       @include('inc.admin-sidenav')
     </div>
-    <div class="col-10">
+    <div class="content-holder col-12 col-lg-10">
       @include('inc.admin-nav')
       <div id="manage-users">
         @include('partials.alerts')
         <div class="row justify-content-center">
+          <div class="col-12">
           <div class="card">
             <div class="card-header">All Users</div>
                 <div class="table-responsive">
@@ -146,7 +153,8 @@ $('tbody').html(output);
                       <span id="total_records"></span>
                       <thead>
                         <tr>
-                          <th scope="col-4">Search:<input id="user-search" type="text" placeholder="Search name..." class="filter-input"></th>
+                          
+                          <th scope="col-4"><div class="row"><label>Search:</label><input id="user-search" type="text" placeholder="Search name..." class="filter-input"></div></th>
                           <th scope="col"></th>
                           <form id="user-form" action="#">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
@@ -179,8 +187,8 @@ $('tbody').html(output);
                         <td>{{$user->email}}</td>
                         <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons" class="text-right">
-                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success" value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
-                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark">Edit Roles</button></a>
+                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success " value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
+                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark ">Edit Roles</button></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}">Delete User</button>
                         </td>
                       </tr>
@@ -189,6 +197,7 @@ $('tbody').html(output);
                       </table>
                     </div>
                     </div>
+            </div>
             </div>
             <div class="render">
             <?php echo $users->render(); ?>
@@ -239,7 +248,7 @@ $('tbody').html(output);
           </button>
         </div>
         <div class="modal-body">
-          This will delete the user {{$user->firstname}} {{$user->surname}}. Are you sure you wish to delete this user?
+          This will delete the user {{implode('', $user->profile()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->pluck('surname')->toArray())}}. Are you sure you wish to delete this user?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('view-policy', function($user){
-            return $user->hasRole('Committee Member');
+            return $user->hasRole('Member');
         });
 
         Gate::define('manage-news', function($user){

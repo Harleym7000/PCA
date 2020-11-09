@@ -10998,8 +10998,9 @@ body {
   margin-bottom: 3%;
 }
 
-#events .card h1 {
-  font-size: 22px;
+#events .card h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 26px;
 }
 
 #events h3,
@@ -11052,8 +11053,14 @@ body {
 
 #news .media {
   width: 90%;
+  height: 98%;
   margin: auto;
   border-bottom: 2px solid #d4d4d4;
+}
+
+#news .media img {
+  height: 200px;
+  margin: auto;
 }
 
 #news .media h5 {
@@ -11169,6 +11176,10 @@ body {
   margin-bottom: 3%;
 }
 
+#event-search .btn {
+  margin-top: 1.9%;
+}
+
 #event-search label {
   font-size: 16px;
   font-weight: bold;
@@ -11177,6 +11188,10 @@ body {
 
 #news-page {
   margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#news-form {
   margin-bottom: 5%;
 }
 
@@ -11189,8 +11204,14 @@ body {
 
 #news-page .media {
   width: 90%;
+  height: 98%;
   margin: auto;
   border-bottom: 2px solid #d4d4d4;
+}
+
+#news-page .media img {
+  height: 200px;
+  margin: auto;
 }
 
 #news-page .media h5 {
@@ -11203,8 +11224,12 @@ body {
 }
 
 #news-search {
-  width: 50%;
+  width: 90%;
   margin: auto;
+}
+
+#news-form .btn {
+  margin-top: 2%;
 }
 
 #news-search label {
@@ -11302,6 +11327,9 @@ body {
   background-color: #252525;
   width: auto;
   min-height: 100vh;
+  max-height: 120vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #sidenav .logo {
@@ -11364,6 +11392,26 @@ body {
   display: none;
 }
 
+#sidenav::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 3px;
+  max-height: 30px;
+  overflow-y: scroll;
+}
+
+#sidenav::-webkit-scrollbar {
+  background: #252525;
+  border-radius: 3px;
+  width: 12px;
+  max-height: 30px;
+  overflow-y: scroll;
+}
+
+#sidenav::-webkit-scrollbar-thumb {
+  background: #3490dc;
+  border-radius: 3px;
+}
+
 #test {
   width: 100%;
   background-color: #fff;
@@ -11375,11 +11423,8 @@ body {
   border-bottom: 3px solid #d3d3d3;
 }
 
-#test .navbar-toggler {
-  margin-left: 5%;
-}
-
 #dashboard {
+  margin: auto;
   margin-top: 3%;
 }
 
@@ -11387,6 +11432,25 @@ body {
   margin-left: 4%;
   margin-top: 2%;
   margin-bottom: 2%;
+}
+
+#dashboard .content {
+  width: 92%;
+  margin: auto;
+}
+
+#dashboard .content .row .card {
+  margin-right: 4%;
+  margin-bottom: 4%;
+}
+
+#dashboard .charts {
+  width: 90%;
+  margin: auto;
+}
+
+#dashboard .charts > .card {
+  margin-right: 5%;
 }
 
 #dashboard .card p {
@@ -11407,9 +11471,13 @@ body {
 }
 
 #dashboard .card img {
-  height: 80%;
+  max-height: 40px;
   width: auto;
   margin-top: 1%;
+}
+
+#dashboard .info-header {
+  margin-top: 5%;
 }
 
 .total {
@@ -11430,9 +11498,11 @@ body {
 
 #user-profile .card {
   box-shadow: 10px 10px 5px #aaaaaa;
+  width: 100%;
+  margin-bottom: 10%;
 }
 
-#user-profile .col-11 .btn {
+#user-profile .btn {
   margin-top: 2%;
 }
 
@@ -11442,8 +11512,8 @@ body {
 }
 
 #profile .card {
-  width: 90%;
   margin: auto;
+  margin-top: 7%;
 }
 
 #members {
@@ -11461,16 +11531,26 @@ body {
   margin-top: 5%;
 }
 
-#manage-users .table tr .col-2 {
-  width: 10%;
+#manage-users .table label {
+  margin-left: 5%;
+  margin-right: 3%;
 }
 
-#manage-users .table tr .col-3 {
+#manage-users .table input[type=text] {
+  width: 70%;
+  height: 30px;
+}
+
+#manage-users .table tr .col-2 {
   width: 20%;
 }
 
+#manage-users .table tr .col-3 {
+  width: 22.5%;
+}
+
 #manage-users .table tr .col-4 {
-  width: 50%;
+  width: 35%;
 }
 
 #manage-users .card {
@@ -11502,10 +11582,22 @@ body {
   box-shadow: 10px 10px 5px #aaaaaa;
 }
 
+#edit-user {
+  margin-top: 25%;
+}
+
+#edit-user .card {
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
 #manage-events {
   width: 90%;
   margin: auto;
   margin-top: 5%;
+}
+
+#manage-events .btn {
+  width: 100%;
 }
 
 #create-event {
@@ -11551,6 +11643,18 @@ body {
 
 #inbox-display .row p {
   padding-top: 12px;
+}
+
+#inbox-display input {
+  min-height: 45px;
+  max-height: 45px;
+  margin-bottom: 2%;
+}
+
+#inbox-display .filter-messages {
+  min-height: 45px;
+  max-height: 45px;
+  margin-bottom: 2%;
 }
 
 #message-reply {
@@ -11603,11 +11707,10 @@ body {
 }
 
 #policy .card img {
-  height: 300px;
-}
-
-#policy .btn-primary {
-  width: 80%;
+  height: 170px;
+  width: 65%;
+  margin: auto;
+  margin-top: 5%;
 }
 
 #my-events {
@@ -11685,6 +11788,10 @@ footer .mb-1 {
   padding-top: 20%;
 }
 
+footer img {
+  margin-right: 20px;
+}
+
 footer .footer-copyright {
   color: #fff;
   border-top: 1px solid #fff;
@@ -11701,8 +11808,16 @@ footer #subscribe-form {
   margin: auto;
 }
 
+footer #subscribe-form input {
+  height: 40px;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
 footer #subscribe-form .btn {
-  max-height: 38px;
+  font-size: 18px;
 }
 
 footer #subscribe-form .col-xl-2 {
@@ -11710,9 +11825,9 @@ footer #subscribe-form .col-xl-2 {
 }
 
 footer #subscribe-form .captcha {
-  width: 40%;
+  width: 44%;
   margin: auto;
-  margin-top: 4%;
+  margin-bottom: 2%;
 }
 
 #dashboard {
@@ -11726,20 +11841,17 @@ input[disabled] {
 }
 
 @media (max-width: 321px) {
-  #manage-users {
-    margin-left: -5%;
-  }
-
   #manage-users .table {
     margin-top: 15%;
-  }
-
-  #dashboard {
-    margin-left: -20%;
   }
 }
 
 @media (max-width: 425px) {
+  .g-recaptcha {
+    transform: scale(0.57);
+    transform-origin: 0 0;
+  }
+
   .box {
     height: 50vh;
   }
@@ -11773,9 +11885,13 @@ input[disabled] {
     margin-top: 20%;
   }
 
+  #events h1 {
+    margin-bottom: 15%;
+  }
+
   #events .card {
-    margin-bottom: 20%;
     margin: auto;
+    margin-bottom: 10%;
   }
 
   #events .col .mb-4 .card .card-text {
@@ -11783,13 +11899,16 @@ input[disabled] {
     margin: auto;
   }
 
-  #events .card-body {
-    margin-left: -8%;
-    margin-right: -8%;
+  #news {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 12%;
   }
 
-  #news {
-    margin-bottom: 12%;
+  #news p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75ch;
   }
 
   #news .media img {
@@ -11826,7 +11945,6 @@ input[disabled] {
   }
 
   #manage-users .table {
-    margin-left: -3%;
     margin-top: 17%;
   }
 
@@ -11912,10 +12030,48 @@ input[disabled] {
     margin-top: 7%;
     margin-bottom: 5%;
   }
+
+  footer .subscribe {
+    width: 90%;
+    margin: auto;
+  }
 }
 
 @media (max-width: 768px) {
+  #manage-users {
+    margin-top: 10%;
+  }
+
+  #manage-users .table .btn {
+    width: 150%;
+    margin-bottom: 10%;
+  }
+
+  #manage-users .table > tbody > tr > td {
+    vertical-align: middle;
+    font-size: 16px;
+  }
+
+  #manage-users .table .filter-input {
+    width: 1000%;
+  }
+
+  footer #subscribe-form {
+    width: 80%;
+    margin: auto;
+  }
+
+  footer #subscribe-form .btn {
+    margin-top: 5%;
+  }
+}
+
+@media (max-width: 991.98px) {
   #sidenav {
+    display: none;
+  }
+
+  #test {
     display: none;
   }
 
@@ -11925,7 +12081,11 @@ input[disabled] {
 
   #mobile-nav .navbar {
     z-index: 9999;
-    width: 1000%;
+    width: 100%;
+  }
+
+  #navbarNav {
+    width: 5%;
   }
 
   #mobile-nav .navbar img {
@@ -11944,43 +12104,23 @@ input[disabled] {
     border-bottom: 1px solid #f8f8f8;
   }
 
-  #test {
+  #inbox-display label {
     display: none;
   }
 
-  #manage-users {
-    margin-left: -15%;
-    margin-top: 10%;
+  #inbox-display input {
+    width: 100%;
   }
 
-  #manage-users .table .btn {
-    width: 150%;
+  #inbox-display .filter-messages {
     margin-bottom: 10%;
-  }
-
-  #manage-users .table {
-    width: 120%;
-  }
-
-  #manage-users .table > tbody > tr > td {
-    vertical-align: middle;
-    font-size: 16px;
-  }
-
-  footer #subscribe-form {
-    width: 80%;
-    margin: auto;
-  }
-
-  footer #subscribe-form .btn {
-    margin-top: 5%;
   }
 }
 
 @media (max-width: 1199.98px) {
   #sidenav .option img {
-    height: 30%;
-    width: 30%;
+    height: 25%;
+    width: 25%;
   }
 
   #sidenav .option {
@@ -12037,13 +12177,12 @@ input[disabled] {
   }
 
   #manage-users {
-    margin-left: -10%;
     margin-top: 10%;
   }
 
   #manage-users .table {
-    width: 50%;
-    margin-left: 10%;
+    width: 100%;
+    overflow-x: scroll;
   }
 
   #manage-users .table .btn {
@@ -12054,10 +12193,6 @@ input[disabled] {
   #manage-users .table > tbody > tr > td {
     vertical-align: middle;
     font-size: 16px;
-  }
-
-  #login .btn {
-    width: 71%;
   }
 }
 

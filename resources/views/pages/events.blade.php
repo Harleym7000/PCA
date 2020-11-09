@@ -2,27 +2,34 @@
 @section('content')
 <div id="events">
     <h1>Scheduled Events</h1>
-    <form id="event-search" action="" method="POST">
+    <form id="event-search" action="/events/getByFilters" method="POST">
       @csrf
             <div class="form-row">
               <div class="col-12 col-lg-4">
                   <label>Search Events:</label>
-                <input type="text" class="form-control" placeholder="Search Event">
+                <input type="text" id="search-event" class="form-control" placeholder="Search Event" name="title">
               </div>
               <div class="col-12 col-lg-4">
                 <label>Select Date:</label>
-                <input type="date" class="form-control">
+                <input type="date" id="search-date" class="form-control" name="date">
               </div>
               <div class="col-12 col-lg-4">
                 <label>Select Time:</label>
-                <input type="time" class="form-control">
+                <input type="time" id="event-time" class="form-control" name="time">
               </div>
+                <br>
+            </div>
+            <div class="form-group text-right">
+              <button type="submit" class="btn btn-primary col-12 col-lg-2">
+                Apply filters
+              </button>
             </div>
     </form>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
       @if(count($events) > 0)
             @foreach($events as $event)
         <div class="col mb-4">
+          <div id="upcoming-events">
           <div class="card">
             <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
             <div class="card-body">
@@ -38,6 +45,7 @@
             </div>
           </div>
         </div>
+      </div>
         @endforeach
         @else 
         <p>There are currently no Upcoming Events</p>
@@ -67,10 +75,10 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="forename" class="form-control" value="{{implode('', auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
+                                      <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="surname" class="form-control" value="{{implode('', auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
+                                      <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -78,7 +86,7 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="email" class="form-control" value="{{auth::user()->email}}" placeholder="Email Address">
+                                      <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -86,7 +94,7 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="phone" class="form-control" value="{{implode('', auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
+                                      <input type="text" name="phone" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
                                     </div>
                                   </div>
                               </div>
@@ -146,7 +154,14 @@
 </div>
 @endforeach
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" integrity="sha512-YKERjYviLQ2Pog20KZaG/TXt9OO0Xm5HE1m/OkAEBaKMcIbTH1AwHB4//r58kaUDh5b1BWwOZlnIeo0vOl1SEA==" crossorigin="anonymous"></script>
                           <script>
+                                                  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
                             $(document).ready(function(){
                               $('.eventRegUser').click(function() {
                                 var eventID = $(this).val();
@@ -164,5 +179,5 @@
                                 });
                               });
                             });
-                          </script>
+</script>
         @endsection
