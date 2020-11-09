@@ -38,7 +38,6 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('can:view-policy');
-Route::post('/policy/delete/{filename}', 'Policy')
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('can:view-policy');
 Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
 

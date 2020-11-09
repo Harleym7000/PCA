@@ -49,13 +49,15 @@ success:function(data){
                                 for(var count = 0; count < len; count++) 
                                   {
                                     var userID = data[count].user_id;
+                                    var totalRoles = data[count].role_name;
+                                    console.log(totalRoles);
                                     
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
                                     output += '<tr>';
                                     output += '<td>' + data[count].firstname + ' '+ data[count].surname+'</td>';
                                     output += '<td>' + data[count].email + '</td>';
-                                    output += '<td>'; + data[count].role_name + '</td>';
+                                    output += '<td>' + data[count].role_name + '</td>';
                                     output += "<td id='action-buttons' class='text-right'>";
                                     output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
                                     output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
