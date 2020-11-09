@@ -41,4 +41,18 @@ public function contact()
     {
         return view('pages.contact');
     }
+
+    public function getEventsByFilters(Request $request)
+    {
+        $eventTitle = $request->title;
+        $eventDate = $request->date;
+        $eventTime = $request->time;
+
+        $query = DB::table('events')
+        ->where('title', 'like', '%'.$eventTitle.'%')
+        ->where('date', 'like', '%'.$eventDate.'%')
+        ->where('time', 'like', '%'.$eventTime.'%');
+        $events = $query->get();
+        return view('pages.events')->with('events', $events);
+    }
 }

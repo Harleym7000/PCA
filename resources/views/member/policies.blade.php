@@ -21,16 +21,24 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
+  });
+    </script>
 </head>
 <body>
 
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="policy">
             @include('partials.alerts')
@@ -40,7 +48,7 @@
         @if(count($policies) > 0)
         <div class="card-deck">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="col-12 col-md-6 col-xl-3 mb-4">
         <div class="card">
           <img class="card-img-top" src="/img/833px-PDF_file_icon.svg.png" alt="Card image cap">
           <div class="card-body">

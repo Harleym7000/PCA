@@ -4,6 +4,7 @@
             <div class="card">
             <div class="card-header">Contact Us</div>
         <div id="contact-form">
+          <div class="col-12">
             <form id="contact" action="/contact-submit" method="POST">
               @csrf
                 <div class="form-row">
@@ -42,6 +43,7 @@
             </div>
 </div>
               </form>
+</div>
 </div>
 </div>
 </div>

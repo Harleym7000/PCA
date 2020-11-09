@@ -46,7 +46,12 @@
             $('#cancelprofile').attr('disabled', 'disabled');
             $('#editprofile').removeAttr('disabled');
     });
-});
+
+    $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
+    });
 
 </script>
 
@@ -61,10 +66,10 @@
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
 <div id="profile">
     @include('partials.alerts')
@@ -79,57 +84,57 @@
                       <form action="/user/profile/update" method="POST">
                         @csrf
                         <div class="form-group row">
-                            <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>
+                            <label for="firstname" class="col-12 col-lg-2 col-form-label text-lg-right">First Name:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="firstname" type="text" class="form-control" name="firstname" value="{{$profileInfo->firstname}}" required autofocus disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Surname:</label>
+                            <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Surname:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="surname" type="text" class="form-control" name="surname" value="{{$profileInfo->surname}}" required autofocus disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Address:</label>
+                            <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Address:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="address" type="text" class="form-control" name="address" value="{{$profileInfo->address}}" required autofocus disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="town" class="col-md-2 col-form-label text-md-right">Town:</label>
+                            <label for="town" class="col-12 col-lg-2 col-form-label text-lg-right">Town:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="town" type="text" class="form-control" name="town" value="{{$profileInfo->town}}" required autofocus disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Postcode:</label>
+                            <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Postcode:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="postcode" type="text" class="form-control" name="postcode" value="{{$profileInfo->postcode}}" required autofocus disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-2 col-form-label text-md-right">Telephone:</label>
+                            <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Telephone:</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="tel_no" type="text" class="form-control" name="contact_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
                             </div>
                         </div>
     
                         <div class="form-group row">
-                            <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
+                            <label for="email" class="col-12 col-lg-2 col-form-label text-lg-right">Email</label>
     
-                            <div class="col-9">
+                            <div class="col-12 col-lg-9">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$userEmail}}" required disabled>
     
                                 @error('email')
@@ -139,9 +144,11 @@
                                 @enderror
                             </div>
                         </div>
-                        <button id="editprofile" type="button" class="btn btn-dark" style="margin-right: 67%;">Edit Profile</button>
-                        <button id="cancelprofile" type="button" class="btn btn-danger pull-right" style="margin-right: 2%;" disabled>Cancel</button>
-                        <button id="saveprofile" type="submit" class="btn btn-primary pull-right" disabled>Save</button>
+                        <div class="col-12">
+                        <button id="editprofile" type="button" class="col-12 col-lg-3 btn btn-dark" style="margin-right: 20%;">Edit Profile</button>
+                        <button id="cancelprofile" type="button" class="col-12 col-lg-3 btn btn-danger" style="margin-right: 3%;" disabled>Cancel</button>
+                        <button id="saveprofile" type="submit" class="col-12 col-lg-3 btn btn-primary" disabled>Save</button>
+                    </div>
                     </div>
                 </div>
             </div>

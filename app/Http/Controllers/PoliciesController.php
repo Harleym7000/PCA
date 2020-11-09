@@ -62,16 +62,17 @@ class PoliciesController extends Controller
             if($storeFile) {
                 DB::table('policies')
                 ->insert(['name' => $fileName]);
-            } else {
-                $request->session()->flash('error', 'You can only upload files in pdf format');
-                        return redirect()->back();
-            }
         //print_r($fileName);
     }
 }
+else {
+    $request->session()->flash('error', 'You can only upload files in pdf format');
+            return redirect()->back();
+}
+}
 $request->session()->flash('success', 'Files uploaded successfully');
                     return redirect()->back();
-}
+    }
 
     /**
      * Display the specified resource.

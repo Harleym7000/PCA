@@ -138,12 +138,31 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $event = Event::find($id);
-        $event->delete();
-        return redirect('/event-manager/index');
-    }
+        $eventID = $request->eid;
+
+        $deleteGuestEventRegs = DB::table('guest_event_registrations')
+        ->where('event_id', $eventID)
+        ->delete();
+
+        $deleteUserEventRegs = DB::table('user_event_registrations')
+        ->where('event_id', $eventID)
+        ->delete();
+
+        $deleteEvent = DB::table('events')
+        ->where('id', $eventID)
+        ->delete();
+
+
+        if($deleteEvent) {
+            $request->session()->flash('success', 'The event was deleted successfully');
+            return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error deleting this event. Please try again later');
+            return redirect()->back();
+        }
+        
 
     public function registerEventUser(Request $request) 
     {

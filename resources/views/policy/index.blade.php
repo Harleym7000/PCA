@@ -30,6 +30,11 @@
       //replace the "Choose a file" label
       $('.custom-file-label').html(fileName);
   });
+
+  $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
 });
 </script>
 </head>
@@ -38,10 +43,10 @@
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="policy">
             @include('partials.alerts')
@@ -51,7 +56,7 @@
         @if(count($policies) > 0)
         <div class="row">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card">
           <img class="card-img-top" src="img/pdf.png" alt="Card image cap">
           <div class="card-body">

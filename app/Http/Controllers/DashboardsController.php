@@ -26,7 +26,8 @@ class DashboardsController extends Controller
         $totalUniqueVisits = count($uniqueVisits);
         $contactMessages = DB::table('contacts')->get();
         $totalContactMessages = count($contactMessages);
-        $usersThisMonthQuery = DB::select('SELECT * FROM users WHERE users.created_at >= (NOW() - INTERVAL 1 MONTH)');
+        $date = Carbon::now()->format('Y-m');
+        $usersThisMonthQuery = DB::select("SELECT * FROM users WHERE users.created_at LIKE '%$date%'");
         $usersThisMonth = count($usersThisMonthQuery);
         $title = "Dashboard";
         return view('dashboard.dashboard')->with([

@@ -29,7 +29,7 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(15);
+        $users = User::paginate(10);
         return view('admin.users.index')->with([
             'roles' => $roles,
             'users'=> $users,
@@ -86,7 +86,7 @@ class UsersController extends Controller
         });
             $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(15); 
+        $users = User::paginate(10); 
         $request->session()->flash('success', 'New user created successfully');
         return redirect()->back();
         } else {
@@ -141,7 +141,6 @@ class UsersController extends Controller
     {
         $user->roles()->sync($request->roles);
         $user->causes()->sync($request->causes);
-        $user->email = $request->email;
 
         if($user->save()) {
 
@@ -163,6 +162,10 @@ class UsersController extends Controller
         if(Gate::denies('manage-users')) {
             return redirect('admin.users.index');
         }
+
+        DB::table('user_reg')
+        ->where('user_id', $id)
+        ->delete();
 
         $user = User::find($id);
         $user->roles()->detach();
