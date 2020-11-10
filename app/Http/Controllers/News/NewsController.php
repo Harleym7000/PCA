@@ -60,7 +60,8 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $news = News::find($id);
+        return view('news.edit')->with('news', $news);
     }
 
     /**
@@ -72,7 +73,18 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $news = News::find($id);
+
+        $news->title = $request->title;
+        $news->story = $request->story;
+        $news->image = $request->image;
+
+        if($news->save()) {
+            $request->session()->flash('success', 'The news story was updated successfully');
+                return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error updating the news story');
+                return redirect()->back();
     }
 
     /**

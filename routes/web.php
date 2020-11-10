@@ -39,10 +39,7 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('can:view-policy');
-<<<<<<< HEAD
-=======
 Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:view-policy');
->>>>>>> dbc3ac08fd8313990d5c8eac425d3e34b7104513
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('can:view-policy');
 Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
 
@@ -75,6 +72,7 @@ Route::delete('cancel_reg/{id}', [
 Route::namespace('News')->prefix('news')->name('news.')->middleware('can:manage-news')->group(function(){
 Route::get('/index', 'NewsController@index');
 Route::get('/edit/{id}', 'NewsController@edit')->name('edit-news');
+Route::put('/edit/{id}', 'NewsController@update')->name('news-update');
 Route::get('/create', 'NewsController@create');
 Route::post('/create', 'NewsController@store');
 });

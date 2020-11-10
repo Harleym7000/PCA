@@ -100,10 +100,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          {!! Form::open(['action' => ['NewsController@destroy', $newsstory->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
-          {{Form::hidden('_method', 'DELETE')}}
-          {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-          {!!Form::close()!!}
+          
         </div>
       </div>
     </div>

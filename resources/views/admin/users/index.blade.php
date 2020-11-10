@@ -48,12 +48,7 @@ success:function(data){
                                 for(var count = 0; count < len; count++) 
                                   {
                                     var userID = data[count].user_id;
-<<<<<<< HEAD
-                                    var totalRoles = data[count].role_name;
-                                    console.log(totalRoles);
-=======
                                     console.log(data[count].role_name);
->>>>>>> dbc3ac08fd8313990d5c8eac425d3e34b7104513
                                     
                                     //console.log("User ID:" +userID);
                                     if(userID == userID)
