@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\SendMail;
 
 class UsersController extends Controller
@@ -218,6 +219,12 @@ class UsersController extends Controller
     public function resetUserPassword(Request $request, User $user) {
 
         $user = auth()->user();
+        $oldPass = $request->current_password;
+        //dd($oldPass);
+        $validatePass = Hash::check($oldPass, $user->password);
+
+        if($validatePass) {
+
         $pass = $request->input('password');
         $passConf = $request->input('passwordCon');
 
@@ -231,7 +238,10 @@ class UsersController extends Controller
         } else {
             $request->session()->flash('error', 'Your passwords did not match. Please try again');
         }
-        return view('admin.users.resetPass');
+    } else {
+        $request->session()->flash('error', 'Your current password is incorrect. Please try again');
+    }
+        return redirect()->back();
     }
 
     public function getUserCauses(Request $request) 

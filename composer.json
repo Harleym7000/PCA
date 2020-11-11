@@ -16,13 +16,12 @@
         "fruitcake/laravel-cors": "^1.0",
         "google/recaptcha": "^1.2",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^7.28.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "santigarcor/laratrust": "^6.1",
-        "unisharp/laravel-ckeditor": "^4.7"
+        "santigarcor/laratrust": "^6.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

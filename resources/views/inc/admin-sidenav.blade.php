@@ -86,7 +86,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_article_white_18dp.png">
-          <a class="nav-link" href="/news/index">Manage News</a>
+          <a class="nav-link" href="/news/index">My News Stories</a>
         </div>
         </li>
         <li class="nav-item">
@@ -355,10 +355,10 @@
           <img class="d-block mx-auto mx-xl-0" src="/img/baseline_article_white_18dp.png">
           </div>
           <div class="col-9 my-auto">
-          <span>Manage News</span>
+          <span>My News Stories</span>
           </div>
       </div>
-      <h5 class="label">Manage News</h5>
+      <h5 class="label">My News Stories</h5>
       </div></a>
       <div class="divider">
       </div>

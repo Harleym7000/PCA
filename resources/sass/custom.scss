@@ -960,6 +960,10 @@ body {
 
   @media (max-width: 425px) { 
 
+    table.mceLayout, textarea.tox-tinymce {
+      width: 80% !important;
+  }
+
     .g-recaptcha {
       transform:scale(0.57);
       transform-origin:0 0;

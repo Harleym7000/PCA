@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\News;
 
@@ -15,7 +16,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::paginate(8);
+        $userID = Auth::user()->id;
+        $news = DB::table('news')->
+        join('users', 'news.author_id', '=', 'users.id')
+        ->join('profiles', 'profiles.user_id', '=', 'users.id')
+        ->where('users.id', $userID)
+        ->select('news.*', 'profiles.firstname', 'profiles.surname')->paginate(8);
         return view('news.index')->with('news', $news);
     }
 
@@ -26,7 +32,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('news.create');
     }
 
     /**
@@ -37,7 +43,30 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->hasFile('image')) {
+            //dd('yes');
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $request->file('image')->storeAs('public/news_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'cleanup.jpg';
+        }
+
+        $authorID = Auth::user()->id;
+        $news = new News;
+        $news->title = $request->input('headline');
+        $news->story = $request->input('story');
+        $news->image = $filenameToStore;
+        $news->author_id = $authorID;
+
+        if($news->save()) {
+            $request->session()->flash('success', 'The news story was published successfully');
+            return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error publishing this news story. Please try again later');
+            return redirect()->back();
     }
 
     /**
@@ -93,8 +122,18 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $news = $request->id;
+        $delete = DB::table('news')
+        ->where('id', $news)
+        ->delete();
+
+        if($delete) {
+            $request->session()->flash('success', 'The news story was deleted successfully');
+                return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error deleting the news story');
+                return redirect()->back();
     }
 }

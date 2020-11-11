@@ -27,7 +27,7 @@
 @if(count($news) > 0)
 @foreach($news as $story)
             <div class="media">
-              <img class="media-object mr-3 img-responsive" src="/storage/news-images/{{$story->image}}" alt="Generic placeholder image">
+              <img class="media-object mr-3 img-responsive" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image">
               <div class="media-body">
                 <a href="/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>

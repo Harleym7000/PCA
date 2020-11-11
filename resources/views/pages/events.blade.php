@@ -2,7 +2,7 @@
 @section('content')
 <div id="events">
     <h1>Scheduled Events</h1>
-    <form id="event-search" action="/events/getByFilters" method="POST">
+    <form id="event-search" action="/events" method="POST">
       @csrf
             <div class="form-row">
               <div class="col-12 col-lg-4">

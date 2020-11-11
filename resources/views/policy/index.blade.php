@@ -80,8 +80,9 @@
             @csrf
             <div class="form-group row">
               <div class="col-10">
-              <input type="file" class="custom-file-input" id="customFile" name="file[]" multiple>
-              <label class="custom-file-label" for="customFile">Choose file</label>
+              <div class="form-group">
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file[]" multiple>
+  </div>
             </div>
             <br>
             <div class="col-2">

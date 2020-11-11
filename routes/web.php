@@ -24,7 +24,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
 Route::get('/events', 'PagesController@events');
-Route::post('/events/getByFilters', 'PagesController@getEventsByFilters');
+Route::post('/events', 'PagesController@getEventsByFilters');
 Route::post('/events/register/guest', 'Events\EventsController@register');
 Route::post('/events/register', 'Events\EventsController@registerEventUser');
 Route::get('/contact-us', 'PagesController@contact');
@@ -75,6 +75,7 @@ Route::get('/edit/{id}', 'NewsController@edit')->name('edit-news');
 Route::put('/edit/{id}', 'NewsController@update')->name('news-update');
 Route::get('/create', 'NewsController@create');
 Route::post('/create', 'NewsController@store');
+Route::post('/delete', 'NewsController@destroy');
 });
 
 //Admin links

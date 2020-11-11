@@ -2164,6 +2164,11 @@ pre code {
   opacity: 1;
 }
 
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11847,6 +11852,11 @@ input[disabled] {
 }
 
 @media (max-width: 425px) {
+  table.mceLayout,
+  textarea.tox-tinymce {
+    width: 80% !important;
+  }
+
   .g-recaptcha {
     transform: scale(0.57);
     transform-origin: 0 0;
