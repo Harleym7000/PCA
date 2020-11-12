@@ -8,7 +8,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_leaderboard_white_18dp.png">
-          <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+          <a class="nav-link" href="/dashboard">Dashboard</a>
         </div>
         </li>
         <li class="nav-item">
@@ -127,7 +127,7 @@
       </div>
           </div>
         </div>
-        @canany(['manage-users', 'manage-events', 'manage-news'])
+        @if(auth()->user()->hasRole('Admin')))
           <h5 class="section">Dashboard</h5>
           <div class="divider">
           </div>
@@ -146,7 +146,26 @@
           </div>
           <br>
           <br>
-          @endcanany
+          @elseif(auth()->user()->hasRole('Event Manager')))
+          <h5 class="section">Dashboard</h5>
+          <div class="divider">
+          </div>
+          <a href="/events/dashboard"><div class="option">
+            <div class="row no-gutters">
+                <div class="col-xl-3 my-auto">
+                <img class="d-block mx-auto mx-xl-0" src="/img/baseline_leaderboard_white_18dp.png">
+                </div>
+                <div class="col-9 my-auto">
+                <span>Dashboard</span>
+                </div>
+            </div>
+            <h5 class="label">Dashboard</h5>
+          </div></a>
+          <div class="divider">
+          </div>
+          <br>
+          <br>
+          @endif
           <h5 class="section">My Profile</h5>
           <div class="divider">
           </div>

@@ -161,13 +161,18 @@ success:function(response){
         <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="dashboard">
+            @can('manage-users')
             <ul class="nav nav-tabs">
+              @can('manage-users')
               <li class="nav-item">
                 <a class="nav-link active" href="/admin/dashboard">Admin</a>
               </li>
+              @endcan
+              @can('manage-events')
               <li class="nav-item">
                 <a class="nav-link" href="/events/dashboard">Events</a>
               </li>
+              @endcan
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
@@ -237,6 +242,7 @@ success:function(response){
                     </div>
                   </div>
                 </div>
+                @endcan
               <h3 class="info-header text-center">More coming soon</h3>
           </div>
           </div>

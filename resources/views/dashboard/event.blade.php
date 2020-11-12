@@ -35,12 +35,16 @@
           @include('inc.admin-nav')
           <div id="dashboard">
             <ul class="nav nav-tabs">
+              @can('manage-users')
               <li class="nav-item">
                 <a class="nav-link" href="/admin/dashboard">Admin</a>
               </li>
+              @endcan
+              @can('manage-events')
               <li class="nav-item">
                 <a class="nav-link active" href="/events/dashboard">Events</a>
               </li>
+              @endcan
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
@@ -49,54 +53,56 @@
               </li>
             </ul>
             <h1>Dashboard</h1>
-            <div class="row justify-content-center">
-                <div class="col-11">
-                      <div class="card-deck">
-                        <div class="card text-white bg-primary ">
-                          <div class="card-body ">
-                            <div class="row">
-                              <div class="widget-img col-4">
-                                <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
-                              </div>
-                              <div class="col-8">
-                                <h1 class="text-center"><strong><span class="total"></span></strong> <br>Site Visits</h1>
-                              </div>
-                            </div>
+              <div class="content col-12">
+                <div class="row justify-content-center">
+                  <div class="card col-12 col-xl-3 text-white bg-primary">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 col-lg-7" style="height: 98%; margin:auto">
+                      <img src="/img/baseline_visibility_white_18dp.png">
                         </div>
-                        </div>
-                        <div class="card text-white bg-success ">
-                          <div class="card-body ">
-                            <div class="row">
-                              <div class="widget-img col-4">
-                                <img src="/img/baseline_people_alt_white_18dp.png" class="img-fluid">
-                              </div>
-                              <div class="col-8">
-                                <h1 class="text-center"><strong><span class="total"></span></strong> <br>Committee Members</h1>
-                              </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="card text-white bg-danger">
-                          <div class="card-body ">
-                            <div class="row">
-                              <div class="widget-img col-4">
-                                <img src="/img/baseline_visibility_white_18dp.png" class="img-fluid">
-                              </div>
-                              <div class="col-8">
-                                <h1 class="text-center"><strong><span class="total"></span></strong> <br>Total Users</h1>
-                              </div>
-                            </div>
-                        </div>
-                        </div>
+                        <div class="col-12 col-lg-5">
+                      <h1 class="card-text text-right">3
+                        <p class="card-text text-right">Site Visits</p>
                       </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card col-12 col-xl-3 text-white bg-success">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 col-lg-5" style="height: 98%; margin:auto">
+                      <img src="/img/baseline_people_alt_white_18dp.png">
+                        </div>
+                        <div class="col-12 col-lg-7">
+                      <h1 class="card-text">3
+                        <p class="card-text">Members</p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card col-12 col-xl-3 text-white bg-danger">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-6" style="height: 98%; margin:auto">
+                      <img src="/img/baseline_person_add_alt_1_white_18dp.png">
+                        </div>
+                        <div class="col-6">
+                      <h1 class="card-text">+3
+                        <p class="card-text">This Month</p>
+                      </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
           </div>
         </div>
       </div>
-  </div>
-  </body>
+    </div>
+</div>
+</body>
+</html>
             
 
                   

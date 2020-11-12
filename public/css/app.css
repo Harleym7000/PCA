@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11332,7 +11327,7 @@ body {
   background-color: #252525;
   width: auto;
   min-height: 100vh;
-  max-height: 120vh;
+  max-height: auto;
   overflow-y: scroll;
   overflow-x: hidden;
 }

@@ -81,7 +81,7 @@ Route::post('/delete', 'NewsController@destroy');
 //Admin links
 Route::get('/admin/contact', 'ContactController@index')->middleware('can:manage-users');
 Route::get('/admin/userstest', 'Admin\UsersController@brdindex')->middleware('can:manage-users');
-Route::get('/admin/dashboard', 'DashboardsController@admin')->middleware('can:manage-users');
+Route::get('/admin/dashboard', 'DashboardsController@admin');
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('can:manage-users');
 Route::post('/policy/upload', 'PoliciesController@store')->middleware('can:manage-users');
 Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile')->middleware('can:manage-users');
