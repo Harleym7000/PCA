@@ -140,6 +140,7 @@ $('tbody').html(output);
     <div class="content-holder col-12 col-lg-10">
       @include('inc.admin-nav')
       <div id="manage-events">
+        @include('partials.alerts')
         <div class="row justify-content-center">
                 <div class="table-responsive">
                     <table class="table table-striped" id="user-table">

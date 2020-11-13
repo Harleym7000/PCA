@@ -51,9 +51,8 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
     Route::put('/edit/{id}', 'EventsController@update');
     Route::get('/create', 'EventsController@create');
     Route::post('/create', 'EventsController@store');
+    Route::post('/delete', 'EventsController@destroy');
 });
-
-Route::post('/events/delete', 'Events\EventsController@destory');
 
 // Route::get('/events/dashboard', 'DashboardsController@events');
 
