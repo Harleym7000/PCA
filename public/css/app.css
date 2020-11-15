@@ -11333,8 +11333,6 @@ body {
   width: auto;
   min-height: 100vh;
   max-height: auto;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #sidenav .logo {
@@ -11397,26 +11395,6 @@ body {
   display: none;
 }
 
-#sidenav::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 3px grey;
-  border-radius: 3px;
-  max-height: 30px;
-  overflow-y: scroll;
-}
-
-#sidenav::-webkit-scrollbar {
-  background: #252525;
-  border-radius: 3px;
-  width: 12px;
-  max-height: 30px;
-  overflow-y: scroll;
-}
-
-#sidenav::-webkit-scrollbar-thumb {
-  background: #3490dc;
-  border-radius: 3px;
-}
-
 #test {
   width: 100%;
   background-color: #fff;
@@ -11426,6 +11404,10 @@ body {
 #test .navbar {
   background: #fff !important;
   border-bottom: 3px solid #d3d3d3;
+}
+
+#members .welcome {
+  margin-left: 8%;
 }
 
 #dashboard {
