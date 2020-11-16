@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,10 @@ class MemberController extends Controller
     
     public function index() 
     {
-    return view('member.index');
+        $events = Event::all();
+    return view('member.index')->with([
+        'events' => $events 
+        ]);
     }
 
     public function viewPolicies()
