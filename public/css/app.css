@@ -2164,11 +2164,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11331,8 +11326,7 @@ body {
 #sidenav {
   background-color: #252525;
   width: auto;
-  min-height: 100vh;
-  max-height: auto;
+  min-height: 100%;
 }
 
 #sidenav .logo {
@@ -11404,10 +11398,6 @@ body {
 #test .navbar {
   background: #fff !important;
   border-bottom: 3px solid #d3d3d3;
-}
-
-#members .welcome {
-  margin-left: 8%;
 }
 
 #dashboard {
