@@ -342,10 +342,10 @@
             <img class="d-block mx-auto mx-xl-0" src="/img/baseline_people_alt_white_18dp.png">
             </div>
             <div class="col-9 my-auto">
-            <span>My Committies</span>
+            <span>My Committees</span>
             </div>
         </div>
-        <h5 class="label">My Committies</h5>
+        <h5 class="label">My Committees</h5>
         </div></a>
         <div class="divider">
         </div>
