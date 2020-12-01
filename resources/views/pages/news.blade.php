@@ -31,7 +31,7 @@
               <div class="media-body">
                 <a href="/news/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
-                <p>{{$story->story}}</p>
+                {!! $story->story !!}
                 <p>Written on: {{$story->created_at}}</p>
               </div>
             </div>
