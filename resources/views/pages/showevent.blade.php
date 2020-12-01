@@ -1,61 +1,61 @@
 @extends('layouts.app')
 @section('content')
-<div id="events">
-    <h1>Scheduled Events</h1>
-    <form id="event-search" action="/events" method="POST">
-      @csrf
-            <div class="form-row">
-              <div class="col-12 col-lg-4">
-                  <label>Search Events:</label>
-                <input type="text" id="search-event" class="form-control" placeholder="Search Event" name="title">
-              </div>
-              <div class="col-12 col-lg-4">
-                <label>Select Date:</label>
-                <input type="date" id="search-date" class="form-control" name="date">
-              </div>
-              <div class="col-12 col-lg-4">
-                <label>Select Time:</label>
-                <input type="time" id="event-time" class="form-control" name="time">
-              </div>
-                <br>
-            </div>
-            <div class="form-group text-right">
-              <button type="submit" class="btn btn-primary col-12 col-lg-2">
-                Apply filters
-              </button>
-            </div>
-    </form>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
-      @if(count($events) > 0)
-            @foreach($events as $event)
-        <div class="col mb-4">
-          <div id="upcoming-events">
-          <div class="card">
-            <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h1 class="card-title">{{$event->title}}</h1>
-              <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
-                  <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
-              <div class="row">
-                <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
-                <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}" data-backdrop="static">
-                  Register
-                </button>
+<div id="show-event">
+    @foreach($events as $event)
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach($images as $i)
+          <div class="carousel-item @if ($loop->first) active @endif">
+              <img src="/img/{{$i->image}}" class="d-block w-100">
           </div>
-            </div>
-          </div>
+          @endforeach
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
       </div>
-        @endforeach
-        @else 
-        <p>There are currently no Upcoming Events</p>
-        @endif
-          </div>
+</div>
+@endforeach
+    <div class="show-event-title">
+      @foreach($events as $event)
+      <h1 class="text-center">{{$event->title}}</h1>
+      <h4 class="text-center">{{$event->description}}</h4>
     </div>
-        </div>
+    <div class="show-event-info">
+      <div class="row">
+          <div class="col-1"></div>
+          <div class="col-3">
+              <img src="/img/cleanup.jpg" style="height: 330px; width:auto;">
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5">
+            <h3> <strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}}</h3>
+            <br>
+            <h3> <strong>Time:</strong> {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
+            <br>
+            <h3> <strong>Venue:</strong> {{$event->venue}}</h3>
+            <br>
+            <h3> <strong>Organiser:</strong> {{$event->managed_by}}</h3>
+            <br> 
+            <h3><strong>Admission:</strong>@if($event->admission == 0) Free @else @money ($event->admission)@endif</h3>
+            <br>
+            <h3 @if($event->spaces_left > 0) style="color: green" @else style="color: red" @endif><strong>Spaces Left:</strong> {{$event->spaces_left}}</h3>
+          </div>
+          <div class="col-1"></div>
+      </div>
+      <div class="text-center">
+      <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#event{{$event->id}}" @if($event->spaces_left == 0) disabled data-toggle="tooltip" data-placement="bottom" title="This event is full" style="cursor: not-allowed;" @endif>Register</button>
+    </div>
+</div>
+</div>
         <!-- Modal -->
 
-@foreach($events as $event)
+
 <div class="modal fade" id="event{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -75,10 +75,10 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name" required>
+                                      <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name" required>
+                                      <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -86,7 +86,7 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address" required>
+                                      <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -119,20 +119,10 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="forename" class="form-control @error('forename') is-invalid @enderror" placeholder="First name" required>
-              @error('forename')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+              <input type="text" name="forename" class="form-control" placeholder="First name">
             </div>
             <div class="col">
-              <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror" placeholder="Last name" required>
-              @error('surname')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+              <input type="text" name="surname" class="form-control" placeholder="Last name">
             </div>
           </div>
           <div class="form-row">
@@ -140,12 +130,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" required>
-              @error('email')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+              <input type="text" name="email" class="form-control" placeholder="Email Address">
             </div>
           </div>
           <div class="form-row">
@@ -153,23 +138,9 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Contact Number">
-              @error('phone')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-          @enderror
+              <input type="text" name="phone" class="form-control" placeholder="Contact Number">
             </div>
           </div>
-          <br>
-<div class="form-row">
-                  <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
-                  @error('recaptcha')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-</div>
       </div>
       <input type="hidden" name="eventID" value="{{$event->id}}">
       <div class="modal-footer">
@@ -192,6 +163,10 @@
 });
 
                             $(document).ready(function(){
+                                $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
                               $('.eventRegUser').click(function() {
                                 var eventID = $(this).val();
                                 var userID = $('#userRegID').val();
@@ -209,4 +184,11 @@
                               });
                             });
 </script>
+
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel();
+    }); 
+    </script>
+
         @endsection

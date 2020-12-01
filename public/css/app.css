@@ -10960,7 +10960,7 @@ body {
 
 .box {
   position: relative;
-  background-image: url("/img/IMG_20200112_145356.jpg");
+  background-image: url("/img/IMG_20200112_145400.jpg");
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -11168,6 +11168,25 @@ body {
   margin: auto;
   margin-top: 5%;
   margin-bottom: 5%;
+}
+
+.show-event-title {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: #252525;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+}
+
+.show-event-info {
+  margin-top: 3%;
+}
+
+.show-event-info .btn {
+  width: 40%;
+  margin-top: 5%;
+  font-size: 28px;
+  margin-bottom: 3%;
 }
 
 #event-search {
@@ -11670,6 +11689,12 @@ body {
 
 .table-resposnive {
   max-height: 30px;
+}
+
+.carousel-inner img {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+  height: 450px;
 }
 
 #policy {

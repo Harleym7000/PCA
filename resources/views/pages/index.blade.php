@@ -16,7 +16,7 @@
                   @foreach($events as $event)
             <div class="col mb-4">
               <div class="card">
-                <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}">
                 <div class="card-body">
                   <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
@@ -43,7 +43,7 @@
             <div class="media">
               <img class="media-object mr-3 img-responsive" src="img/cleanup.jpg" alt="Generic placeholder image" >
               <div class="media-body">
-                <a href="/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
+                <a href="/news/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
                 <p>{{$story->story}}</p>
                 <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y  H:i:s')}}</p>
@@ -78,10 +78,10 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
+              <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name" required>
             </div>
             <div class="col">
-              <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
+              <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name" required>
             </div>
           </div>
           <div class="form-row">
@@ -89,7 +89,7 @@
           </div>
           <div class="form-row">
             <div class="col">
-              <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address">
+              <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" placeholder="Email Address" required>
             </div>
           </div>
           <div class="form-row">
@@ -115,34 +115,63 @@
 @endauth
 @guest
 <form action="/events/register/guest" method="POST">
-@csrf 
+  @csrf 
 <div class="form-row">
-<label class="col">First Name:</label>
-<label class="col">Surname:</label>
-</div>
-<div class="form-row">
-<div class="col">
-<input type="text" name="forename" class="form-control" placeholder="First name">
-</div>
-<div class="col">
-<input type="text" name="surname" class="form-control" placeholder="Last name">
-</div>
+  <label class="col">First Name:</label>
+  <label class="col">Surname:</label>
 </div>
 <div class="form-row">
-<label class="col">Email Address:</label>
+  <div class="col">
+    <input type="text" name="forename" class="form-control @error('forename') is-invalid @enderror" placeholder="First name" required>
+    @error('forename')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+  </div>
+  <div class="col">
+    <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror" placeholder="Last name" required>
+    @error('surname')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+  </div>
 </div>
 <div class="form-row">
-<div class="col">
-<input type="text" name="email" class="form-control" placeholder="Email Address">
-</div>
+  <label class="col">Email Address:</label>
 </div>
 <div class="form-row">
-<label class="col">Contact Number:</label>
+  <div class="col">
+    <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Address" required>
+    @error('email')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+  </div>
 </div>
 <div class="form-row">
-<div class="col">
-<input type="text" name="phone" class="form-control" placeholder="Contact Number">
+  <label class="col">Contact Number:</label>
 </div>
+<div class="form-row">
+  <div class="col">
+    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Contact Number">
+    @error('phone')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
+  </div>
+</div>
+<br>
+<div class="form-row">
+        <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
+        @error('recaptcha')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
 </div>
 </div>
 <input type="hidden" name="eventID" value="{{$event->id}}">

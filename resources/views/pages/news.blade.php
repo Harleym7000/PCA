@@ -29,7 +29,7 @@
             <div class="media">
               <img class="media-object mr-3 img-responsive" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image">
               <div class="media-body">
-                <a href="/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
+                <a href="/news/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
                 <p>{{$story->story}}</p>
                 <p>Written on: {{$story->created_at}}</p>

@@ -20,16 +20,21 @@ use Illuminate\Support\Facades\Mail;
 
 
 //Front-end links
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PagesController@index')->name('home');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
+Route::get('/news/{id}', 'PagesController@showNewsStory');
 Route::get('/events', 'PagesController@events');
+Route::get('/event/{id}', 'PagesController@showEvent');
 Route::post('/events', 'PagesController@getEventsByFilters');
-Route::post('/events/register/guest', 'Events\EventsController@register');
+Route::post('/events/register/guest', 'MailSend@registerEventGuest');
 Route::post('/events/register', 'Events\EventsController@registerEventUser');
 Route::get('/contact-us', 'PagesController@contact');
 Route::post('/contact-submit', 'MailSend@contact_us');
 Route::post('/subscribe', 'MailSend@subscribe');
+Route::get('sub/verify/{token?}', 'MailSend@verified');
+Route::get('event/verify/{token?}', 'MailSend@eventVerified');
+Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
 
 //Auth Routes
 Auth::routes(['verify' => true]);
@@ -63,6 +68,8 @@ Route::post('/user/profile/update', 'AccountsController@updateProfile')->middlew
 Route::get('/user/settings', 'AccountsController@settings')->middleware('auth');
 Route::get('/user/events', 'AccountsController@events')->middleware('auth');
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
+Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('auth');
+Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('auth')->name('user.committees.update');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ])->middleware('auth');

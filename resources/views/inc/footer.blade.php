@@ -104,8 +104,9 @@
     </li>
   </ul>
   <div id="subscribe-form">
-    <form action="" method="POST">
-        <input class="form-control col-9" type="text" placeholder="Enter email address...">
+    <form action="/subscribe" method="POST">
+      @csrf
+        <input class="form-control col-9" type="email" placeholder="Enter email address..." name="sub_email">
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary col-9">Subscribe</button>
       </div>

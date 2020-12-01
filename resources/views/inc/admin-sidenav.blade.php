@@ -336,7 +336,7 @@
       </div></a>
       <div class="divider">
       </div>
-      <a href="/user/events"><div class="option">
+      <a href="/user/committees/{{Auth::user()->id}}"><div class="option">
         <div class="row no-gutters">
           <div class="col-xl-3 my-auto">
             <img class="d-block mx-auto mx-xl-0" src="/img/baseline_people_alt_white_18dp.png">

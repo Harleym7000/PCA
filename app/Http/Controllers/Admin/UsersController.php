@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\Cause;
+use App\Rules\Script_Validation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -60,6 +61,17 @@ class UsersController extends Controller
      */
     public function store(Request $request, User $user)
     {
+        $passwords = $request->password.' '.$request->passwordCon;
+        //dd($passwords);
+        $validatedData = $request->validate([
+            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],
+            'roles' => 'required'
+        ],
+        $messages = [
+            'email.unique' => 'A user with the email address '.$request->email.' already exists',
+            'roles.required' => 'Please select at least one role'
+            ]);
+
         $user = new User;
         $user->email = $request->input('email');
         $userPass = $request->input('password');
@@ -141,7 +153,6 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
-        $user->causes()->sync($request->causes);
 
         if($user->save()) {
 
@@ -255,5 +266,20 @@ class UsersController extends Controller
         $result = $query->get();
 
         return response()->json($result);
+    }
+
+    public function updateUserCauses(Request $request, $id)
+    {
+        $causes = $request->causes;
+        $user = User::find($id);
+        $user->causes()->sync($causes);
+
+        if($user->save()) {
+
+        $request->session()->flash('success', 'Your committees have been updated successfully');
+        } else {
+            $request->session()->flash('error', 'There was an error updating your committees');
+        }
+        return redirect()->back();
     }
 }

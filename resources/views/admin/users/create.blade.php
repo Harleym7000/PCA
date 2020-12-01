@@ -49,42 +49,56 @@
                       <form action="{{ action('Admin\UsersController@store') }}" method="POST">
                         @csrf   
                         <div class="form-group row">
-                            <label for="email" class="col-12 col-form-label">Email</label>
+                            <label for="email" class="col-12 col-form-label">Email: <span class="asterisk">*</span></label>
     
                             <div class="col-12">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
     
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
+                                        <strong>{{$message}}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-12 col-form-label">Password</label>
+                            <label for="password" class="col-12 col-form-label">Password: <span class="asterisk">*</span></label>
     
                             <div class="col-12">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="passwordCon" class="col-12 col-form-label">Confirm Password</label>
+                            <label for="passwordCon" class="col-12 col-form-label">Confirm Password: <span class="asterisk">*</span></label>
     
                             <div class="col-12">
-                                <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
+                                <input id="passwordCon" type="password" class="form-control @error('passwordCon') is-invalid @enderror" name="passwordCon" required>
+                                @error('passwordCon')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="roles" class="col-form-label">Roles</label>
-    
+                            <label for="roles" class="col-form-label">Roles <span class="asterisk">*</span> <br>(Please select at least one)</label>
                             <div class="col-12">
                         @foreach ($roles as $role)
                             <div class="form-check">
-                              <input type="checkbox" name="roles[]" value="{{ $role->id }}">
+                              <input type="checkbox" name="roles[]" value="{{ $role->id }}" class="@error('roles') is-invalid @enderror">
+                              @error('roles')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                @enderror
                               <label>{{ $role->name }}</label>
                             </div>
                         @endforeach

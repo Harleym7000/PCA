@@ -76,16 +76,20 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'email' => ['required', 'unique:users', 'email', 'max:255', new Script_Validation],
+            'recaptcha' => 'required',
+            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],
             'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
             'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation],
-            'agree' => ['accepted', 'required']
+            'agree' => 'required|in:1'
         ],
         $messages = [
             'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
             'password.confirmed' => 'Passwords do not match',
-            'email.unique' => 'A user with the email address '.$request->email.' already exists'
-        ]);
+            'password_confirmation.required' => 'Passwords do not match',
+            'email.unique' => 'A user with the email address '.$request->email.' already exists',
+            'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
+            'recaptcha.required' => 'Please complete the recaptcha validation'
+            ]);
 
         $userpass = request('password');
         $userconfpass = request('password_confirmation');

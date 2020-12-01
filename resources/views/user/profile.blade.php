@@ -87,7 +87,12 @@
                             <label for="firstname" class="col-12 col-lg-2 col-form-label text-lg-right">First Name:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="firstname" type="text" class="form-control" name="firstname" value="{{$profileInfo->firstname}}" required autofocus disabled>
+                                <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{$profileInfo->firstname}}" required autofocus disabled>
+                                @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -95,7 +100,12 @@
                             <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Surname:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="surname" type="text" class="form-control" name="surname" value="{{$profileInfo->surname}}" required autofocus disabled>
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{$profileInfo->surname}}" required autofocus disabled>
+                                @error('surname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -103,7 +113,12 @@
                             <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Address:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="address" type="text" class="form-control" name="address" value="{{$profileInfo->address}}" required autofocus disabled>
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$profileInfo->address}}" required autofocus disabled>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -111,7 +126,12 @@
                             <label for="town" class="col-12 col-lg-2 col-form-label text-lg-right">Town:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="town" type="text" class="form-control" name="town" value="{{$profileInfo->town}}" required autofocus disabled>
+                                <input id="town" type="text" class="form-control @error('town') is-invalid @enderror" name="town" value="{{$profileInfo->town}}" required autofocus disabled>
+                                @error('town')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -119,7 +139,12 @@
                             <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Postcode:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="postcode" type="text" class="form-control" name="postcode" value="{{$profileInfo->postcode}}" required autofocus disabled>
+                                <input id="postcode" type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" value="{{$profileInfo->postcode}}" required autofocus disabled>
+                                @error('postcode')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -127,7 +152,12 @@
                             <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Telephone:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="tel_no" type="text" class="form-control" name="contact_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
+                                <input id="tel_no" type="text" class="form-control @error('tel_no') is-invalid @enderror" name="contact_no" value="{{$profileInfo->contact_no}}" autofocus disabled>
+                                @error('tel_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
     
@@ -139,7 +169,7 @@
     
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>

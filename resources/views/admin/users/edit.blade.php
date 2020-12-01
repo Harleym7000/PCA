@@ -62,8 +62,15 @@
                     @endforeach
                     </div>
                 </div>
+                <div class="row">
+                  <div class="col-10">
+                <a href="/admin/users"><button type="button" class="btn btn-secondary">Cancel</button></a>
+              </div>
+              <div class="col-2">
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+                  </div>
                   </div>
                 </div>
             </div>

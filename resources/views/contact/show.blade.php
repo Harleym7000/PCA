@@ -56,7 +56,7 @@
             <br>
             @if(count($response) > 0)
             @foreach($response as $r)
-            <strong><p>{{implode('', auth::user()->profile()->pluck('firstname')->toArray())}} {{implode('', auth::user()->profile()->pluck('surname')->toArray())}} ({{Auth::user()->email}})</p></strong>
+            <strong><p>{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}} {{implode('', Auth::user()->profile()->pluck('surname')->toArray())}} ({{Auth::user()->email}})</p></strong>
             <h4>{{$r->response}}</h4>
               @endforeach
             
@@ -71,8 +71,15 @@
               <br>
               <input type="hidden" value="{{$m->email}}" name="from">
               <input type="hidden" value="{{$m->subject}}" name="subject">
+              <div class="row">
+                <div class="col-10">
+                  <a href="/admin/contact"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                </div>
+                <div class="col-2">
               <div class="form-group text-right">
               <button type="submit" class="btn btn-primary">Reply</button>
+            </div>
+            </div>
             </div>
           </div>
             </form>

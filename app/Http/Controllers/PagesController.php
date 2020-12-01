@@ -55,4 +55,31 @@ public function contact()
         $events = $query->get();
         return view('pages.events')->with('events', $events);
     }
+
+    public function showEvent($id)
+    {
+        $events = DB::table('events')
+        ->where('id',$id)
+        ->get();
+
+        $images = DB::table('event_images')
+        ->where('event_id', $id)
+        ->get();
+
+        return view('pages.showevent')->with([
+            'events' => $events,
+            'images' => $images
+            ]);
+    }
+
+    public function showNewsStory($id)
+    {
+        
+        $news = DB::table('news')
+        ->where('id', $id)
+        ->get();
+        //dd($news);
+
+        return view('pages.shownews')->with(['news' => $news]);
+    }
 }

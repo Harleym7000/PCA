@@ -81,7 +81,14 @@
             <div class="form-group row">
               <div class="col-10">
               <div class="form-group">
-    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file[]" multiple>
+                <div class="form-control">
+    <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple>
+  </div>
+    @error('file')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
   </div>
             </div>
             <br>

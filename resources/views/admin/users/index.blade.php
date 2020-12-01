@@ -30,6 +30,9 @@
 });
                       
                         $(document).ready(function(){
+                          $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
 
                           $('#user-search').on('keyup',function(){
                             var value = $('#user-search').val();
@@ -57,9 +60,9 @@ success:function(data){
                                     output += '<td>' + data[count].email + '</td>';
                                     output += '<td>' + data[count].role_name + '</td>';
                                     output += "<td id='action-buttons' class='text-right'>";
-                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
-                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
+                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'><img src='/img/baseline_visibility_white_18dp.png'></button>";
+                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'><img src='/img/baseline_create_white_18dp.png'></button></a>";
+                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'><img src='/img/baseline_delete_white_18dp.png'></button>";
                                     output += "</td>";
                                     output += '</tr>';
                                     
@@ -99,9 +102,9 @@ $('tbody').html(output);
                                     output += '<td>' + data[count].email + '</td>';
                                     output += '<td>' + data[count].role_name + '</td>';
                                     output += "<td id='action-buttons' class='text-right'>";
-                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'>View User Details</button>";
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'>Edit User</button></a>";
-                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
+                                    output += "<button type='submit' class='btn btn-success' data-toggle='modal' data-target='#view"+data[count].user_id+"'><img src='/img/baseline_visibility_white_18dp.png'></button>";
+                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark' style='margin-left: 2%;'><img src='/img/baseline_create_white_18dp.png'></button></a>";
+                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'><img src='/img/baseline_delete_white_18dp.png'></button>";
                                     output += "</td>";
                                     output += '</tr>';
                                     
@@ -162,7 +165,7 @@ $('tbody').html(output);
               </select>
             </form>
           </th>
-              <th scope="col"></th>
+              <th scope="col"><a href="/admin/users"><button class="btn btn-primary">Clear Filters</button></a></th>
                       </thead>
                         <thead>
                           <tr>
@@ -182,9 +185,9 @@ $('tbody').html(output);
                         <td>{{$user->email}}</td>
                         <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons" class="text-right">
-                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success " value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}">View User Details</button>
-                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark ">Edit Roles</button></a>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}">Delete User</button>
+                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success " value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
+                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete User"></button>
                         </td>
                       </tr>
                       @endforeach

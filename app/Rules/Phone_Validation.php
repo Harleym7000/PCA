@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
 
-class Phone_Vaidation implements Rule
+class Phone_Validation implements Rule
 {
     /**
      * Create a new rule instance.

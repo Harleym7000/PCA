@@ -44,6 +44,13 @@ class PoliciesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'file' => 'required'
+        ],
+        $messages = [
+            'file.required' => 'Please select a file or files to upload'
+            ]);
         
         foreach($request->file as $file) {
          $fileName = $file->getClientOriginalName();

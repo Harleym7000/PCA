@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cause;
+use App\Rules\Name_Validation;
+use App\Rules\Phone_Validation;
+use App\Rules\Postcode_Validation;
+use App\Rules\Script_Validation;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -69,6 +73,15 @@ class AccountsController extends Controller
     }
 
     public function storeProfile(Request $request) {
+
+        $vaildateProfile = $request->validate([
+            'firstname' => ['required', new Script_Validation, new Name_Validation],
+            'surname' => ['required', new Script_Validation, new Name_Validation]
+        ],
+        $messages = [
+            'firstname.required' => 'Please provide your first name',
+            'surname.required'=> 'Please provide your surname'
+        ]);
         $userID = Auth::user()->id;
         $firstname = $request->firstname;
         $surname = $request->surname;
@@ -98,6 +111,27 @@ class AccountsController extends Controller
     }
 
     public function updateProfile(Request $request) {
+        $vaildateProfile = $request->validate([
+            'firstname' => ['required', new Script_Validation, new Name_Validation],
+            'surname' => ['required', new Script_Validation, new Name_Validation],
+            'address' => ['required', new Script_Validation, 'regex:/^(?:\\d+ [a-zA-Z ]+, ){2}[a-zA-Z ]+$/'],
+            'town' => ['required', new Script_Validation],
+            'postcode' => ['required', new Script_Validation, new Postcode_Validation],
+            'tel_no' => new Phone_Validation, new Script_Validation,
+            'email' => 'required', 'email', new Script_Validation
+        ],
+        $messages = [
+            'firstname.required' => 'First name was not updated as this field is required',
+            'surname.required' => 'Surname was not updated as this field is required',
+            'address.required' => 'Address was not updated as this field is required',
+            'address.regex' => 'Invalid address format',
+            'town.required' => 'Town was not updated as this field is required',
+            'postcode.required' => 'Postcode was not updated as this field is required',
+            'tel_no.required' => 'Contact Number was not updated as this field is required',
+            'email.required' => 'Email was not updated as this field is required'
+
+        ]);
+
         $userID = Auth::user()->id;
         $firstname = $request->firstname;
         $surname = $request->surname;
@@ -142,5 +176,22 @@ class AccountsController extends Controller
         get();
 
         return view('user.events')->with('events', $events);
+    }
+
+    public function showCommittees($id)
+    {
+        $causes = DB::table('causes')
+        ->get();
+
+        $user = User::find($id);
+
+        DB::table('cause_user')
+        ->where('user_id', $id)
+        ->get();
+
+        return view('user.committees')->with([
+            'causes' => $causes,
+            'user' => $user
+            ]);
     }
 }

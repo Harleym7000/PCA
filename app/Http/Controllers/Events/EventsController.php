@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Event;
 use App\News;
+use App\Rules\Name_Validation;
+use App\Rules\Phone_Vaidation;
+use App\Rules\Script_Validation;
 use Carbon\Carbon;
+use Faker\Guesser\Name;
 
 class EventsController extends Controller
 {
