@@ -48,7 +48,7 @@
                                 @foreach($causes as $cause)
                                 <div class="form-check col-4">
                                     <input type="checkbox" name="causes[]" value="{{ $cause->id }}"
-                                    @if(Auth::user()->causes()->pluck('id')->contains($cause->id)) checked @endif>
+                                    @if(Auth::user()->causes()->pluck('id')->contains($cause->id)) checked @endif disabled>
                                     <label>{{ $cause->name }}</label>
                                   </div>
                                 @endforeach

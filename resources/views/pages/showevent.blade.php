@@ -6,7 +6,7 @@
         <div class="carousel-inner">
             @foreach($images as $i)
           <div class="carousel-item @if ($loop->first) active @endif">
-              <img src="/img/{{$i->image}}" class="d-block w-100">
+              <img src="/storage/event_images/{{$i->image}}" class="d-block w-100">
           </div>
           @endforeach
         </div>
@@ -30,7 +30,7 @@
       <div class="row">
           <div class="col-1"></div>
           <div class="col-3">
-              <img src="/img/cleanup.jpg" style="height: 330px; width:auto;">
+              <img src="/storage/event_images/{{$event->image}}" style="height: 330px; width:auto;">
           </div>
           <div class="col-2"></div>
           <div class="col-5">

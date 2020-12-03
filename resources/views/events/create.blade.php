@@ -39,10 +39,12 @@
         <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="create-event">
+            @include('partials.alerts')
           <div class="card">
             <div class="card-header">Create Event</div>
     <div id="add-event-form">
 <form action="/events/create" method='POST' enctype='multipart/form-data'>
+  @csrf
     <div class="form-group">
         <label for="title">Event Title: <span class="asterisk">*</span></label>
         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter Event Title..." name="title" required autofocus>
@@ -89,6 +91,24 @@
                     @enderror
       </div>
       <div class="form-group">
+        <label for="admission">Event Admission Price: <span class="asterisk">*</span></label>
+        <input type="number" step="any" class="form-control @error('admission') is-invalid @enderror" id="admission" placeholder="Enter Event Admission Fee. If free enter 0.00" name="admission" required>
+        @error('admission')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="capacity">Event Capacity: <span class="asterisk">*</span></label>
+        <input type="number" min=1 class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="capacity" required>
+        @error('admission')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
         <label for="org">Event Organiser: <span class="asterisk">*</span></label>
         <input type="text" class="form-control @error('org') is-invalid @enderror" id="org" placeholder="Who is organising the event..." name="org" required>
         @error('org')
@@ -99,8 +119,8 @@
       </div>
       <div class="form-group">
         <label for="main-image">Main Event Image: <span class="asterisk">*</span></label>
-        <input type="file" class="form-control @error('main-image') is-invalid @enderror" id="main-image" name="main-image" required>
-        @error('main-image')
+        <input type="file" class="form-control @error('main_image') is-invalid @enderror" id="main_image" name="main_image" required>
+        @error('main_image')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -108,14 +128,14 @@
       </div>
       <div class="form-group">
         <label for="other-images">Other Event Images:</label>
-        <input type="file" class="form-control @error('other-images') is-invalid @enderror" id="other-images" name="other-images">
-        @error('other-images')
+        <input type="file" class="form-control @error('other_images') is-invalid @enderror" id="other_images" name="other_images[]" multiple>
+        @error('other_images')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
       </div>
-    </div>
+      <br>
     <div class="form-group row text-right">
       <div class="col-12">
     <button type="submit" class="btn btn-primary">Create Event</button>

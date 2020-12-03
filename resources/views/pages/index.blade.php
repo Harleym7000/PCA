@@ -16,7 +16,7 @@
                   @foreach($events as $event)
             <div class="col mb-4">
               <div class="card">
-                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}" style="height:300px; width:auto; max-width: 350px;">
                 <div class="card-body">
                   <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
@@ -41,7 +41,7 @@
             @if(count($news) > 0)
             @foreach($news as $story)
             <div class="media">
-              <img class="media-object mr-3 img-responsive" src="img/cleanup.jpg" alt="Generic placeholder image" >
+              <img class="media-object mr-3 img-responsive" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" >
               <div class="media-body">
                 <a href="/news/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>

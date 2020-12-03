@@ -54,29 +54,52 @@ class EventsController extends Controller
     public function store(Request $request)
     {
 
-        if($request->hasFile('image')) {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
+        //dd($request);
+
+        if($request->hasFile('main_image')) {
+            $filenameWithExt = $request->file('main_image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('image')->getClientOriginalExtension();
+            $ext = $request->file('main_image')->getClientOriginalExtension();
             $filenameToStore = $filename.'_'.time().'.'.$ext;
-            $path = $request->file('image')->storeAs('public/event_images', $filenameToStore);
+            $path = $request->file('main_image')->storeAs('public/event_images', $filenameToStore);
         } else {
             $filenameToStore = 'pcaLogo.png';
         }
 
         $event = new Event;
         $event->title = $request->input('title');
-        $event->description = $request->input('description');
+        $event->description = $request->input('desc');
         $event->date = $request->input('date');
         $event->time = $request->input('time');
         $event->venue = $request->input('location');
+        $event->admission = $request->input('admission');
+        $event->spaces_left = $request->input('capacity');
         $event->image = $filenameToStore;
-        $event->managed_by = $request->input('managed_by');
+        $event->managed_by = $request->input('org');
         $event->approved = 1;
 
-        if($event->save()) {
-            return redirect('/event-manager/index');
+        $event->save();
+
+        $eventID = $event->id;
+        //dd($eventID);
+        $otherImages = $request->other_images;
+        foreach($otherImages as $image) {
+            $filenameWithExt = $image->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $image->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $image->storeAs('public/event_images', $filenameToStore);
+
+            $storeInDB = DB::table('event_images')
+            ->insert(['event_id' => $eventID, 'image' => $filenameToStore]);
         }
+
+        if($event->save()) {
+            $request->session()->flash('success', 'The event was created successfully');
+            return redirect()->back();
+        }
+        $request->session()->flash('error', 'There was an error creating the event. Please try again.');
+            return redirect()->back();
     }
 
     /**
