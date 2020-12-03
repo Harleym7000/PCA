@@ -42,30 +42,87 @@
           <div class="card">
             <div class="card-header">Create Event</div>
     <div id="add-event-form">
-{!! Form::open(['method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+<form action="/events/create" method='POST' enctype='multipart/form-data'>
     <div class="form-group">
-        {{Form::label('title', 'Event Title')}}
-        {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Enter Event Title...'])}}
-        {{Form::label('description', 'Event Description')}}
-        {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Enter Event Description...'])}}
-        {{Form::label('date', 'Event Date')}}
-        {{Form::date('date', '', ['class' => 'form-control', 'placeholder' => 'Select Event Date...'])}}
-        {{Form::label('time', 'Event Time')}}
-        {{Form::time('time', '', ['class' => 'form-control', 'placeholder' => 'Enter Event Time...'])}}
-        {{Form::label('location', 'Event Location')}}
-        {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Enter Event Location...'])}}
-        {{Form::label('managed_by', 'Event Managed By')}}
-        {{Form::text('managed_by', '', ['class' => 'form-control', 'placeholder' => 'Who Is Managing The Event...'])}}
-        {{Form::label('title', 'Event Image')}}
-        {{Form::file('image', ['class' => 'btn btn-default'])}}
+        <label for="title">Event Title: <span class="asterisk">*</span></label>
+        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter Event Title..." name="title" required autofocus>
+        @error('title')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="desc">Event Description: <span class="asterisk">*</span></label>
+        <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" rows="8" placeholder="Summarise the event..." name="desc" required></textarea>
+        @error('desc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="title">Event Date: <span class="asterisk">*</span></label>
+        <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" required>
+        @error('date')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="time">Event Time: <span class="asterisk">*</span></label>
+        <input type="time" class="form-control @error('time') is-invalid @enderror" id="time" name="time" required>
+        @error('time')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="location">Event Venue: <span class="asterisk">*</span></label>
+        <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="Enter Event Venue..." name="location" required>
+        @error('location')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="org">Event Organiser: <span class="asterisk">*</span></label>
+        <input type="text" class="form-control @error('org') is-invalid @enderror" id="org" placeholder="Who is organising the event..." name="org" required>
+        @error('org')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="main-image">Main Event Image: <span class="asterisk">*</span></label>
+        <input type="file" class="form-control @error('main-image') is-invalid @enderror" id="main-image" name="main-image" required>
+        @error('main-image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <div class="form-group">
+        <label for="other-images">Other Event Images:</label>
+        <input type="file" class="form-control @error('other-images') is-invalid @enderror" id="other-images" name="other-images">
+        @error('other-images')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
     </div>
     <div class="form-group row text-right">
       <div class="col-12">
-    {{Form::submit('Create Event', ['class' => 'btn btn-primary'])}}
+    <button type="submit" class="btn btn-primary">Create Event</button>
   </div>
 </div>
     </div>
-{!! Form::close() !!}
+  </form>
 </div>
 </div>
 </div>
