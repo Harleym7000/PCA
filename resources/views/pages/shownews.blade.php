@@ -2,7 +2,20 @@
 @section('content')
 <div id="show-news">
     @foreach($news as $n)
-    <h1 class="text-center">{{$n->title}}</h1>
+    <h1 class="text-center mt-5">{{$n->title}}</h1>
     @endforeach
+    @foreach($author as $a)
+    <p class="text-center">Written By: {{$a->firstname}} {{$a->surname}}</p>
+        @endforeach
+    <br>
+    @foreach($news as $n)
+    <div class="news-image-holder">
+    <img src="/storage/news_images/{{$n->image}}">
+</div>
+<br>
+    <h5 class="text-center">{!!$n->story !!}</h5>
+    @endforeach
+    <br>
+    <br>
 </div>
         @endsection

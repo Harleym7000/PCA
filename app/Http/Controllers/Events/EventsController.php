@@ -76,7 +76,7 @@ class EventsController extends Controller
         $event->spaces_left = $request->input('capacity');
         $event->image = $filenameToStore;
         $event->managed_by = $request->input('org');
-        $event->approved = 1;
+        $event->approved = 0;
 
         $event->save();
 
@@ -95,7 +95,7 @@ class EventsController extends Controller
         }
 
         if($event->save()) {
-            $request->session()->flash('success', 'The event was created successfully');
+            $request->session()->flash('success', 'The event was created successfully and is pending approval. Your event will appear on the site once it has been approved');
             return redirect()->back();
         }
         $request->session()->flash('error', 'There was an error creating the event. Please try again.');

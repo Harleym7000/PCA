@@ -18,7 +18,7 @@ class NewsController extends Controller
     {
         $userID = Auth::user()->id;
         $news = DB::table('news')->
-        join('users', 'news.author_id', '=', 'users.id')
+        join('users', 'news.written_by', '=', 'users.id')
         ->join('profiles', 'profiles.user_id', '=', 'users.id')
         ->where('users.id', $userID)
         ->select('news.*', 'profiles.firstname', 'profiles.surname')->paginate(8);
@@ -59,7 +59,7 @@ class NewsController extends Controller
         $news->title = $request->input('headline');
         $news->story = $request->input('story');
         $news->image = $filenameToStore;
-        $news->author_id = $authorID;
+        $news->written_by = $authorID;
 
         if($news->save()) {
             $request->session()->flash('success', 'The news story was published successfully');
@@ -104,9 +104,19 @@ class NewsController extends Controller
     {
         $news = News::find($id);
 
+        if($request->hasFile('news_image')) {
+            //dd('yes');
+            $filenameWithExt = $request->file('news_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $request->file('news_image')->getClientOriginalExtension();
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $request->file('news_image')->storeAs('public/news_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'cleanup.jpg';
+        }
         $news->title = $request->title;
         $news->story = $request->story;
-        $news->image = $request->image;
+        $news->image = $filenameToStore;
 
         if($news->save()) {
             $request->session()->flash('success', 'The news story was updated successfully');

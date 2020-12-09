@@ -40,5 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-news', function($user){
             return $user->hasRole('Author');
         });
+
+        Gate::define('approve-events', function($user){
+            return $user->hasRole('Event Approver');
+        });
     }
 }

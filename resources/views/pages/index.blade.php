@@ -43,9 +43,9 @@
             <div class="media">
               <img class="media-object mr-3 img-responsive" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" >
               <div class="media-body">
-                <a href="/news/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
+                <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
-                <p>{{$story->story}}</p>
+                <p>{!!$story->story!!}</p>
                 <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y  H:i:s')}}</p>
               </div>
             </div>

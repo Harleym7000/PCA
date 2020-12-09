@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e7c9ee0123984c1fef022bd07d9589b",
+    "content-hash": "2e5531a96fd5ef3b33e491a0ba67e4c8",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -323,6 +323,58 @@
                 }
             ],
             "time": "2020-08-18T23:57:15+00:00"
+        },
+        {
+            "name": "dcblogdev/laravel-eventbrite",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dcblogdev/laravel-eventbrite.git",
+                "reference": "f96715a2463f6a1a574b853381e5bf99b55ad92d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dcblogdev/laravel-eventbrite/zipball/f96715a2463f6a1a574b853381e5bf99b55ad92d",
+                "reference": "f96715a2463f6a1a574b853381e5bf99b55ad92d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dcblogdev\\Eventbrite\\EventbriteServiceProvider"
+                    ],
+                    "aliases": {
+                        "Eventbrite": "Dcblogdev\\Eventbrite\\Facades\\Eventbrite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dcblogdev\\Eventbrite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Carr",
+                    "email": "dave@dcblog.dev",
+                    "homepage": "https://dcblog.dev"
+                }
+            ],
+            "description": "A Laravel Eventbrite package",
+            "homepage": "https://github.com/dcblogdev/laravel-eventbrite",
+            "keywords": [
+                "eventbrite",
+                "laravel"
+            ],
+            "time": "2020-02-24T07:37:52+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5831,7 +5883,6 @@
                 "faker",
                 "fixtures"
             ],
-            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {

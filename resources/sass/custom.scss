@@ -807,6 +807,16 @@ body {
       height: 450px;
     }
 
+    .news-image-holder {
+      display:flex; 
+      justify-content:center;
+    }
+
+    .news-image-holder img {
+      max-height: 600px; 
+      width:auto;
+    }
+
     #policy {
       width: 90%;
       margin: auto;

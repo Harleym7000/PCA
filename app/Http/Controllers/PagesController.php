@@ -78,8 +78,20 @@ public function contact()
         $news = DB::table('news')
         ->where('id', $id)
         ->get();
-        //dd($news);
 
-        return view('pages.shownews')->with(['news' => $news]);
+        $getAuthorID = 0;
+
+        foreach($news as $n) {
+            $getAuthorID = $n->written_by; 
+        }
+        
+        $getAuthor = DB::table('news')
+        ->join('profiles', 'profiles.user_id', '=', 'news.written_by')
+        ->select('firstname', 'surname')
+        ->where('written_by', $getAuthorID)
+        ->groupBy('written_by')
+        ->get();
+
+        return view('pages.shownews')->with(['news' => $news, 'author' => $getAuthor]);
     }
 }

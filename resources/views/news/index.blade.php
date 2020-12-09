@@ -48,6 +48,7 @@
     <div class="content-holder col-12 col-lg-10">
       @include('inc.admin-nav')
       <div id="manage-events">
+        @include('partials.alerts')
         <div class="row justify-content-center">
                 <div class="table-responsive">
                     <table class="table table-striped" id="user-table">
@@ -64,33 +65,32 @@
                         <thead>
                           <tr>
                             <th scope="col">Image</th>
-                            <th scope="col">Headline</th>
+                            <th scope="col" style="width: 20%">Headline</th>
                             <th scope="col">Story</th>
-                            <th scope="col">Author</th>
+                            <th scope="col" style="width: 10%;">Author</th>
                             <th style="width: 20%;">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-
-                          
-  
 @if(count($news) > 0)
   @foreach($news as $story)
                     <tr>
                         <td><img src="/storage/news_images/{{$story->image}}" style="height: 85px; width: 150px;"></td>
-                        <td><strong>{{$story->title}}</strong></td>
-                        <td><strong>{{$story->story}}</strong></td>
+                        <td><strong>{!!$story->title!!}</strong></td>
+                        <td><strong>{!!$story->story!!}</strong></td>
                         <td><strong>{{$story->firstname}} {{$story->surname}}</strong></td>
                         <td id="action-buttons">
                             @can('manage-news')
-                              <a href="/news/edit/{{$story->id}}"><button type="button" class="btn btn-dark">Edit</button></a>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#newsdelete{{$story->id}}">Delete</button>
-                            @endcan
+                            <div class="row">
+                              <a href="/news/edit/{{$story->id}}"><button type="button" class="btn btn-dark"><img src="/img/baseline_create_white_18dp.png"></button></a>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#newsdelete{{$story->id}}"><img src="/img/baseline_delete_white_18dp.png"></button></a>
+                              </div>
+                                @endcan
                         </td>
                       </tr>
                       @endforeach
                       @else 
-                      <p>You have not created any news stories</p>
+                      <td>You have not created any news stories</td>
                       @endif
                     </tbody>
                       </table>

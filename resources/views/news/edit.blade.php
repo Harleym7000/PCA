@@ -15,7 +15,28 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/9qolqe06kbfpdnul0hbz5re9tw7ajdmp5prm43f248wbh0nh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          selector: '#story',
+          mobile: {
+            theme: 'mobile',
+    maxWidth: 425,
+  },
+  width: 700,
+          plugins: 'autoresize',
+          autoresize_bottom_margin: 50
+        });
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('#toggle-sidenav').on('click', function(){
+            $('.sidenav-holder').toggle();
+            $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+          });
+        });
+          </script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,10 +44,10 @@
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
 <div class="container">
     @include('partials.alerts')
@@ -67,7 +88,7 @@
                         <label for="organiser" class="col-md-2 col-form-label text-md-right">Image:</label>
 
                         <div class="col-6">
-                            <input id="news-image" type="file" class="form-control" name="news-image" autocomplete="organiser" autofocus>
+                            <input id="news-image" type="file" class="form-control" name="news_image" autocomplete="organiser" autofocus>
                         </div>
                     </div>
                     <div class="text-right">
