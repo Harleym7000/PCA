@@ -31,20 +31,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit Event {{$event->title}}</div>
+                @foreach($event as $e)
+                <div class="card-header">Edit Event Application - {{$e->title}}</div>
 
                 <div class="card-body">
 
-                  <form action="{{route('event-edit', $event)}}" method="POST" enctype="multipart/form-data">
+                  <form action="/admin/events/amendApp" method="POST" enctype="multipart/form-data">
                     @csrf
-                    {{ method_field('PUT') }}
-
-
                     <div class="form-group row">
                         <label for="title" class="col-md-2 col-form-label text-md-right">Event Title:</label>
 
                         <div class="col-md-6">
-                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$event->title}}" required autocomplete="title" autofocus>
+                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$e->title}}" required autocomplete="title" autofocus>
 
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -58,7 +56,7 @@
                         <label for="desc" class="col-md-2 col-form-label text-md-right">Description:</label>
 
                         <div class="col-6">
-                            <textarea id="desc" rows="6" class="form-control" name="desc" required autocomplete="desc" autofocus>{{$event->description}}</textarea>
+                            <textarea id="desc" rows="6" class="form-control" name="desc" required autocomplete="desc" autofocus>{{$e->description}}</textarea>
                         </div>
                     </div>
 
@@ -66,7 +64,7 @@
                         <label for="date" class="col-md-2 col-form-label text-md-right">Date:</label>
 
                         <div class="col-6">
-                            <input id="date" type="date" class="form-control" name="date" value="{{$event->date}}" required autocomplete="date" autofocus>
+                            <input id="date" type="date" class="form-control" name="date" value="{{$e->date}}" required autocomplete="date" autofocus>
                         </div>
                     </div>
 
@@ -74,7 +72,7 @@
                         <label for="time" class="col-md-2 col-form-label text-md-right">Time:</label>
 
                         <div class="col-6">
-                            <input id="time" type="time" class="form-control" name="time" value="{{$event->time}}" required autocomplete="time" autofocus>
+                            <input id="time" type="time" class="form-control" name="time" value="{{$e->time}}" required autocomplete="time" autofocus>
                         </div>
                     </div>
 
@@ -82,7 +80,7 @@
                         <label for="venue" class="col-md-2 col-form-label text-md-right">Venue:</label>
 
                         <div class="col-6">
-                            <input id="venue" type="text" class="form-control" name="venue" value="{{$event->venue}}" required autocomplete="venue" autofocus>
+                            <input id="venue" type="text" class="form-control" name="venue" value="{{$e->venue}}" required autocomplete="venue" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -96,10 +94,12 @@
                         <label for="organiser" class="col-md-2 col-form-label text-md-right">Organiser:</label>
 
                         <div class="col-6">
-                            <input id="organiser" type="text" class="form-control" name="organiser" value="{{$event->managed_by}}" required autocomplete="organiser" autofocus>
+                            <input id="organiser" type="text" class="form-control" name="organiser" value="{{$e->managed_by}}" required autocomplete="organiser" autofocus>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary" value="{{$e->id}}" name="amend">Update</button>
+                    @endforeach
+                  </form>
                 </div>
             </div>
         </div>

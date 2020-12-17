@@ -16,16 +16,22 @@
                   @foreach($events as $event)
             <div class="col mb-4">
               <div class="card">
-                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}" style="height:300px; width:auto; max-width: 350px;">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}" style="width:100%; min-height:350px; max-height: 350px;">
                 <div class="card-body">
                   <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
                   <div class="row">
                     <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
+                    @if($event->is_eventbrite == 1)
+                    <a href="{{$event->eventbrite_link}}" class="col-5" target="_blank" style="padding-top: 2%;"><button type="button" class="btn btn-light" style="width:115%;">
+                      Register
+                    </button></a> 
+                    @else
                     <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}">
                       Register
                     </button>
+                    @endif
               </div>
                 </div>
               </div>
@@ -46,7 +52,7 @@
                 <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
                 <p>{!!$story->story!!}</p>
-                <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y  H:i:s')}}</p>
+                <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y - H:i:s')}}</p>
               </div>
             </div>
               @endforeach

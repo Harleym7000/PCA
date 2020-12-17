@@ -9,31 +9,30 @@
                   <label>Search Events:</label>
                 <input type="text" id="search-event" class="form-control" placeholder="Search Event" name="title">
               </div>
-              <div class="col-12 col-lg-4">
+              <div class="col-12 col-lg-3">
                 <label>Select Date:</label>
                 <input type="date" id="search-date" class="form-control" name="date">
               </div>
-              <div class="col-12 col-lg-4">
+              <div class="col-12 col-lg-3">
                 <label>Select Time:</label>
                 <input type="time" id="event-time" class="form-control" name="time">
               </div>
-                <br>
-            </div>
-            <div class="form-group text-right">
-              <button type="submit" class="btn btn-primary col-12 col-lg-2">
+            <div class="text-right col-12 col-lg-2">
+              <button type="submit" class="btn btn-primary col-12">
                 Apply filters
               </button>
             </div>
     </form>
+</div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
       @if(count($events) > 0)
             @foreach($events as $event)
         <div class="col mb-4">
           <div id="upcoming-events">
           <div class="card">
-            <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
+            <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="..." style="width:100%; min-height:350px; max-height: 350px;">
             <div class="card-body">
-              <h1 class="card-title">{{$event->title}}</h1>
+              <h2 class="card-title text-center">{{$event->title}}</h2>
               <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
               <div class="row">

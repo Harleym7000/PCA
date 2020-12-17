@@ -147,32 +147,32 @@ $('tbody').html(output);
           <div class="card">
             <div class="card-header">All Users</div>
                 <div class="table-responsive">
-                    <table class="table table-striped" id="user-table">
+                    <table class="table table-striped table-bordered table-sm" id="user-table">
                       <span id="total_records"></span>
                       <thead>
-                        <tr>
+                        <tr class="d-flex">
                           
-                          <th scope="col-4"><div class="row"><label>Search:</label><input id="user-search" type="text" placeholder="Search name..." class="filter-input"></div></th>
-                          <th scope="col"></th>
+                          <th class="col-2"><input id="user-search" type="text" placeholder="Search name..." class="filter-input"></div></th>
+                          <th scope="col" class="col-3"></th>
                           <form id="user-form" action="#">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                          <th scope="col">Select Role:
+                          <th scope="col" class="col-4">
               <select id="user-role" name="user-role">
-                <option selected disabled>Choose an option...</option>
+                <option selected disabled>Select a role</option>
                 @foreach($roles as $role)
                 <option id="role-id" value="{{$role->id}}">{{$role->name}}</option>
                 @endforeach
               </select>
             </form>
           </th>
-              <th scope="col"><a href="/admin/users"><button class="btn btn-primary">Clear Filters</button></a></th>
+              <th scope="col" class="col-3"><a href="/admin/users"><div class="text-right"><button class="btn btn-primary col-12">Clear Filters</button></div></a></th>
                       </thead>
-                        <thead>
-                          <tr>
-                            <th scope="col" class="col-2">Name</th>
-                            <th scope="col" class="col-3">Email</th>
-                            <th scope="col" class="col-3">Roles</th>
-                            <th scope="col" class="col-4 text-center">Actions</th>
+                        <thead class="thead-dark">
+                          <tr class="d-flex">
+                            <th scope="col" class="manage-users-name col-2">Name</th>
+                            <th scope="col" class="manage-users-email col-3">Email</th>
+                            <th scope="col" class="manag-users-roles col-4">Roles</th>
+                            <th scope="col" class="manage-users-actions text-center col-3">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -180,11 +180,11 @@ $('tbody').html(output);
   
   <!-- Modal -->
   @foreach($users as $user)
-                    <tr>
-                        <td>{{implode('', $user->profile()->get()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->get()->pluck('surname')->toArray())}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
-                        <td id="action-buttons" class="text-right">
+                    <tr class="d-flex">
+                        <td class="col-2">{{implode('', $user->profile()->get()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->get()->pluck('surname')->toArray())}}</td>
+                        <td class="col-3">{{$user->email}}</td>
+                        <td class="col-4">{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
+                        <td id="action-buttons" class="text-center col-3">
                           <button id="view-user{{$user->id}}" type="submit" class="btn btn-success " value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
                             <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete User"></button>

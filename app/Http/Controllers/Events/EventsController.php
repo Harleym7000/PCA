@@ -76,6 +76,16 @@ class EventsController extends Controller
         $event->spaces_left = $request->input('capacity');
         $event->image = $filenameToStore;
         $event->managed_by = $request->input('org');
+        if($request->has('eventbrite')) {
+            $event->is_eventbrite = 1;
+        } else {
+            $event->is_eventbrite = 0;
+        }
+        if($request->has('eventbrite_link')) {
+            $event->eventbrite_link = $request->input('eventbrite_link');
+        } else {
+            $event->eventbrite_link = "";
+        }
         $event->approved = 0;
 
         $event->save();
@@ -209,6 +219,10 @@ class EventsController extends Controller
         } else {
             DB::table('user_event_registrations')
             ->insert(['user_id' => $userID, 'event_id' => $eventID]);
+
+            DB::table('events')
+            ->where('id', $eventID)
+            ->decrement('spaces_left');
     
             $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
             return redirect()->back();
@@ -232,6 +246,21 @@ class EventsController extends Controller
                   ]);
 
         $request->session()->flash('success', 'You have been successfully registered for this event.');
+        return redirect()->back();
+    }
+
+    public function addwidget()
+    {
+        return view('events.insertEvent');
+    }
+
+    public function insertwidget(Request $request) 
+    {
+        $code = $request->widget;
+
+        DB::table('ebwidgets')
+        ->insert(['widget' => $code]);
+
         return redirect()->back();
     }
 }

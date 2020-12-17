@@ -135,6 +135,21 @@
                         </span>
                     @enderror
       </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="eventbrite" name="eventbrite">
+        <label class="form-check-label" for="eventbrite">Does this event require registration through EventBrite?</label>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="eventbrite-link">Eventbrite Link: (Optional)</label>
+        <input type="text" class="form-control @error('eventbrite_link') is-invalid @enderror" id="eventbrite_link" placeholder="Please provide the eventbrite link" name="eventbrite_link">
+        @error('eventbrite_link')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+      </div>
+      <p>Fields marked with <span class="asterisk">*</span> are required</p>
       <br>
     <div class="form-group row text-right">
       <div class="col-12">

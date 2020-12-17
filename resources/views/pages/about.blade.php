@@ -9,6 +9,10 @@
                         <p>Portstewart Community Association is a charitable organisation who currently organises and implemets 
                           <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> alongside other events and activities for the benefit 
                           of the community.</p>
+                          <br>
+                          <div class="text-center">
+                            <a href="/register"><button class="btn btn-primary become-member" type="button">Become a Member Today!</button></a>
+                          </div>
                         </div>
                       </div>
                       <div id="about-projects">
@@ -17,7 +21,7 @@
                           <div class="card">
                             <img src="/img/red_sails.jpg" class="card-img-top img-fluid img-thumbnail" alt="...">
                             <div class="card-body">
-                              <h1 class="card-title">Red Sails Festival</h1>
+                              <h1 class="card-title"><a href="https://redsails.co.uk/">Red Sails Festival</a></h1>
                               <p class="card-text" style="width: 90%; margin: auto;">Red Sails Festival runs over the course of a week every summer in Portstewart. Live music, dance and activities for everyone to enjoy, finishing with our famous fireworks display</p>
                             </div>
                           </div>
@@ -26,7 +30,7 @@
                             <div class="card">
                               <img src="/img/event.jpg" class="card-img-top img-fluid img-thumbnail" alt="...">
                               <div class="card-body">
-                                <h1 class="card-title">Community Events</h1>
+                                <h1 class="card-title"><a href="/events">Community Events</a></h1>
                                 <p class="card-text" style="width: 90%; margin: auto;">Portstewart Community Association hold events of all kinds for people of all ages within the community. Why not go to our <a href="/events">events</a> page to find an event for you?</p>
                               </div>
                             </div>
@@ -42,7 +46,7 @@
                           </div>
                     </div>
                       </div>
-                <div id="about-team">
+                {{-- <div id="about-team">
                         <h1>- Our Team -</h1>
                         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
                             <div class="col mb-4">
@@ -81,7 +85,7 @@
                                   </div>
                                 </div>
                               </div>
-                        </div>
+                        </div> --}}
                 </div>
         </div>
 </div>

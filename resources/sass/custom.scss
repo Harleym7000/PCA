@@ -92,6 +92,10 @@ body {
           margin-bottom: 3%;
       }
 
+      #events .card {
+        box-shadow: 10px 10px 5px #aaaaaa;
+      }
+
       #events .card h2 {
         font-family: 'Montserrat', sans-serif;
         font-size: 26px;
@@ -149,6 +153,9 @@ body {
         height: 98%;
         margin: auto;
         border-bottom: 2px solid rgb(212, 212, 212);
+        background-color: #fff;
+        margin-bottom: 2%;
+        box-shadow: 10px 10px 5px #aaaaaa;
     }
 
     #news .media img {
@@ -225,6 +232,12 @@ body {
       margin-top: 5%;
     }
 
+    #about #tagline .btn {
+      font-size: 24px;
+      border-radius: 24px;
+      margin-top: 2%;
+    }
+
     #about-filler {
       height: 35vh;
     }
@@ -236,6 +249,10 @@ body {
     #about-projects {
       width: 95%;
       margin: auto;
+    }
+
+    #about-projects .card {
+      box-shadow: 10px 10px 5px #aaaaaa;
     }
 
     #about-projects .card img {
@@ -251,7 +268,7 @@ body {
     #about-projects .card p {
       color: rgb(34, 34, 34);
       font-family: sans-serif;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     #about-team {
@@ -300,7 +317,11 @@ body {
     }
 
     #event-search .btn {
-      margin-top: 1.9%;
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      top: 48%;
+      left:6%;
     }
 
     #event-search label {
@@ -323,13 +344,17 @@ body {
       font-family: 'Montserrat', sans-serif;
       font-size: 48px;
       padding-top: 3%;
+      margin-bottom: 4%;
   }
 
   #news-page .media {
-      width: 90%;
+      width: 92%;
       height: 98%;
       margin: auto;
       border-bottom: 2px solid rgb(212, 212, 212);
+      background-color: #fff;
+      margin-bottom: 2%;
+      box-shadow: 10px 10px 5px #aaaaaa;
   }
 
   #news-page .media img {
@@ -349,10 +374,15 @@ body {
   #news-search {
     width: 90%;
     margin: auto;
+    margin-bottom: 3%;
   }
 
-  #news-form .btn {
-    margin-top: 2%;
+  #news-search .btn {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 48%;
+    left:6%;
   }
 
   #news-search label {
@@ -596,7 +626,7 @@ body {
     }
 
     #user-profile {
-      margin-top: 7%;
+      margin-top: 5%;
     }
 
     #user-profile h1 {
@@ -620,7 +650,6 @@ body {
 
     #profile .card {
       margin: auto;
-      margin-top: 7%;
     }
 
     #members {
@@ -638,26 +667,14 @@ body {
       margin-top: 5%;
     }
 
-    #manage-users .table label {
-      margin-left: 5%;
-      margin-right: 3%;
-    }
-
     #manage-users .table input[type="text"] {
-      width: 70%;
+      width: 100%;
       height: 30px;
     }
 
-    #manage-users .table tr .col-2 {
-      width: 20%;
-    }
-
-    #manage-users .table tr .col-3 {
-      width: 22.5%;
-    }
-
-    #manage-users .table tr .col-4 {
-      width: 35%;
+    #manage-users .table select {
+      width: 100%;
+      height: 30px;
     }
 
     #manage-users .card {
@@ -690,7 +707,7 @@ body {
     }
 
     #edit-user {
-      margin-top: 25%;
+      margin-top: 5%;
     }
 
     #edit-user .card {
@@ -1077,7 +1094,7 @@ body {
     }
 
     #manage-users .table > tbody > tr > td {
-        font-size: 16px;
+        font-size: 12px;
    }
 
    #news-page h1 {
@@ -1172,6 +1189,10 @@ footer .subscribe {
         margin-top: 10%;
     }
 
+    #manage-users .table > thead > tr > th {
+      font-size: 14px;
+    }
+
     #manage-users .table .btn {
         width: 150%;
         margin-bottom: 10%;
@@ -1179,7 +1200,7 @@ footer .subscribe {
 
     #manage-users .table > tbody > tr > td {
         vertical-align: middle;
-        font-size: 16px;
+        font-size: 12px;
         
    }
 
@@ -1250,6 +1271,18 @@ width: 5%;
 #inbox-display .filter-messages {
   margin-bottom: 10%;
 }
+
+#event-search .btn {
+  position: static !important;
+  height: 100%;
+  margin-top: 1%;
+ }
+
+ #news-search .btn {
+  position: static !important;
+  height: 100%;
+  margin-top: 1%;
+ }
 
  }
 
@@ -1330,7 +1363,7 @@ width: 5%;
 
     #manage-users .table > tbody > tr > td {
         vertical-align: middle;
-        font-size: 16px;
+        font-size: 10px;
         
    }
  }

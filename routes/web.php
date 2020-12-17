@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', 'PagesController@index')->name('home');
 Route::get('/about', 'PagesController@about');
 Route::get('/news', 'PagesController@news');
+Route::post('/news', 'PagesController@getNewsByFilters');
 Route::get('/news/story/{id}', 'PagesController@showNewsStory');
 Route::get('/events', 'PagesController@events');
 Route::get('/event/{id}', 'PagesController@showEvent');
@@ -107,8 +108,12 @@ Route::post('/admin/contact/flipToUnread', 'ContactController@flipToUnread')->mi
 Route::post('/admin/contact/delete', 'ContactController@destroy')->middleware('can:manage-users');
 Route::post('/admin/contact/filter', 'ContactController@filter')->middleware('can:manage-users');
 Route::get('/admin/events/applications', 'ApproveController@eventApplications')->middleware('can:approve-events');
+Route::post('/admin/events/approve', 'ApproveController@approveEvent')->middleware('can:approve-events');
+Route::post('/admin/events/amendApp', 'ApproveController@amendAppSubmit')->middleware('can:approve-events');
 Route::delete('/admin/events/rejectApp/{id}', 'ApproveController@rejectApp')->middleware('can:approve-events');
 Route::get('/admin/events/amend-application/{id}', 'ApproveController@amendApp')->middleware('can:approve-events');
+Route::get('/test/event/widget', 'Events\EventsController@addwidget');
+Route::post('/test/event/widget', 'Events\EventsController@insertwidget');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

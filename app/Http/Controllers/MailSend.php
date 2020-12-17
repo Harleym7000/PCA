@@ -206,6 +206,10 @@ class MailSend extends Controller
         $event = Event::find($eventID);
         $eventName = $event->title;
 
+        DB::table('events')
+        ->where('id', $eventID)
+        ->decrement('spaces_left');
+
         $token = Str::random(8);
         DB::table('guest_event_registrations')
         ->insert(['event_id' => $eventID, 
@@ -268,6 +272,7 @@ class MailSend extends Controller
             ->where('token', $token)
             ->update(['token_verified' => 1]);
             $request->session()->flash('success', 'You have successfully registered for the event.');
+            return view('pages.eventRegSuccessful');
     }
 }
 }

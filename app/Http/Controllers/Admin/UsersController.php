@@ -61,7 +61,7 @@ class UsersController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        $passwords = $request->password.' '.$request->passwordCon;
+        //$passwords = $request->password.' '.$request->passwordCon;
         //dd($passwords);
         $validatedData = $request->validate([
             'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],

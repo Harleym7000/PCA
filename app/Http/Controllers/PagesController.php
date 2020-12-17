@@ -56,6 +56,19 @@ public function contact()
         return view('pages.events')->with('events', $events);
     }
 
+    public function getNewsByFilters(Request $request)
+    {
+        $newsTitle = $request->title;
+        $newsDate = $request->date;
+        $newsAuthor = $request->author;
+
+        $query = DB::table('news')
+        ->where('title', 'like', '%'.$newsTitle.'%')
+        ->where('created_at', 'like', '%'.$newsDate.'%');
+        $news = $query->get();
+        return view('pages.news')->with('news', $news);
+    }
+
     public function showEvent($id)
     {
         $events = DB::table('events')

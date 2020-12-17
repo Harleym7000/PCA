@@ -8,18 +8,18 @@
             <div class="form-row">
               <div class="col-12 col-lg-4">
                   <label>Search News:</label>
-                <input type="text" class="form-control" placeholder="Search News">
+                <input type="text" class="form-control" placeholder="Search News" name="title">
               </div>
-              <div class="col-12 col-lg-4">
+              <div class="col-12 col-lg-3">
                 <label>Search By Date:</label>
-              <input type="date" class="form-control">
+              <input type="date" class="form-control" name="date">
             </div>
-            <div class="col-12 col-lg-4">
-              <label>Search By Date:</label>
-            <input type="text" class="form-control" placeholder="Search By Author">
+            <div class="col-12 col-lg-3">
+              <label>Search By Author:</label>
+            <input type="text" class="form-control" placeholder="Search By Author" name="author">
           </div>
-          <div class="col-12 text-right">
-            <button type="submit" class="col-12 col-lg-2 btn btn-primary">Apply Filters</button>
+          <div class="col-12 col-lg-2 text-right">
+            <button type="submit" class="col-12 btn btn-primary">Apply Filters</button>
           </div>
     </form>
 </div>
@@ -32,10 +32,12 @@
                 <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
                 <p>{!! $story->story !!}<p>
-                <p>Written on: {{$story->created_at}}</p>
+                <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y - H:i:s')}}</p>
               </div>
             </div>
             @endforeach
+            @else
+            <p class="text-center">There are no news stories that match your criteria</p>
             @endif
 </div>
         @endsection

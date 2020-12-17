@@ -43,18 +43,21 @@
           @include('inc.admin-nav')
           <div id="my-events">
             @include('partials.alerts')
-            <h1 class="text-center">My Events</h1>
+            <h1 class="text-center">Pending Event Applications</h1>
           @if(count($pending) > 0)
           <div class="card-deck">
             @foreach($pending as $p)
             <div class="col-12 col-md-6 col-xl-4 mb-4">
               <div class="card">
-                <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
+                <img src="/storage/event_images/{{$p->image}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h1 class="card-title">{{$p->title}}</h1>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($p->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($p->time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$p->venue}}</h3>
-                  <button type="submit" class="btn btn-success">Approve Event</button>
+                  <form action="/admin/events/approve" method="POST">
+                    @csrf
+                  <button type="submit" class="btn btn-success" value="{{$p->id}}" name="approveApp">Approve Event</button>
+                  </form>
                   <a href="/admin/events/amend-application/{{$p->id}}"><button type="submit" class="btn btn-warning">Amend Event</button></a>
                   <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#rejectEvent{{$p->id}}">Reject Event</button>
                 </div>
@@ -66,7 +69,7 @@
       </div>
     </div>
     @else 
-    <h4 class="text-center">You have no upcoming events</h4> 
+    <h4 class="text-center">There are currently no pending Event Applications. Check back later</h4> 
     @endif
 </div>
 </div>

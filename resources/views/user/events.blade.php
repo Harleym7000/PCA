@@ -49,7 +49,7 @@
             @foreach($events as $event)
             <div class="col-12 col-md-6 col-xl-4 mb-4">
               <div class="card">
-                <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h1 class="card-title">{{$event->title}}</h1>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
