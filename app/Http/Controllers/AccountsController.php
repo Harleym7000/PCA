@@ -11,6 +11,7 @@ use App\Rules\Script_Validation;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class AccountsController extends Controller
 {
@@ -83,12 +84,12 @@ class AccountsController extends Controller
             'surname.required'=> 'Please provide your surname'
         ]);
         $userID = Auth::user()->id;
-        $firstname = $request->firstname;
-        $surname = $request->surname;
-        $address = $request->address;
-        $town = $request->town;
-        $postcode = $request->postcode;
-        $contact_no = $request->contact_no;
+        $firstname = Crypt::encrypt($request->firstname);
+        $surname = Crypt::encrypt($request->surname);
+        $address = Crypt::encrypt($request->address);
+        $town = Crypt::encrypt($request->town);
+        $postcode = Crypt::encrypt($request->postcode);
+        $contact_no = Crypt::encrypt($request->contact_no);
         $email = $request->email;
 
         $createProfile = DB::table('profiles')
@@ -114,7 +115,7 @@ class AccountsController extends Controller
         $vaildateProfile = $request->validate([
             'firstname' => ['required', new Script_Validation, new Name_Validation],
             'surname' => ['required', new Script_Validation, new Name_Validation],
-            'address' => ['required', new Script_Validation, 'regex:/^(?:\\d+ [a-zA-Z ]+, ){2}[a-zA-Z ]+$/'],
+            'address' => ['required', new Script_Validation],
             'town' => ['required', new Script_Validation],
             'postcode' => ['required', new Script_Validation, new Postcode_Validation],
             'tel_no' => new Phone_Validation, new Script_Validation,
@@ -133,12 +134,12 @@ class AccountsController extends Controller
         ]);
 
         $userID = Auth::user()->id;
-        $firstname = $request->firstname;
-        $surname = $request->surname;
-        $address = $request->address;
-        $town = $request->town;
-        $postcode = $request->postcode;
-        $contact_no = $request->contact_no;
+        $firstname = Crypt::encrypt($request->firstname);
+        $surname = Crypt::encrypt($request->surname);
+        $address = Crypt::encrypt($request->address);
+        $town = Crypt::encrypt($request->town);
+        $postcode = Crypt::encrypt($request->postcode);
+        $contact_no = Crypt::encrypt($request->contact_no);
         $email = $request->email;
 
         $updateProfile = DB::table('profiles')
@@ -184,14 +185,20 @@ class AccountsController extends Controller
         ->get();
 
         $user = User::find($id);
+        $uid = $user->id;
 
         DB::table('cause_user')
         ->where('user_id', $id)
         ->get();
 
+        $profileInfo = DB::table('profiles')
+        ->where('user_id', $uid)
+        ->first();
+
         return view('user.committees')->with([
             'causes' => $causes,
-            'user' => $user
+            'user' => $user,
+            'profileInfo' => $profileInfo
             ]);
     }
 }

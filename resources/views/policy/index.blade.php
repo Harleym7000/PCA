@@ -56,14 +56,12 @@
         @if(count($policies) > 0)
         <div class="row">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="col-12 col-md-6 col-lg-3 col-xl-4 mb-4">
         <div class="card">
           <img class="card-img-top" src="img/pdf.png" alt="Card image cap">
           <div class="card-body">
             <h4 class="card-title">{{$p->name}}</h4>
-            <form action="/policy/delete/{{$p->name}}" method="POST">
-              @csrf
-            <button type="submit" class="col-12 btn btn-danger" value="{{$p->name}}" name="deletefile">Delete</button>
+            <button type="submit" class="col-12 btn btn-danger" data-toggle="modal" data-target="#delete{{$p->id}}">Delete</button>
             </form>
           </div>
         </div>
@@ -100,7 +98,31 @@
         </div>
       </div>
     </div>
+    @foreach($policies as $p)
+    <div class="modal fade" id="delete{{$p->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete Policy</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            This will delete the policy {{$p->name}}. Are you sure you wish to delete this policy?
+          </div>
+          <div class="modal-footer">
+            <form action="/policy/delete/{{$p->name}}" method="POST">
+              @csrf
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger" value="{{$p->name}}" name="filename">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
 </div>
 </div>
+@endforeach
 </body>
 </html>

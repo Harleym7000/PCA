@@ -156,7 +156,7 @@ $('tbody').html(output);
                           <th scope="col" class="col-3"></th>
                           <form id="user-form" action="#">
                             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                          <th scope="col" class="col-4">
+                          <th scope="col" class="col-3">
               <select id="user-role" name="user-role">
                 <option selected disabled>Select a role</option>
                 @foreach($roles as $role)
@@ -165,29 +165,32 @@ $('tbody').html(output);
               </select>
             </form>
           </th>
-              <th scope="col" class="col-3"><a href="/admin/users"><div class="text-right"><button class="btn btn-primary col-12">Clear Filters</button></div></a></th>
+              <th scope="col" class="col-4"><a href="/admin/users"><div class="text-right"><button class="btn btn-primary col-12">Clear Filters</button></div></a></th>
                       </thead>
                         <thead class="thead-dark">
                           <tr class="d-flex">
                             <th scope="col" class="manage-users-name col-2">Name</th>
                             <th scope="col" class="manage-users-email col-3">Email</th>
-                            <th scope="col" class="manag-users-roles col-4">Roles</th>
-                            <th scope="col" class="manage-users-actions text-center col-3">Actions</th>
+                            <th scope="col" class="manag-users-roles col-3">Roles</th>
+                            <th scope="col" class="manage-users-actions text-center col-4">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
                           
   
   <!-- Modal -->
-  @foreach($users as $user)
+  @foreach($users as $u)
                     <tr class="d-flex">
-                        <td class="col-2">{{implode('', $user->profile()->get()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->get()->pluck('surname')->toArray())}}</td>
-                        <td class="col-3">{{$user->email}}</td>
-                        <td class="col-4">{{ implode(', ',$user->roles()->get()->pluck('name')->toArray())}}</td>
-                        <td id="action-buttons" class="text-center col-3">
-                          <button id="view-user{{$user->id}}" type="submit" class="btn btn-success " value="{{$user->id}}" data-toggle="modal" data-target="#view{{$user->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
-                            <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$user->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete User"></button>
+                      <td class="col-2">{{Crypt::decrypt($u->profile()->pluck('firstname'))}} {{Crypt::decrypt($u->profile()->pluck('surname'))}}</td>
+                        <td class="col-3">{{$u->email}}</td>
+                        
+                        <td class="col-3">{{implode(", ", $u->roles()->pluck('name')->toArray())}}</td>
+                        
+                        <td id="action-buttons" class="text-center col-4">
+                          <button id="view-user{{$u->id}}" type="submit" class="btn btn-success " value="{{$u->id}}" data-toggle="modal" data-target="#view{{$u->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
+                          <button id="comms-user{{$u->id}}" type="submit" class="btn btn-dark " value="{{$u->id}}" data-toggle="modal" data-target="#comms{{$u->id}}"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="User Committees"></button>  
+                          <a href="{{route('admin.users.edit', $u->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$u->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete User"></button>
                         </td>
                       </tr>
                       @endforeach
@@ -198,7 +201,7 @@ $('tbody').html(output);
             </div>
             </div>
             <div class="render">
-            <?php echo $users->render(); ?>
+            
             </div>
         </div>
     </div>
@@ -221,11 +224,11 @@ $('tbody').html(output);
         </button>
       </div>
       <div class="modal-body">
-        <h3>Name: {{implode('',$user->profile()->pluck('firstname')->toArray())}} {{implode('',$user->profile()->pluck('surname')->toArray())}}</h3>
-        <h3>Address: {{implode('',$user->profile()->pluck('address')->toArray())}}, {{implode('',$user->profile()->pluck('town')->toArray())}}, {{implode('',$user->profile()->pluck('postcode')->toArray())}}</h3>
-        <h3>Contact No: {{implode('',$user->profile()->pluck('contact_no')->toArray())}}</h3>
+        <h3>Name: </h3>
+        <h3>Address: </h3>
+        <h3>Contact No: </h3>
         <h3>Causes Supporting:
-            {{ implode(', ',$user->causes()->get()->pluck('name')->toArray())}}  
+             
         </h3> 
       </div>
       <div class="modal-footer">
@@ -235,6 +238,41 @@ $('tbody').html(output);
   </div>
 </div>
 </div>
+
+<div class="modal fade" id="comms{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">User Committies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/user/committees/update/{{$user->id}}" method="POST">
+          {{ method_field('PUT') }}
+          @csrf 
+          <div class="form-group row">
+            <div class="row">
+            @foreach($causes as $cause)
+            <div class="form-check col-6">
+                <input type="checkbox" name="comms[]" value="{{ $cause->id }}"
+                @if($user->causes()->pluck('id')->contains($cause->id)) checked @endif>
+                <label>{{ $cause->name }}</label>
+              </div>
+            @endforeach
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
   <!-- Delete Modal -->
   <div class="modal fade" id="delete{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -246,7 +284,7 @@ $('tbody').html(output);
           </button>
         </div>
         <div class="modal-body">
-          This will delete the user {{implode('', $user->profile()->pluck('firstname')->toArray())}} {{implode('', $user->profile()->pluck('surname')->toArray())}}. Are you sure you wish to delete this user?
+          This will delete the user. Are you sure you wish to delete this user?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

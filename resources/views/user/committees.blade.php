@@ -36,7 +36,7 @@
         <div class="row justify-content-center d-flex align-items-middle">
             <div class="col-12">
                 <div class="card">
-            <div class="card-header">User Committees - {{implode('',Auth::user()->profile()->pluck('firstname')->toArray())}} {{implode('',Auth::user()->profile()->pluck('surname')->toArray())}}</div>
+            <div class="card-header">User Committees - {{Crypt::decrypt($profileInfo->firstname)}} {{Crypt::decrypt($profileInfo->surname)}}</div>
                     <div class="card-body">
 
                       <form action="{{route('user.committees.update', $user->id)}}" method="POST">
@@ -54,9 +54,6 @@
                                 @endforeach
                             </div>
                             </div>
-                        <button id="editcommittees" type="button" class="col-12 col-lg-3 btn btn-dark" style="margin-right: 20%;">Edit Committees</button>
-                        <button id="cancelcommittees" type="button" class="col-12 col-lg-3 btn btn-danger" style="margin-right: 3%;" disabled>Cancel</button>
-                        <button id="savecommittees" type="submit" class="col-12 col-lg-3 btn btn-primary">Save</button>
                         </form>
                     </div>
                     </div>

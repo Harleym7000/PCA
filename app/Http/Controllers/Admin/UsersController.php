@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendMail;
 
 class UsersController extends Controller
@@ -31,11 +32,27 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(10);
+        $users = User::all();
+        $causes = Cause::all();
+        // $profileInfo = DB::table('users')
+        // ->join('profiles', 'users.id', '=', 'profiles.user_id')
+        // ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        // ->groupBy('users.id')
+        // ->get();
+
+        foreach($users as $u) {
+            $name = Crypt::decrypt($u->profile()->pluck('firstname'));
+        }
+        
+
+        //dd($name);
+        
+        
         return view('admin.users.index')->with([
             'roles' => $roles,
             'users'=> $users,
-            'title' => $title
+            'title' => $title,
+            'causes' => $causes
             ]);
     }
 
@@ -270,7 +287,7 @@ class UsersController extends Controller
 
     public function updateUserCauses(Request $request, $id)
     {
-        $causes = $request->causes;
+        $causes = $request->comms;
         $user = User::find($id);
         $user->causes()->sync($causes);
 

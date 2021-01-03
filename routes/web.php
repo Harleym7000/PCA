@@ -45,7 +45,7 @@ Route::post('/register', 'Auth\RegisterController@create');
 Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('can:view-policy');
-Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:view-policy');
+Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:manage-users');
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('can:view-policy');
 Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
 
@@ -70,7 +70,7 @@ Route::get('/user/settings', 'AccountsController@settings')->middleware('auth');
 Route::get('/user/events', 'AccountsController@events')->middleware('auth');
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
 Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('auth');
-Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('auth')->name('user.committees.update');
+Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('can:manage-users')->name('user.committees.update');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ])->middleware('auth');
