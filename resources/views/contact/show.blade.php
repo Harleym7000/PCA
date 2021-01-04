@@ -27,10 +27,10 @@
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="message-reply">
             @include('partials.alerts')
@@ -72,10 +72,10 @@
               <input type="hidden" value="{{$m->email}}" name="from">
               <input type="hidden" value="{{$m->subject}}" name="subject">
               <div class="row">
-                <div class="col-10">
+                <div class="col-8 col-lg-10">
                   <a href="/admin/contact"><button type="button" class="btn btn-secondary">Cancel</button></a>
                 </div>
-                <div class="col-2">
+                <div class="col-4 col-lg-2">
               <div class="form-group text-right">
               <button type="submit" class="btn btn-primary">Reply</button>
             </div>

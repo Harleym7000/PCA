@@ -175,10 +175,13 @@
                             </div>
                         </div>
                         <div class="col-12">
-                        <button id="editprofile" type="button" class="col-12 col-lg-3 btn btn-dark" style="margin-right: 20%;">Edit Profile</button>
-                        <button id="cancelprofile" type="button" class="col-12 col-lg-3 btn btn-danger" style="margin-right: 3%;" disabled>Cancel</button>
-                        <button id="saveprofile" type="submit" class="col-12 col-lg-3 btn btn-primary" disabled>Save</button>
+                        <button id="editprofile" type="button" class="col-12 col-lg-3 btn btn-dark" style="margin-right: 30%;">Edit Profile</button>
+                        <button id="cancelprofile" type="button" class="col-12 col-lg-2 btn btn-danger" style="margin-right: 3%;" disabled>Cancel</button>
+                        <button id="saveprofile" type="submit" class="col-12 col-lg-2 btn btn-primary" style="margin-right: 3%;" disabled>Save</button>
+                        </form>
                     </div>
+                    <br>
+                    <button type="submit" class="col-12 col-lg-3 btn btn-danger" data-toggle="modal" data-target="#delete{{$userID}}" style="margin-left: 1.1%;">Delete Account</button>
                     </div>
                 </div>
             </div>
@@ -189,6 +192,30 @@
       </div>
     </div>
 </div>
+</div>
+
+<div class="modal fade" id="delete{{$userID}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>This will delete your account and you will no longer be able to log in. <br>Are you sure you wish to delete your account?<h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="/user/profile/delete/{{$userID}}" method="POST">
+            @csrf
+          <button type="submit" class="btn btn-danger">Delete Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

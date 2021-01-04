@@ -111,14 +111,14 @@ dataType: "json",
             <li class="list-group-item my-auto" @if($message->read === 1) style="background-color:#f8f8f8;"
               @endif>
               <div class="row">
-              <p class="col-9 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->subject}}</p> <p class="col-3 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->firstname}} {{$message->surname}} <p class="col-12 col-lg-3" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->message}}</p>
-              <div class="col-8 col-md-9 col-lg-3">
+              <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->subject}}</p> <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->firstname}} {{$message->surname}} <p class="col-12 col-lg-3" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->message}}</p>
+              <div class="col-12 col-md-9 col-lg-3">
               <a href="/admin/contact/reply/{{$message->id}}" data-toggle="tooltip" data-placement="bottom" title="Reply"><button type="button" id="reply" class="btn btn-btn-link"><img src="/img/baseline_reply_black_18dp.png"></button></a>
               @if($message->read === 0)<a href="" data-toggle="tooltip" data-placement="bottom" title="Mark as Read"><button type="button"  class="markRead btn btn-link" value="{{$message->id}}" name="mark-read"><img src="/img/baseline_mark_email_read_black_18dp.png">@else<a href="" data-toggle="tooltip" data-placement="bottom" title="Mark Unread"><button type="button" class="markUnread btn btn-link" name="markUnread" value="{{$message->id}}"><img src="/img/baseline_mark_email_unread_black_18dp.png">@endif</button></a>
               <a data-toggle="tooltip" data-placement="bottom" title="Delete"><button type="button" class="btn btn-link" data-toggle="modal" data-target="#delete{{$message->id}}"><img src="/img/baseline_delete_black_18dp.png"></button></a>
               
             </div>
-            <p class="col-4 col-md-3 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{\Carbon\Carbon::parse($message->created_at)->format('D jS M H:i')}}</p>
+            <p class="col-12 col-md-3 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{\Carbon\Carbon::parse($message->created_at)->format('D jS M H:i')}}</p>
               </div>
             </li>
             @endforeach

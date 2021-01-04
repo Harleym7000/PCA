@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Event;
 use Illuminate\Support\Facades\DB;
 use App\News;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
@@ -16,8 +17,12 @@ class PagesController extends Controller
         ->get();
         $news = News::orderBy('id', 'desc')->get();
         $visitor_ip = $_SERVER['REMOTE_ADDR'];
+        $mon = Carbon::now()->format('M');
+        $year = Carbon::now()->format('Y');
+        $date = Carbon::now()->format('Y-m-d');
+        $time = Carbon::now()->format('H:i:s');
         DB::table('visitors')->insert(
-            ['ip' => $visitor_ip]
+            ['ip' => $visitor_ip, 'visit_month' => $mon, 'visit_year' => $year, 'visit_date' => $date, 'visit_time' => $time]
         );
         return view('pages.index')->with('events', $events)->with('news', $news)->with('eventsCount', count($events));
 }

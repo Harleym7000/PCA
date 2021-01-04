@@ -22,7 +22,7 @@ class DashboardsController extends Controller
         ->where('role_user.role_id', '=', 3)
         ->get();
         $totalCommitteeMembers = count($committeeMembers);
-        $uniqueVisits = DB::table('visitors')->distinct()->get(['ip']);
+        $uniqueVisits = DB::table('visitors')->get(['ip']);
         $totalUniqueVisits = count($uniqueVisits);
         $contactMessages = DB::table('contacts')->get();
         $totalContactMessages = count($contactMessages);

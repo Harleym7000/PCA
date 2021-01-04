@@ -43,7 +43,7 @@
           @include('partials.alerts')
           <div class="row">
             <div class="col-8">
-              <h1 class="welcome">Welcome {{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}</h1>
+              <h1 class="welcome">Welcome {{\Crypt::decrypt(Auth::user()->profile()->pluck('firstname'))}}</h1>
             </div>
             <div class="col-3">
               <div class="card col-12 text-white bg-success">

@@ -66,7 +66,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 Route::get('/user/profile', 'AccountsController@profile')->middleware('auth');
 Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('can:view-policy');
 Route::post('/user/profile/update', 'AccountsController@updateProfile')->middleware('auth');
-Route::get('/user/settings', 'AccountsController@settings')->middleware('auth');
+Route::post('/user/profile/delete/{id}', 'AccountsController@deleteAccount')->middleware('auth');
 Route::get('/user/events', 'AccountsController@events')->middleware('auth');
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
 Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('auth');
@@ -94,9 +94,7 @@ Route::post('/policy/upload', 'PoliciesController@store')->middleware('can:manag
 Route::get('/policy/download/{filename}', 'PoliciesController@downloadFile')->name('downloadFile')->middleware('can:manage-users');
 Route::post('admin/users/processResetPass', 'Admin\UsersController@resetUserPassword')->middleware('can:manage-users');
 Route::get('/admin/getContactMessages', 'ContactController@getMessages')->middleware('can:manage-users');
-Route::post('/admin/getUserRole', 'Admin\UsersController@getUsersByRole')->middleware('can:manage-users');
-Route::get('/admin/getAllUsers', 'Admin\UsersController@getAllUsers')->middleware('can:manage-users');
-Route::post('/admin/getUserByName', 'Admin\UsersController@getUsersByName')->middleware('can:manage-users');
+Route::post('/admin/users/getByFilter', 'Admin\UsersController@getUsersByFilters')->middleware('can:manage-users');
 Route::post('/admin/getUserCauses', 'Admin\UsersController@getUserCauses')->middleware('can:manage-users');
 Route::get('/admin/getCommitteeGrowth', 'DashboardsController@getCommitteeGrowth')->middleware('can:manage-users');
 Route::get('/admin/getSiteTraffic', 'DashboardsController@getSiteTraffic')->middleware('can:manage-users');

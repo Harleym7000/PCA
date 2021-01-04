@@ -11375,7 +11375,7 @@ body {
 #sidenav {
   background-color: #252525;
   width: auto;
-  min-height: 100%;
+  min-height: 110%;
 }
 
 #sidenav .logo {
@@ -11442,6 +11442,10 @@ body {
   width: 100%;
   background-color: #fff;
   height: 3%;
+}
+
+.mob-info {
+  display: none;
 }
 
 #test .navbar {
@@ -11983,7 +11987,16 @@ input[disabled] {
   }
 
   #manage-users .table > tbody > tr > td {
-    font-size: 12px;
+    font-size: 22px;
+  }
+
+  #manage-users .table > tbody > tr > td .btn {
+    height: 50px;
+    width: 120px;
+  }
+
+  .mob-info {
+    display: block;
   }
 
   #news-page h1 {
@@ -12087,7 +12100,7 @@ input[disabled] {
 
   #manage-users .table > tbody > tr > td {
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 18px;
   }
 
   #manage-users .table .filter-input {
@@ -12242,7 +12255,6 @@ input[disabled] {
 
   #manage-users .table > tbody > tr > td {
     vertical-align: middle;
-    font-size: 10px;
   }
 }
 

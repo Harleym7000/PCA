@@ -227,7 +227,7 @@ success:function(response){
                 <div class="charts row justify-content-center">
                   <div class="card col-12 col-lg-5">
                     <div class="card-header">
-                      <strong>Member Growth Pattern</strong>
+                      <strong>Member Growth Pattern {{\Carbon\Carbon::now()->format('Y')}}</strong>
                     </div>
                     <div class="card-body">
                       <div id="members_curve_chart"></div>
@@ -235,7 +235,7 @@ success:function(response){
                   </div>
                   <div class="card col-12 col-lg-5">
                     <div class="card-header">
-                      <strong>Site Traffic</strong>
+                      <strong>Site Traffic {{\Carbon\Carbon::now()->format('Y')}}</strong>
                     </div>
                     <div class="card-body">
                       <div id="traffic_curve_chart"></div>
@@ -243,7 +243,6 @@ success:function(response){
                   </div>
                 </div>
                 @endcan
-              <h3 class="info-header text-center">More coming soon</h3>
           </div>
           </div>
         </div>

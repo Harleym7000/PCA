@@ -76,11 +76,9 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'recaptcha' => 'required',
             'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],
-            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed', new Script_Validation],
-            'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', new Script_Validation],
-            'agree' => 'required|in:1'
+            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
+            'password_confirmation' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/'],
         ],
         $messages = [
             'password.regex' => 'Passwords must contaain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',

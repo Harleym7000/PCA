@@ -78,7 +78,7 @@
                         <td><img src="/storage/news_images/{{$story->image}}" style="height: 85px; width: 150px;"></td>
                         <td><strong>{!!$story->title!!}</strong></td>
                         <td><strong>{!!$story->story!!}</strong></td>
-                        <td><strong>{{$story->firstname}} {{$story->surname}}</strong></td>
+                        <td><strong>{{\Crypt::decrypt($story->firstname)}} {{\Crypt::decrypt($story->surname)}}</strong></td>
                         <td id="action-buttons">
                             @can('manage-news')
                             <div class="row">

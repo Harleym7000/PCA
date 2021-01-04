@@ -56,7 +56,7 @@ class AccountsController extends Controller
         ->where('users.id', $userID)
         ->select('email')->first();
         $userEmail = $userEmailQuery->email;
-        return view('user.profile')->with(['profileInfo' => $profileInfo, 'userEmail' => $userEmail]);
+        return view('user.profile')->with(['profileInfo' => $profileInfo, 'userEmail' => $userEmail, 'userID' => $userID]);
     }
 
     public function cancelReg(Request $request, $id)
@@ -165,7 +165,7 @@ class AccountsController extends Controller
     }
 
     public function settings($id) {
-        return view('user.settings');
+        return view('user.settings')->with('id', $id);
     }
 
     public function events() {
@@ -200,5 +200,44 @@ class AccountsController extends Controller
             'user' => $user,
             'profileInfo' => $profileInfo
             ]);
+    }
+
+    public function deleteAccount($id) 
+    {
+        $userID = $id;
+
+        DB::table('user_event_registrations')
+        ->where('user_id', $userID)
+        ->delete();
+
+        DB::table('user_reg')
+        ->where('user_id', $userID)
+        ->delete();
+
+        DB::table('role_user')
+        ->where('user_id', $userID)
+        ->delete();
+
+        DB::table('profiles')
+        ->where('user_id', $userID)
+        ->delete();
+
+        DB::table('news')
+        ->where('written_by', $userID)
+        ->delete();
+
+        DB::table('contact_response')
+        ->where('respondee_user_id', $userID)
+        ->delete();
+
+        DB::table('cause_user')
+        ->where('user_id', $userID)
+        ->delete();
+
+        DB::table('users')
+        ->where('id', $userID)
+        ->delete();
+
+        return redirect('/');
     }
 }

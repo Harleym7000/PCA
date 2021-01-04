@@ -98,7 +98,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_settings_white_18dp.png">
-          <a class="nav-link" href="/user/settings">Account Settings</a>
+          <a class="nav-link" href="/user/settings/{{Auth::user()->id}}">Account Settings</a>
         </div>
         </li>
         <li class="nav-item">
@@ -397,7 +397,7 @@
       <br>
     <br>
     @endcan
-    <a href="/user/settings"><div class="option">
+    <a href="/user/settings/{{Auth::user()->id}}"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">
           <img class="d-block mx-auto mx-xl-0" src="/img/baseline_settings_white_18dp.png">

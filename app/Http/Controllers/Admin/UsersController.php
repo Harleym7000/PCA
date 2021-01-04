@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendMail;
 
+
 class UsersController extends Controller
 {
     /**
@@ -32,7 +33,7 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::all();
+        $users = User::paginate(10);
         $causes = Cause::all();
         // $profileInfo = DB::table('users')
         // ->join('profiles', 'users.id', '=', 'profiles.user_id')
@@ -208,36 +209,6 @@ class UsersController extends Controller
         }
 
         return redirect()->route('admin.users.index');
-    }
-
-    public function getUsersByRole(Request $request) {
-        $role_id = $_POST['id'];
-        $query = DB::table('users')
-        ->join('role_user', 'users.id', '=', 'role_user.user_id')
-        ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->select('users.id AS user_id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'role_user.user_id', 'roles.name AS role_name')
-        ->where('role_user.role_id', '=', $role_id);
-
-        $result = $query->get();
-
-        return response()->json($result);
-    }
-
-    public function getUsersByName(Request $request) {
-        $name = $_POST['search'];
-        $query = DB::table('users')
-        ->join('role_user', 'users.id', '=', 'role_user.user_id')
-        ->join('roles', 'roles.id', '=', 'role_user.role_id')
-        ->join('profiles', 'profiles.user_id', '=', 'users.id')
-        ->select('users.id AS user_id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'role_user.user_id AS role_user_id', 'roles.name AS role_name')
-        ->where('profiles.firstname', 'like', '%'.$name.'%')
-        ->orWhere('profiles.surname', 'like', '%'.$name.'%')
-        ->groupBy('users.id');
-
-        $result = $query->get();
-
-        return response()->json($result);
     }
 
     public function displayResetUserPassword() {
