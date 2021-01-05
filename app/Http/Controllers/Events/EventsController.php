@@ -124,6 +124,37 @@ class EventsController extends Controller
         return view('events.show')->with('event', $event);
     }
 
+    public function showRegistered($id)
+    {
+        $eventID = $id;
+
+        $eventTitle = DB::table('events')
+        ->where('id', $eventID)
+        ->select('title')
+        ->first();
+
+        //dd($id);
+
+        $guestReg = DB::table('guest_event_registrations')
+        ->where('event_id', $eventID)
+        ->get();
+
+        $userReg = DB::table('user_event_registrations')
+        ->join('profiles', 'profiles.user_id', '=', 'user_event_registrations.user_id')
+        ->join('users', 'users.id', '=', 'profiles.user_id')
+        ->where('event_id', $eventID)
+        ->select('firstname', 'surname', 'email', 'contact_no')
+        ->get();
+
+        return view('events.showRegistered')->with([
+            'guestReg' => $guestReg,
+            'userReg' => $userReg,
+            'eventTitle' => $eventTitle
+        ]);
+
+        //dd($userReg);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -229,25 +260,25 @@ class EventsController extends Controller
         }
     }
 
-    public function register(Request $request)
-    {
-        $forename = $request->input('forename');
-        $surname = $request->input('surname');
-        $email = $request->input('email');
-        $phone = $request->input('phone');
-        $eventID = $request->input('eventID');
+    // public function register(Request $request)
+    // {
+    //     $forename = $request->input('forename');
+    //     $surname = $request->input('surname');
+    //     $email = $request->input('email');
+    //     $phone = $request->input('phone');
+    //     $eventID = $request->input('eventID');
 
-        DB::table('guest_event_registrations')
-        ->insert(['event_id' => $eventID, 
-                  'forename' => $forename, 
-                  'surname' => $surname, 
-                  'email' => $email, 
-                  'contact_no' => $phone
-                  ]);
+    //     DB::table('guest_event_registrations')
+    //     ->insert(['event_id' => $eventID, 
+    //               'forename' => $forename, 
+    //               'surname' => $surname, 
+    //               'email' => $email, 
+    //               'contact_no' => $phone
+    //               ]);
 
-        $request->session()->flash('success', 'You have been successfully registered for this event.');
-        return redirect()->back();
-    }
+    //     $request->session()->flash('success', 'You have been successfully registered for this event.');
+    //     return redirect()->back();
+    // }
 
     public function addwidget()
     {

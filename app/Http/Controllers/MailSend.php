@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 use App\News;
 use App\Event;
 
@@ -197,10 +198,10 @@ class MailSend extends Controller
                     
         }
 
-        $forename = $request->input('forename');
-        $surname = $request->input('surname');
+        $forename = Crypt::encrypt($request->input('forename'));
+        $surname = Crypt::encrypt($request->input('surname'));
         $email = $request->input('email');
-        $phone = $request->input('phone');
+        $phone = Crypt::encrypt($request->input('phone'));
         $eventID = $request->input('eventID');
 
         $event = Event::find($eventID);

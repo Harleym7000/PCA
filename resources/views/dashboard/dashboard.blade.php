@@ -161,55 +161,36 @@ success:function(response){
         <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
           <div id="dashboard">
-            @can('manage-users')
-            <ul class="nav nav-tabs">
-              @can('manage-users')
-              <li class="nav-item">
-                <a class="nav-link active" href="/admin/dashboard">Admin</a>
-              </li>
-              @endcan
-              @can('manage-events')
-              <li class="nav-item">
-                <a class="nav-link" href="/events/dashboard">Events</a>
-              </li>
-              @endcan
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
             <h1>Dashboard</h1>
               <div class="content col-12">
                 <div class="row justify-content-center">
-                  <div class="card col-12 col-xl-3 text-white bg-primary">
+                  <div class="card col-12 col-xl-3 text-white bg-primary mb-5">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-12 col-lg-7" style="height: 98%; margin:auto">
+                        <div class="col-6" style="height: 98%; margin:auto">
                       <img src="/img/baseline_visibility_white_18dp.png">
                         </div>
-                        <div class="col-12 col-lg-5">
+                        <div class="col-6">
                       <h1 class="card-text text-right">{{$totalUniqueVisits}}
                         <p class="card-text text-right">Site Visits</p>
                       </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card col-12 col-xl-3 text-white bg-success">
+                  <div class="card col-12 col-xl-3 text-white bg-success mb-5">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-12 col-lg-5" style="height: 98%; margin:auto">
+                        <div class="col-6" style="height: 98%; margin:auto">
                       <img src="/img/baseline_people_alt_white_18dp.png">
                         </div>
-                        <div class="col-12 col-lg-7">
+                        <div class="col-6">
                       <h1 class="card-text">{{$totalCommitteeMembers}}
                         <p class="card-text">Members</p>
                       </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card col-12 col-xl-3 text-white bg-danger">
+                  <div class="card col-12 col-xl-3 text-white bg-danger mb-5">
                     <div class="card-body">
                       <div class="row">
                         <div class="col-6" style="height: 98%; margin:auto">
@@ -225,7 +206,7 @@ success:function(response){
                 </div>
               </div>
                 <div class="charts row justify-content-center">
-                  <div class="card col-12 col-lg-5">
+                  <div class="card col-12 col-lg-5 mb-5">
                     <div class="card-header">
                       <strong>Member Growth Pattern {{\Carbon\Carbon::now()->format('Y')}}</strong>
                     </div>
@@ -233,7 +214,7 @@ success:function(response){
                       <div id="members_curve_chart"></div>
                     </div>
                   </div>
-                  <div class="card col-12 col-lg-5">
+                  <div class="card col-12 col-lg-5 mb-5">
                     <div class="card-header">
                       <strong>Site Traffic {{\Carbon\Carbon::now()->format('Y')}}</strong>
                     </div>
@@ -242,7 +223,6 @@ success:function(response){
                     </div>
                   </div>
                 </div>
-                @endcan
           </div>
           </div>
         </div>

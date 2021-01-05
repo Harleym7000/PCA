@@ -36,99 +36,9 @@
       drawMembersChart();
       drawTrafficChart();
     });
-
-                          $('#user-search').on('keyup',function(){
-                            var value = $('#user-search').val();
-$.ajax({
-type : 'POST',
-url : '/admin/getUserByName',
-headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-data:{search: value},
-dataType: "json",
-success:function(data){
-  var output = '';
-                                var len = data.length;
-                                
-                                console.log(len);
-                                //console.log("Data is" +JSON.stringify(data));
-                                
-                                for(var count = 0; count < len; count++) 
-                                  {
-                                    var userID = data[count].user_id;
-                                    var roles = data[count].role_name;
-                                    console.log(roles)
-                                    //console.log("User ID:" +userID);
-                                    if(userID == userID)
-                                    output += '<tr>';
-                                    output += '<td>' + data[count].name + '</td>';
-                                    output += '<td>' + data[count].email + '</td>';
-                                    output += '<td>' + data[count].role_name + '</td>';
-                                    output += '<td>';
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark'>Edit User</button></a>";
-                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
-                                    output += "</td>";
-                                    output += '</tr>';
-                                    
-                                  }
-$('tbody').html(output);
-}
-});
-})
-
-                         
-                          $('#user-role').change(function(e){
-                            e.preventDefault();
-                            var role = $('#user-role').val();
-                            //console.log(role);
-                            
-                            
-                            $.ajax({
-                              method: "POST",
-                              url: "/admin/getUserRole",
-                              headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                              data: {id: role},
-                              dataType: "json",
-                              success: function(data) {
-                                var output = '';
-                                var len = data.length;
-                                
-                                //console.log(len);
-                                //console.log("Data is" +JSON.stringify(data));
-                                
-                                for(var count = 0; count < len; count++) 
-                                  {
-                                    var userID = data[count].user_id;
-                                    //console.log("User ID:" +userID);
-                                    if(userID == userID)
-                                    output += '<tr>';
-                                    output += '<td>' + data[count].name + '</td>';
-                                    output += '<td>' + data[count].email + '</td>';
-                                    output += '<td>' + data[count].role_name + '</td>';
-                                    output += '<td>';
-                                    output += "<a href=/admin/users/"+data[count].user_id+"/edit><button type='button' class='btn btn-dark'>Edit User</button></a>";
-                                    output += "<button type='submit' class='btn btn-danger' data-toggle='modal' style='margin-left: 2%;' data-target='#delete"+data[count].user_id+"'>Delete User</button>";
-                                    output += "</td>";
-                                    output += '</tr>';
-                                    
-                                  }
-                                  
-                                  
-                                  $('tbody').html(output);
-                                    //console.log("The output is" +output);
-                                    //console.log('Data' +data.user_id);
-                                    return data;
-                                    
-                              }
-                              
-                            });
-                            
-                            //console.log(role);
-                            
-                          });
-                          
                         });
-                        
-                      </script>
+
+                          </script>
 </head>
 <body>
   <div id="app">
@@ -139,62 +49,54 @@ $('tbody').html(output);
     </div>
     <div class="content-holder col-12 col-lg-10">
       @include('inc.admin-nav')
-      <div id="manage-events">
+      <div id="manage-users">
         @include('partials.alerts')
         <div class="row justify-content-center">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="user-table">
-                      <span id="total_records"></span>
-                      <thead>
-                        <tr>
-                          <th scope="col">Search Events:<input id="event-search" type="text" placeholder="Search event..." class="filter-input"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                          <th scope="col">Search Organisers:
-                            <select id="event-organiser" name="event-organiser">
-                              <option selected disabled>Choose an option...</option>
-                              @foreach($orgs as $org)
-                              <option id="organiser" value="{{$org->managed_by}}">{{$org->managed_by}}</option>
-                              @endforeach
-                            </select>
-              <th scope="col"></th>
-                      </thead>
-                        <thead>
-                          <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Venue</th>
-                            <th scope="col">Organiser</th>
-                            <th style="width: 20%;">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                          
-  
-  <!-- Modal -->
-  @foreach($events as $event)
-                    <tr>
-                        <td><img src="/storage/event_images/{{$event->image}}" style="height: 85px; width: 150px;"></td>
-                        <td><strong>{{$event->title}}</strong></td>
-                        <td><strong>{{\Carbon\Carbon::parse($event->date)->format('D d M Y')}}</strong></td>
-                        <td><strong>{{\Carbon\Carbon::parse($event->time)->format('H:i')}}</strong></td>
-                        <td><strong>{{$event->venue}}</strong></td>
-                        <td><strong>{{$event->managed_by}}</strong></td>
-                        <td id="action-buttons">
-                            @can('manage-events')
-                              <a href="/events/edit/{{$event->id}}"><button type="button" class="btn btn-dark">Edit</button></a>
-                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#eventdelete{{$event->id}}">Delete</button>
-                            @endcan
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                      </table>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">Event Management</div>
+              <p class="mob-info pt-5">Scroll right to see more</p> 
+                  <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-sm" id="user-table">
+                        <span id="total_records"></span>
+                          <thead class="thead-dark">
+                            <tr class="d-flex">
+                              <th scope="col" class="manage-users-name col-6 col-lg-2">Title</th>
+                              <th scope="col" class="manage-users-email col-6 col-lg-3">Date/Time</th>
+                              <th scope="col" class="manag-users-roles col-6 col-lg-3">Venue</th>
+                              <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+    @foreach($events as $e)
+                      <tr class="d-flex">
+                        <td class="col-6 col-lg-2"><strong>{{$e->title}}</strong></td>
+                          <td class="col-6 col-lg-3"><strong>{{ \Carbon\Carbon::parse($e->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($e->time)->format('g:ia')}}</strong></td>
+                          <td class="col-6 col-lg-3"><strong>{{$e->venue}}</strong></td>
+                          <td id="action-buttons" class="text-center col-6 col-lg-4">
+                            <a href="/events/registered/{{$e->id}}"><button id="comms-user" type="submit" class="btn btn-success " value="" data-toggle="modal" data-target="#comms"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View Registered"></button></a>  
+                            <a href="/events/edit/{{$e->id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Event"></button></a>
+                                  <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$e->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                        </table>
+                      </div>
+                      </div>
+              </div>
+              </div>
+              <div class="render">
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  </div>
+      </div>
+    </div>
+  </div>
                       
                     
                     </div>
@@ -212,7 +114,7 @@ $('tbody').html(output);
 </div>
   <!-- Modal -->
   @foreach($events as $event)
-  <div class="modal fade" id="eventdelete{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="delete{{$event->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">

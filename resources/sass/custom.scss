@@ -860,6 +860,10 @@ body {
       margin-top: 5%;
     }
 
+    #event-edit {
+      margin-top: 5%;
+    }
+
     #my-events h1 {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
@@ -973,21 +977,10 @@ body {
     margin-bottom: 2%;
   }
 
-  #dashboard {
-    height: 48vh;
-  }
-
   input[disabled] {
     cursor: not-allowed;
     opacity: .6;
     background: red;
-  }
-
-  @media (max-width: 321px) {
-    
-    #manage-users .table {
-        margin-top: 15%;
-    }
   }
 
   @media (max-width: 425px) { 
@@ -1093,8 +1086,8 @@ body {
         font-size: 14px;
       }
 
-    #manage-users .table {
-        margin-top: 17%;
+    #manage-users {
+        margin-top: 25%;
     }
 
     #manage-users .table > tbody > tr > td {
@@ -1104,10 +1097,6 @@ body {
    #manage-users .table > tbody > tr > td .btn {
      height: 50px;
      width: 120px;
-   }
-
-   .mob-info {
-     display: block;
    }
 
    #news-page h1 {
@@ -1166,9 +1155,13 @@ body {
   margin-bottom: 10%;
 }
 
-#dashboard .card-deck .card {
+#dashboard {
+  margin-top: 10%;
+}
+
+#dashboard .card {
   font-size: 22px;
-  height: 300px;
+  height: auto;
   text-align: center;
 }
 
@@ -1198,10 +1191,6 @@ footer .subscribe {
   // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) { 
 
-    #manage-users {
-        margin-top: 10%;
-    }
-
     #manage-users .table > thead > tr > th {
       font-size: 14px;
     }
@@ -1221,6 +1210,14 @@ footer .subscribe {
     width: 1000%;
   }
 
+  .mob-info {
+    display: block;
+  }
+
+  #sidenav .divider {
+    display: none;
+  }
+
    footer #subscribe-form {
     width: 80%;
     margin: auto;
@@ -1234,7 +1231,6 @@ footer .subscribe {
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) { 
-
   #sidenav {
     display: none;
 }
@@ -1270,7 +1266,6 @@ width: 5%;
 #mobile-nav .navbar li {
   margin-top: 5%;
   margin-bottom: 5%;
-  border-bottom: 1px solid #f8f8f8;
 }
 
 #inbox-display label {
@@ -1357,10 +1352,6 @@ width: 5%;
         margin: auto;
         font-size: 20px;
         text-align: center;
-    }
-
-    #manage-users {
-        margin-top: 10%;
     }
 
     #manage-users .table {

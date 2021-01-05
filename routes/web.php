@@ -43,6 +43,7 @@ Route::get('/register', 'Auth\RegisterController@index');
 Route::post('/register', 'Auth\RegisterController@create');
 
 Route::get('/member', 'MemberController@index')->name('member')->middleware('can:view-policy');
+Route::post('/meeting/update', 'AdminPagesManagerController@updateMeeting')->middleware('can:manage-users');
 Route::get('/users/resetPass', 'Admin\UsersController@displayResetUserPassword');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('can:view-policy');
 Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:manage-users');
@@ -53,8 +54,9 @@ Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:m
 //Event Manager Links
 Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:manage-events')->group(function(){
     Route::get('/index', 'EventsController@index')->name('event');
-    Route::get('/edit/{id}', 'EventsController@edit');
+    Route::get('/edit/{id}', 'EventsController@edit')->name('event-edit');
     Route::put('/edit/{id}', 'EventsController@update');
+    Route::get('/registered/{id}', 'EventsController@showRegistered');
     Route::get('/create', 'EventsController@create');
     Route::post('/create', 'EventsController@store');
     Route::post('/delete', 'EventsController@destroy');

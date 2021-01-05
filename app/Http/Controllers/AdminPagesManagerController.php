@@ -85,4 +85,14 @@ class AdminPagesManagerController extends Controller
     {
         //
     }
+
+    public function updateMeeting(Request $request)
+    {
+        $date = $request->meetdate;
+
+        DB::table('meeting')
+        ->update(['datetime' => $date]);
+
+        return redirect()->back();
+    }
 }

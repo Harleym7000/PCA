@@ -54,7 +54,22 @@
                     </div>
                     <div class="col-10">
                   <h1 class="card-text text-right">Next Meeting</h1>
-                    <h5 class="card-text text-right">Mon 2nd Dec 2020 - 7:00pm</h5>
+                  @can('manage-users')
+                  <form action="/meeting/update" method="POST">
+                    @csrf
+                  <div class="row">
+                    <div class="col-9">
+                  <input type="datetime-local" name="meetdate">
+                </div>
+                <div class="col-3">
+                  <button type="submit" class="btn btn-primary">
+                    Update
+                  </button>
+                </form>
+                </div>
+                </div>
+                  @endcan
+                    <h5 class="card-text text-right">{{ \Carbon\Carbon::parse($meetingDate->datetime)->format('D jS M Y - g:ia')}}</h5>
                   </div>
                   </div>
             </div>

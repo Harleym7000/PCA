@@ -46,27 +46,27 @@
         <div class="row justify-content-center">
           <div class="col-12">
           <div class="card">
-            <div class="card-header">All Users </div>
+            <div class="card-header">User Management</div>
             <p class="mob-info pt-5">Scroll right to see more</p> 
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-sm" id="user-table">
                       <span id="total_records"></span>
                         <thead class="thead-dark">
                           <tr class="d-flex">
-                            <th scope="col" class="manage-users-name col-6 col-md-2">Name</th>
-                            <th scope="col" class="manage-users-email col-6 col-md-3">Email</th>
-                            <th scope="col" class="manag-users-roles col-6 col-md-3">Roles</th>
-                            <th scope="col" class="manage-users-actions text-center col-6 col-md-4">Actions</th>
+                            <th scope="col" class="manage-users-name col-6 col-lg-2">Name</th>
+                            <th scope="col" class="manage-users-email col-6 col-lg-3">Email</th>
+                            <th scope="col" class="manag-users-roles col-6 col-lg-3">Roles</th>
+                            <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
   <!-- Modal -->
   @foreach($users as $u)
                     <tr class="d-flex">
-                      <td class="col-6 col-md-2">{{Crypt::decrypt($u->profile()->pluck('firstname'))}} {{Crypt::decrypt($u->profile()->pluck('surname'))}}</td>
-                        <td class="col-6 col-md-3">{{$u->email}}</td>
-                        <td class="col-6 col-md-3">{{implode(", ", $u->roles()->pluck('name')->toArray())}}</td>
-                        <td id="action-buttons" class="text-center col-6 col-md-4">
+                      <td class="col-6 col-lg-2">{{Crypt::decrypt($u->profile()->pluck('firstname'))}} {{Crypt::decrypt($u->profile()->pluck('surname'))}}</td>
+                        <td class="col-6 col-lg-3">{{$u->email}}</td>
+                        <td class="col-6 col-lg-3">{{implode(", ", $u->roles()->pluck('name')->toArray())}}</td>
+                        <td id="action-buttons" class="text-center col-6 col-lg-4">
                           <button id="view-user{{$u->id}}" type="submit" class="btn btn-success " value="{{$u->id}}" data-toggle="modal" data-target="#view{{$u->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
                           <button id="comms-user{{$u->id}}" type="submit" class="btn btn-dark " value="{{$u->id}}" data-toggle="modal" data-target="#comms{{$u->id}}"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="User Committees"></button>  
                           <a href="{{route('admin.users.edit', $u->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>

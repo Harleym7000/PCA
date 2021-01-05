@@ -1,8 +1,14 @@
 <div id="mobile-nav">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" id="mobNavToggle" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="logo justify-content-center">
+      <div class="row">
+        <div class="col-12 d-flex">
+          <img src="/img/pcaLogoDarkTransparent.png" style="height:120px; width: 90px;">
+        
+    <button class="navbar-toggler my-auto" type="button" id="mobNavToggle" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="height: 40px;">
       <span class="navbar-toggler-icon"></span>
     </button>
+    </div>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -95,12 +101,12 @@
           <a class="nav-link" href="/news/create">Create News Story</a>
         </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_settings_white_18dp.png">
           <a class="nav-link" href="/user/settings/{{Auth::user()->id}}">Account Settings</a>
         </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_security_white_18dp.png">
@@ -117,7 +123,7 @@
       </ul>
     </div>
   </nav>
-  </div>
+</div>
   
   <div id="sidenav">
       <div class="logo justify-content-center">
@@ -397,7 +403,7 @@
       <br>
     <br>
     @endcan
-    <a href="/user/settings/{{Auth::user()->id}}"><div class="option">
+    {{-- <a href="/user/settings/{{Auth::user()->id}}"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">
           <img class="d-block mx-auto mx-xl-0" src="/img/baseline_settings_white_18dp.png">
@@ -409,7 +415,7 @@
       <h5 class="label">Account Settings</h5>
     </div></a>
     <div class="divider">
-    </div>
+    </div> --}}
     <a href="/users/resetPass"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">

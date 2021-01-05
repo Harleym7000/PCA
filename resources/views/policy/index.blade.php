@@ -56,7 +56,7 @@
         @if(count($policies) > 0)
         <div class="row">
         @foreach($policies as $p)
-        <div class="col-12 col-md-6 col-lg-3 col-xl-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card">
           <img class="card-img-top" src="img/pdf.png" alt="Card image cap">
           <div class="card-body">
@@ -77,7 +77,7 @@
           <form action="/policy/upload" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group row">
-              <div class="col-10">
+              <div class="col-12 col-lg-10">
               <div class="form-group">
                 <div class="form-control">
     <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple>
@@ -90,8 +90,8 @@
   </div>
             </div>
             <br>
-            <div class="col-2">
-              <button type="submit" class="btn btn-primary">Upload</button>
+            <div class="col-12 col-lg-2">
+              <button type="submit" class="btn btn-primary col-12">Upload</button>
               </div>
           </div>
           </form>

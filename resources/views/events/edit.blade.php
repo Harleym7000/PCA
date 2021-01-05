@@ -18,24 +18,37 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                          <script>
+                            $(document).ready(function(){
+
+                          $('#toggle-sidenav').on('click', function(){
+      $('.sidenav-holder').toggle();
+      $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
+    });
+                        });
+                        
+                      </script>
 </head>
+<body>
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="col-2">
+        <div class="sidenav-holder col-12 col-lg-2">
           @include('inc.admin-sidenav')
         </div>
-        <div class="col-10">
+        <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
 <div class="container">
+    <div id="event-edit">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Edit Event {{$event->title}}</div>
 
                 <div class="card-body">
 
-                  <form action="{{route('event-edit', $event)}}" method="POST" enctype="multipart/form-data">
+                  <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
 
@@ -105,3 +118,10 @@
         </div>
     </div>
 </div>
+</div>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

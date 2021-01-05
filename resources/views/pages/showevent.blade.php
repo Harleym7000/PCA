@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="show-event">
-    @foreach($events as $event)
+    {{-- @foreach($events as $event)
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @foreach($images as $i)
@@ -20,7 +20,7 @@
           </a>
       </div>
 </div>
-@endforeach
+@endforeach --}}
     <div class="show-event-title">
       @foreach($events as $event)
       <h1 class="text-center">{{$event->title}}</h1>

@@ -11750,6 +11750,10 @@ body {
   margin-top: 5%;
 }
 
+#event-edit {
+  margin-top: 5%;
+}
+
 #my-events h1 {
   text-align: center;
   font-family: "Montserrat", sans-serif;
@@ -11863,20 +11867,10 @@ footer #subscribe-form .captcha {
   margin-bottom: 2%;
 }
 
-#dashboard {
-  height: 48vh;
-}
-
 input[disabled] {
   cursor: not-allowed;
   opacity: 0.6;
   background: red;
-}
-
-@media (max-width: 321px) {
-  #manage-users .table {
-    margin-top: 15%;
-  }
 }
 
 @media (max-width: 425px) {
@@ -11982,8 +11976,8 @@ input[disabled] {
     font-size: 14px;
   }
 
-  #manage-users .table {
-    margin-top: 17%;
+  #manage-users {
+    margin-top: 25%;
   }
 
   #manage-users .table > tbody > tr > td {
@@ -11993,10 +11987,6 @@ input[disabled] {
   #manage-users .table > tbody > tr > td .btn {
     height: 50px;
     width: 120px;
-  }
-
-  .mob-info {
-    display: block;
   }
 
   #news-page h1 {
@@ -12055,9 +12045,13 @@ input[disabled] {
     margin-bottom: 10%;
   }
 
-  #dashboard .card-deck .card {
+  #dashboard {
+    margin-top: 10%;
+  }
+
+  #dashboard .card {
     font-size: 22px;
-    height: 300px;
+    height: auto;
     text-align: center;
   }
 
@@ -12085,10 +12079,6 @@ input[disabled] {
 }
 
 @media (max-width: 768px) {
-  #manage-users {
-    margin-top: 10%;
-  }
-
   #manage-users .table > thead > tr > th {
     font-size: 14px;
   }
@@ -12105,6 +12095,14 @@ input[disabled] {
 
   #manage-users .table .filter-input {
     width: 1000%;
+  }
+
+  .mob-info {
+    display: block;
+  }
+
+  #sidenav .divider {
+    display: none;
   }
 
   footer #subscribe-form {
@@ -12152,7 +12150,6 @@ input[disabled] {
   #mobile-nav .navbar li {
     margin-top: 5%;
     margin-bottom: 5%;
-    border-bottom: 1px solid #f8f8f8;
   }
 
   #inbox-display label {
@@ -12237,10 +12234,6 @@ input[disabled] {
     margin: auto;
     font-size: 20px;
     text-align: center;
-  }
-
-  #manage-users {
-    margin-top: 10%;
   }
 
   #manage-users .table {

@@ -17,8 +17,12 @@ class MemberController extends Controller
     public function index() 
     {
         $events = Event::all();
+        $meetingDate = DB::table('meeting')
+        ->select('datetime')
+        ->first();
     return view('member.index')->with([
-        'events' => $events 
+        'events' => $events,
+        'meetingDate' => $meetingDate
         ]);
     }
 
