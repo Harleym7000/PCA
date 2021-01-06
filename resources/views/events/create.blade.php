@@ -127,7 +127,7 @@
                     @enderror
       </div>
       <div class="form-group">
-        <label for="other-images">Other Event Images:</label>
+        <label for="other-images">Other Event Images: <span class="asterisk">*</span></label>
         <input type="file" class="form-control @error('other_images') is-invalid @enderror" id="other_images" name="other_images[]" multiple>
         @error('other_images')
                         <span class="invalid-feedback" role="alert">

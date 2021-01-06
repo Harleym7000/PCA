@@ -141,7 +141,16 @@
               <input type="text" name="phone" class="form-control" placeholder="Contact Number">
             </div>
           </div>
-      </div>
+      <br>
+<div class="form-row">
+        <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
+        @error('recaptcha')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+</div>
+</div>
       <input type="hidden" name="eventID" value="{{$event->id}}">
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
             <div class="box">
+              @include('partials.alerts')
                 <div class="img-title">
                   <h1 class="display-4">Serving the Portstewart Community</h1>
                   <a href="/register"><button type="button" class="btn btn-primary">JOIN TODAY</button></a>

@@ -52,25 +52,25 @@
                         @csrf
 
                         <div class="form-group row">
-                          <label for="password" class="col-12 col-md-3 col-lg-2 col-form-label text-md-right">Current Password</label>
+                          <label for="password" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Current Password</label>
   
-                          <div class="col-12 col-md-7">
+                          <div class="col-12 col-md-7 col-lg-8">
                               <input id="current_password" type="password" class="form-control" name="current_password" required>
                           </div>
                       </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-12 col-md-3 col-lg-2 col-form-label text-md-right">New Password</label>
+                            <label for="password" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">New Password</label>
     
-                            <div class="col-12 col-md-7">
+                            <div class="col-12 col-md-7 col-lg-8">
                                 <input id="password" type="password" class="form-control" name="password" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="passwordCon" class="col-md-3 col-lg-2 col-form-label text-md-right">Confirm New Password</label>
+                            <label for="passwordCon" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Confirm New Password</label>
     
-                            <div class="col-12 col-md-7">
+                            <div class="col-12 col-md-7 col-lg-8">
                                 <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
                             </div>
                         </div>

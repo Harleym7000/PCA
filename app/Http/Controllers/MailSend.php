@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 use App\News;
 use App\Event;
+use App\User;
 
 class MailSend extends Controller
 {
@@ -22,7 +23,6 @@ class MailSend extends Controller
     public function contact_us(Request $request) {
         $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'recaptcha' => 'required',
             'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
             'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
             'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation],
@@ -274,6 +274,93 @@ class MailSend extends Controller
             ->update(['token_verified' => 1]);
             $request->session()->flash('success', 'You have successfully registered for the event.');
             return view('pages.eventRegSuccessful');
+    }
+}
+
+public function createdUserReg(Request $request) 
+{
+    //dd('Hello World!');
+
+    $email = $request->email;
+    $userExists = DB::table('users')
+    ->where('email', $email)
+    ->get();
+
+    $UID = DB::table('users')
+    ->insertGetId(['email' => $email]);
+
+    $user = User::find($UID);
+
+    $user->roles()->sync($request->roles);
+
+    if(count($userExists) > 0) {
+        $request->session()->flash('error', 'A user with this email address already exists');
+            return redirect()->back();
+    } else {
+        $token = $token = Str::random(60);
+
+         DB::table('user_tokens')
+        ->insert(['token' => $token, 'user_id' => $UID]);
+
+        //dd($UID);
+
+        DB::table('role_user')
+        ->insert(['user_id' => $UID, 'role_id' => 6]);
+
+        \Mail::send('email.newUser', [
+            'body' => 'You are receiving this email as you have been added as a back-end user of the PCA website. Please click on the link below to complete setting up your account, ',
+            'token' => $token
+        ], function ($mail) use ($request) {
+            $mail->from('harleymdev@gmail.com', 'PCA User Registation');
+            $mail->to($request->email)->subject('PCA User Registration');
+        });
+        if( count(\Mail::failures()) > 0) {
+            $request->session()->flash('error', 'Something went wrong');
+            return redirect()->back();
+            } else {
+
+$request->session()->flash('success', 'An email has been sent to ' .$email .' with instructions to set up their account.');
+return redirect()->back();
+    }
+}
+}
+
+public function validateUserToken(Request $request)
+{
+    $token = $_GET['token'];
+
+    //dd($token);
+
+    $tokenValid = DB::table('user_tokens')
+    ->where('token', $token)
+    ->get();
+
+    $tokenVerified = DB::table('user_tokens')
+    ->where('token', $token)
+    ->where('verified', 1)
+    ->get();
+
+    if(count($tokenValid) < 1) {
+        $request->session()->flash('error', 'This token is invalid');
+            return redirect('/');
+    }
+
+    if(count($tokenVerified) > 0) {
+        $request->session()->flash('error', 'This token has already been verified');
+            return redirect('/');
+    }
+
+    if(count($tokenValid) === 1) {
+        // $verifyToken = DB::table('user_tokens')
+        // ->where('token', $token)
+        // ->update(['verified' => 1]);
+
+        $userID = DB::table('user_tokens')
+        ->where('token', $token)
+        ->select('user_id')
+        ->first();
+
+        return view('pages.createPassword')->with('userID', $userID);
     }
 }
 }

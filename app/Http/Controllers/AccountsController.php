@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class AccountsController extends Controller
 {
@@ -74,15 +75,6 @@ class AccountsController extends Controller
     }
 
     public function storeProfile(Request $request) {
-
-        $vaildateProfile = $request->validate([
-            'firstname' => ['required', new Script_Validation, new Name_Validation],
-            'surname' => ['required', new Script_Validation, new Name_Validation]
-        ],
-        $messages = [
-            'firstname.required' => 'Please provide your first name',
-            'surname.required'=> 'Please provide your surname'
-        ]);
         $userID = Auth::user()->id;
         $firstname = Crypt::encrypt($request->firstname);
         $surname = Crypt::encrypt($request->surname);
@@ -105,7 +97,7 @@ class AccountsController extends Controller
 
         if($createProfile) {
             $request->session()->flash('success', ' Your profile was created successfully');
-            return redirect('/member');
+            return redirect()->back();
         }
             $request->session()->flash('error', 'There was an error creating your profile');
             return redirect()->back();

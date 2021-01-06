@@ -2,6 +2,7 @@
 
 @section('content')
 <div id="login">
+    @include('partials.alerts')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -47,6 +48,7 @@
                                 </button>
 
                                 <div class="login-actions">
+                                    <div class="text-center">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -54,6 +56,7 @@
                                     <a class="btn btn-link" href="/register">
                                         {{ __('Not a Committee Member? Register here') }}
                                     </a>
+                                </div>
                                 @endif
                             </div>
                             </div>

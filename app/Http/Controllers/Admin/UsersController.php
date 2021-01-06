@@ -33,7 +33,8 @@ class UsersController extends Controller
     {
         $title = 'User Management';
         $roles = Role::all();
-        $users = User::paginate(10);
+        //$users = User::paginate(10);
+        $users = User::where('profile_set', 1)->paginate(10);
         $causes = Cause::all();
         // $profileInfo = DB::table('users')
         // ->join('profiles', 'users.id', '=', 'profiles.user_id')

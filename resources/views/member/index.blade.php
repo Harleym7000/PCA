@@ -42,10 +42,10 @@
       <div id="members">
           @include('partials.alerts')
           <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-md-6 col-xl-8">
               <h1 class="welcome">Welcome {{\Crypt::decrypt(Auth::user()->profile()->pluck('firstname'))}}</h1>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-md-6 col-xl-4">
               <div class="card col-12 text-white bg-success">
                 <div class="card-body">
                   <div class="row">
@@ -58,10 +58,11 @@
                   <form action="/meeting/update" method="POST">
                     @csrf
                   <div class="row">
-                    <div class="col-9">
+                    <div class="col-12 col-lg-7">
                   <input type="datetime-local" name="meetdate">
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-lg-1"></div>
+                <div class="col-12 col-lg-2">
                   <button type="submit" class="btn btn-primary">
                     Update
                   </button>

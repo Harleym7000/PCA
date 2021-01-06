@@ -68,9 +68,10 @@
           <textarea id="story" name="story" cols="40" rows="20">
           </textarea>
           <br>
+            </div>
             <div class="form-group">
               <label for="exampleFormControlFile1">News Story Cover Image</label>
-              <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+              <input type="file" class="form-control" id="exampleFormControlFile1" name="image">
             </div>
             <div class="text-right">
             <button type="submit" class="btn btn-primary">Publish</button>

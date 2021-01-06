@@ -7,6 +7,7 @@ use App\Event;
 use Illuminate\Support\Facades\DB;
 use App\News;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class PagesController extends Controller
 {
@@ -111,5 +112,41 @@ public function contact()
         ->get();
 
         return view('pages.shownews')->with(['news' => $news, 'author' => $getAuthor]);
+    }
+
+    public function createUserPassword(Request $request, $id)
+    {
+     
+    //dd($id);
+
+    $validatedData = $request->validate([
+        'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/'],
+        'password_con' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/']
+    ],
+    $messages = [
+        'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
+        'password_con.required' => 'Passwords do not match',
+        ]);
+
+        $pass = $request->password;
+        $passCon = $request->password_con;
+
+        //dd($pass);
+
+    if($pass === $passCon) {
+        $password = Hash::make($passCon);
+        DB::table('users')
+        ->where('id', $id)
+        ->update(['password' => $password]);
+
+        DB::table('user_tokens')
+        ->where('user_id', $id)
+        ->update(['verified' => 1]);
+
+        $request->session()->flash('success', ' Your account was created successfully. You may now log in using your credentials');
+            return view('auth.login');
+    }
+    
+
     }
 }

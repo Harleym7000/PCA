@@ -168,6 +168,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <br>
 </div>
       </div>
       <input type="hidden" name="eventID" value="{{$event->id}}">

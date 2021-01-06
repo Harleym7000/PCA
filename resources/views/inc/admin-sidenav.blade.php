@@ -313,6 +313,7 @@
     <br>
     <br>
     @endcan
+    @can('view-policy')
     <h5 class="section">PCA Member</h5>
     <div class="divider">
     </div>
@@ -370,6 +371,7 @@
         </div>
         <br>
     <br>
+    @endcan
     @can('manage-news')
     <h5 class="section">News</h5>
     <div class="divider">

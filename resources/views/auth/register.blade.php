@@ -115,14 +115,10 @@ We collect the following personally identifying information which is provided di
 in person, via the website or social pages for reasons such as membership, participation in an
 organised event or because you have an interest in PCA and requested updates on our activities:
           <br><br><ul>
- <li>Contact details- name, address, email address and phone numbers.</li>
-<li> Date of birth- to decide membership category, event eligibility and child protection </li>
+ <li>Contact details- name, address, email address and phone numbers. (All this information is stored in the database in it's encrypted format. Only authorized users can view this data)</li>
 <li> Participation details- member, trustee, volunteer, committee membership, gift aid. </li>
-    <li> Equality information- gender, disability, ethnic and religion. </li>
-        <li> Emergency details next of kin </li>
-            <li> Website information- IP address, activity on our site, browser type and version </li>
+            <li> Website information- IP address, activity on our site</li>
                 <li> Information that you provide for completing web form or mailing list. </li>
-                    <li>Information about transaction carried out over the website. </li>
                         <li> ‘Cookies’ which enable the website to remember your information if you return to the site,
 such as to keep you logged in or remember your login credentials if you return to the site. </li>
 <li> We also receive personal information about you indirectly from sources such as – donations
@@ -135,7 +131,7 @@ Protection Policies are available on request
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" disabled>Accept</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
         </div>
       </div>
     </div>

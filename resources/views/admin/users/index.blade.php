@@ -103,11 +103,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <h3>Name: {{\Crypt::decrypt($user->profile()->pluck('firstname'))}} {{\Crypt::decrypt($user->profile()->pluck('surname'))}}</h3>
-        <h3>Address: {{\Crypt::decrypt($user->profile()->pluck('address'))}}
-        <h3>Town: {{\Crypt::decrypt($user->profile()->pluck('town'))}}</h3>
-        <h3>Town: {{\Crypt::decrypt($user->profile()->pluck('postcode'))}}</h3>
-        <h3>Contact No: {{\Crypt::decrypt($user->profile()->pluck('contact_no'))}}</h3>
+        <h3><strong>Name:</strong> {{\Crypt::decrypt($user->profile()->pluck('firstname'))}} {{\Crypt::decrypt($user->profile()->pluck('surname'))}}</h3>
+        <h3><strong>Address:</strong> {{\Crypt::decrypt($user->profile()->pluck('address'))}}
+        <h3><strong>Town:</strong> {{\Crypt::decrypt($user->profile()->pluck('town'))}}</h3>
+        <h3><strong>Postcode:</strong> {{\Crypt::decrypt($user->profile()->pluck('postcode'))}}</h3>
+        <h3><strong>Contact No:</strong> {{\Crypt::decrypt($user->profile()->pluck('contact_no'))}}</h3>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

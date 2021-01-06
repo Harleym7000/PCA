@@ -36,6 +36,7 @@ Route::post('/subscribe', 'MailSend@subscribe');
 Route::get('sub/verify/{token?}', 'MailSend@verified');
 Route::get('event/verify/{token?}', 'MailSend@eventVerified');
 Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
+Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword');
 
 //Auth Routes
 Auth::routes(['verify' => true]);
@@ -66,13 +67,14 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:m
 
 //User links
 Route::get('/user/profile', 'AccountsController@profile')->middleware('auth');
-Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('can:view-policy');
+Route::post('/user/profile', 'AccountsController@storeProfile')->middleware('auth');
 Route::post('/user/profile/update', 'AccountsController@updateProfile')->middleware('auth');
 Route::post('/user/profile/delete/{id}', 'AccountsController@deleteAccount')->middleware('auth');
-Route::get('/user/events', 'AccountsController@events')->middleware('auth');
+Route::get('/user/events', 'AccountsController@events')->middleware('can:view-policy');
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
-Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('auth');
+Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('can:view-policy');
 Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('can:manage-users')->name('user.committees.update');
+Route::get('/user/create/verify/{token?}', 'MailSend@validateUserToken');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ])->middleware('auth');
@@ -114,6 +116,7 @@ Route::delete('/admin/events/rejectApp/{id}', 'ApproveController@rejectApp')->mi
 Route::get('/admin/events/amend-application/{id}', 'ApproveController@amendApp')->middleware('can:approve-events');
 Route::get('/test/event/widget', 'Events\EventsController@addwidget');
 Route::post('/test/event/widget', 'Events\EventsController@insertwidget');
+Route::post('/admin/users/createNew', 'MailSend@createdUserReg')->middleware('can:manage-users');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');

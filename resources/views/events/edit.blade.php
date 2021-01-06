@@ -54,9 +54,9 @@
 
 
                     <div class="form-group row">
-                        <label for="title" class="col-md-2 col-form-label text-md-right">Event Title:</label>
+                        <label for="title" class="col-12 col-md-2 col-form-label text-md-right">Event Title:</label>
 
-                        <div class="col-md-6">
+                        <div class="col-12 col-md-10">
                             <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$event->title}}" required autocomplete="title" autofocus>
 
                             @error('title')
@@ -68,47 +68,47 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="desc" class="col-md-2 col-form-label text-md-right">Description:</label>
+                        <label for="desc" class="col-12 col-md-2 col-form-label text-md-right">Description:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <textarea id="desc" rows="6" class="form-control" name="desc" required autocomplete="desc" autofocus>{{$event->description}}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="date" class="col-md-2 col-form-label text-md-right">Date:</label>
+                        <label for="date" class="col-12 col-md-2 col-form-label text-md-right">Date:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <input id="date" type="date" class="form-control" name="date" value="{{$event->date}}" required autocomplete="date" autofocus>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="time" class="col-md-2 col-form-label text-md-right">Time:</label>
+                        <label for="time" class="col-12 col-md-2 col-form-label text-md-right">Time:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <input id="time" type="time" class="form-control" name="time" value="{{$event->time}}" required autocomplete="time" autofocus>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="venue" class="col-md-2 col-form-label text-md-right">Venue:</label>
+                        <label for="venue" class="col-12 col-md-2 col-form-label text-md-right">Venue:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <input id="venue" type="text" class="form-control" name="venue" value="{{$event->venue}}" required autocomplete="venue" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="image" class="col-md-2 col-form-label text-md-right">Image:</label>
+                        <label for="image" class="col-12 col-md-2 col-form-label text-md-right">Image:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <input id="image" type="file" class="form-control" name="image" autofocus>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="organiser" class="col-md-2 col-form-label text-md-right">Organiser:</label>
+                        <label for="organiser" class="col-12 col-md-2 col-form-label text-md-right">Organiser:</label>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-10">
                             <input id="organiser" type="text" class="form-control" name="organiser" value="{{$event->managed_by}}" required autocomplete="organiser" autofocus>
                         </div>
                     </div>

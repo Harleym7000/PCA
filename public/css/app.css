@@ -10960,8 +10960,8 @@ body {
 
 .box {
   position: relative;
-  background-image: url("/img/IMG_20200112_145400.jpg");
-  height: 100vh;
+  background-image: url("/img/IMG_20200416_163053.jpg");
+  height: 85vh;
   background-size: cover;
   background-position: center;
 }
@@ -11375,7 +11375,7 @@ body {
 #sidenav {
   background-color: #252525;
   width: auto;
-  min-height: 110%;
+  min-height: 120%;
 }
 
 #sidenav .logo {

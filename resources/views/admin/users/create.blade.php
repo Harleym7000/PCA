@@ -46,7 +46,7 @@
     
                     <div class="card-body">
                         
-                      <form action="{{ action('Admin\UsersController@store') }}" method="POST">
+                      <form action="/admin/users/createNew" method="POST">
                         @csrf   
                         <div class="form-group row">
                             <label for="email" class="col-12 col-form-label">Email: <span class="asterisk">*</span></label>
@@ -55,32 +55,6 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
     
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-12 col-form-label">Password: <span class="asterisk">*</span></label>
-    
-                            <div class="col-12">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="passwordCon" class="col-12 col-form-label">Confirm Password: <span class="asterisk">*</span></label>
-    
-                            <div class="col-12">
-                                <input id="passwordCon" type="password" class="form-control @error('passwordCon') is-invalid @enderror" name="passwordCon" required>
-                                @error('passwordCon')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{$message}}</strong>
                                     </span>
