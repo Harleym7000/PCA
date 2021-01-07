@@ -75,10 +75,10 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="forename" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}}"placeholder="First name">
+                                      <input type="text" name="forename" class="form-control" value="{{\Crypt::decrypt(Auth::user()->profile()->pluck('firstname'))}}"placeholder="First name">
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="surname" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('surname')->toArray())}}"placeholder="Last name">
+                                      <input type="text" name="surname" class="form-control" value="{{\Crypt::decrypt(Auth::user()->profile()->pluck('surname'))}}"placeholder="Last name">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -94,7 +94,7 @@
                                   </div>
                                   <div class="form-row">
                                     <div class="col">
-                                      <input type="text" name="phone" class="form-control" value="{{implode('', Auth::user()->profile()->pluck('contact_no')->toArray())}}" placeholder="Contact Number">
+                                      <input type="text" name="phone" class="form-control" value="{{\Crypt::decrypt(Auth::user()->profile()->pluck('contact_no'))}}" placeholder="Contact Number">
                                     </div>
                                   </div>
                               </div>
