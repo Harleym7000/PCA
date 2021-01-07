@@ -176,12 +176,12 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->hasFile('image')) {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
+        if($request->hasFile('main_image')) {
+            $filenameWithExt = $request->file('main_image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('image')->getClientOriginalExtension();
+            $ext = $request->file('main_image')->getClientOriginalExtension();
             $filenameToStore = $filename.'_'.time().'.'.$ext;
-            $path = $request->file('image')->storeAs('public/event_images', $filenameToStore);
+            $path = $request->file('main_image')->storeAs('public/event_images', $filenameToStore);
         }
 
         $event = Event::find($id);
@@ -189,14 +189,23 @@ class EventsController extends Controller
         $event->description = $request->input('desc');
         $event->date = $request->input('date');
         $event->time = $request->input('time');
-        $event->venue = $request->input('venue');
-        if($request->hasFile('image')) {
+        $event->venue = $request->input('location');
+        $event->admission = $request->input('admission');
+        $event->spaces_left = $request->input('capacity');
+        if($request->has('eventbrite')) {
+            $event->is_eventbrite = 1;
+        }
+        if($request->hasFile('main_image')) {
             $event->image = $filenameToStore;
         }
-        $event->managed_by = $request->input('organiser');
+        $event->managed_by = $request->input('org');
+        if($request->has('eventbrite_link')) {
+            $event->eventbrite_link = $request->input('eventbrite_link');
+        }
 
         if($event->save()) {
-            return redirect('/event-manager/index');
+            $request->session()->flash('success', 'The event was updated successfully');
+            return redirect()->back();
         }
     }
 

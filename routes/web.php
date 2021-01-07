@@ -36,7 +36,7 @@ Route::post('/subscribe', 'MailSend@subscribe');
 Route::get('sub/verify/{token?}', 'MailSend@verified');
 Route::get('event/verify/{token?}', 'MailSend@eventVerified');
 Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
-Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword');
+Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword')->middleware('can:new-user');
 
 //Auth Routes
 Auth::routes(['verify' => true]);
@@ -74,7 +74,7 @@ Route::get('/user/events', 'AccountsController@events')->middleware('can:view-po
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
 Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('can:view-policy');
 Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('can:manage-users')->name('user.committees.update');
-Route::get('/user/create/verify/{token?}', 'MailSend@validateUserToken');
+Route::get('/user/create/verify/{token?}', 'MailSend@validateUserToken')->middleware('can:new-user');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ])->middleware('auth');

@@ -36,19 +36,6 @@ class UsersController extends Controller
         //$users = User::paginate(10);
         $users = User::where('profile_set', 1)->paginate(10);
         $causes = Cause::all();
-        // $profileInfo = DB::table('users')
-        // ->join('profiles', 'users.id', '=', 'profiles.user_id')
-        // ->join('role_user', 'role_user.user_id', '=', 'users.id')
-        // ->groupBy('users.id')
-        // ->get();
-
-        foreach($users as $u) {
-            $name = Crypt::decrypt($u->profile()->pluck('firstname'));
-        }
-        
-
-        //dd($name);
-        
         
         return view('admin.users.index')->with([
             'roles' => $roles,
@@ -149,7 +136,7 @@ class UsersController extends Controller
         if(Gate::denies('manage-users')) {
             return redirect(route('admin.users.index'));
         }
-        $roles = Role::all();
+        $roles = Role::all()->except(6);
         $causes = Cause::all();
         $title = 'Edit Users';
         $user = User::find($id);

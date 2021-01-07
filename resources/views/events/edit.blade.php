@@ -48,78 +48,128 @@
 
                 <div class="card-body">
 
-                  <form action="" method="POST" enctype="multipart/form-data">
+                  <form action="/events/edit/{{$event->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
-
-
-                    <div class="form-group row">
-                        <label for="title" class="col-12 col-md-2 col-form-label text-md-right">Event Title:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$event->title}}" required autocomplete="title" autofocus>
-
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                          <div class="form-group">
+                              <label for="title">Event Title:</label>
+                              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter Event Title..." name="title" value="{{$event->title}}" required autofocus>
+                              @error('title')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="desc">Event Description:</label>
+                              <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" rows="8" placeholder="Summarise the event..." name="desc" required>{{$event->description}}</textarea>
+                              @error('desc')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="title">Event Date:</label>
+                              <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{$event->date}}" required>
+                              @error('date')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="time">Event Time:</label>
+                              <input type="time" class="form-control @error('time') is-invalid @enderror" id="time" name="time" value="{{$event->time}}" required>
+                              @error('time')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="location">Event Venue:</label>
+                              <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="Enter Event Venue..." name="location" value="{{$event->venue}}" required>
+                              @error('location')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="admission">Event Admission Price:</label>
+                              <input type="number" step="any" class="form-control @error('admission') is-invalid @enderror" id="admission" placeholder="Enter Event Admission Fee. If free enter 0.00" name="admission" value="{{$event->admission}}" required>
+                              @error('admission')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="capacity">Event Capacity:</label>
+                              <input type="number" min=1 class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="capacity" value="{{$event->spaces_left}}" required>
+                              @error('admission')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="org">Event Organiser:</label>
+                              <input type="text" class="form-control @error('org') is-invalid @enderror" id="org" placeholder="Who is organising the event..." name="org" value="{{$event->managed_by}}" required>
+                              @error('org')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="main-image">Main Event Image:</label>
+                              <img src="/storage/event_images/{{$event->image}}" style="height: 140px; width:170px;">
+                              <input type="file" class="form-control @error('main_image') is-invalid @enderror" id="main_image" name="main_image" value="{{$event->image}}" required>
+                              @error('main_image')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="other-images">Other Event Images:</label>
+                              <input type="file" class="form-control @error('other_images') is-invalid @enderror" id="other_images" name="other_images[]" multiple>
+                              @error('other_images')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="eventbrite" name="eventbrite" @if($event->is_eventbrite == 1) checked @endif>
+                              <label class="form-check-label" for="eventbrite">Does this event require registration through EventBrite?</label>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="eventbrite-link">Eventbrite Link: (Optional)</label>
+                              <input type="text" class="form-control @error('eventbrite_link') is-invalid @enderror" id="eventbrite_link" placeholder="Please provide the eventbrite link if necessary" name="eventbrite_link" value="{{$event->eventbrite_link}}">
+                              @error('eventbrite_link')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
+                            <br>
+                          <div class="form-group row text-right">
+                            <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Update Event</button>
                         </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="desc" class="col-12 col-md-2 col-form-label text-md-right">Description:</label>
-
-                        <div class="col-12 col-md-10">
-                            <textarea id="desc" rows="6" class="form-control" name="desc" required autocomplete="desc" autofocus>{{$event->description}}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="date" class="col-12 col-md-2 col-form-label text-md-right">Date:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="date" type="date" class="form-control" name="date" value="{{$event->date}}" required autocomplete="date" autofocus>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="time" class="col-12 col-md-2 col-form-label text-md-right">Time:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="time" type="time" class="form-control" name="time" value="{{$event->time}}" required autocomplete="time" autofocus>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="venue" class="col-12 col-md-2 col-form-label text-md-right">Venue:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="venue" type="text" class="form-control" name="venue" value="{{$event->venue}}" required autocomplete="venue" autofocus>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="image" class="col-12 col-md-2 col-form-label text-md-right">Image:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="image" type="file" class="form-control" name="image" autofocus>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="organiser" class="col-12 col-md-2 col-form-label text-md-right">Organiser:</label>
-
-                        <div class="col-12 col-md-10">
-                            <input id="organiser" type="text" class="form-control" name="organiser" value="{{$event->managed_by}}" required autocomplete="organiser" autofocus>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-        </div>
+                      </div>
+                          </div>
+                        </form>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                          </div>
+                      </div>
       </div>
     </div>
 </div>

@@ -63,7 +63,6 @@
                     {{ method_field('PUT') }}
 
                     <div class="form-group row">
-                        <button id="bold" type="button" class="btn btn-primary">B</button>
                         <label for="title" class="col-md-2 col-form-label text-md-right">News Headline:</label>
 
                         <div class="col-md-6">

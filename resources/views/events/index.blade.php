@@ -74,7 +74,7 @@
                           <td class="col-6 col-lg-3"><strong>{{ \Carbon\Carbon::parse($e->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($e->time)->format('g:ia')}}</strong></td>
                           <td class="col-6 col-lg-3"><strong>{{$e->venue}}</strong></td>
                           <td id="action-buttons" class="text-center col-6 col-lg-4">
-                            <a href="/events/registered/{{$e->id}}"><button id="comms-user" type="submit" class="btn btn-success " value="" data-toggle="modal" data-target="#comms"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View Registered"></button></a>  
+                            <a href="/events/registered/{{$e->id}}"><button id="comms-user" type="submit" class="btn btn-success"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View Registered"></button></a>  
                             <a href="/events/edit/{{$e->id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Event"></button></a>
                                   <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$e->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
                           </td>

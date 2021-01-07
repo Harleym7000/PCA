@@ -143,6 +143,11 @@ public function contact()
         ->where('user_id', $id)
         ->update(['verified' => 1]);
 
+        DB::table('role_user')
+        ->where('user_id', $id)
+        ->where('role_id', 6)
+        ->delete();
+
         $request->session()->flash('success', ' Your account was created successfully. You may now log in using your credentials');
             return view('auth.login');
     }

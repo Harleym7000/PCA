@@ -10960,10 +10960,11 @@ body {
 
 .box {
   position: relative;
-  background-image: url("/img/IMG_20200416_163053.jpg");
+  background-image: url("/img/IMG_2739.jpg");
   height: 85vh;
+  width: auto;
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
 }
 
 .img-title {
@@ -11103,9 +11104,9 @@ body {
   background-image: url("/img/cleanup.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  height: 0;
   background-position: center;
-  height: 65vh;
-  width: 100%;
+  padding-top: 30%;
 }
 
 #about-img {
