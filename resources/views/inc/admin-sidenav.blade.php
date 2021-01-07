@@ -14,7 +14,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_leaderboard_white_18dp.png">
-          <a class="nav-link" href="/dashboard">Dashboard</a>
+          <a class="nav-link" href="/admin/dashboard">Dashboard</a>
         </div>
         </li>
         <li class="nav-item">
@@ -56,7 +56,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_event_white_18dp.png">
-          <a class="nav-link" href="/event-manager/index">Event Management</a>
+          <a class="nav-link" href="/events/index">Event Management</a>
         </div>
         </li>
         <li class="nav-item">
@@ -74,7 +74,7 @@
         <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_dashboard_white_18dp.png">
-          <a class="nav-link" href="/user/events">Members Dashboard</a>
+          <a class="nav-link" href="/member">Members Dashboard</a>
         </div>
         </li>
         <li class="nav-item">

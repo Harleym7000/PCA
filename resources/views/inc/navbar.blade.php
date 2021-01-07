@@ -49,19 +49,19 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @can('manage-users')
-                        <a class="dropdown-item" href="{{ route('admin.users.index') }}">
+                        <a class="dropdown-item" href="/admin/dashboard">
                          Admin
                      </a>
                      @endcan
 
                      @can('manage-events')
-                        <a class="dropdown-item" href="/event-manager/index">
+                        <a class="dropdown-item" href="/events/index">
                          Event Management
                      </a>
                      @endcan
 
                      @can('manage-news')
-                     <a class="dropdown-item" href="/event-manager/index">
+                     <a class="dropdown-item" href="/news/index">
                         Manage News 
                     </a>
                     @endcan
