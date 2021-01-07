@@ -97,18 +97,16 @@
                                       <input type="text" name="phone" class="form-control" value="{{\Crypt::decrypt(Auth::user()->profile()->pluck('contact_no'))}}" placeholder="Contact Number">
                                     </div>
                                   </div>
-                              </div>
                               <div class="form-check">
                                 <div class="col">
                                 <input type="checkbox" class="form-check-input" value="{{auth()->user()->id}}" name="UID" id="userRegID">
                                 <label class="form-check-label" for="exampleCheck1">This information is correct</label>
                               </div>
-                            </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn btn-primary" name="EID" value="{{$event->id}}">Register</button>
                               </div>
-</form>
+                            </form>
       @endauth
           @guest
           <form action="/events/register/guest" method="POST">
@@ -150,7 +148,6 @@
                           </span>
                       @enderror
 </div>
-</div>
       <input type="hidden" name="eventID" value="{{$event->id}}">
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -160,6 +157,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 @endforeach
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
