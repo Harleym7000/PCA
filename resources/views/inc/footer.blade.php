@@ -13,7 +13,7 @@
         <!-- Content -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">What We Do</h5>
         <p>Portstewart Community Association is a charitable organisation who currently organises and implemets 
-          <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> alongside other events and activities for the benefit 
+          <a href="https://redsails.co.uk/" target="_blank" class="text-white"><strong><u>The Red Sails Festival</u></strong></a> alongside other events and activities for the benefit 
           of the community.</p>
 
       </div>
@@ -57,12 +57,14 @@
           <li>
             <a href="/contact-us">Contact Us</a>
           </li>
+          @guest
           <li>
             <a href="/login">Login</a>
           </li>
           <li>
             <a href="/register">Register</a>
           </li>
+          @endguest
           <li>
             <a href="https://redsails.co.uk/" target="_blank">Red Sails Website</a>
           </li>

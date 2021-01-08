@@ -10967,14 +10967,18 @@ body {
   background-position: center bottom;
 }
 
+.display-4 {
+  font-size: 48px;
+}
+
 .img-title {
   position: absolute;
   color: #fff;
   text-align: center;
   left: 0;
   right: 0;
-  top: 38%;
-  font-size: 62px;
+  top: 22%;
+  font-size: 48px;
   font-family: "Roboto", cursive;
   text-shadow: 3px 3px #000;
 }
@@ -10984,6 +10988,7 @@ body {
   width: 180px;
   height: 45px;
   font-size: 16px;
+  margin-top: 15%;
 }
 
 #events {
@@ -11889,15 +11894,6 @@ input[disabled] {
     height: 50vh;
   }
 
-  .img-title {
-    top: 10%;
-    text-align: center;
-  }
-
-  .display-4 {
-    font-size: 48px;
-  }
-
   .navbar {
     margin: 0 auto;
   }
@@ -11905,11 +11901,6 @@ input[disabled] {
   .navbar .navbar-brand img {
     width: 93px;
     height: 120px;
-  }
-
-  .img-title .btn {
-    width: 120px;
-    font-size: 12px;
   }
 
   #events {
@@ -11942,15 +11933,6 @@ input[disabled] {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 75ch;
-  }
-
-  #news .media img {
-    display: none;
-  }
-
-  #news .media {
-    text-align: center;
-    font-weight: bold;
   }
 
   #news .media h5 {
@@ -12080,6 +12062,39 @@ input[disabled] {
 }
 
 @media (max-width: 768px) {
+  .img-title {
+    position: absolute;
+    color: #fff;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 22%;
+    font-size: 32px;
+    font-family: "Roboto", cursive;
+    text-shadow: 3px 3px #000;
+  }
+
+  #news .media img {
+    display: none;
+  }
+
+  #news .media {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .img-title .btn {
+    border-radius: 20px;
+    width: 120px;
+    height: 45px;
+    font-size: 12px;
+    margin-top: 22%;
+  }
+
+  .display-4 {
+    font-size: 28px;
+  }
+
   #manage-users .table > thead > tr > th {
     font-size: 14px;
   }
@@ -12117,6 +12132,10 @@ input[disabled] {
 }
 
 @media (max-width: 991.98px) {
+  .display-4 {
+    font-size: 28px;
+  }
+
   #sidenav {
     display: none;
   }

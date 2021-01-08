@@ -12,7 +12,7 @@
           </div>
           <div id="events">
               <h1>Upcoming Events</h1>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-3">
           @if(count($events) > 0)
                   @foreach($events as $event)
             <div class="col mb-4">
