@@ -72,6 +72,8 @@ class ContactController extends Controller
         ->get();
 
         $response = DB::table('contact_response')
+        ->join('users', 'contact_response.respondee_user_id', '=', 'users.id')
+        ->join('profiles', 'profiles.user_id', '=', 'contact_response.respondee_user_id')
         ->where('message_id', $messageID)
         ->get();
 

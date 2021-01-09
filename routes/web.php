@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Mail;
 */
 
 //Redirect
-
-
-
 //Front-end links
 Route::get('/', 'PagesController@index')->name('home');
 Route::get('/about', 'PagesController@about');
@@ -36,7 +33,7 @@ Route::post('/subscribe', 'MailSend@subscribe');
 Route::get('sub/verify/{token?}', 'MailSend@verified');
 Route::get('event/verify/{token?}', 'MailSend@eventVerified');
 Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
-Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword')->middleware('can:new-user');
+Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword');
 
 //Auth Routes
 Auth::routes(['verify' => true]);
@@ -50,7 +47,6 @@ Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->m
 Route::post('/policy/delete/{filename}', 'PoliciesController@destroy')->middleware('can:manage-users');
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('can:view-policy');
 Route::get('/events/dashboard', 'DashboardsController@event')->middleware('can:manage-events');
-
 
 //Event Manager Links
 Route::namespace('Events')->prefix('events')->name('events.')->middleware('can:manage-events')->group(function(){
@@ -74,7 +70,7 @@ Route::get('/user/events', 'AccountsController@events')->middleware('can:view-po
 Route::get('/user/profile/create', 'AccountsController@createProfile')->middleware('auth');
 Route::get('/user/committees/{id}', 'AccountsController@showCommittees')->middleware('can:view-policy');
 Route::put('/user/committees/update/{id}', 'Admin\UsersController@updateUserCauses')->middleware('can:manage-users')->name('user.committees.update');
-Route::get('/user/create/verify/{token?}', 'MailSend@validateUserToken')->middleware('can:new-user');
+Route::get('/user/create/verify/{token?}', 'MailSend@validateUserToken');
 Route::delete('cancel_reg/{id}', [
     'uses' => 'AccountsController@cancelReg'
 ])->middleware('auth');
@@ -109,11 +105,11 @@ Route::post('/admin/contact/flipToRead', 'ContactController@flipToRead')->middle
 Route::post('/admin/contact/flipToUnread', 'ContactController@flipToUnread')->middleware('can:manage-users');
 Route::post('/admin/contact/delete', 'ContactController@destroy')->middleware('can:manage-users');
 Route::post('/admin/contact/filter', 'ContactController@filter')->middleware('can:manage-users');
-Route::get('/admin/events/applications', 'ApproveController@eventApplications')->middleware('can:approve-events');
-Route::post('/admin/events/approve', 'ApproveController@approveEvent')->middleware('can:approve-events');
-Route::post('/admin/events/amendApp', 'ApproveController@amendAppSubmit')->middleware('can:approve-events');
-Route::delete('/admin/events/rejectApp/{id}', 'ApproveController@rejectApp')->middleware('can:approve-events');
-Route::get('/admin/events/amend-application/{id}', 'ApproveController@amendApp')->middleware('can:approve-events');
+Route::get('/admin/events/applications', 'ApproveController@eventApplications')->middleware('can:manage-users');
+Route::post('/admin/events/approve', 'ApproveController@approveEvent')->middleware('can:manage-users');
+Route::post('/admin/events/amendApp', 'ApproveController@amendAppSubmit')->middleware('can:manage-users');
+Route::delete('/admin/events/rejectApp/{id}', 'ApproveController@rejectApp')->middleware('can:manage-users');
+Route::get('/admin/events/amend-application/{id}', 'ApproveController@amendApp')->middleware('can:manage-users');
 Route::get('/test/event/widget', 'Events\EventsController@addwidget');
 Route::post('/test/event/widget', 'Events\EventsController@insertwidget');
 Route::post('/admin/users/createNew', 'MailSend@createdUserReg')->middleware('can:manage-users');

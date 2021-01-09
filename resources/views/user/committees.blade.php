@@ -35,7 +35,7 @@
         <div id="user-profile">
         <div class="row justify-content-center d-flex align-items-middle">
             <div class="col-12">
-                <div class="card">
+                <div class="card bg-dark text-white">
             <div class="card-header">User Committees - {{Crypt::decrypt($profileInfo->firstname)}} {{Crypt::decrypt($profileInfo->surname)}}</div>
                     <div class="card-body">
 
@@ -48,7 +48,7 @@
                                 @foreach($causes as $cause)
                                 <div class="form-check col-12 col-md-6 col-lg-4">
                                     <input type="checkbox" name="causes[]" value="{{ $cause->id }}"
-                                    @if(Auth::user()->causes()->pluck('id')->contains($cause->id)) checked @else disabled @endif >
+                                    @if(Auth::user()->causes()->pluck('id')->contains($cause->id))checked @endif disabled>
                                     <label>{{ $cause->name }}</label>
                                   </div>
                                 @endforeach

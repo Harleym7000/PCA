@@ -3,6 +3,15 @@
 <div id="contact-us">
             <div class="card">
             <div class="card-header">Contact Us</div>
+            @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
         <div id="contact-form">
           <div class="col-12">
             <form id="contact" action="/contact-submit" method="POST">
@@ -55,8 +64,8 @@
                                 @enderror
                 </div>
                 <div class="form-group">
-                  <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
-                  @error('recaptcha')
+                  <div class="g-recaptcha @error('g-recaptcha-response') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
+                  @error('g-recaptcha-response')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
