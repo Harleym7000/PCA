@@ -118,6 +118,8 @@ class RegisterController extends Controller
             ['month' => $month, 'year' => $year, 'user_id' => $userID]
         );
         $user->attachRole($role);
+        event(new \Illuminate\Auth\Events\Registered($user));
+
         return redirect('/email/verify');
         }
  else {

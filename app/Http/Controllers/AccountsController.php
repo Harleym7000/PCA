@@ -36,7 +36,7 @@ class AccountsController extends Controller
                     return redirect('/user/profile');
                 }
              else {
-            return view('user.createProfile')->with('userEmail', $userEmail);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
         }
     }
 
@@ -50,7 +50,7 @@ class AccountsController extends Controller
         ->where('users.id', $userID)->first();
         $userEmail = $query2->email;
         if($query->profile_set == 0) {
-            return view('user.createProfile')->with('userEmail', $userEmail);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
         }
         $profileInfo = DB::table('profiles')
         ->where('profiles.user_id', $userID)

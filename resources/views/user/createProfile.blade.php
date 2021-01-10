@@ -15,7 +15,7 @@
 
 <script>
         $(document).ready(function() {
-            $('.modal').modal('show');
+            $('#modal-welcome').modal('show');
 
             $('#toggle-sidenav').on('click', function(){
       $('.sidenav-holder').toggle();
@@ -36,22 +36,20 @@
 <div id="app">
     <div class="container-fluid" style="text-align: left; color: #000;">
       <div class="row no-gutters">
-        <div class="sidenav-holder col-12 col-lg-2">
-          @include('inc.admin-sidenav')
         </div>
-        <div class="content-holder col-12 col-lg-10">
-          @include('inc.admin-nav')
+        <div class="content-holder col-12">
 <div id="profile">
     @include('partials.alerts')
     <div class="container">
-        <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal" id="modal-welcome" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h3 class="modal-title">Welcome to PCA</h3>
                 </div>
                 <div class="modal-body">
-                  <h5>Hi there! Welcome to PCA. We're delighted to have you as a Committee Member. Before you begin exploring the site, we just need to collect some details from you. Please fill in the form to complete your profile.</h5>
+                  <h5>Hi there! Welcome to PCA. We're delighted to have you as a Member. Before you begin exploring the site, we just need to collect some details from you. Please fill in the form to complete your profile.</h5>
+                  <p>This data will only be used to register you for our events</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -133,8 +131,11 @@
                         <div class="form-group row text-right">
                             <div class="col-11">
                             <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
                         </div>
+                        <button type="submit" class="col-12 col-lg-3 btn btn-danger" data-toggle="modal" data-target="#delete{{$userID}}" style="margin-left: 1.1%;">Delete Account</button>
                             </div>
+                            
                     </div>
                 </div>
             </div>
@@ -144,6 +145,29 @@
         </div>
       </div>
     </div>
-</div>
+
+    <div class="modal fade" id="delete{{$userID}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete User</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>This will delete your account and you will no longer be able to log in. <br>Are you sure you wish to delete your account?<h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <form action="/user/profile/delete/{{$userID}}" method="POST">
+                @csrf
+              <button type="submit" class="btn btn-danger">Delete Account</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
