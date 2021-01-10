@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendMail;
-
+use App\Rules\Email_Validation;
 
 class UsersController extends Controller
 {
@@ -70,7 +70,7 @@ class UsersController extends Controller
         //$passwords = $request->password.' '.$request->passwordCon;
         //dd($passwords);
         $validatedData = $request->validate([
-            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],
+            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
             'roles' => 'required'
         ],
         $messages = [

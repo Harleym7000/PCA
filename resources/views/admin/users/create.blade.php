@@ -37,6 +37,15 @@
         <div class="content-holder col-12 col-lg-10">
           @include('inc.admin-nav')
 <div id="create-user">
+  @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
     @include('partials.alerts')
     <div class="container">
         <div class="row justify-content-center">

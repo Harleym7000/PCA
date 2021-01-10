@@ -30,7 +30,7 @@ class Email_Validation implements Rule
         "google.com", "hotmail.com", "hotmail.co.uk", "mac.com", "me.com", "mail.com", "msn.com",
         "live.com", "sbcglobal.net", "verizon.net", "yahoo.com", "yahoo.co.uk", "btinternet.com", "virginmedia.com", "blueyonder.co.uk", "freeserve.co.uk", "live.co.uk",
         "ntlworld.com", "o2.co.uk", "orange.net", "sky.com", "talktalk.co.uk", "tiscali.co.uk",
-        "virgin.net", "wanadoo.co.uk", "bt.com"])) {
+        "virgin.net", "wanadoo.co.uk", "bt.com", "portstewartca.org"])) {
             return true;
         }
         return false;

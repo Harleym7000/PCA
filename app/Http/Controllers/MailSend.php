@@ -271,7 +271,14 @@ class MailSend extends Controller
 
 public function createdUserReg(Request $request) 
 {
-    //dd('Hello World!');
+    $validatedData = $request->validate([
+        'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+        'roles' => 'required'
+    ],
+    $messages = [
+        'email.unique' => 'A user with the email address '.$request->email.' already exists',
+        'roles.required' => 'Please select at least one role for this user'
+        ]);
 
     $email = $request->email;
     $userExists = DB::table('users')

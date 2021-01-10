@@ -65,7 +65,7 @@ class PoliciesController extends Controller
             return redirect()->back();
         }
         if($fileExt === 'pdf') {
-            $storeFile = $file->storeAs('public/policy', $fileName);
+            $storeFile = $file->storeAs('public/policy', ($fileName));
             if($storeFile) {
                 DB::table('policies')
                 ->insert(['name' => $fileName]);

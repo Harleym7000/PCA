@@ -54,23 +54,15 @@
                     </div>
                     <div class="col-10">
                   <h1 class="card-text text-right">Next Meeting</h1>
-                  @can('manage-users')
-                  <form action="/meeting/update" method="POST">
-                    @csrf
-                  <div class="row">
-                    <div class="col-12 col-lg-7">
-                  <input type="datetime-local" name="meetdate">
-                </div>
-                <div class="col-12 col-lg-1"></div>
-                <div class="col-12 col-lg-2">
-                  <button type="submit" class="btn btn-primary">
+                    <h5 class="card-text text-right">{{ \Carbon\Carbon::parse($meetingDate->datetime)->format('D jS M Y - g:ia')}}</h5>
+                    @can('manage-users')
+                    <div class="text-right">
+                  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#meetingdate">
                     Update
                   </button>
+                </div>
                 </form>
-                </div>
-                </div>
                   @endcan
-                    <h5 class="card-text text-right">{{ \Carbon\Carbon::parse($meetingDate->datetime)->format('D jS M Y - g:ia')}}</h5>
                   </div>
                   </div>
             </div>
@@ -86,7 +78,7 @@
       <div class="col mb-4">
         <div id="upcoming-events">
         <div class="card">
-          <img src="/img/pcaLogo.png" class="card-img-top" alt="...">
+          <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="..." style="width:100%; max-height:350px;">
           <div class="card-body">
             <h1 class="card-title">{{$event->title}}</h1>
             <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
@@ -209,6 +201,29 @@
 </div>
 @endforeach
 </div>
+  </div>
+
+  <div class="modal fade" id="meetingdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">User Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/meeting/update" method="POST">
+            @csrf
+            <input type="datetime-local" name="meetdate">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </body>
 </html>
