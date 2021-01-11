@@ -61,17 +61,32 @@
             @csrf
             <div class="form-group">
               <label for="formGroupExampleInput">Headline:</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Story Headline..." name="headline">
+              <input type="text" class="form-control @error('headline') is-invalid @enderror" id="formGroupExampleInput" placeholder="News Story Headline..." name="headline">
+              @error('headline')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput">Story:</label>
-          <textarea id="story" name="story" cols="40" rows="20">
+          <textarea id="story" name="story" cols="40" rows="20" class="@error('story') is-invalid @enderror">
           </textarea>
+          @error('story')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+      @enderror
           <br>
             </div>
             <div class="form-group">
               <label for="exampleFormControlFile1">News Story Cover Image</label>
-              <input type="file" class="form-control" id="exampleFormControlFile1" name="image">
+              <input type="file" class="form-control @error('image') is-invalid @enderror" id="exampleFormControlFile1" name="image">
+              @error('image')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
             </div>
             <div class="text-right">
             <button type="submit" class="btn btn-primary">Publish</button>

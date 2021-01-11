@@ -42,7 +42,7 @@
             <br>
             <h3> <strong>Organiser:</strong> {{$event->managed_by}}</h3>
             <br> 
-            <h3><strong>Admission:</strong>@if($event->admission == 0) Free @else @money ($event->admission)@endif</h3>
+            <h3 @if($event->admission == '£0.00') style="color: green" @endif><strong>Admission:</strong>@if($event->admission == '£0.00') Free @else {{$event->admission}} @endif</h3>
             <br>
             <h3 @if($event->spaces_left > 0) style="color: green" @else style="color: red" @endif><strong>Spaces Left:</strong> {{$event->spaces_left}}</h3>
           </div>

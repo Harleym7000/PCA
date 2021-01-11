@@ -43,6 +43,18 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'headline' => 'required',
+            'story' => ['required', 'min:50'],
+            'image' => ['required', 'max:2048'],
+        ],
+        $messages = [
+            'headline.required' => 'Please provide a headline for this news story',
+            'story.required' => 'Please provide a news story',
+            'image.required' => 'Please provide an image for this news story',
+            'image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
+            ]);
+
         if($request->hasFile('image')) {
             //dd('yes');
             $filenameWithExt = $request->file('image')->getClientOriginalName();
@@ -102,6 +114,17 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'headline' => 'required',
+            'story' => ['required', 'min:50'],
+            'news_image' => ['max:2048'],
+        ],
+        $messages = [
+            'headline.required' => 'Please provide a headline for this news story',
+            'story.required' => 'Please provide a news story',
+            'news_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
+            ]);
+
         $news = News::find($id);
 
         if($request->hasFile('news_image')) {
@@ -114,7 +137,7 @@ class NewsController extends Controller
         } else {
             $filenameToStore = 'cleanup.jpg';
         }
-        $news->title = $request->title;
+        $news->title = $request->headline;
         $news->story = $request->story;
         $news->image = $filenameToStore;
 

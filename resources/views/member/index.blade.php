@@ -43,7 +43,7 @@
           @include('partials.alerts')
           <div class="row">
             <div class="col-12 col-md-6 col-xl-8">
-              <h1 class="welcome">Welcome {{\Crypt::decrypt(Auth::user()->profile()->pluck('firstname'))}}</h1>
+              <h1 class="welcome pt-5">Welcome {{\Crypt::decrypt(Auth::user()->profile()->pluck('firstname'))}}</h1>
             </div>
             <div class="col-12 col-md-6 col-xl-4">
               <div class="card col-12 text-white bg-success">

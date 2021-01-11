@@ -55,6 +55,34 @@ class EventsController extends Controller
     {
 
         //dd($request);
+        $validatedData = $request->validate([
+            'title' => ['required', 'min:2', 'max:255'],
+            'desc' => ['required', 'min:8', 'max:255'],
+            'date' => ['required', 'date_format:Y-m-d', 'after:today'],
+            'time' => ['required', 'date_format:H:i'],
+            'location' => ['required'],
+            'admission' => ['required'],
+            'capacity' => ['required', 'numeric'],
+            'org' => 'required',
+            'main_image' => ['required', 'max:2048'],
+        ],
+        $messages = [
+            'title.required' => 'Please provide an event title',
+            'desc.required' => 'Please provide an event description',
+            'date.required' => 'Please provide a date for this event',
+            'date.date_format' => 'Please provide a date in the format dd/mm/yyyy',
+            'date.after' => 'The event cannot be before today',
+            'time.required' => 'Please provide a start time for this event',
+            'time.date_format' => 'Please provide a time in the format hh:mm',
+            'location.required' => 'Please provide a venue for this event',
+            'admission.required' => 'Please provide an entry fee for this event',
+            'capacity.required' => 'Please provide the total capacity for this event',
+            'capacity.numeric' => 'The total capacity must be a number',
+            'org.required' => 'Please provide who the event Organiser is (PCA or other)',
+            'main_image.required' => 'Please provide an image for this event',
+            'main_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
+            ]);
+
 
         if($request->hasFile('main_image')) {
             $filenameWithExt = $request->file('main_image')->getClientOriginalName();
@@ -92,17 +120,6 @@ class EventsController extends Controller
 
         $eventID = $event->id;
         //dd($eventID);
-        $otherImages = $request->other_images;
-        foreach($otherImages as $image) {
-            $filenameWithExt = $image->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $ext = $image->getClientOriginalExtension();
-            $filenameToStore = $filename.'_'.time().'.'.$ext;
-            $path = $image->storeAs('public/event_images', $filenameToStore);
-
-            $storeInDB = DB::table('event_images')
-            ->insert(['event_id' => $eventID, 'image' => $filenameToStore]);
-        }
 
         if($event->save()) {
             $request->session()->flash('success', 'The event was created successfully and is pending approval. Your event will appear on the site once it has been approved');
@@ -176,6 +193,34 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $validatedData = $request->validate([
+            'title' => ['required', 'min:2', 'max:255'],
+            'desc' => ['required', 'min:8', 'max:255'],
+            'date' => ['required', 'date_format:Y-m-d'],
+            'time' => ['required', 'date_format:H:i'],
+            'location' => ['required'],
+            'admission' => ['required'],
+            'capacity' => ['required', 'numeric'],
+            'org' => 'required',
+            'main_image' => ['max:2048'],
+        ],
+        $messages = [
+            'title.required' => 'Please provide an event title',
+            'desc.required' => 'Please provide an event description',
+            'date.required' => 'Please provide a date for this event',
+            'date.date_format' => 'Please provide a date in the format dd/mm/yyyy',
+            'date.after' => 'The event cannot be before today',
+            'time.required' => 'Please provide a start time for this event',
+            'time.date_format' => 'Please provide a time in the format hh:mm',
+            'location.required' => 'Please provide a venue for this event',
+            'admission.required' => 'Please provide an entry fee for this event',
+            'capacity.required' => 'Please provide the total capacity for this event',
+            'capacity.numeric' => 'The total capacity must be a number',
+            'org.required' => 'Please provide who the event Organiser is (PCA or other)',
+            'main_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
+            ]);
+
         if($request->hasFile('main_image')) {
             $filenameWithExt = $request->file('main_image')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);

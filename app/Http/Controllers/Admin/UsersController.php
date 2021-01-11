@@ -204,11 +204,24 @@ class UsersController extends Controller
     }
 
     public function resetUserPassword(Request $request, User $user) {
+        $validatedData = $request->validate([
+            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/'],
+        ],
+        $messages = [
+            'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
+            'password.confirmed' => 'Passwords do not match',
+            'passwordCon.required' => 'Passwords do not match',
+            ]);
 
         $user = auth()->user();
         $oldPass = $request->current_password;
         //dd($oldPass);
         $validatePass = Hash::check($oldPass, $user->password);
+
+        if(!$validatePass) {
+            $request->session()->flash('error', 'Your current password was incorrect');
+            return redirect()->back();
+        }
 
         if($validatePass) {
 
@@ -222,14 +235,14 @@ class UsersController extends Controller
             ->where('id', $userID)
             ->update(['password' => $newPass]);
             $request->session()->flash('success', 'Your password has been reset. You can now login using your new password');
+            return redirect()->back();
         } else {
             $request->session()->flash('error', 'Your passwords did not match. Please try again');
+            return redirect()->back();
         }
-    } else {
-        $request->session()->flash('error', 'Your current password is incorrect. Please try again');
+        
     }
-        return redirect()->back();
-    }
+}
 
     public function getUserCauses(Request $request) 
     {

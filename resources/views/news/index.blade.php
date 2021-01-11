@@ -72,7 +72,7 @@
                           <td class="col-6 col-lg-3"><strong>{!!$n->story!!}</strong></td>
                           <td class="col-6 col-lg-3"><img src="/storage/news_images/{{$n->image}}" style="width: 100%;"></td>
                           <td id="action-buttons" class="text-center col-6 col-lg-4">
-                            <a href="/events/edit/"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit News Story"></button></a>
+                            <a href="/news/edit/{{$n->id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit News Story"></button></a>
                                   <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#newsdelete{{$n->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete News Story"></button>
                           </td>
                         </tr>
