@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendMail;
+use Illuminate\Support\Str;
 
 
 class UsersController extends Controller
@@ -257,5 +258,25 @@ class UsersController extends Controller
             $request->session()->flash('error', 'There was an error updating your committees');
         }
         return redirect()->back();
+    }
+
+    public function searchUsers(Request $request) 
+    {
+        //dd('Hello Wolrd!');
+
+        $name = $request->name;
+        $email = $request->email;
+        $role = $request->roles;
+
+        $getProfilesTable = DB::table('profiles')
+        ->get();
+        $nameSearch = Str::ucfirst($name);
+        foreach($getProfilesTable as $p) {
+            $decryptName = Crypt::decrypt($p->firstname). ' '.Crypt::decrypt($p->surname);
+            if(Str::of($decryptName)->startsWith($nameSearch)) {
+                dd('yes');
+            }
+            //dd($decryptName);
+        }
     }
 }

@@ -121,6 +121,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');
     Route::get('/users/{id}/edit', 'UsersController@edit');
+    Route::post('/users/search', 'UsersController@searchUsers');
 });
 
 
