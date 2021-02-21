@@ -56,7 +56,7 @@
             <br>
             @if(count($response) > 0)
             @foreach($response as $r)
-            <strong><p>{{implode('', Auth::user()->profile()->pluck('firstname')->toArray())}} {{implode('', Auth::user()->profile()->pluck('surname')->toArray())}} ({{Auth::user()->email}})</p></strong>
+            <strong><p>{{\Crypt::decrypt($r->firstname)}} {{\Crypt::decrypt($r->surname)}} ({{$r->email}})</p></strong>
             <h4>{{$r->response}}</h4>
               @endforeach
             

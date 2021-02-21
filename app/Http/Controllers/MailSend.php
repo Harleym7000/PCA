@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 use App\News;
 use App\Event;
+use App\Rules\Email_Validation;
 use App\User;
 
 class MailSend extends Controller
@@ -25,7 +26,7 @@ class MailSend extends Controller
             'g-recaptcha-response' => 'required|captcha',
             'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
             'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
-            'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation],
+            'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
             'subject' => ['required', 'min:2', 'max:255', new Script_Validation],
             'message' => ['required', 'max:510', new Script_Validation]
         ],
@@ -35,7 +36,7 @@ class MailSend extends Controller
         'email.required' => 'Please provide your email address',
         'subject.required' => 'Please enter a message subject',
         'message.required' => 'Please provide us with a brief description of why you are contacting us',
-        'recaptcha.required' => 'Please complete the recapctha validation'
+        'g-recaptcha-response.required' => 'Please verify you are not a robot'
     ]);
         $contactfirst_name = $request->input('firstname');
         $contactemail = $request->input('email');
@@ -103,7 +104,7 @@ class MailSend extends Controller
     public function subscribe(Request $request)
     {
         $request->validate([
-            'sub_email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation]
+            'sub_email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation]
         ],
     $messages = [
         'sub_email.required' => 'Please provide your email address'
@@ -175,28 +176,19 @@ class MailSend extends Controller
     public function registerEventGuest(Request $request)
     {
 
-        $validatedData = Validator::make($request->all(), [
+        $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
             'forename' => ['required', 'min:2', 'max:255', new Name_Validation, new Script_Validation],
             'surname' => ['required', new Name_Validation, 'min:2', 'max:255', new Script_Validation],
-            'email' => ['required', 'email', new Script_Validation],
-            'phone' => new Phone_Validation
-        ]);
+            'email' => ['required', 'email', new Script_Validation, new Email_Validation],
+            'phone' => new Phone_Validation,
+        ],
         $messages = [
             'forename.required' => 'Please provide your first name',
             'surname.reuired' => 'Please provide your surname',
             'email.required' => 'Please provide your email address',
-        ];
-
-        if (request('forename') == null || request('surname') == null || request('email') == null) {
-            $validatedData->errors()->add('recaptcha', 'Please complete the recaptcha validation');
-        }
-
-        if($validatedData->fails()) {
-            $request->session()->flash('error', 'You have not been registered for this event. Please try again');
-            return redirect()->back()->withErrors($validatedData);
-                    
-        }
+            'g-recaptcha-response.required' => 'Please verify you are not a robot',
+        ]);
 
         $forename = Crypt::encrypt($request->input('forename'));
         $surname = Crypt::encrypt($request->input('surname'));
@@ -279,7 +271,14 @@ class MailSend extends Controller
 
 public function createdUserReg(Request $request) 
 {
-    //dd('Hello World!');
+    $validatedData = $request->validate([
+        'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+        'roles' => 'required'
+    ],
+    $messages = [
+        'email.unique' => 'A user with the email address '.$request->email.' already exists',
+        'roles.required' => 'Please select at least one role for this user'
+        ]);
 
     $email = $request->email;
     $userExists = DB::table('users')
@@ -299,13 +298,10 @@ public function createdUserReg(Request $request)
     } else {
         $token = $token = Str::random(60);
 
-         DB::table('user_tokens')
+         $insertToken = DB::table('user_tokens')
         ->insert(['token' => $token, 'user_id' => $UID]);
 
         //dd($UID);
-
-        DB::table('role_user')
-        ->insert(['user_id' => $UID, 'role_id' => 6]);
 
         \Mail::send('email.newUser', [
             'body' => 'You are receiving this email as you have been added as a back-end user of the PCA website. Please click on the link below to complete setting up your account, ',
@@ -327,6 +323,10 @@ return redirect()->back();
 
 public function validateUserToken(Request $request)
 {
+    if(!Auth::guest()) {
+        $request->session()->flash('error', 'You are not authorised to complete this action');
+            return redirect('/');
+    }
     $token = $_GET['token'];
 
     //dd($token);
@@ -360,7 +360,8 @@ public function validateUserToken(Request $request)
         ->select('user_id')
         ->first();
 
-        return view('pages.createPassword')->with('userID', $userID);
+            return view('pages.createPassword')->with('userID', $userID);
+        
     }
 }
 }

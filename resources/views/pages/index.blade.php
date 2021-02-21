@@ -1,7 +1,16 @@
 @extends('layouts.app')
 @section('content')
+@include('partials.alerts')
+              @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <div class="box">
-              @include('partials.alerts')
                 <div class="img-title">
                   <h1 class="display-4">Serving the Portstewart Community</h1>
                   <a href="/register"><button type="button" class="btn btn-primary">JOIN TODAY</button></a>
@@ -17,7 +26,7 @@
                   @foreach($events as $event)
             <div class="col mb-4">
               <div class="card">
-                <img src="/storage/event_images/{{$event->image}}" class="card-img-top" alt="Image for event {{$event->title}}" style="width:100%; min-height:350px; max-height: 350px;">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="Image for event {{$event->title}}" style="width:100%; max-height:350px;">
                 <div class="card-body">
                   <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
@@ -48,7 +57,7 @@
             @if(count($news) > 0)
             @foreach($news as $story)
             <div class="media">
-              <img class="media-object mr-3 img-responsive" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" >
+              <img class="media-object mr-3 img-fluid" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" >
               <div class="media-body">
                 <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
                 <br><br>
@@ -173,8 +182,8 @@
 </div>
 <br>
 <div class="form-row">
-        <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
-        @error('recaptcha')
+        <div class="g-recaptcha @error('g-recaptcha-response') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
+        @error('g-recaptcha-response')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>

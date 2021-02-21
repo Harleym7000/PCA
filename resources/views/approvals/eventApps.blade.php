@@ -49,7 +49,7 @@
             @foreach($pending as $p)
             <div class="col-12 col-md-6 col-xl-4 mb-4">
               <div class="card">
-                <img src="/storage/event_images/{{$p->image}}" class="card-img-top" alt="...">
+                <img src="/storage/event_images/{{$p->image}}" class="card-img-top img-fluid" alt="..." style="width:100%; max-height:350px;">
                 <div class="card-body">
                   <h1 class="card-title">{{$p->title}}</h1>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($p->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($p->time)->format('g:ia')}}</h3>

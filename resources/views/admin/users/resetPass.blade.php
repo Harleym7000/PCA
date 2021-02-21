@@ -55,24 +55,39 @@
                           <label for="password" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Current Password</label>
   
                           <div class="col-12 col-md-7 col-lg-8">
-                              <input id="current_password" type="password" class="form-control" name="current_password" required>
-                          </div>
+                              <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" required>
+                              @error('current_password')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                            </div>
                       </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">New Password</label>
     
                             <div class="col-12 col-md-7 col-lg-8">
-                                <input id="password" type="password" class="form-control" name="password" required>
-                            </div>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                @error('password')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                              </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="passwordCon" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Confirm New Password</label>
     
                             <div class="col-12 col-md-7 col-lg-8">
-                                <input id="passwordCon" type="password" class="form-control" name="passwordCon" required>
-                            </div>
+                                <input id="passwordCon" type="password" class="form-control @error('passwordCon') is-invalid @enderror" name="passwordCon" required>
+                                @error('passwordCon')
+                                              <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                                          @enderror
+                              </div>
                         </div>
                         <div class="text-right">
                         <button type="submit" class="col-12 col-md-3 col-lg-3 col-xl-2 btn btn-primary">Reset Password</button>

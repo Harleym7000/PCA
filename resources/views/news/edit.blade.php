@@ -52,8 +52,8 @@
 <div class="container">
     @include('partials.alerts')
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-12">
+            <div class="card mt-5">
                 <div class="card-header">Edit News Story {{$news->title}}</div>
 
                 <div class="card-body">
@@ -63,11 +63,11 @@
                     {{ method_field('PUT') }}
 
                     <div class="form-group row">
-                        <label for="title" class="col-md-2 col-form-label text-md-right">News Headline:</label>
+                        <label for="title" class="col-12 col-md-2 col-form-label text-md-right">News Headline:</label>
 
-                        <div class="col-md-6">
-                            <input id="title" type="text" class="form-control" name="title" value="{{$news->title}}" required autocomplete="date" autofocus>
-                            @error('title')
+                        <div class="col-12 col-md-10">
+                            <input id="headline" type="text" class="form-control @error('headline') is-invalid @enderror" name="headline" value="{{$news->title}}" autofocus>
+                            @error('headline')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -76,19 +76,29 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="desc" class="col-md-2 col-form-label text-md-right">Story:</label>
+                        <label for="desc" class="col-12 col-md-2 col-form-label text-md-right">Story:</label>
 
-                        <div class="col-6">
-                            <textarea id="story" rows="20" class="form-control" contenteditable="true" onClick="document.execCommand('bold', false, null)" name="story" required autocomplete="desc" autofocus>{{$news->story}}</textarea>
+                        <div class="col-12 col-md-10">
+                            <textarea id="story" rows="20" class="form-control @error('story') is-invalid @enderror" contenteditable="true" onClick="document.execCommand('bold', false, null)" name="story" required autocomplete="desc" autofocus>{{$news->story}}</textarea>
+                            @error('story')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="organiser" class="col-md-2 col-form-label text-md-right">Image:</label>
+                        <label for="organiser" class="col-12 col-md-2 col-form-label text-md-right">Image:</label>
 
-                        <div class="col-6">
-                            <input id="news-image" type="file" class="form-control" name="news_image" autocomplete="organiser" autofocus>
-                        </div>
+                        <div class="col-12 col-md-10">
+                            <input id="news-image" type="file" class="form-control @error('news_image') is-invalid @enderror" name="news_image" autocomplete="organiser" autofocus>
+                            @error('news_image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                          </div>
                     </div>
                     <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save Changes</button>

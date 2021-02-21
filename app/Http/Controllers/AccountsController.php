@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cause;
+use App\Rules\Address_validation;
 use App\Rules\Name_Validation;
 use App\Rules\Phone_Validation;
 use App\Rules\Postcode_Validation;
 use App\Rules\Script_Validation;
+use App\Rules\Email_Validation;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +36,7 @@ class AccountsController extends Controller
                     return redirect('/user/profile');
                 }
              else {
-            return view('user.createProfile')->with('userEmail', $userEmail);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
         }
     }
 
@@ -48,7 +50,7 @@ class AccountsController extends Controller
         ->where('users.id', $userID)->first();
         $userEmail = $query2->email;
         if($query->profile_set == 0) {
-            return view('user.createProfile')->with('userEmail', $userEmail);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
         }
         $profileInfo = DB::table('profiles')
         ->where('profiles.user_id', $userID)
@@ -75,6 +77,14 @@ class AccountsController extends Controller
     }
 
     public function storeProfile(Request $request) {
+
+        $validatedData = $request->validate([
+            'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+        ],
+        $messages = [
+            'email.unique' => 'A user with the email address '.$request->email.' already exists',
+            ]);
+
         $userID = Auth::user()->id;
         $firstname = Crypt::encrypt($request->firstname);
         $surname = Crypt::encrypt($request->surname);
@@ -107,7 +117,7 @@ class AccountsController extends Controller
         $vaildateProfile = $request->validate([
             'firstname' => ['required', new Script_Validation, new Name_Validation],
             'surname' => ['required', new Script_Validation, new Name_Validation],
-            'address' => ['required', new Script_Validation],
+            'address' => 'required',
             'town' => ['required', new Script_Validation],
             'postcode' => ['required', new Script_Validation, new Postcode_Validation],
             'tel_no' => new Phone_Validation, new Script_Validation,
@@ -117,12 +127,10 @@ class AccountsController extends Controller
             'firstname.required' => 'First name was not updated as this field is required',
             'surname.required' => 'Surname was not updated as this field is required',
             'address.required' => 'Address was not updated as this field is required',
-            'address.regex' => 'Invalid address format',
+            'address.regex' => 'Please provide a valid address',
             'town.required' => 'Town was not updated as this field is required',
             'postcode.required' => 'Postcode was not updated as this field is required',
-            'tel_no.required' => 'Contact Number was not updated as this field is required',
             'email.required' => 'Email was not updated as this field is required'
-
         ]);
 
         $userID = Auth::user()->id;

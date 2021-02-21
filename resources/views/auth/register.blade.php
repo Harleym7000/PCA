@@ -11,6 +11,16 @@
             <div class="card">
                 <div class="card-header">New Members - Registration</div>
 
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="card-body">
                     <div class="text-center">
                     <h2>Become a Member Today</h2>
@@ -65,8 +75,8 @@
                         <br>
                         <div class="form-group">
                             <div class="captcha text-center">
-                                    <div class="g-recaptcha @error('recaptcha') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
-                                    @error('recaptcha')
+                                    <div class="g-recaptcha @error('g-recaptcha-response') is-invalid @enderror" data-sitekey="6LeWLL8ZAAAAALOKCQHnNaPioxOzVeF3VTBLiCUS" name="recapctha"></div>
+                                    @error('g-recaptcha-response')
                                                       <span class="invalid-feedback" role="alert">
                                                           <strong>{{ $message }}</strong>
                                                       </span>

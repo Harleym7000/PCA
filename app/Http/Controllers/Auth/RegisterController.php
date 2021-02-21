@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
+use App\Rules\Email_Validation;
 use App\Rules\Name_Validation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -76,8 +77,9 @@ class RegisterController extends Controller
     {
         $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation],
+            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
             'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
+            'agree' => 'required',
         ],
         $messages = [
             'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
@@ -85,7 +87,7 @@ class RegisterController extends Controller
             'password_confirmation.required' => 'Passwords do not match',
             'email.unique' => 'A user with the email address '.$request->email.' already exists',
             'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
-            'recaptcha.required' => 'Please complete the recaptcha validation'
+            'g-recaptcha-response.required' => 'Please verify you are not a robot'
             ]);
 
         $userpass = request('password');
@@ -116,6 +118,8 @@ class RegisterController extends Controller
             ['month' => $month, 'year' => $year, 'user_id' => $userID]
         );
         $user->attachRole($role);
+        event(new \Illuminate\Auth\Events\Registered($user));
+
         return redirect('/email/verify');
         }
  else {

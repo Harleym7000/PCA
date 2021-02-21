@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\DB;
 use App\News;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
     public function index() {
         $events = DB::table('events')
-        ->latest()
+        ->where('approved', 1)
+        ->orderBy('date', 'asc')
         ->limit(3)
         ->get();
         $news = News::orderBy('id', 'desc')->get();
@@ -57,7 +59,8 @@ public function contact()
         $query = DB::table('events')
         ->where('title', 'like', '%'.$eventTitle.'%')
         ->where('date', 'like', '%'.$eventDate.'%')
-        ->where('time', 'like', '%'.$eventTime.'%');
+        ->where('time', 'like', '%'.$eventTime.'%')
+        ->where('approved', 1);
         $events = $query->get();
         return view('pages.events')->with('events', $events);
     }
@@ -116,6 +119,11 @@ public function contact()
 
     public function createUserPassword(Request $request, $id)
     {
+
+        if(!Auth::guest()) {
+            $request->session()->flash('error', 'You are not authorised to complete this action');
+                return redirect('/');
+        }
      
     //dd($id);
 
@@ -148,7 +156,7 @@ public function contact()
         ->where('role_id', 6)
         ->delete();
 
-        $request->session()->flash('success', ' Your account was created successfully. You may now log in using your credentials');
+        $request->session()->now('success', ' Your account was created successfully. You may now log in using your credentials');
             return view('auth.login');
     }
     
