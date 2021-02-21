@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="show-event">
+  @include('partials.alerts')
     {{-- @foreach($events as $event)
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">

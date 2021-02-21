@@ -28,11 +28,11 @@
     <br>
     <br>
     <div class="verify-button">
-    <a href="http://127.0.0.1:8000/sub/verify?token={{$token}}"><button type="button" style="width: 30%; margin-left: 35%; background-color: #3490DC; height: 50px; border:none; color: #fff; font-size: 18px; cursor: pointer;">Verify Email</button></a>
+    <a href="https://www.portstewartca.org/sub/verify?token={{$token}}"><button type="button" style="width: 30%; margin-left: 35%; background-color: #3490DC; height: 50px; border:none; color: #fff; font-size: 18px; cursor: pointer;">Verify Email</button></a>
 </div>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000">If the button above does not work, please click the link below or copy and paste it into a new tab on your browser</p>
-    <a href="http://127.0.0.1:8000/sub/verify?token={{$token}}">http://127.0.0.1:8000/sub/verify?token={{$token}}</a>
+    <a href="https://www.portstewartca.org/sub/verify?token={{$token}}">https://www.portstewartca.org/sub/verify?token={{$token}}</a>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000;">If this wasn't you, we apologise for the inconvenience. Please ignore this email. <br> Thanks, <br> PCA</p>
 </div>

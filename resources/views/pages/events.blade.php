@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="events">
+  @include('partials.alerts')
     <h1>Scheduled Events</h1>
     <form id="event-search" action="/events" method="POST">
       @csrf

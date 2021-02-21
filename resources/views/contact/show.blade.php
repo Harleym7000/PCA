@@ -36,10 +36,9 @@
             @include('partials.alerts')
             <div class="card">
               @foreach($message as $m)
-              <div class="card-header">{{$m->subject}}</div>
+              <div class="card-header">{{\Crypt::decrypt($m->subject)}}</div>
               <div class="card-body">
                 <div class="text-left">
-                  <h3>Assigned To: @foreach($assignedTo as $a){{$a->firstname}} {{$a->surname}}@endforeach</h3>
                   <h5>Status: @if($m->closed === 0)Open @else Closed @endif </h3>
                   @if($m->closed === 0)
                   <form action="/admin/contact/close" method="POST">
@@ -49,15 +48,15 @@
                   <br>
                   <br>
                   @endif
-            <h1>{{$m->subject}}</h1>
-            <strong><p>{{$m->firstname}} {{$m->surname}} ({{$m->email}})</p></strong>
-            <h4>{{$m->message}}</h4>
+            <h1>{{\Crypt::decrypt($m->subject)}}</h1>
+            <strong><p>{{\Crypt::decrypt($m->firstname)}} {{\Crypt::decrypt($m->surname)}} ({{$m->email}})</p></strong>
+            <h4>{{\Crypt::decrypt($m->message)}}</h4>
           </div>
             <br>
             @if(count($response) > 0)
             @foreach($response as $r)
             <strong><p>{{\Crypt::decrypt($r->firstname)}} {{\Crypt::decrypt($r->surname)}} ({{$r->email}})</p></strong>
-            <h4>{{$r->response}}</h4>
+            <h4>{{\Crypt::decrypt($r->response)}}</h4>
               @endforeach
             
             @endif
@@ -70,7 +69,7 @@
               </div>
               <br>
               <input type="hidden" value="{{$m->email}}" name="from">
-              <input type="hidden" value="{{$m->subject}}" name="subject">
+              <input type="hidden" value="{{\Crypt::decrypt($m->subject)}}" name="subject">
               <div class="row">
                 <div class="col-8 col-lg-10">
                   <a href="/admin/contact"><button type="button" class="btn btn-secondary">Cancel</button></a>

@@ -54,7 +54,7 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                     <a class="btn btn-link" href="/register">
-                                        {{ __('Not a Committee Member? Register here') }}
+                                        {{ __('Not a Member? Register here') }}
                                     </a>
                                 </div>
                                 @endif

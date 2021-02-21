@@ -32,7 +32,7 @@
 </div>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000">If the button above does not work, please click the link below or copy and paste it into a new tab on your browser</p>
-    <a href="http://127.0.0.1:8000/user/create/verify?token={{$token}}">http://127.0.0.1:8000/user/create/verify?token={{$token}}</a>
+    <a href="https://www.portstewartca.org/user/create/verify?token={{$token}}">https://www.portstewartca.org/user/create/verify?token={{$token}}</a>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000;">If this wasn't you, we apologise for the inconvenience. Please ignore this email. <br> Thanks, <br> PCA</p>
 </div>

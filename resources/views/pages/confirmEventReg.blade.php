@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('partials.alerts')
 <div class="row justify-content-center">
 <div class="card col-8" style="margin-top:3%; margin-bottom:3%;">
     <div class="card-header">Confirm Event Registration</div>

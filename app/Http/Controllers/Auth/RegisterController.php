@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use App\Rules\Email_Validation;
 use App\Rules\Name_Validation;
+use App\Rules\Password_validation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -78,13 +79,14 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
             'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
-            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
+            'password' => ['required', 'min:8', 'max:20', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
+            'password_confirmation' => 'required',
             'agree' => 'required',
         ],
         $messages = [
             'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
             'password.confirmed' => 'Passwords do not match',
-            'password_confirmation.required' => 'Passwords do not match',
+            'password_confirmation.required' => 'Please confirm your password',
             'email.unique' => 'A user with the email address '.$request->email.' already exists',
             'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
             'g-recaptcha-response.required' => 'Please verify you are not a robot'

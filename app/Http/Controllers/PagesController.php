@@ -18,7 +18,7 @@ class PagesController extends Controller
         ->orderBy('date', 'asc')
         ->limit(3)
         ->get();
-        $news = News::orderBy('id', 'desc')->get();
+        $news = News::orderBy('id', 'desc')->limit(3)->get();
         $visitor_ip = $_SERVER['REMOTE_ADDR'];
         $mon = Carbon::now()->format('M');
         $year = Carbon::now()->format('Y');

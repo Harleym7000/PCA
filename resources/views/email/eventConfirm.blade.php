@@ -27,12 +27,15 @@
     <p style="font-size: 16px; font-weight: bold; color: #000;">{{$body}}</p>
     <br>
     <br>
-    <div class="verify-button">
-    <h3>{{$token}}</h3>
+    <div class="verify-button" style="text-align: center; background-color: #fff; border: 2px solid #000;">
+    <h3 style="font-size: 28px;">{{$token}}</h3>
 </div>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000">If you were not taken to the next page to enter the code, please try the link below</p>
-    <a href="http://127.0.0.1:8000/events/register/guest">http://127.0.0.1:8000/events/register/guest</a>
+    <a href="https://www.portstewartca.org/events/register/guest">https://www.portstewartca.org/events/register/guest</a>
+    <br>
+    <p style="font-size: 16px; font-weight: bold; color: #000">If you wish to cancel this event registration, please follow this link below:</p>
+    <a href="https://www.portstewartca.org/event/register/cancel?id={{$cancelLink}}">Cancel Event Registration</a>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000;">If this wasn't you, we apologise for the inconvenience. Please ignore this email. <br> Thanks, <br> PCA</p>
 </div>

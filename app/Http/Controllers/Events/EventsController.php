@@ -291,6 +291,16 @@ class EventsController extends Controller
         $userID = $_POST['UID'];
         $eventID = $_POST['EID'];
 
+        $eventFull = DB::table('events')
+        ->where('id', $eventID)
+        ->where('spaces_left', '<=', 0)
+        ->get();
+
+        if(count($eventFull) > 0) {
+            $request->session()->flash('error', 'Sorry, this event is full');
+                    return redirect()->back();
+        }
+
         $regQuery = DB::table('user_event_registrations')
         ->where('user_id', '=', $userID)
         ->where('event_id', '=', $eventID)

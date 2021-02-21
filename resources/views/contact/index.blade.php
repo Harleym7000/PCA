@@ -111,7 +111,7 @@ dataType: "json",
             <li class="list-group-item my-auto" @if($message->read === 1) style="background-color:#f8f8f8;"
               @endif>
               <div class="row">
-              <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->subject}}</p> <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->firstname}} {{$message->surname}} <p class="col-12 col-lg-3" @if($message->read === 0) style="font-weight: bold;"@endif>{{$message->message}}</p>
+              <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{\Crypt::decrypt($message->subject)}}</p> <p class="col-12 col-lg-2" @if($message->read === 0) style="font-weight: bold;"@endif>{{\Crypt::decrypt($message->firstname)}} {{\Crypt::decrypt($message->surname)}} <p class="col-12 col-lg-3" @if($message->read === 0) style="font-weight: bold;"@endif>{{\Crypt::decrypt($message->message)}}</p>
               <div class="col-12 col-md-9 col-lg-3">
               <a href="/admin/contact/reply/{{$message->id}}" data-toggle="tooltip" data-placement="bottom" title="Reply"><button type="button" id="reply" class="btn btn-btn-link"><img src="/img/baseline_reply_black_18dp.png"></button></a>
               @if($message->read === 0)<a href="" data-toggle="tooltip" data-placement="bottom" title="Mark as Read"><button type="button"  class="markRead btn btn-link" value="{{$message->id}}" name="mark-read"><img src="/img/baseline_mark_email_read_black_18dp.png">@else<a href="" data-toggle="tooltip" data-placement="bottom" title="Mark Unread"><button type="button" class="markUnread btn btn-link" name="markUnread" value="{{$message->id}}"><img src="/img/baseline_mark_email_unread_black_18dp.png">@endif</button></a>
@@ -134,13 +134,13 @@ dataType: "json",
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Message {{$message->subject}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Message {{\Crypt::decrypt($message->subject)}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        This will delete the message {{$message->subject}}. Are you sure you wish to delete this message
+        This will delete the message {{\Crypt::decrypt($message->subject)}}. Are you sure you wish to delete this message
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

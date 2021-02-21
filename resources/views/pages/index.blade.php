@@ -56,13 +56,18 @@
             <h1>Latest News</h1>
             @if(count($news) > 0)
             @foreach($news as $story)
-            <div class="media">
-              <img class="media-object mr-3 img-fluid" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" >
+            <div class="media mb-5">
+              <div class="row">
+                <div class="col-12 col-lg-3">
+              <img class="media-object mr-3 img-fluid" src="/storage/news_images/{{$story->image}}" alt="Generic placeholder image" style="width: 100%; height: auto;">
+            </div>
+              <br>
+              <div class="col-12 col-lg-9">
               <div class="media-body">
                 <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
-                <br><br>
-                <p>{!!$story->story!!}</p>
-                <p>Written on: {{ \Carbon\Carbon::parse($story->created_at)->format('D jS M Y - H:i:s')}}</p>
+                <p class="story ml-5 mr-5">{!!$story->story!!}
+                </div>
+            </div>
               </div>
             </div>
               @endforeach

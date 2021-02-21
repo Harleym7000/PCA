@@ -162,7 +162,7 @@
           </button>
         </div>
         <div class="modal-body">
-          This will delete the user. Are you sure you wish to delete this user?
+          This will delete the user {{\Crypt::decrypt($user->profile()->pluck('firstname'))}} {{\Crypt::decrypt($user->profile()->pluck('surname'))}}. Are you sure you wish to delete this user?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

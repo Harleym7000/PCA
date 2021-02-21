@@ -205,12 +205,12 @@ class UsersController extends Controller
 
     public function resetUserPassword(Request $request, User $user) {
         $validatedData = $request->validate([
-            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/'],
+            'password' => ['required', 'min:8', 'max:20', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed']
         ],
         $messages = [
             'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
             'password.confirmed' => 'Passwords do not match',
-            'passwordCon.required' => 'Passwords do not match',
+            'password_confirmation.required' => 'Passwords do not match',
             ]);
 
         $user = auth()->user();
@@ -226,7 +226,7 @@ class UsersController extends Controller
         if($validatePass) {
 
         $pass = $request->input('password');
-        $passConf = $request->input('passwordCon');
+        $passConf = $request->input('password_confirmation');
 
         if($pass === $passConf) {
             $userID = $user->id;

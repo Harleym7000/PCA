@@ -61,7 +61,8 @@ body {
       }
 
       .display-4 {
-        font-size: 48px;
+        font-size: 56px;
+        margin-top: 2%;
     }
       
       .img-title{
@@ -81,7 +82,7 @@ body {
           width: 180px;
           height: 45px;
           font-size: 16px;
-          margin-top: 15%;
+          margin-top: 10%;
       }
 
       #events {
@@ -849,6 +850,10 @@ body {
       width: 90%;
     }
 
+    #policy .card h4 {
+      font-size: 20px;
+    }
+
     #policy .card img {
       height: 170px;
       width: 65%;
@@ -1033,12 +1038,6 @@ body {
         margin-bottom: 12%;
       }
 
-      #news p {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 75ch;
-      }
-
       #news .media h5 {
         font-size: 42px;
       }
@@ -1081,7 +1080,6 @@ body {
    }
 
    #news-page .media img {
-    display: none;
 }
 
 #news-page .media  {
@@ -1181,7 +1179,7 @@ footer .subscribe {
   }
 
   #news .media img {
-    display: none;
+    
 }
 
 #news .media  {
@@ -1243,7 +1241,7 @@ footer .subscribe {
 @media (max-width: 991.98px) { 
 
   .display-4 {
-    font-size: 28px;
+    font-size: 40px;
 }
 
   #sidenav {
@@ -1311,6 +1309,10 @@ width: 5%;
 
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) { 
+
+  .img-title .btn {
+    margin-top: 17%;
+}
 
     #sidenav .option img{
         height: 25%;

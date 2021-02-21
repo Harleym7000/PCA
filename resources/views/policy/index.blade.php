@@ -50,7 +50,14 @@
           @include('inc.admin-nav')
           <div id="policy">
             @include('partials.alerts')
+            <div class="row">
+              <div class="col-10">
           <h1>Current Policy Documents</h1>
+        </div>
+        <div class="col-2">
+          <button type="submit" class="col-12 btn btn-primary" data-toggle="modal" data-target="#addnewpolicy">Upload New Policies</button>
+        </div>
+        </div>
           <div class="row">
         </div>
         @if(count($policies) > 0)
@@ -72,29 +79,7 @@
           <p>There are currently no policy documents uploaded</p>
           @endif
           <br>
-          <br>
-          <h1>Upload New Policy Document</h1>
-          <form action="/policy/upload" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group row">
-              <div class="col-12 col-lg-10">
-              <div class="form-group">
-                <div class="form-control">
-    <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple>
-  </div>
-    @error('file')
-    <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-    </span>
-@enderror
-  </div>
-            </div>
-            <br>
-            <div class="col-12 col-lg-2">
-              <button type="submit" class="btn btn-primary col-12">Upload</button>
-              </div>
-          </div>
-          </form>
+          <br>          
         </div>
       </div>
     </div>
@@ -124,5 +109,39 @@
 </div>
 </div>
 @endforeach
+
+<div class="modal fade" id="addnewpolicy" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload New Policies</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/policy/upload" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="form-group row">
+            <div class="col-12">
+            <div class="form-group">
+              <div class="form-control">
+  <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple onclick="startProgressBar()">
+</div>
+  @error('file')
+  <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+  </span>
+@enderror
+</div>
+          </div>
+          <br>
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" name="filename">Upload</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
