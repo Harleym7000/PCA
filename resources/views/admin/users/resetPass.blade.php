@@ -78,11 +78,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="passwordCon" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Confirm New Password</label>
+                            <label for="password_confirmation" class="col-12 col-md-5 col-lg-4 col-form-label text-md-right">Confirm New Password</label>
     
                             <div class="col-12 col-md-7 col-lg-8">
-                                <input id="passwordCon" type="password" class="form-control @error('passwordCon') is-invalid @enderror" name="passwordCon" required>
-                                @error('passwordCon')
+                                <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
+                                @error('password_confirmation')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>

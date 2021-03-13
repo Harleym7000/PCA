@@ -48,8 +48,6 @@
           <div class="card">
             <div class="card-header">User Management</div>
             <p class="mob-info pt-5">Scroll right to see more</p> 
-            <form action="/admin/users/search" method="POST">
-              @csrf 
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-sm" id="user-table">
                       <span id="total_records"></span>
@@ -61,20 +59,20 @@
                             <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
                           </tr>
                         </thead>
-                        
                         <thead class="thead">
                           <tr class="d-flex">
-                            <th scope="col" class="manage-users-name col-6 col-lg-2"><input type="text" name="name" placeholder="Search Name"></th>
+                              <form action="/admin/users/search" method="POST">
+                                  @csrf
+                            <th scope="col" class="manage-users-name col-6 col-lg-2"><input type="text" placeholder="Search Name" name="name"></th>
                             <th scope="col" class="manage-users-email col-6 col-lg-3"><input type="text" name="email" placeholder="Search Email"></th>
-                            <th scope="col" class="manag-users-roles col-6 col-lg-3"><select name="roles">
-                              <option value="" selected>Select an option...</option>
-                              @foreach($roles as $r)
-                              <option value="{{$r->id}}">{{$r->name}}</option>
-                              @endforeach
-                            </th>
-                            <th scope="col" class="manage-users-actions text-center col-6 col-lg-4"><button type="submit" class="btn btn-primary col-12">Search</th>
+                            <th scope="col" class="manag-users-roles col-6 col-lg-3"><select name="role">
+                                @foreach($roles as $r)
+                                <option value="{{$r->id}}">{{$r->name}}</option>
+                                @endforeach
+                            </select></th>
+                            <th scope="col" class="manage-users-actions text-center col-6 col-lg-4"><button type="submit" class="btn btn-primary col-12">Search</button></th>
+                            </form>
                           </tr>
-                  
                         </thead>
                         <tbody>
   <!-- Modal -->
@@ -179,7 +177,7 @@
           </button>
         </div>
         <div class="modal-body">
-          This will delete the user. Are you sure you wish to delete this user?
+          This will delete the user {{\Crypt::decrypt($user->profile()->pluck('firstname'))}} {{\Crypt::decrypt($user->profile()->pluck('surname'))}}. Are you sure you wish to delete this user?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -68,10 +68,35 @@
                       <form action="/user/profile" method="POST">
                         @csrf
                         <div class="form-group row">
+                            <label for="title" class="col-md-2 col-form-label text-md-right">Title:</label>
+    
+                            <div class="col-9">
+                                <select class="form-control" name="title" id="title">
+                                    @foreach($titles as $title)
+                                <option value="{{$title->name}}">{{$title->name}}</option>
+                                @endforeach
+</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label for="firstname" class="col-md-2 col-form-label text-md-right">First Name:</label>
     
                             <div class="col-9">
                                 <input id="firstname" type="text" class="form-control" name="firstname" required autofocus>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="firstname" class="col-12 col-lg-2 col-form-label text-lg-right">Middle Name(s):</label>
+    
+                            <div class="col-12 col-lg-9">
+                                <input id="middlename" type="text" class="form-control @error('middlename') is-invalid @enderror" name="middlename">
+                                @error('middlename')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -119,11 +144,11 @@
                             <label for="email" class="col-md-2 col-form-label text-md-right">Email:</label>
     
                             <div class="col-9">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$userEmail}}" required>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$userEmail}}" readonly="readonly">
     
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong></strong>
+                                        <strong>{{$message}}</strong>
                                     </span>
                                 @enderror
                             </div>

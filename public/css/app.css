@@ -10968,7 +10968,8 @@ body {
 }
 
 .display-4 {
-  font-size: 48px;
+  font-size: 56px;
+  margin-top: 2%;
 }
 
 .img-title {
@@ -10988,7 +10989,7 @@ body {
   width: 180px;
   height: 45px;
   font-size: 16px;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 #events {
@@ -11739,6 +11740,10 @@ body {
   width: 90%;
 }
 
+#policy .card h4 {
+  font-size: 20px;
+}
+
 #policy .card img {
   height: 170px;
   width: 65%;
@@ -11923,12 +11928,6 @@ input[disabled] {
     margin-bottom: 12%;
   }
 
-  #news p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 75ch;
-  }
-
   #news .media h5 {
     font-size: 42px;
   }
@@ -11968,10 +11967,6 @@ input[disabled] {
 
   #news-page h1 {
     margin-top: 12%;
-  }
-
-  #news-page .media img {
-    display: none;
   }
 
   #news-page .media {
@@ -12068,10 +12063,6 @@ input[disabled] {
     text-shadow: 3px 3px #000;
   }
 
-  #news .media img {
-    display: none;
-  }
-
   #news .media {
     text-align: center;
     font-weight: bold;
@@ -12127,7 +12118,7 @@ input[disabled] {
 
 @media (max-width: 991.98px) {
   .display-4 {
-    font-size: 28px;
+    font-size: 40px;
   }
 
   #sidenav {
@@ -12192,6 +12183,10 @@ input[disabled] {
 }
 
 @media (max-width: 1199.98px) {
+  .img-title .btn {
+    margin-top: 17%;
+  }
+
   #sidenav .option img {
     height: 25%;
     width: 25%;

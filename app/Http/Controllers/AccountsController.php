@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AccountsController extends Controller
 {
@@ -32,11 +33,14 @@ class AccountsController extends Controller
         ->select('email')
         ->where('users.id', $userID)->first();
         $userEmail = $query2->email;
+        $titles = DB::table('titles')
+        ->get();
                 if($query->profile_set == 1) {
                     return redirect('/user/profile');
                 }
              else {
-            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID,
+                'titles' => $titles]);
         }
     }
 
@@ -49,8 +53,11 @@ class AccountsController extends Controller
         ->select('email')
         ->where('users.id', $userID)->first();
         $userEmail = $query2->email;
+        $titles = DB::table('titles')
+        ->get();
         if($query->profile_set == 0) {
-            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID]);
+            return view('user.createProfile')->with(['userEmail' => $userEmail, 'userID' => $userID,
+                'titles => $titles']);
         }
         $profileInfo = DB::table('profiles')
         ->where('profiles.user_id', $userID)
@@ -59,7 +66,7 @@ class AccountsController extends Controller
         ->where('users.id', $userID)
         ->select('email')->first();
         $userEmail = $userEmailQuery->email;
-        return view('user.profile')->with(['profileInfo' => $profileInfo, 'userEmail' => $userEmail, 'userID' => $userID]);
+        return view('user.profile')->with(['profileInfo' => $profileInfo, 'userEmail' => $userEmail, 'userID' => $userID, 'titles' => $titles]);
     }
 
     public function cancelReg(Request $request, $id)
@@ -79,14 +86,25 @@ class AccountsController extends Controller
     public function storeProfile(Request $request) {
 
         $validatedData = $request->validate([
-            'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+            'email' => ['email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
         ],
         $messages = [
             'email.unique' => 'A user with the email address '.$request->email.' already exists',
             ]);
 
         $userID = Auth::user()->id;
+        
+        $signUpEmail = DB::table('users')
+        ->where('id', $userID)
+        ->select('email')
+        ->get();
+        if(Str::of($signUpEmail)->exactly($request->email)) {
+            $request->session()->flash('error', 'Your email must be your sign-up email address. If you need to change this, you can do so after creating your profile');
+        return redirect()->back();
+        }
+        $title = Crypt::encrypt($request->title);
         $firstname = Crypt::encrypt($request->firstname);
+        $middlename = Crypt::encrypt($request->middlename);
         $surname = Crypt::encrypt($request->surname);
         $address = Crypt::encrypt($request->address);
         $town = Crypt::encrypt($request->town);
@@ -96,7 +114,7 @@ class AccountsController extends Controller
 
         $createProfile = DB::table('profiles')
         ->insert( 
-            ['user_id' => $userID, 'firstname' => $firstname, 'surname' => $surname, 'address' => $address, 'town' => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]
+            ['user_id' => $userID, 'title' => $title, 'firstname' => $firstname, 'middlename' => $middlename, 'surname' => $surname, 'address' => $address, 'town' => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]
         );
 
         DB::table('users')
@@ -115,12 +133,14 @@ class AccountsController extends Controller
 
     public function updateProfile(Request $request) {
         $vaildateProfile = $request->validate([
+            'title' => ['required'],
             'firstname' => ['required', new Script_Validation, new Name_Validation],
+            'middlename' => [new Script_Validation],
             'surname' => ['required', new Script_Validation, new Name_Validation],
             'address' => 'required',
             'town' => ['required', new Script_Validation],
             'postcode' => ['required', new Script_Validation, new Postcode_Validation],
-            'tel_no' => new Phone_Validation, new Script_Validation,
+            'contact_no' => new Phone_Validation, new Script_Validation,
             'email' => 'required', 'email', new Script_Validation
         ],
         $messages = [
@@ -134,7 +154,9 @@ class AccountsController extends Controller
         ]);
 
         $userID = Auth::user()->id;
+        $title = Crypt::encrypt($request->title);
         $firstname = Crypt::encrypt($request->firstname);
+        $middlename = Crypt::encrypt($request->middlename);
         $surname = Crypt::encrypt($request->surname);
         $address = Crypt::encrypt($request->address);
         $town = Crypt::encrypt($request->town);
@@ -144,7 +166,7 @@ class AccountsController extends Controller
 
         $updateProfile = DB::table('profiles')
         ->where('user_id', $userID)
-        ->update(['firstname' => $firstname, 'surname' => $surname, 'address' => $address, 'town'  => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]);
+        ->update(['title'=> $title, 'firstname' => $firstname, 'middlename' => $middlename, 'surname' => $surname, 'address' => $address, 'town'  => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]);
 
         $updateEmail = DB::table('users')
         ->where('id', $userID)
@@ -233,11 +255,15 @@ class AccountsController extends Controller
         DB::table('cause_user')
         ->where('user_id', $userID)
         ->delete();
+        
+        DB::table('user_tokens')
+        ->where('user_id', $userID)
+        ->delete();
 
         DB::table('users')
         ->where('id', $userID)
         ->delete();
-
+        
         return redirect('/');
     }
 }

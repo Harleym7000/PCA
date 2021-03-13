@@ -198,7 +198,6 @@ class EventsController extends Controller
             'title' => ['required', 'min:2', 'max:255'],
             'desc' => ['required', 'min:8', 'max:255'],
             'date' => ['required', 'date_format:Y-m-d'],
-            'time' => ['required', 'date_format:H:i'],
             'location' => ['required'],
             'admission' => ['required'],
             'capacity' => ['required', 'numeric'],
@@ -291,6 +290,19 @@ class EventsController extends Controller
         $userID = $_POST['UID'];
         $eventID = $_POST['EID'];
 
+        $eventFull = DB::table('events')
+        ->where('id', $eventID)
+        ->where('spaces_left', '<=', 0)
+        ->get();
+        
+        $event = Event::find($eventID);
+        $eventName = $event->title;
+
+        if(count($eventFull) > 0) {
+            $request->session()->flash('error', 'Sorry, this event is full');
+                    return redirect()->back();
+        }
+
         $regQuery = DB::table('user_event_registrations')
         ->where('user_id', '=', $userID)
         ->where('event_id', '=', $eventID)
@@ -310,7 +322,21 @@ class EventsController extends Controller
             ->decrement('spaces_left');
     
             $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
+            
+            \Mail::send('email.eventConfirmUser', [
+                    'body' => 'You are receiving this email as you wish to register for '.$eventName,
+                ], function ($mail) use ($request) {
+                    $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA Event Registation');
+                    $mail->to($request->email)->subject('PCA Event Registration');
+                });
+                if( count(\Mail::failures()) > 0) {
+                    $request->session()->flash('error', 'Something went wrong');
+                    return redirect()->back();
+                    }
+                    
             return redirect()->back();
+            
+            
         }
     }
 

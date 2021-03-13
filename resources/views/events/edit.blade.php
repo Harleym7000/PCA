@@ -189,7 +189,7 @@ function formatCurrency(input, blur) {
                             </div>
                             <div class="form-group">
                               <label for="capacity">Event Capacity:</label>
-                              <input type="number" min=1 class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="capacity" value="{{$event->spaces_left}}" required>
+                              <input type="number" class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="capacity" value="{{$event->spaces_left}}" required>
                               @error('admission')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>

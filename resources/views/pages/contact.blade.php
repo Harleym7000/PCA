@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div id="contact-us">
+  @include('partials.alerts')
             <div class="card">
             <div class="card-header">Contact Us</div>
             @if($errors->any())

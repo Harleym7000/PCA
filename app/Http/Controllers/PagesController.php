@@ -18,7 +18,7 @@ class PagesController extends Controller
         ->orderBy('date', 'asc')
         ->limit(3)
         ->get();
-        $news = News::orderBy('id', 'desc')->get();
+        $news = News::orderBy('id', 'desc')->limit(3)->get();
         $visitor_ip = $_SERVER['REMOTE_ADDR'];
         $mon = Carbon::now()->format('M');
         $year = Carbon::now()->format('Y');
@@ -142,6 +142,12 @@ public function contact()
         //dd($pass);
 
     if($pass === $passCon) {
+        
+        $user = DB::table('users')
+        ->where('id', $id);
+        
+        event(new \Illuminate\Auth\Events\Registered($user));
+        
         $password = Hash::make($passCon);
         DB::table('users')
         ->where('id', $id)
@@ -155,6 +161,7 @@ public function contact()
         ->where('user_id', $id)
         ->where('role_id', 6)
         ->delete();
+        
 
         $request->session()->now('success', ' Your account was created successfully. You may now log in using your credentials');
             return view('auth.login');

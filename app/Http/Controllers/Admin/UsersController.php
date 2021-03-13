@@ -184,7 +184,27 @@ class UsersController extends Controller
         DB::table('user_reg')
         ->where('user_id', $id)
         ->delete();
-
+        
+        DB::table('cause_user')
+        ->where('user_id', $id)
+        ->delete();
+        
+        DB::table('role_user')
+        ->where('user_id', $id)
+        ->delete();
+        
+        DB::table('user_event_registrations')
+        ->where('user_id', $id)
+        ->delete();
+        
+        DB::table('user_reg')
+        ->where('user_id', $id)
+        ->delete();
+        
+        DB::table('user_tokens')
+        ->where('user_id', $id)
+        ->delete();
+        
         $user = User::find($id);
         $user->roles()->detach();
         $user->causes()->detach();
@@ -205,12 +225,12 @@ class UsersController extends Controller
 
     public function resetUserPassword(Request $request, User $user) {
         $validatedData = $request->validate([
-            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/'],
+            'password' => ['required', 'min:8', 'max:20', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed']
         ],
         $messages = [
             'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
             'password.confirmed' => 'Passwords do not match',
-            'passwordCon.required' => 'Passwords do not match',
+            'password_confirmation.required' => 'Passwords do not match',
             ]);
 
         $user = auth()->user();
@@ -226,7 +246,7 @@ class UsersController extends Controller
         if($validatePass) {
 
         $pass = $request->input('password');
-        $passConf = $request->input('passwordCon');
+        $passConf = $request->input('password_confirmation');
 
         if($pass === $passConf) {
             $userID = $user->id;
@@ -270,25 +290,5 @@ class UsersController extends Controller
             $request->session()->flash('error', 'There was an error updating your committees');
         }
         return redirect()->back();
-    }
-
-    public function searchUsers(Request $request) 
-    {
-        //dd('Hello Wolrd!');
-
-        $name = $request->name;
-        $email = $request->email;
-        $role = $request->roles;
-
-        $getProfilesTable = DB::table('profiles')
-        ->get();
-        $nameSearch = Str::ucfirst($name);
-        foreach($getProfilesTable as $p) {
-            $decryptName = Crypt::decrypt($p->firstname). ' '.Crypt::decrypt($p->surname);
-            if(Str::of($decryptName)->startsWith($nameSearch)) {
-                dd('yes');
-            }
-            //dd($decryptName);
-        }
     }
 }

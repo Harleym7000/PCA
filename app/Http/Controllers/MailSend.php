@@ -38,11 +38,11 @@ class MailSend extends Controller
         'message.required' => 'Please provide us with a brief description of why you are contacting us',
         'g-recaptcha-response.required' => 'Please verify you are not a robot'
     ]);
-        $contactfirst_name = $request->input('firstname');
+        $contactfirst_name = Crypt::encrypt($request->input('firstname'));
         $contactemail = $request->input('email');
-        $contactsurname = $request->input('surname');
-        $contactsubject = $request->input('subject');
-        $contactmessage = $request->input('message');
+        $contactsurname = Crypt::encrypt($request->input('surname'));
+        $contactsubject = Crypt::encrypt($request->input('subject'));
+        $contactmessage = Crypt::encrypt($request->input('message'));
 
         DB::table('contacts')->insert(
             ['firstname' => $contactfirst_name, 'surname' => $contactsurname, 'email' => $contactemail, 'subject' => $contactsubject, 'message' => $contactmessage]
@@ -60,7 +60,7 @@ class MailSend extends Controller
             'body' => $request->input('message')
         ], function ($mail) use ($request) {
             $mail->from($request->email, $request->firstname);
-            $mail->to('harleymdev@gmail.com')->subject($request->subject);
+            $mail->to(env('MAIL_FROM_ADDRESS'))->subject($request->subject);
             $mail->replyTo($request->email);
 
         });
@@ -69,7 +69,7 @@ class MailSend extends Controller
         return view('pages.contact');
         } else {
         $request->session()->flash('success', 'Thanks. Your message has been sent');
-        return view('pages.contact');
+        return redirect()->back();
         }
     }
 
@@ -77,7 +77,7 @@ class MailSend extends Controller
     {
         $messageID = $id;
         $userID = Auth::user()->id;
-        $response = $request->response;
+        $response = Crypt::encrypt($request->response);
         DB::table('contact_response')
         ->insert(['message_id' => $messageID, 'response' => $response, 'respondee_user_id' => $userID]);
 
@@ -87,9 +87,9 @@ class MailSend extends Controller
 
             'body' => $request->input('response')
         ], function ($mail) use ($request) {
-            $mail->from('harleymdev@gmail.com');
+            $mail->from(env('MAIL_FROM_ADDRESS'));
             $mail->to($request->from)->subject('RE: '.$request->subject);
-            $mail->replyTo('harleymdev@gmail.com');
+            $mail->replyTo(env('MAIL_FROM_ADDRESS'));
 
         });
         if( count(\Mail::failures()) > 0) {
@@ -132,7 +132,7 @@ class MailSend extends Controller
             please click on the link below.',
             'token' => $token
         ], function ($mail) use ($request) {
-            $mail->from('harleymdev@gmail.com', 'PCA Newsletter');
+            $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA Newsletter');
             $mail->to($request->sub_email)->subject('PCA Newsletter Subscription');
         });
         if( count(\Mail::failures()) > 0) {
@@ -162,7 +162,7 @@ class MailSend extends Controller
         ->get();
         
         if(count($tokenValid) < 1) {
-            $request->session()->flash('error', 'Invalid token');
+            $request->session()->flash('error', 'Invalid token. Please try again');
             return view('pages.notSubscribed');
         }
         elseif(count($tokenValid) === 1) {
@@ -173,6 +173,10 @@ class MailSend extends Controller
             return view('pages.verifySubscribed');
         }
     }
+    public function showRegisterEventGuest(Request $request) {
+        return view('pages.confirmEventReg');
+    }
+
     public function registerEventGuest(Request $request)
     {
 
@@ -197,28 +201,50 @@ class MailSend extends Controller
         $eventID = $request->input('eventID');
 
         $event = Event::find($eventID);
+        $eventFull = DB::table('events')
+        ->where('id', $eventID)
+        ->where('spaces_left', 0)
+        ->get();
+
+        if(count($eventFull) > 0) {
+            $request->session()->flash('error', 'Sorry, this event is full');
+                    return redirect()->back();
+        }
         $eventName = $event->title;
+
+        $checkPreviousReg = DB::table('guest_event_registrations')
+        ->where('event_id', $eventID)
+        ->where('email', $email)
+        ->get();
+
+        if(count($checkPreviousReg) > 0) {
+            $request->session()->flash('error', 'You have already registered for this event');
+                    return redirect()->back();
+        }
 
         DB::table('events')
         ->where('id', $eventID)
         ->decrement('spaces_left');
 
         $token = Str::random(8);
+        $cancelLink = Str::random(40);
         DB::table('guest_event_registrations')
         ->insert(['event_id' => $eventID, 
                   'forename' => $forename, 
                   'surname' => $surname, 
                   'email' => $email,
-                  'token' => $token, 
+                  'token' => $token,
+                  'cancelLink' => $cancelLink, 
                   'contact_no' => $phone
                   ]);
 
                   \Mail::send('email.eventConfirm', [
                     'body' => 'You are receiving this email as you wish to register for '.$eventName.'. To confirm you wish to register for this event, 
                     please copy the token below and paste it into the next page.',
-                    'token' => $token
+                    'token' => $token,
+                    'cancelLink' => $cancelLink
                 ], function ($mail) use ($request) {
-                    $mail->from('harleymdev@gmail.com', 'PCA Event Registation');
+                    $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA Event Registation');
                     $mail->to($request->email)->subject('PCA Event Registration');
                 });
                 if( count(\Mail::failures()) > 0) {
@@ -229,7 +255,8 @@ class MailSend extends Controller
         $request->session()->flash('success', 'An email with your verification code has been sent to '.$email. '. Please enter it below');
         return view('pages.confirmEventReg');
                     }
-    }
+                }
+
     public function validateEventToken(Request $request)
     {
         $token = $request->token;
@@ -257,8 +284,8 @@ class MailSend extends Controller
         ->get();
         
         if(count($tokenValid) < 1) {
-            $request->session()->flash('error', 'Invalid token');
-            return view('pages.eventRegUnsuccessful');
+            $request->session()->flash('error', 'Invalid token. Please try again');
+            return redirect()->back();
         }
         elseif(count($tokenValid) === 1) {
             DB::table('guest_event_registrations')
@@ -307,7 +334,7 @@ public function createdUserReg(Request $request)
             'body' => 'You are receiving this email as you have been added as a back-end user of the PCA website. Please click on the link below to complete setting up your account, ',
             'token' => $token
         ], function ($mail) use ($request) {
-            $mail->from('harleymdev@gmail.com', 'PCA User Registation');
+            $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA User Registation');
             $mail->to($request->email)->subject('PCA User Registration');
         });
         if( count(\Mail::failures()) > 0) {
@@ -362,6 +389,27 @@ public function validateUserToken(Request $request)
 
             return view('pages.createPassword')->with('userID', $userID);
         
+    }
+}
+
+public function cancelEventRegGuest(Request $request)
+{
+    $cancelLink = $_GET['id'];
+
+    $validLink = DB::table('guest_event_registrations')
+    ->where('cancelLink', $cancelLink)
+    ->get(); 
+
+    if(count($validLink) != 1) {
+        $request->session()->flash('error', 'Invalid url');
+            return redirect('/');
+    } else{
+        DB::table('guest_event_registrations')
+        ->where('cancelLink', $cancelLink)
+        ->delete();
+
+        $request->session()->flash('success', 'You have successfully cancelled your registration for this event');
+            return redirect('/');
     }
 }
 }
