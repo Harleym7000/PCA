@@ -27,14 +27,14 @@
       <h1 class="text-center">{{$event->title}}</h1>
       <h4 class="text-center">{{$event->description}}</h4>
     </div>
-    <div class="show-event-info">
+    <div class="show-event-info pl-2 pr-2">
       <div class="row">
-          <div class="col-1"></div>
-          <div class="col-3">
-              <img src="/storage/event_images/{{$event->image}}" style="height: 330px; width:auto;">
+          <div class="col-12 col-lg-1"></div>
+          <div class="col-12 col-md-6 col-lg-5">
+              <img src="/storage/event_images/{{$event->image}}" style="height: 330px; width:auto;" @if($eventHappened ?? '' === 1) class="mb-5" @endif>
           </div>
-          <div class="col-2"></div>
-          <div class="col-5">
+          {{-- <div class="col-12 col-md-6 col-lg-2"></div> --}}
+          <div class="col-12 col-md-6 col-lg-5">
             <h3> <strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}}</h3>
             <br>
             <h3> <strong>Time:</strong> {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
@@ -43,17 +43,36 @@
             <br>
             <h3> <strong>Organiser:</strong> {{$event->managed_by}}</h3>
             <br> 
-            <h3 @if($event->admission == '£0.00') style="color: green" @endif><strong>Admission:</strong>@if($event->admission == '£0.00') Free @else {{$event->admission}} @endif</h3>
+            <h3 @if($eventHappened ?? '' === 1) style="display:none;" @endif @if($event->admission == '£0.00') style="color: green" @endif><strong>Admission:</strong>@if($event->admission == '£0.00') Free @else {{$event->admission}} @endif</h3>
             <br>
-            <h3 @if($event->spaces_left > 0) style="color: green" @else style="color: red" @endif><strong>Spaces Left:</strong> {{$event->spaces_left}}</h3>
+            <h3 @if($eventHappened ?? '' === 1) style="display:none;" @endif @if($event->spaces_left > 0) style="color: green" @else style="color: red" @endif><strong>Spaces Left:</strong> {{$event->spaces_left}}</h3>
           </div>
-          <div class="col-1"></div>
+          <div class="col-12 col-lg-1"></div>
       </div>
       <div class="text-center">
-      <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#event{{$event->id}}" @if($event->spaces_left == 0) disabled data-toggle="tooltip" data-placement="bottom" title="This event is full" style="cursor: not-allowed;" @endif>Register</button>
+      <button @if($eventHappened ?? '' === 1) style="display:none;" @endif class="btn btn-primary" type="button" data-toggle="modal" data-target="#event{{$event->id}}" @if($event->spaces_left == 0) disabled data-toggle="tooltip" data-placement="bottom" title="This event is full" style="cursor: not-allowed;" @endif>Register</button>
     </div>
 </div>
 </div>
+</div>
+
+@if($eventHappened ?? '' === 1)
+@if(count($images) > 0)
+<div id="event-images">
+  <h1 class="text-center mt-3 mb-5">Event Images</h1>
+  <div class="container mb-5">
+    <div class="row gallery ">
+      @foreach($images as $i)
+      
+<a href="/storage/event_images/{{ $i->image_path }}" class="col-12 col-md-6 col-lg-3">
+  <img src="/storage/event_images/{{ $i->image_path }}" class="event_image" style="width: 100%; height: 300px; object-fit:cover;" alt="Event Image">
+</a>
+    @endforeach
+    @endif
+  </div>
+  </div>
+</div>
+@endif
         <!-- Modal -->
 
 
@@ -161,6 +180,10 @@
 </div>
 </div>
 @endforeach
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+<script>
+    lightGallery(document.querySelector('.gallery'));
+    </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" integrity="sha512-YKERjYviLQ2Pog20KZaG/TXt9OO0Xm5HE1m/OkAEBaKMcIbTH1AwHB4//r58kaUDh5b1BWwOZlnIeo0vOl1SEA==" crossorigin="anonymous"></script>
                           <script>
@@ -200,3 +223,4 @@
     </script>
 
         @endsection
+  </body>

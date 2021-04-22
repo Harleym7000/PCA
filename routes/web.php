@@ -3,6 +3,7 @@
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,9 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('auth'
     Route::get('/create', 'EventsController@create');
     Route::post('/create', 'EventsController@store');
     Route::post('/delete', 'EventsController@destroy');
+    Route::get('/photo_upload/{id}', 'EventsController@showUploadImages');
+    Route::post('/photo_upload/{id}', 'EventsController@uploadImages');
+    Route::post('/delete_photos/{id}', 'EventsController@deleteImages');
 });
 
 // Route::get('/events/dashboard', 'DashboardsController@events');
@@ -87,6 +91,9 @@ Route::post('/delete', 'NewsController@destroy');
 });
 
 //Admin links
+Route::get('/artisan', 'ArtisanController@run');
+Route::post('/artisan', 'ArtisanController@check');
+Route::post('/upload', 'PoliciesController@upload');
 Route::get('/admin/contact', 'ContactController@index')->middleware('auth', 'can:manage-users');
 Route::get('/admin/userstest', 'Admin\UsersController@brdindex')->middleware('auth', 'can:manage-users');
 Route::get('/admin/dashboard', 'DashboardsController@admin')->middleware('auth', 'can:manage-users');
@@ -114,6 +121,7 @@ Route::get('/admin/events/amend-application/{id}', 'ApproveController@amendApp')
 Route::post('/admin/users/createNew', 'MailSend@createdUserReg')->middleware('auth', 'can:manage-users');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show']]);
+    Route::post('/users/search', 'UsersController@searchUser');
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');
     Route::get('/users/{id}/edit', 'UsersController@edit');
 });

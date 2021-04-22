@@ -263,6 +263,10 @@ class EventsController extends Controller
     {
         $eventID = $request->eid;
 
+        $deleteEventImages = DB::table('event_images')
+        ->where('event_id', $eventID)
+        ->delete();
+
         $deleteGuestEventRegs = DB::table('guest_event_registrations')
         ->where('event_id', $eventID)
         ->delete();
@@ -374,4 +378,79 @@ class EventsController extends Controller
 
         return redirect()->back();
     }
+
+    public function showUploadImages($eventID)
+    {
+        $event = Event::find($eventID);
+        //dd($eventID);
+        $getCurrentImages = DB::table('event_images')
+            ->where('event_id', $eventID)
+            ->select('id', 'image_path');
+
+            $currentImages = $getCurrentImages->get();
+
+        return view('events.uploadImages')->with([
+            'event' => $event,
+            'currentImages' => $currentImages
+            ]);
+    }
+
+    public function uploadImages(Request $request, $eventID)
+    {
+        // if($request->has('file')) {
+        //     dd('yes');
+        // }
+        // else dd('no');
+            //dd($eventID);
+
+        $validatedData = $request->validate([
+            'file' => 'required|max:2048'
+        ],
+        $messages = [
+            'file.required' => 'Please select a file or files to upload',
+            'file.max' => 'Your image file size is too big. Please do not upload images larger than 2MB in size',
+            'file.image' => 'Your file format is invalid. Please only upload image files'
+            ]);
+
+            $fileTypes = ['png', 'jpg', 'jfif', 'jpeg', 'tiff'];
+
+            if($request->hasFile('file')) {
+                $processed = 0;
+        foreach($request->file as $file) {
+
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $file->getClientOriginalExtension();
+            //dd($ext);
+            if(!in_array($ext, $fileTypes)) {
+                $request->session()->flash('error', 'One or more files is not an image. Please only upload image files');
+        return redirect()->back();
+            }
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $file->storeAs('public/event_images', $filenameToStore);
+
+                DB::table('event_images')
+                ->insert(['event_id' => $eventID, 'image_path' => $filenameToStore]);
+    }
+    $processed = 1;
+}
+    if($processed === 1) {
+        $request->session()->flash('success', 'Images have been uploaded successfully');
+        return redirect()->back();
+    }
+    $request->session()->flash('error', 'Images could not be uploaded successfully');
+        return redirect()->back();
+}
+
+public function deleteImages(Request $request) 
+{
+      $imageID = $request->id;
+
+      $deleteImage = DB::table('event_images')
+      ->where('id', $imageID)
+      ->delete();
+
+      $request->session()->flash('success', 'The image was deleted successfully');
+        return redirect()->back();
+}
 }

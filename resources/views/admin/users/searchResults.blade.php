@@ -59,22 +59,9 @@
                             <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
                           </tr>
                         </thead>
-                        <thead class="thead">
-                          <tr class="d-flex">
-                            <th scope="col-12" class="manage-users-name col-12"><form action="/admin/users/search" method="POST">
-                              @csrf<input type="text" placeholder="Search Name" name="name" class="col-8">
-                            </div>
-                            <button type="submit" class="btn btn-primary col-3 ml-5">Search</button>
-                        </th>
-                          </form>
-                        </div>
-                          </tr>
-                        </thead>
                         <tbody>
-                </div>
-          </div>
   <!-- Modal -->
-  @foreach($users as $u)
+  @foreach($matchingUsers as $u)
                     <tr class="d-flex">
                       <td class="col-6 col-lg-2">{{Crypt::decrypt($u->profile()->pluck('firstname'))}} {{Crypt::decrypt($u->profile()->pluck('surname'))}}</td>
                         <td class="col-6 col-lg-3">{{$u->email}}</td>
@@ -104,7 +91,8 @@
     </div>
   </div>
 </div>
-@foreach($users as $user)
+
+@foreach($matchingUsers as $user)
 <!-- View Modal -->
 <div class="modal fade" id="view{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

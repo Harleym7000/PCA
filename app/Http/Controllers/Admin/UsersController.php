@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\SendMail;
 use App\Rules\Email_Validation;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class UsersController extends Controller
 {
@@ -34,7 +36,7 @@ class UsersController extends Controller
         $title = 'User Management';
         $roles = Role::all();
         //$users = User::paginate(10);
-        $users = User::where('profile_set', 1)->paginate(10);
+        $users = User::where('profile_set', 1)->paginate(6);
         $causes = Cause::all();
         
         return view('admin.users.index')->with([
@@ -289,6 +291,69 @@ class UsersController extends Controller
         } else {
             $request->session()->flash('error', 'There was an error updating your committees');
         }
-        return redirect()->back();
+
+        $title = 'User Management';
+        $roles = Role::all();
+        //$users = User::paginate(10);
+        $users = User::where('profile_set', 1)->paginate(6);
+        $causes = Cause::all();
+        
+        return view('admin.users.index')->with([
+            'roles' => $roles,
+            'users'=> $users,
+            'title' => $title,
+            'causes' => $causes
+            ]);
+    }
+
+    public function searchUser(Request $request) {
+        $name = $request->name;
+        $email = $request->email;
+
+        $existingUsers = DB::table('users')
+        ->join('profiles', 'users.id', '=', 'profiles.user_id')
+        ->join('role_user', 'users.id', '=', 'role_user.user_id')
+        ->join('roles', 'role_user.role_id', '=', 'roles.id')
+        ->groupBy('users.id')
+        ->select('users.id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'roles.display_name')
+        ->get();
+
+        $matches = [];
+        foreach($existingUsers as $user) {
+            $decryptedFirstName = decrypt($user->firstname);
+            $decryptedSurname = decrypt($user->surname);
+            $decryptedName = $decryptedFirstName.' '.$decryptedSurname;
+            $email = $user->email;
+            $role = $user->display_name;
+            $userID = $user->id;
+            //dd($userRoles);
+
+            if(Str::of($decryptedName)->lower()->startsWith($name)) {
+                $matchingUsers = DB::table('users')
+                ->join('profiles', 'users.id', '=', 'profiles.user_id')
+                ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                ->join('roles', 'role_user.role_id', '=', 'roles.id')
+                ->where('users.id', $userID)
+                ->groupBy('users.id')
+                ->select('users.id', 'profiles.firstname', 'profiles.surname', 'users.email', 'role_user.role_id', 'roles.display_name')
+                ->get();
+
+                array_push($matches, $userID);
+            }
+        }
+
+        $totalMatches = count($matches);
+            $matchingUsers = [];
+            for($i = 0; $i < $totalMatches; $i++) {
+                $userID = $matches[$i];
+                $match = User::find($userID);
+                array_push($matchingUsers, $match);
+            }
+
+                $causes = Cause::all();
+                return view('admin.users.searchResults')->with([
+                    'matchingUsers' => $matchingUsers,
+                    'causes' => $causes
+                    ]);      
     }
 }
