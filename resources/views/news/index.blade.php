@@ -65,6 +65,17 @@
                               <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
                             </tr>
                           </thead>
+                          <thead class="thead">
+                            <tr class="d-flex">
+                              <th scope="col-12" class="manage-users-name col-12"><form action="/news/search" method="POST">
+                                @csrf<input type="text" placeholder="Search News" name="search" class="col-8">
+                              </div>
+                              <button type="submit" class="btn btn-primary col-3 ml-5">Search</button>
+                          </th>
+                            </form>
+                          </div>
+                            </tr>
+                          </thead>
                           <tbody>
     @foreach($news as $n)
                       <tr class="d-flex">

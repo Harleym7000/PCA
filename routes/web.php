@@ -62,6 +62,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('auth'
     Route::get('/photo_upload/{id}', 'EventsController@showUploadImages');
     Route::post('/photo_upload/{id}', 'EventsController@uploadImages');
     Route::post('/delete_photos/{id}', 'EventsController@deleteImages');
+    Route::post('/search', 'EventsController@searchEvents');
 });
 
 // Route::get('/events/dashboard', 'DashboardsController@events');
@@ -88,6 +89,7 @@ Route::put('/edit/{id}', 'NewsController@update')->name('news-update');
 Route::get('/create', 'NewsController@create');
 Route::post('/create', 'NewsController@store');
 Route::post('/delete', 'NewsController@destroy');
+Route::post('/search', 'NewsController@searchNews');
 });
 
 //Admin links

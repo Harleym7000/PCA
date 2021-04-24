@@ -75,21 +75,29 @@ class RegisterController extends Controller
 
     protected function create(Request $request)
     {
-        $validatedData = $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
-            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
-            'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
-            'agree' => 'required',
-        ],
-        $messages = [
-            'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
-            'password.confirmed' => 'Passwords do not match',
-            'password_confirmation.required' => 'Passwords do not match',
-            'email.unique' => 'A user with the email address '.$request->email.' already exists',
-            'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
-            'g-recaptcha-response.required' => 'Please verify you are not a robot'
-            ]);
+        $secretKey = env('NOCAPTCHA_SECRET');
+        $response = $_POST['g-recaptcha-response'];
+        $ip = $_SERVER['REMOTE_ADDR'];
+        //dd($ip);
 
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
+        $file = file_get_contents($url);
+        $data = json_decode($file);
+        if($data->success == true) 
+        { 
+            $validatedData = $request->validate([
+                'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+                'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
+                'agree' => 'required',
+            ],
+            $messages = [
+                'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
+                'password.confirmed' => 'Passwords do not match',
+                'password_confirmation.required' => 'Passwords do not match',
+                'email.unique' => 'A user with the email address '.$request->email.' already exists',
+                'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
+                
+                ]);
         $userpass = request('password');
         $userconfpass = request('password_confirmation');
 
@@ -122,6 +130,11 @@ class RegisterController extends Controller
 
         return redirect('/email/verify');
         }
+    }
+    if($data->success == false) {
+        $request->session()->flash('error', 'Error: Please verify you are not a robot');
+        return redirect()->back();
+    }
  else {
         $request->session()->flash('error', 'Error: Passwords do not match');
         return redirect()->back()->withInput($request->except('password'));

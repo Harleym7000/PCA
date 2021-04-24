@@ -453,4 +453,16 @@ public function deleteImages(Request $request)
       $request->session()->flash('success', 'The image was deleted successfully');
         return redirect()->back();
 }
+
+public function searchEvents(Request $request) {
+    $eventSearch = $request->search;
+
+    //dd($eventSearch);
+
+    $events = DB::table('events')
+    ->where('title', 'like', '%'.$eventSearch.'%')
+    ->paginate(5);
+
+    return view('events.index')->with('events', $events);
+}
 }
