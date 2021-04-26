@@ -37,6 +37,12 @@ Route::get('event/verify/{token?}', 'MailSend@eventVerified');
 Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
 Route::get('/event/register/cancel/{id?}', 'MailSend@cancelEventRegGuest');
 Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword');
+Route::get('/test', function() {
+    dd('Hello');
+});
+Route::get('/test-hello', function() {
+    dd('Hello');
+});
 
 //Auth Routes
 Auth::routes(['verify' => true]);
