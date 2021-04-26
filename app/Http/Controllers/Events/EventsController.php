@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Event;
+use App\User;
 use App\News;
 use App\Rules\Name_Validation;
 use App\Rules\Phone_Vaidation;
@@ -114,12 +116,17 @@ class EventsController extends Controller
         } else {
             $event->eventbrite_link = "";
         }
-        $event->approved = 0;
+        $userID = Auth::user()->id;
+        if($userID === 34) {
+            $event->approved = 1;
+            $event->save();
+            $request->session()->flash('success', 'The event was created successfully. You can now view your event on the site');
+            return redirect()->back();
+        } else {
+            $event->approved = 0;
+        }
 
         $event->save();
-
-        $eventID = $event->id;
-        //dd($eventID);
 
         if($event->save()) {
             $request->session()->flash('success', 'The event was created successfully and is pending approval. Your event will appear on the site once it has been approved');

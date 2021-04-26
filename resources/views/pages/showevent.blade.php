@@ -61,10 +61,10 @@
 <div id="event-images">
   <h1 class="text-center mt-3 mb-5">Event Images</h1>
   <div class="container mb-5">
-    <div class="row gallery ">
+    <div class="row gallery">
       @foreach($images as $i)
       
-<a href="/storage/event_images/{{ $i->image_path }}" class="col-12 col-md-6 col-lg-3">
+<a href="/storage/event_images/{{ $i->image_path }}" class="col-12 col-md-6 col-lg-3 mb-4">
   <img src="/storage/event_images/{{ $i->image_path }}" class="event_image" style="width: 100%; height: 300px; object-fit:cover;" alt="Event Image">
 </a>
     @endforeach
