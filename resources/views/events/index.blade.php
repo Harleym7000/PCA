@@ -67,6 +67,17 @@
                               <th scope="col" class="manage-users-actions text-center col-6 col-lg-4">Actions</th>
                             </tr>
                           </thead>
+                          <thead class="thead">
+                            <tr class="d-flex">
+                              <th scope="col-12" class="manage-users-name col-12"><form action="/events/search" method="POST">
+                                @csrf<input type="text" placeholder="Search Event" name="search" class="col-8">
+                              </div>
+                              <button type="submit" class="btn btn-primary col-3 ml-5">Search</button>
+                          </th>
+                            </form>
+                          </div>
+                            </tr>
+                          </thead>
                           <tbody>
     @foreach($events as $e)
                       <tr class="d-flex">
@@ -76,6 +87,7 @@
                           <td id="action-buttons" class="text-center col-6 col-lg-4">
                             <a href="/events/registered/{{$e->id}}"><button id="comms-user" type="submit" class="btn btn-success"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View Registered"></button></a>  
                             <a href="/events/edit/{{$e->id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Event"></button></a>
+                            <a href="/events/photo_upload/{{ $e->id }}"><button type="button" class="btn btn-primary"><img src="/img/baseline_photo_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Manage Event Images"></button></a>
                                   <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$e->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
                           </td>
                         </tr>

@@ -184,9 +184,35 @@ console.log('success');
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+=======
       </div>
       @endforeach
 </div>
   </div>
+  <div class="modal fade" id="meetingdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">User Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/meeting/update" method="POST">
+            @csrf
+            <input type="datetime-local" name="meetdate">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+>>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
+      </div>
+      @endforeach
+</div>
+  </div>
+
 </body>
 </html>

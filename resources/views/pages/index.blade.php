@@ -26,7 +26,7 @@
                   @foreach($events as $event)
             <div class="col mb-4">
               <div class="card">
-                <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="Image for event {{$event->title}}" style="width:100%; max-height:350px;">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="Image for event {{$event->title}}" style="width:100%; min-height: 350px; max-height:350px;">
                 <div class="card-body">
                   <h2 class="card-title text-center">{{$event->title}}</h2>
                   <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>

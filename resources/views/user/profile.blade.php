@@ -18,7 +18,9 @@
 
         
         $("#editprofile").click(function() {
+            $('#title').removeAttr('disabled');
             $('#firstname').removeAttr('disabled');
+            $('#middlename').removeAttr('disabled');
             $('#surname').removeAttr('disabled');
             $('#address').removeAttr('disabled');
             $('#town').removeAttr('disabled');
@@ -33,7 +35,9 @@
     });
 
     $("#cancelprofile").click(function() {
+            $('#title').attr('disabled', 'disabled');
             $('#firstname').attr('disabled', 'disabled');
+            $('#middlename').attr('disabled', 'disabled');
             $('#surname').attr('disabled', 'disabled');
             $('#address').attr('disabled', 'disabled');
             $('#town').attr('disabled', 'disabled');
@@ -93,11 +97,36 @@
                       <form action="/user/profile/update" method="POST">
                         @csrf
                         <div class="form-group row">
+                            <label for="title" class="col-md-2 col-form-label text-md-right">Title:</label>
+    
+                            <div class="col-9">
+                                <select class="form-control" name="title" id="title" disabled>
+                                    @foreach($titles as $title)
+                                <option value="{{$title->name}}" @if($title->name == Crypt::decrypt($profileInfo->title)) selected @endif>{{$title->name}}</option>
+                                @endforeach
+</select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label for="firstname" class="col-12 col-lg-2 col-form-label text-lg-right">First Name:</label>
     
                             <div class="col-12 col-lg-9">
                                 <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{\Crypt::decrypt($profileInfo->firstname)}}" required autofocus disabled>
                                 @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="firstname" class="col-12 col-lg-2 col-form-label text-lg-right">Middle Name(s):</label>
+    
+                            <div class="col-12 col-lg-9">
+                                <input id="middlename" type="text" class="form-control @error('middlename') is-invalid @enderror" name="middlename" value="{{\Crypt::decrypt($profileInfo->middlename)}}" required autofocus disabled>
+                                @error('middlename')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -161,8 +190,8 @@
                             <label for="surname" class="col-12 col-lg-2 col-form-label text-lg-right">Telephone:</label>
     
                             <div class="col-12 col-lg-9">
-                                <input id="tel_no" type="text" class="form-control @error('tel_no') is-invalid @enderror" name="contact_no" value="{{\Crypt::decrypt($profileInfo->contact_no)}}" autofocus disabled>
-                                @error('tel_no')
+                                <input id="tel_no" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{\Crypt::decrypt($profileInfo->contact_no)}}" autofocus disabled>
+                                @error('contact_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

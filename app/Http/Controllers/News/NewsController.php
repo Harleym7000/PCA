@@ -169,4 +169,14 @@ class NewsController extends Controller
         $request->session()->flash('error', 'There was an error deleting the news story');
                 return redirect()->back();
     }
+
+    public function searchNews(Request $request) {
+        $newsSearch = $request->search;
+
+        $news = DB::table('news')
+        ->where('title', 'like', '%'.$newsSearch.'%')
+        ->paginate(8);
+
+        return view('news.index')->with('news', $news);
+    }
 }

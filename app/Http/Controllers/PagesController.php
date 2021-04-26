@@ -39,6 +39,10 @@ public function events() {
     return view('pages.events')->with('events', $events);
 }
 
+public function showLightbox() {
+    return view('pages.test-lightbox');
+}
+
 public function news()
     {
         $news = News::orderBy('id', 'desc')->get();
@@ -80,17 +84,38 @@ public function contact()
 
     public function showEvent($id)
     {
+        //dd($id);
+
+        $currentDate = Carbon::now()->format('Y-m-d');
+        //dd($currentDate);
         $events = DB::table('events')
         ->where('id',$id)
         ->get();
 
+        $eventDate = '';
+        foreach ($events as $event) {
+            $eventDate = $event->date;
+        }
+
+        //dd($eventDate);
+        if($eventDate < $currentDate) {
+            //dd('This event has happened');
+        $eventHappened = 1;
         $images = DB::table('event_images')
         ->where('event_id', $id)
         ->get();
 
+        //dd(count($images));
+
         return view('pages.showevent')->with([
             'events' => $events,
-            'images' => $images
+            'images' => $images,
+            'eventHappened' => $eventHappened
+            ]);
+        }
+
+        return view('pages.showevent')->with([
+            'events' => $events
             ]);
     }
 
@@ -142,6 +167,12 @@ public function contact()
         //dd($pass);
 
     if($pass === $passCon) {
+        
+        $user = DB::table('users')
+        ->where('id', $id);
+        
+        event(new \Illuminate\Auth\Events\Registered($user));
+        
         $password = Hash::make($passCon);
         DB::table('users')
         ->where('id', $id)
@@ -155,6 +186,7 @@ public function contact()
         ->where('user_id', $id)
         ->where('role_id', 6)
         ->delete();
+        
 
         $request->session()->now('success', ' Your account was created successfully. You may now log in using your credentials');
             return view('auth.login');

@@ -8,26 +8,27 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" href="/img/pcaLogo.png" type="image/gif" sizes="16x16">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        @include('inc.navbar')
-            @yield('content')
+
+<div id="app">
+    <div class="container-fluid" style="text-align: left; color: #000;">
+      <div class="row no-gutters">
+        <div class="col-2">
+          @include('inc.admin-sidenav')
         </div>
-        @include('inc.footer')
-</body>
-</html>
+        <div class="col-10">
+          @include('inc.admin-nav')

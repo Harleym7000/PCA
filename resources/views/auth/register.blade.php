@@ -11,7 +11,8 @@
             <div class="card">
                 <div class="card-header">New Members - Registration</div>
 
-                @if($errors->any())
+                <div class="card-body">
+                    @if($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -20,8 +21,6 @@
                         </ul>
                     </div>
                 @endif
-
-                <div class="card-body">
                     <div class="text-center">
                     <h2>Become a Member Today</h2>
                     <p>It's quick and easy to sign up</p>

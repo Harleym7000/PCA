@@ -26,13 +26,9 @@
         <h1 style="color: #000;">Hello!</h1>
     <p style="font-size: 16px; font-weight: bold; color: #000;">{{$body}}</p>
     <br>
+    <p style="font-size: 16px; font-weight: bold; color: #000">Please show this email upon arrival at the event.</p>
     <br>
-    <div class="verify-button">
-    <a href="https://www.portstewartca.org/user/create/verify?token={{$token}}"><button type="button" style="width: 30%; margin-left: 35%; background-color: #3490DC; height: 50px; border:none; color: #fff; font-size: 18px; cursor: pointer;">Verify Email</button></a>
-</div>
-    <br>
-    <p style="font-size: 16px; font-weight: bold; color: #000">If the button above does not work, please click the link below or copy and paste it into a new tab on your browser</p>
-    <a href="https://www.portstewartca.org/user/create/verify?token={{$token}}">https://www.portstewartca.org/user/create/verify?token={{$token}}</a>
+    <p style="font-size: 16px; font-weight: bold; color: #000">If you wish to cancel this event registration, you can do so under the My Events section of your account.</p>
     <br>
     <p style="font-size: 16px; font-weight: bold; color: #000;">If this wasn't you, we apologise for the inconvenience. Please ignore this email. <br> Thanks, <br> PCA</p>
 </div>

@@ -198,7 +198,6 @@ class EventsController extends Controller
             'title' => ['required', 'min:2', 'max:255'],
             'desc' => ['required', 'min:8', 'max:255'],
             'date' => ['required', 'date_format:Y-m-d'],
-            'time' => ['required', 'date_format:H:i'],
             'location' => ['required'],
             'admission' => ['required'],
             'capacity' => ['required', 'numeric'],
@@ -264,6 +263,10 @@ class EventsController extends Controller
     {
         $eventID = $request->eid;
 
+        $deleteEventImages = DB::table('event_images')
+        ->where('event_id', $eventID)
+        ->delete();
+
         $deleteGuestEventRegs = DB::table('guest_event_registrations')
         ->where('event_id', $eventID)
         ->delete();
@@ -295,6 +298,12 @@ class EventsController extends Controller
         ->where('id', $eventID)
         ->where('spaces_left', '<=', 0)
         ->get();
+<<<<<<< HEAD
+=======
+        
+        $event = Event::find($eventID);
+        $eventName = $event->title;
+>>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
 
         if(count($eventFull) > 0) {
             $request->session()->flash('error', 'Sorry, this event is full');
@@ -320,7 +329,21 @@ class EventsController extends Controller
             ->decrement('spaces_left');
     
             $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
+            
+            \Mail::send('email.eventConfirmUser', [
+                    'body' => 'You are receiving this email as you wish to register for '.$eventName,
+                ], function ($mail) use ($request) {
+                    $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA Event Registation');
+                    $mail->to($request->email)->subject('PCA Event Registration');
+                });
+                if( count(\Mail::failures()) > 0) {
+                    $request->session()->flash('error', 'Something went wrong');
+                    return redirect()->back();
+                    }
+                    
             return redirect()->back();
+            
+            
         }
     }
 
@@ -358,4 +381,91 @@ class EventsController extends Controller
 
         return redirect()->back();
     }
+
+    public function showUploadImages($eventID)
+    {
+        $event = Event::find($eventID);
+        //dd($eventID);
+        $getCurrentImages = DB::table('event_images')
+            ->where('event_id', $eventID)
+            ->select('id', 'image_path');
+
+            $currentImages = $getCurrentImages->get();
+
+        return view('events.uploadImages')->with([
+            'event' => $event,
+            'currentImages' => $currentImages
+            ]);
+    }
+
+    public function uploadImages(Request $request, $eventID)
+    {
+        // if($request->has('file')) {
+        //     dd('yes');
+        // }
+        // else dd('no');
+            //dd($eventID);
+
+        $validatedData = $request->validate([
+            'file' => 'required|max:2048'
+        ],
+        $messages = [
+            'file.required' => 'Please select a file or files to upload',
+            'file.max' => 'Your image file size is too big. Please do not upload images larger than 2MB in size',
+            'file.image' => 'Your file format is invalid. Please only upload image files'
+            ]);
+
+            $fileTypes = ['png', 'jpg', 'jfif', 'jpeg', 'tiff'];
+
+            if($request->hasFile('file')) {
+                $processed = 0;
+        foreach($request->file as $file) {
+
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $ext = $file->getClientOriginalExtension();
+            //dd($ext);
+            if(!in_array($ext, $fileTypes)) {
+                $request->session()->flash('error', 'One or more files is not an image. Please only upload image files');
+        return redirect()->back();
+            }
+            $filenameToStore = $filename.'_'.time().'.'.$ext;
+            $path = $file->storeAs('public/event_images', $filenameToStore);
+
+                DB::table('event_images')
+                ->insert(['event_id' => $eventID, 'image_path' => $filenameToStore]);
+    }
+    $processed = 1;
+}
+    if($processed === 1) {
+        $request->session()->flash('success', 'Images have been uploaded successfully');
+        return redirect()->back();
+    }
+    $request->session()->flash('error', 'Images could not be uploaded successfully');
+        return redirect()->back();
+}
+
+public function deleteImages(Request $request) 
+{
+      $imageID = $request->id;
+
+      $deleteImage = DB::table('event_images')
+      ->where('id', $imageID)
+      ->delete();
+
+      $request->session()->flash('success', 'The image was deleted successfully');
+        return redirect()->back();
+}
+
+public function searchEvents(Request $request) {
+    $eventSearch = $request->search;
+
+    //dd($eventSearch);
+
+    $events = DB::table('events')
+    ->where('title', 'like', '%'.$eventSearch.'%')
+    ->paginate(5);
+
+    return view('events.index')->with('events', $events);
+}
 }

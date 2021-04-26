@@ -22,8 +22,17 @@ class MailSend extends Controller
 {
 
     public function contact_us(Request $request) {
+        $secretKey = env('NOCAPTCHA_SECRET');
+        $response = $_POST['g-recaptcha-response'];
+        $ip = $_SERVER['REMOTE_ADDR'];
+        //dd($ip);
+
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
+        $file = file_get_contents($url);
+        $data = json_decode($file);
+        if($data->success == true) 
+        {
         $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
             'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
             'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
             'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
@@ -71,7 +80,11 @@ class MailSend extends Controller
         $request->session()->flash('success', 'Thanks. Your message has been sent');
         return redirect()->back();
         }
+    } else {
+        $request->session()->flash('error', 'Plese verify you are not a robot');
+        return redirect()->back();
     }
+}
 
     public function contact_response(Request $request, $id)
     {
@@ -180,8 +193,18 @@ class MailSend extends Controller
     public function registerEventGuest(Request $request)
     {
 
+        $secretKey = env('NOCAPTCHA_SECRET');
+        $response = $_POST['g-recaptcha-response'];
+        $ip = $_SERVER['REMOTE_ADDR'];
+        //dd($ip);
+
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
+        $file = file_get_contents($url);
+        $data = json_decode($file);
+        if($data->success == true) 
+        { 
+
         $validatedData = $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
             'forename' => ['required', 'min:2', 'max:255', new Name_Validation, new Script_Validation],
             'surname' => ['required', new Name_Validation, 'min:2', 'max:255', new Script_Validation],
             'email' => ['required', 'email', new Script_Validation, new Email_Validation],
@@ -191,7 +214,6 @@ class MailSend extends Controller
             'forename.required' => 'Please provide your first name',
             'surname.reuired' => 'Please provide your surname',
             'email.required' => 'Please provide your email address',
-            'g-recaptcha-response.required' => 'Please verify you are not a robot',
         ]);
 
         $forename = Crypt::encrypt($request->input('forename'));
@@ -250,11 +272,17 @@ class MailSend extends Controller
                 if( count(\Mail::failures()) > 0) {
                     $request->session()->flash('error', 'Something went wrong');
                     return redirect()->back();
-                    } else {
-
-        $request->session()->flash('success', 'An email with your verification code has been sent to '.$email. '. Please enter it below');
+                }
+                $request->session()->flash('success', 'An email with your verification code has been sent to '.$email. '. Please enter it below');
         return view('pages.confirmEventReg');
                     }
+<<<<<<< HEAD
+=======
+                    if($data->success == false) {
+                        $request->session()->flash('error', 'Please confirm you are not a robot');
+                    return redirect()->back();
+                    }
+>>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
                 }
 
     public function validateEventToken(Request $request)

@@ -26,30 +26,34 @@
     </form>
 </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
-      @if(count($events) > 0)
-            @foreach($events as $event)
-        <div class="col mb-4">
-          <div id="upcoming-events">
-          <div class="card mt-3">
-            <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="..." style="width:100%; max-height:350px;">
-            <div class="card-body">
-              <h2 class="card-title text-center">{{$event->title}}</h2>
-              <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
+       @if(count($events) > 0)
+                  @foreach($events as $event)
+            <div class="col mb-4">
+              <div class="card">
+                <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="Image for event {{$event->title}}" style="width:100%; min-height: 350px; max-height:350px;">
+                <div class="card-body">
+                  <h2 class="card-title text-center">{{$event->title}}</h2>
+                  <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
-              <div class="row">
-                <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
-                <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}" data-backdrop="static">
-                  Register
-                </button>
-          </div>
+                  <div class="row">
+                    <a href="/event/{{$event->id}}" class="btn btn-primary col-5">More Info</a>
+                    @if($event->is_eventbrite == 1)
+                    <a href="{{$event->eventbrite_link}}" class="col-5" target="_blank" style="padding-top: 2%;"><button type="button" class="btn btn-light" style="width:115%;">
+                      Register
+                    </button></a> 
+                    @else
+                    <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}">
+                      Register
+                    </button>
+                    @endif
+              </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-        @endforeach
-        @else 
-        <p>There are currently no Upcoming Events</p>
-        @endif
+            @endforeach
+                  @else 
+                  <p>There are currently no Upcoming Events</p>
+                  @endif
           </div>
     </div>
         </div>
@@ -183,6 +187,9 @@
   </div>
 </div>
 @endforeach
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" integrity="sha512-YKERjYviLQ2Pog20KZaG/TXt9OO0Xm5HE1m/OkAEBaKMcIbTH1AwHB4//r58kaUDh5b1BWwOZlnIeo0vOl1SEA==" crossorigin="anonymous"></script>
                           <script>
