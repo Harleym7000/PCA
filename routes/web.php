@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Artisan;
 //Front-end links
 Route::get('/', 'PagesController@index')->name('home');
 Route::get('/about', 'PagesController@about');
+Route::post('/events', 'PagesController@getEventsByFilters');
+Route::post('/events/register', 'Events\EventsController@registerEventUser');
 
 //News page links 
 Route::group(['prefix' => 'news'], function() {
@@ -31,10 +33,8 @@ Route::group(['prefix' => 'news'], function() {
 Route::group(['prefix' => 'event'], function() {
     Route::get('/', 'PagesController@events');
     Route::get('/{id}', 'PagesController@showEvent');
-    Route::post('/', 'PagesController@getEventsByFilters');
     Route::post('/register/guest', 'MailSend@registerEventGuest');
     Route::get('/register/guest', 'MailSend@showRegisterEventGuest');
-    Route::post('/register', 'Events\EventsController@registerEventUser');
 });
 
 Route::get('/contact-us', 'PagesController@contact');
@@ -45,12 +45,6 @@ Route::get('event/verify/{token?}', 'MailSend@eventVerified');
 Route::post('/event/reg/confirm', 'MailSend@validateEventToken');
 Route::get('/event/register/cancel/{id?}', 'MailSend@cancelEventRegGuest');
 Route::post('/user/create/setPassword/{id}', 'PagesController@createUserPassword');
-Route::get('/test', function() {
-    dd('Hello');
-});
-Route::get('/test-hello', function() {
-    dd('Hello');
-});
 
 //Auth Routes
 Auth::routes(['verify' => true]);

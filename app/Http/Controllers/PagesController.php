@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class PagesController extends Controller
 {
     public function index() {
+        $currentDate = Carbon::now()->format('Y-m-d');
         $events = DB::table('events')
         ->where('approved', 1)
+        ->where('date', '>=', $currentDate)
         ->orderBy('date', 'asc')
         ->limit(3)
         ->get();

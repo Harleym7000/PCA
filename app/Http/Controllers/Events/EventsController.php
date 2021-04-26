@@ -301,6 +301,8 @@ class EventsController extends Controller
         $userID = $_POST['UID'];
         $eventID = $_POST['EID'];
 
+        $eventName = Event::find($eventID)->get('title');
+
         $eventFull = DB::table('events')
         ->where('id', $eventID)
         ->where('spaces_left', '<=', 0)
