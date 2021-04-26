@@ -11122,6 +11122,8 @@ body {
 
 #about-img img {
   height: 600px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 #about h1 {

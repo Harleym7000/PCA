@@ -19,7 +19,7 @@
                       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 justify-content-center">
                         <div class="col mb-4">
                           <div class="card">
-                            <img src="/img/red_sails.jpg" class="card-img-top img-fluid img-thumbnail" alt="...">
+                            <img src="/img/red_sails.jpg" class="card-img-top img-fluid img-thumbnail" alt="..." style="object-fit:cover;">
                             <div class="card-body">
                               <h1 class="card-title"><a href="https://redsails.co.uk/">Red Sails Festival</a></h1>
                               <p class="card-text" style="width: 90%; margin: auto;">Red Sails Festival runs over the course of a week every summer in Portstewart. Live music, dance and activities for everyone to enjoy, finishing with our famous fireworks display</p>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col mb-4">
                             <div class="card">
-                              <img src="/img/event.jpg" class="card-img-top img-fluid img-thumbnail" alt="...">
+                              <img src="/img/event.jpg" class="card-img-top img-fluid img-thumbnail" alt="..." style="object-fit:cover;">
                               <div class="card-body">
                                 <h1 class="card-title"><a href="/events">Community Events</a></h1>
                                 <p class="card-text" style="width: 90%; margin: auto;">Portstewart Community Association hold events of all kinds for people of all ages within the community. Why not go to our <a href="/events">events</a> page to find an event for you?</p>
@@ -37,7 +37,7 @@
                           </div>
                           <div class="col mb-4">
                             <div class="card">
-                              <img src="/img/cleanup.jpg" class="card-img-top img-fluid img-thumbnail" alt="...">
+                              <img src="/img/cleanup.jpg" class="card-img-top img-fluid img-thumbnail" alt="..." style="object-fit:cover;">
                               <div class="card-body">
                                 <h1 class="card-title">Town Clean-Ups</h1>
                                 <p class="card-text" style="width: 90%; margin: auto;">Once a month, members of the PCA alongside members of the local community commit an hour of their time to helping to keep our town tidy. Refreshments available afterwards</p>

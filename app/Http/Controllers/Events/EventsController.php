@@ -298,12 +298,6 @@ class EventsController extends Controller
         ->where('id', $eventID)
         ->where('spaces_left', '<=', 0)
         ->get();
-<<<<<<< HEAD
-=======
-        
-        $event = Event::find($eventID);
-        $eventName = $event->title;
->>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
 
         if(count($eventFull) > 0) {
             $request->session()->flash('error', 'Sorry, this event is full');
