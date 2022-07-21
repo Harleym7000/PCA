@@ -1,0 +1,58 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+.landing-header {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.site-navbar {
+    min-height: 20vh;
+}
+
+.nav-link {
+    color: #002080 !important;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #8cd7f7 !important;
+}
+
+.fom-btn {
+    color: #000 !important;
+}
+
+.text-shadow {
+    text-shadow: 4px 4px #000;
+}
+
+.txtover { 
+    position:relative 
+} 
+
+.txtover figcaption { 
+    position:absolute; 
+    top: 30%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#abt-heading {
+    color: #002080;
+}
+
+.abt-line {
+    height: 1px;
+    background-color: #002080;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.filter-white {
+    filter: invert(100%) sepia(3%) saturate(13%) hue-rotate(81deg) brightness(106%) contrast(106%);
+}
