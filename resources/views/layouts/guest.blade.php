@@ -24,13 +24,13 @@
         <div class="font-sans text-gray-900 antialiased">
             {{$slot}}
         </div>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-        <script>
+        <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+        <!-- <script>
    function onSubmit(token) {
      document.getElementById("register-form").submit();
    }
- </script>
- <script>
+ </script> -->
+ <!-- <script>
      grecaptcha.ready(function() {
              grecaptcha.execute('6LcVwOcdAAAAAIgkXu6xND6r_4ZTXCXomFA-DlE6', {action: 'contact'}).then(function(token) {
                 if (token) {
@@ -38,6 +38,6 @@
                 }
              });
          });
-         </script>
+         </script> -->
     </body>
 </html>

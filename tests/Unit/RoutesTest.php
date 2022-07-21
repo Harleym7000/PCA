@@ -34,4 +34,12 @@ class RoutesTest extends TestCase
         $response->assertViewIs('pages.about');
         $response->assertSee("What We Do", $escaped = true);
     }
+
+    public function test_login_screen_can_be_rendered()
+    {
+        $response = $this->get('/login');
+        $response->assertOk();
+        $response->assertViewIs('auth.login');
+        $response->assertSee("Log in");
+    }
 }
