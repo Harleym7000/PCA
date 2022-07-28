@@ -11,12 +11,12 @@
 @include('layouts.navbar')
 <div class="image-container h-screen">
 <figure class="txtover"> <img src="img/IMG_2739.jpg" class="w-full h-screen object-cover"> <figcaption class="text-white text-shadow lg:mt-6 p-3 text-4xl md:text-5xl lg:text-6xl">Serving the Portstewart Community
-<br><x-button class="mt-8 bg-blue-500 border-none hover:bg-blue-700 rounded-3xl md:mt-16 lg:mt-20">
+<br><a href="/register"><x-button dusk="home-join" class="mt-8 bg-blue-500 border-none hover:bg-blue-700 rounded-3xl md:mt-16 lg:mt-20">
                     {{ __('JOIN TODAY') }}
-                </x-button>
-                <x-button class="mt-8 bg-slate-50 hover:bg-slate-300 rounded-3xl fom-btn lg:ml-12">
+                </x-button></a>
+                <a href="/about"><x-button dusk="home-fom" class="mt-8 bg-slate-50 hover:bg-slate-300 rounded-3xl fom-btn lg:ml-12">
                     {{ __('FIND OUT MORE') }}
-                </x-button>
+                </x-button></a>
 </figcaption> </figure>
 </div>
 </div>

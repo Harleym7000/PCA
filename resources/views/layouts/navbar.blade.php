@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg shadow-gray-300">
   <div class="container-fluid">
     <img src="img/pcaLogo.png" class="h-36">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,20 +13,34 @@
           <a class="nav-link" dusk="navbar-about" href="/about">About</a>
         </li>
         <li class="nav-item ml-5">
-          <a class="nav-link" href="/about">Events</a>
+          <a class="nav-link" dusk="navbar-events" href="/events">Events</a>
         </li>
         <li class="nav-item ml-5">
-          <a class="nav-link" href="/about">News</a>
+          <a class="nav-link" dusk="navbar-news" href="/news">News</a>
         </li>
         <li class="nav-item ml-5">
-          <a class="nav-link" href="/about">Contact Us</a>
+          <a class="nav-link" dusk="navbar-contact" href="/contact-us">Contact Us</a>
+        </li>
+        <!-- <li class="nav-item ml-5">
+          <a class="nav-link" dusk="navbar-login" href="/login">Login</a>
         </li>
         <li class="nav-item ml-5">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item ml-5">
-          <a class="nav-link" href="/about">Register</a>
-        </li>
+          <a class="nav-link" dusk="navbar-register" href="/register">Register</a>
+        </li> -->
+        @auth
+        <x-slot name="content">
+                        <!-- Authentication -->
+                        <form method="POST" action="/logout">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                        @endauth
       </ul>
     </div>
   </div>

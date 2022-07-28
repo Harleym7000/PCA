@@ -22,10 +22,22 @@ class NavbarTest extends DuskTestCase
                     ->assertPathIs('/')
 
                     ->click('@navbar-about')
-                    ->assertPathIs('/about');
+                    ->assertPathIs('/about')
 
-                    // ->click('@navbar-events')
-                    // ->assertPathIs('/events');
+                    ->click('@navbar-events')
+                    ->assertPathIs('/events')
+
+                    ->click('@navbar-news')
+                    ->assertPathIs('/news')
+
+                    ->click('@navbar-contact')
+                    ->assertPathIs('/contact-us');
+
+                    // ->click('@navbar-login')
+                    // ->assertPathIs('/login')
+
+                    // ->click('@navbar-register')
+                    // ->assertPathIs('/register');
         });
     }
 }
