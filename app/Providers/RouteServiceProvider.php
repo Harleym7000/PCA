@@ -17,8 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const EVENT_MANAGER_HOME = '/manage-events';
+    public const ADMIN_HOME = '/admin';
+    public const AUTHOR_HOME = '/manage-news';
     public const HOME = '/dashboard';
-
     /**
      * The controller namespace for the application.
      *

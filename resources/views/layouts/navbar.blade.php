@@ -28,18 +28,14 @@
           <a class="nav-link" dusk="navbar-register" href="/register">Register</a>
         </li> -->
         @auth
-        <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="/logout">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            <li class="nav-item ml-5">
+          <button type="submit"><a class="nav-link" dusk="navbar-contact">Log Out</a></button>
+        </li>
                         </form>
-                    </x-slot>
                         @endauth
       </ul>
     </div>

@@ -28,19 +28,19 @@
 
         <ul class="list-unstyled mb-3">
           <li>
-            <a href="/">Home</a>
+            <a href="/" dusk="footer-home" id="footer-home">Home</a>
           </li>
           <li>
-            <a href="/about">About</a>
+            <a href="/about" dusk="footer-about" id="footer-about">About</a>
           </li>
           <li>
-            <a href="/events">Events</a>
+            <a href="/events" dusk="footer-events" id="footer-events">Events</a>
           </li>
           <li>
-            <a href="/news">News</a>
+            <a href="/news" dusk="footer-news" id="footer-news">News</a>
           </li>
           <li>
-            <a href="/contact-us">Contact Us</a>
+            <a href="/contact-us" dusk="footer-contact" id="footer-contact">Contact Us</a>
           </li>
         </ul>
 
@@ -59,8 +59,8 @@
         <!-- Links -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Social Media</h5>
             <div class="row justify-content-center">
-            <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank" class="col-2 col-md-3 col-lg-2 filter-white mb-2"><img src="/img/facebook.svg" class="h-8"></a>
-            <a href="https://www.instagram.com/portstewart_community/" target="_blank" class="col-2 col-md-3 col-lg-2 filter-white mb-2"><img src="/img/instagram.svg" class="h-8"></a>
+            <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank" class="col-2 col-md-3 col-lg-2 filter-white mb-2"><img src="/img/facebook.svg" class="h-8" dusk="footer-fb"></a>
+            <a href="https://www.instagram.com/portstewart_community/" target="_blank" class="col-2 col-md-3 col-lg-2 filter-white mb-2"><img src="/img/instagram.svg" class="h-8" dusk="footer-ig"></a>
             </div>
       </div>
       <!-- Grid column -->
@@ -81,8 +81,8 @@
     <br> Charity Number: NIC101459
   </div>
   <div class="text-center pb-5 mt-3">
-  <a href="" class="underline underline-offset-1 mt-2">Privacy Policy</a>
-  <a href="" class="underline underline-offset-1 ml-3 mt-2">Legal Stuff</a>
+  <a href="" class="underline underline-offset-1 mt-2" dusk="footer-policy">Privacy Policy</a>
+  <a href="" class="underline underline-offset-1 ml-3 mt-2" dusk="footer-terms">Legal Stuff</a>
   </div>
   <!-- Copyright -->
 

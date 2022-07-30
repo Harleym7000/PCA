@@ -17,12 +17,21 @@ class IsEventManager
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = Auth::user();
+        $authorised = 0;
+        if(!Auth::check()) {
+            return redirect('/login');
+        } else {
         $userRoles = Auth::user()->roles();
         foreach($userRoles as $role) {
-            if($role === 'Event Manager') {
-                dd('This works');
+            if($user->hasRoles('Event Manager')) {
+                $authorised = 1;
+                return $next($request);
             }
         }
-        //abort(403);
+    }
+        if($authorised == 0) {
+            return redirect('/login');
+        }
     }
 }

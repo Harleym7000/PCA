@@ -21,6 +21,14 @@ class MiddlewareTest extends TestCase
         $response->assertRedirect('/login');
     }
 
+    public function test_event_manager_middleware_denies_authenticated_user_without_event_manager_role()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)
+                    ->get('/manage-events');
+        $response->assertStatus(302);
+    }
+
     public function test_event_manager_middleware_allows_event_manager_users()
     {
         $user = User::factory()->create();

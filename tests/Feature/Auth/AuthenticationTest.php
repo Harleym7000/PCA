@@ -6,10 +6,11 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     public function test_login_screen_can_be_rendered()
     {
@@ -41,5 +42,14 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertGuest();
+    }
+
+    public function test_logged_in_users_can_logout()
+    {
+        $user = User::factory()->create();
+
+        $this->post('/logout');
+
+        $this->assertFalse(Auth::check());
     }
 }

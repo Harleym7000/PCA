@@ -26,7 +26,7 @@ Route::get('/events', [PagesController::class, 'events']);
 Route::get('/news', [PagesController::class, 'news']);
 Route::get('/contact-us', [PagesController::class, 'contact_us']);
 
-Route::middleware(['auth', Spatie\Csp\AddCspHeaders::class . ':' . ContentPolicy::class])->group(function () {
+Route::middleware(['auth', Spatie\Csp\AddCspHeaders::class . ':' . ContentPolicy::class])->middleware(IsEventManager::class)->group(function () {
     Route::get('/manage-events', [EventsController::class, 'index']);
 });
 

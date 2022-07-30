@@ -16,9 +16,10 @@ class AboutPageTest extends DuskTestCase
     public function test_events_link_on_community_events_card()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/about')
+            $repsonse = $browser->visit('/about')
                     ->click('@about-events')
                     ->assertPathIs('/events');
+                    $browser->screenshot('error');
         });
     }
 }
