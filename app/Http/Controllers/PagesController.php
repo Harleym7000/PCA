@@ -16,8 +16,8 @@ class PagesController extends Controller
         $currentDate = Carbon::now()->format('Y-m-d');
         $events = DB::table('events')
         ->where('approved', 1)
-        ->where('date', '>=', $currentDate)
-        ->orderBy('date', 'asc')
+        ->where('start_date', '>=', $currentDate)
+        ->orderBy('start_date', 'asc')
         ->limit(3)
         ->get();
         $news = News::orderBy('id', 'desc')->limit(3)->get();
@@ -123,7 +123,7 @@ public function contact()
 
     public function showNewsStory($id)
     {
-        
+
         $news = DB::table('news')
         ->where('id', $id)
         ->get();
@@ -131,9 +131,9 @@ public function contact()
         $getAuthorID = 0;
 
         foreach($news as $n) {
-            $getAuthorID = $n->written_by; 
+            $getAuthorID = $n->written_by;
         }
-        
+
         $getAuthor = DB::table('news')
         ->join('profiles', 'profiles.user_id', '=', 'news.written_by')
         ->select('firstname', 'surname')
@@ -151,7 +151,7 @@ public function contact()
             $request->session()->flash('error', 'You are not authorised to complete this action');
                 return redirect('/');
         }
-     
+
     //dd($id);
 
     $validatedData = $request->validate([
@@ -169,12 +169,12 @@ public function contact()
         //dd($pass);
 
     if($pass === $passCon) {
-        
+
         $user = DB::table('users')
         ->where('id', $id);
-        
+
         event(new \Illuminate\Auth\Events\Registered($user));
-        
+
         $password = Hash::make($passCon);
         DB::table('users')
         ->where('id', $id)
@@ -188,12 +188,12 @@ public function contact()
         ->where('user_id', $id)
         ->where('role_id', 6)
         ->delete();
-        
+
 
         $request->session()->now('success', ' Your account was created successfully. You may now log in using your credentials');
             return view('auth.login');
     }
-    
+
 
     }
 }
