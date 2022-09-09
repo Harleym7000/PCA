@@ -9,6 +9,29 @@ body {
     padding: auto;
   }
 
+  ::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(178, 178, 178, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(178, 178, 178, 0.8);
+}
+
   html, body {
     overflow-x: hidden;
   }
@@ -19,27 +42,27 @@ body {
   .asterisk {
     color: red;
   }
-  
+
   /* Navbar styles*/
-  
+
   .navbar .navbar-brand img {
       height: 147px;
       width: 106px;
   }
-  
+
   .navbar .navbar-nav .nav-item .nav-link {
       color: #002080;
       font-size: 22px;
       font-weight: bold;
       margin-right: 15px;
   }
-  
+
   .navbar .navbar-nav .nav-item .nav-link:hover {
       color: #39c5c5;
       transform: scale(1.2);
       transition: all .5s ease-in-out;
   }
-  
+
   /* Container holding the image and the text */
   .container-fluid {
       position: relative;
@@ -64,7 +87,7 @@ body {
         font-size: 56px;
         margin-top: 2%;
     }
-      
+
       .img-title{
         position: absolute;
         color: #fff;
@@ -92,9 +115,9 @@ body {
 
       #events {
           width: 90%;
-          margin: auto; 
+          margin: auto;
           margin-top: 5%;
-          
+
       }
 
       #events h1 {
@@ -180,9 +203,9 @@ body {
         font-size: 20px;
     }
 
-  
+
     //Index Upcoming Events
-    
+
 
     //About Page
 
@@ -204,7 +227,7 @@ body {
       width: 60%;
       margin: auto;
       text-align: center;
-      
+
 
     }
 
@@ -289,9 +312,9 @@ body {
     #about-team h1 {
       margin-bottom: 3%;
     }
-  
-    //Events pages 
-  
+
+    //Events pages
+
     //Events Page
     #events-show {
       width: 70%;
@@ -397,7 +420,7 @@ body {
     font-weight: bold;
   }
 
-    //Contact Us Page 
+    //Contact Us Page
     #contact-us {
       width: 70%;
       margin: auto;
@@ -836,12 +859,12 @@ body {
     }
 
     .news-image-holder {
-      display:flex; 
+      display:flex;
       justify-content:center;
     }
 
     .news-image-holder img {
-      max-height: 600px; 
+      max-height: 600px;
       width:auto;
     }
 
@@ -866,7 +889,7 @@ body {
       margin: auto;
       margin-top: 5%;
     }
-      
+
     #my-events {
       margin-top: 5%;
     }
@@ -918,29 +941,29 @@ body {
       width: 40%;
       margin: auto;
   }
-  
+
     //Footer styles*/
   footer {
       background: #191919;
   }
-  
+
   footer .font-weight-bold {
     color: #fff;
   }
-  
+
   footer p {
     color: #fff;
   }
-  
+
   footer .list-unstyled li a {
     text-decoration: none;
     color: #fff;
   }
-  
+
   footer .list-unstyled li a:hover {
     color: #5df5f5;
   }
-  
+
   footer .mb-1 {
     color: #fff;
     padding-top: 20%;
@@ -949,18 +972,18 @@ body {
   footer img {
     margin-right: 20px;
   }
-  
+
   footer .footer-copyright {
     color: #fff;
     border-top: 1px solid #fff;
     background: #111;
   }
-  
+
   footer .subscribe {
     border-top: 1px solid #fff;
     padding-bottom: 3%;
   }
-  
+
   footer #subscribe-form {
     width: 40%;
     margin: auto;
@@ -994,7 +1017,7 @@ body {
     background: red;
   }
 
-  @media (max-width: 425px) { 
+  @media (max-width: 425px) {
 
     table.mceLayout, textarea.tox-tinymce {
       width: 80% !important;
@@ -1004,7 +1027,7 @@ body {
       transform:scale(0.57);
       transform-origin:0 0;
   }
-      
+
     .box {
         height: 50vh;
     }
@@ -1021,7 +1044,7 @@ body {
       #events {
           text-align: center;
           margin: auto;
-          margin-top: 20%;   
+          margin-top: 20%;
       }
 
       #events h1 {
@@ -1170,7 +1193,7 @@ footer .subscribe {
 }
 
   // Small devices (landscape phones, less than 768px)
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
 
   .img-title{
     position: absolute;
@@ -1185,7 +1208,7 @@ footer .subscribe {
   }
 
   #news .media img {
-    
+
 }
 
 #news .media  {
@@ -1217,7 +1240,7 @@ footer .subscribe {
     #manage-users .table > tbody > tr > td {
         vertical-align: middle;
         font-size: 18px;
-        
+
    }
 
    #manage-users .table .filter-input {
@@ -1244,7 +1267,7 @@ footer .subscribe {
  }
 
 // Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) { 
+@media (max-width: 991.98px) {
 
   .display-4 {
     font-size: 40px;
@@ -1260,7 +1283,7 @@ footer .subscribe {
 
 #mobile-nav {
   display: inline;
-  
+
 }
 
 #mobile-nav .navbar {
@@ -1314,7 +1337,7 @@ width: 5%;
  }
 
 // Large devices (desktops, less than 1200px)
-@media (max-width: 1199.98px) { 
+@media (max-width: 1199.98px) {
 
   .img-title .btn {
     margin-top: 17%;
@@ -1391,6 +1414,6 @@ width: 5%;
 
     #manage-users .table > tbody > tr > td {
         vertical-align: middle;
-        
+
    }
  }
