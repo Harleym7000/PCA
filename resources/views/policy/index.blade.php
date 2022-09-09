@@ -23,7 +23,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
-  
+
   $('#customFile').on('change',function(){
       //get the file name
       var fileName = $(this).val();
@@ -54,11 +54,7 @@
               <div class="col-10">
           <h1>Current Policy Documents</h1>
         </div>
-<<<<<<< HEAD
-        <div class="col-2">
-=======
         <div class="col-12 col-md-3 col-lg-2">
->>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
           <button type="submit" class="col-12 btn btn-primary" data-toggle="modal" data-target="#addnewpolicy">Upload New Policies</button>
         </div>
         </div>
@@ -83,7 +79,7 @@
           <p>There are currently no policy documents uploaded</p>
           @endif
           <br>
-          <br>          
+          <br>
         </div>
       </div>
     </div>
@@ -109,7 +105,7 @@
           </div>
         </div>
       </div>
-      
+
 </div>
 </div>
 @endforeach
@@ -130,11 +126,7 @@
             <div class="col-12">
             <div class="form-group">
               <div class="form-control">
-<<<<<<< HEAD
-  <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple onclick="startProgressBar()">
-=======
   <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="exampleFormControlFile1" name="file[]" multiple>
->>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
 </div>
   @error('file')
   <span class="invalid-feedback" role="alert">

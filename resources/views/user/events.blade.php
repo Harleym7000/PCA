@@ -52,7 +52,7 @@
                 <img src="/storage/event_images/{{$event->image}}" class="card-img-top img-fluid" alt="..." style="width:100%; max-height:350px;">
                 <div class="card-body">
                   <h1 class="card-title">{{$event->title}}</h1>
-                  <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
+                  <h3 class="card-title text-center">When: {{ \Carbon\Carbon::parse($event->start_date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($event->start_time)->format('g:ia')}}</h3>
                   <h3 class="card-text text-center" style="width: 90%; margin: auto;">Where: {{$event->venue}}</h3>
                   <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#cancelReg{{$event->id}}">Cancel Registration</button>
                 </div>
@@ -63,8 +63,8 @@
         </div>
       </div>
     </div>
-    @else 
-    <h4 class="text-center">You have no upcoming events</h4> 
+    @else
+    <h4 class="text-center">You have no upcoming events</h4>
     @endif
 </div>
 </div>
@@ -95,6 +95,5 @@
 </div>
 @endforeach
 </body>
-            
 
-                  
+

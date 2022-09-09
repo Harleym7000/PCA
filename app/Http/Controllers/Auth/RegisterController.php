@@ -68,7 +68,7 @@ class RegisterController extends Controller
      * @return \App\User
      */
 
-    protected function index() 
+    protected function index()
     {
         $causes = DB::table('causes')->get();
         return view('auth.register')->with('causes', $causes);
@@ -76,24 +76,6 @@ class RegisterController extends Controller
 
     protected function create(Request $request)
     {
-<<<<<<< HEAD
-        $validatedData = $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
-            'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
-            'password' => ['required', 'min:8', 'max:20', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
-            'password_confirmation' => 'required',
-            'agree' => 'required',
-        ],
-        $messages = [
-            'password.regex' => 'Passwords must contain at least 1 capital letter, 1 number and 1 special character (e.g. @#!?%)',
-            'password.confirmed' => 'Passwords do not match',
-            'password_confirmation.required' => 'Please confirm your password',
-            'email.unique' => 'A user with the email address '.$request->email.' already exists',
-            'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
-            'g-recaptcha-response.required' => 'Please verify you are not a robot'
-            ]);
-
-=======
         $secretKey = env('NOCAPTCHA_SECRET');
         $response = $_POST['g-recaptcha-response'];
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -102,8 +84,8 @@ class RegisterController extends Controller
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
         $file = file_get_contents($url);
         $data = json_decode($file);
-        if($data->success == true) 
-        { 
+        if($data->success == true)
+        {
             $validatedData = $request->validate([
                 'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
                 'password' => ['required', 'max:20', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@~£^&*()-_=+`¬¦?><.,;:]).*$/', 'confirmed'],
@@ -115,9 +97,8 @@ class RegisterController extends Controller
                 'password_confirmation.required' => 'Passwords do not match',
                 'email.unique' => 'A user with the email address '.$request->email.' already exists',
                 'agree.required' => 'Please confirm you have read and agreed to the terms and conditions',
-                
+
                 ]);
->>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
         $userpass = request('password');
         $userconfpass = request('password_confirmation');
 
@@ -160,4 +141,4 @@ class RegisterController extends Controller
         return redirect()->back()->withInput($request->except('password'));
     }
     }
-} 
+}

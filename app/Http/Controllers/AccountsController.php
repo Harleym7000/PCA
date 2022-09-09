@@ -74,9 +74,9 @@ class AccountsController extends Controller
         $eventID = $id;
         $userID = Auth::user()->id;
 
-        DB::table('user_event_registrations')-> 
+        DB::table('user_event_registrations')->
         where('user_event_registrations.event_id', '=', $eventID)->
-        where('user_event_registrations.user_id', '=', $userID)-> 
+        where('user_event_registrations.user_id', '=', $userID)->
         delete();
 
         $request->session()->flash('success', ' You have successfully cancelled your registration for this event');
@@ -93,7 +93,7 @@ class AccountsController extends Controller
             ]);
 
         $userID = Auth::user()->id;
-        
+
         $signUpEmail = DB::table('users')
         ->where('id', $userID)
         ->select('email')
@@ -113,7 +113,7 @@ class AccountsController extends Controller
         $email = $request->email;
 
         $createProfile = DB::table('profiles')
-        ->insert( 
+        ->insert(
             ['user_id' => $userID, 'title' => $title, 'firstname' => $firstname, 'middlename' => $middlename, 'surname' => $surname, 'address' => $address, 'town' => $town, 'postcode' => $postcode, 'contact_no' => $contact_no]
         );
 
@@ -175,7 +175,7 @@ class AccountsController extends Controller
         if($updateProfile) {
                 $request->session()->flash('success', ' Your profile was updated successfully');
                 return redirect()->back();
-        } 
+        }
 
         if($updateEmail) {
             $request->session()->flash('success', ' Your email was updated successfully');
@@ -194,7 +194,7 @@ class AccountsController extends Controller
         $userID = Auth::user()->id;
         $events = DB::table('user_event_registrations')->
         join('events', 'user_event_registrations.event_id', '=', 'events.id')->
-        select('events.id', 'events.title', 'events.date', 'events.time', 'events.venue', 'events.image')->
+        select('events.id', 'events.title', 'events.start_date', 'events.start_time', 'events.venue', 'events.image')->
         where('user_event_registrations.user_id', '=', $userID)->
         get();
 
@@ -224,7 +224,7 @@ class AccountsController extends Controller
             ]);
     }
 
-    public function deleteAccount($id) 
+    public function deleteAccount($id)
     {
         $userID = $id;
 
@@ -255,7 +255,7 @@ class AccountsController extends Controller
         DB::table('cause_user')
         ->where('user_id', $userID)
         ->delete();
-        
+
         DB::table('user_tokens')
         ->where('user_id', $userID)
         ->delete();
@@ -263,7 +263,7 @@ class AccountsController extends Controller
         DB::table('users')
         ->where('id', $userID)
         ->delete();
-        
+
         return redirect('/');
     }
 }
