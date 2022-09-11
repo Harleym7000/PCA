@@ -30,7 +30,7 @@ class MailSend extends Controller
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
         $file = file_get_contents($url);
         $data = json_decode($file);
-        if($data->success == true) 
+        if($data->success == true)
         {
         $request->validate([
             'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
@@ -114,49 +114,6 @@ class MailSend extends Controller
         }
     }
 
-    public function subscribe(Request $request)
-    {
-        $request->validate([
-            'sub_email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation]
-        ],
-    $messages = [
-        'sub_email.required' => 'Please provide your email address'
-    ]);
-
-
-        $email = $request->input('sub_email');
-        $is_Subscribed = DB::table('subs')
-        ->where('email', $email)
-        ->get();
-
-        if(count($is_Subscribed) > 0) {
-            $request->session()->flash('error', 'You have already subscribed to our newsletter');
-            return redirect()->back();
-        }
-        $token = Str::random(60);
-        DB::table('subs')
-        ->insert([
-            'email' => $email,
-            'token' => $token
-            ]);
-
-        \Mail::send('email.subConfirm', [
-            'body' => 'You are receiving this email as you have subscribed to the PCA newsletter. To confirm you wish to be subscribed to the PCA newsletter, 
-            please click on the link below.',
-            'token' => $token
-        ], function ($mail) use ($request) {
-            $mail->from(env('MAIL_FROM_ADDRESS'), 'PCA Newsletter');
-            $mail->to($request->sub_email)->subject('PCA Newsletter Subscription');
-        });
-        if( count(\Mail::failures()) > 0) {
-            $request->session()->flash('error', 'Something went wrong');
-            return redirect()->back();
-            } else {
-            $request->session()->flash('success', 'An email has been sent to your address. Please confirm you wish to subscribe through the link in the email');
-            return redirect()->back();
-            }
-    }
-
     public function verified(Request $request) {
         $token = $_GET['token'];
 
@@ -169,11 +126,11 @@ class MailSend extends Controller
             $request->session()->flash('error', 'This token has already been verified');
             return view('pages.notSubscribed');
         }
-        
+
         $tokenValid = DB::table('subs')
         ->where('token', $token)
         ->get();
-        
+
         if(count($tokenValid) < 1) {
             $request->session()->flash('error', 'Invalid token. Please try again');
             return view('pages.notSubscribed');
@@ -201,8 +158,8 @@ class MailSend extends Controller
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
         $file = file_get_contents($url);
         $data = json_decode($file);
-        if($data->success == true) 
-        { 
+        if($data->success == true)
+        {
 
         $validatedData = $request->validate([
             'forename' => ['required', 'min:2', 'max:255', new Name_Validation, new Script_Validation],
@@ -251,17 +208,17 @@ class MailSend extends Controller
         $token = Str::random(8);
         $cancelLink = Str::random(40);
         DB::table('guest_event_registrations')
-        ->insert(['event_id' => $eventID, 
-                  'forename' => $forename, 
-                  'surname' => $surname, 
+        ->insert(['event_id' => $eventID,
+                  'forename' => $forename,
+                  'surname' => $surname,
                   'email' => $email,
                   'token' => $token,
-                  'cancelLink' => $cancelLink, 
+                  'cancelLink' => $cancelLink,
                   'contact_no' => $phone
                   ]);
 
                   \Mail::send('email.eventConfirm', [
-                    'body' => 'You are receiving this email as you wish to register for '.$eventName.'. To confirm you wish to register for this event, 
+                    'body' => 'You are receiving this email as you wish to register for '.$eventName.'. To confirm you wish to register for this event,
                     please copy the token below and paste it into the next page.',
                     'token' => $token,
                     'cancelLink' => $cancelLink
@@ -276,13 +233,10 @@ class MailSend extends Controller
                 $request->session()->flash('success', 'An email with your verification code has been sent to '.$email. '. Please enter it below');
         return view('pages.confirmEventReg');
                     }
-<<<<<<< HEAD
-=======
                     if($data->success == false) {
                         $request->session()->flash('error', 'Please confirm you are not a robot');
                     return redirect()->back();
                     }
->>>>>>> cd08280835ee3fa10f9c9e3a5e8e85eef4e9edc0
                 }
 
     public function validateEventToken(Request $request)
@@ -306,11 +260,11 @@ class MailSend extends Controller
             $request->session()->flash('error', 'You have already registered for this event');
             return view('pages.eventRegUnsuccessful');
         }
-        
+
         $tokenValid = DB::table('guest_event_registrations')
         ->where('token', $token)
         ->get();
-        
+
         if(count($tokenValid) < 1) {
             $request->session()->flash('error', 'Invalid token. Please try again');
             return redirect()->back();
@@ -324,7 +278,7 @@ class MailSend extends Controller
     }
 }
 
-public function createdUserReg(Request $request) 
+public function createdUserReg(Request $request)
 {
     $validatedData = $request->validate([
         'email' => ['required', 'unique:users', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
@@ -416,7 +370,7 @@ public function validateUserToken(Request $request)
         ->first();
 
             return view('pages.createPassword')->with('userID', $userID);
-        
+
     }
 }
 
@@ -426,7 +380,7 @@ public function cancelEventRegGuest(Request $request)
 
     $validLink = DB::table('guest_event_registrations')
     ->where('cancelLink', $cancelLink)
-    ->get(); 
+    ->get();
 
     if(count($validLink) != 1) {
         $request->session()->flash('error', 'Invalid url');

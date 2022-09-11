@@ -12,8 +12,8 @@
 
         <!-- Content -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">What We Do</h5>
-        <p>Portstewart Community Association is a charitable organisation who currently organises and implemets 
-          <a href="https://redsails.co.uk/" target="_blank" class="text-white"><strong><u>The Red Sails Festival</u></strong></a> alongside other events and activities for the benefit 
+        <p>Portstewart Community Association is a charitable organisation who currently organises and implemets
+          <a href="https://redsails.co.uk/" target="_blank" class="text-white"><strong><u>The Red Sails Festival</u></strong></a> alongside other events and activities for the benefit
           of the community.</p>
 
       </div>
@@ -65,9 +65,6 @@
             <a href="/register">Register</a>
           </li>
           @endguest
-          <li>
-            <a href="https://redsails.co.uk/" target="_blank">Red Sails Website</a>
-          </li>
         </ul>
 
       </div>
@@ -99,7 +96,7 @@
   <hr>
 
   <!-- Call to action -->
-  <div class="subscribe">
+  <!-- <div class="subscribe">
   <ul class="list-unstyled list-inline text-center py-2">
     <li class="list-inline-item">
       <h3 class="mb-1">Subscribe to Our Newsletter</h3>
@@ -114,7 +111,7 @@
       </div>
     </form>
 </div>
-</div>
+</div> -->
 </div>
   <!-- Call to action -->
 

@@ -22,7 +22,7 @@ Route::get('/about', 'PagesController@about');
 Route::post('/events', 'PagesController@getEventsByFilters');
 Route::post('/events/register', 'Events\EventsController@registerEventUser');
 
-//News page links 
+//News page links
 Route::group(['prefix' => 'news'], function() {
     Route::get('/', 'PagesController@news');
     Route::post('/', 'PagesController@getNewsByFilters');
@@ -79,6 +79,8 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('auth'
     Route::post('/delete_photos/{id}', 'EventsController@deleteImages');
     Route::post('/search', 'EventsController@searchEvents');
 });
+
+Route::get('/events/red-sails', 'RedSailsController@index')->middleware('auth', 'can:manage-events');
 
 //User links
 Route::group(['prefix' => 'user'], function () {
