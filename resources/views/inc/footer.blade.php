@@ -65,9 +65,6 @@
             <a href="/register">Register</a>
           </li>
           @endguest
-          <li>
-            <a href="https://redsails.co.uk/" target="_blank">Red Sails Website</a>
-          </li>
         </ul>
 
       </div>
@@ -85,6 +82,9 @@
           <li>
             <a href="https://www.facebook.com/PortstewartCommunityAssociation/" target="_blank"><img src="/img/baseline_facebook_white_18dp.png">Facebook</a>
           </li>
+          <li class="mt-2">
+            <a href="https://www.instagram.com/portstewart_community/" target="_blank"><img src="/img/instagram.png" class="ml-1">Instagram</a>
+          </li>
         </ul>
 
       </div>
@@ -99,29 +99,12 @@
   <hr>
 
   <!-- Call to action -->
-  <div class="subscribe">
-  <ul class="list-unstyled list-inline text-center py-2">
-    <li class="list-inline-item">
-      <h3 class="mb-1">Subscribe to Our Newsletter</h3>
-    </li>
-  </ul>
-  <div id="subscribe-form">
-    <form action="/subscribe" method="POST">
-      @csrf
-        <input class="form-control col-9" type="email" placeholder="Enter email address..." name="sub_email">
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary col-9">Subscribe</button>
-      </div>
-    </form>
-</div>
-</div>
-</div>
   <!-- Call to action -->
 
   <hr>
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright: Portstewart Community Association
+  <div class="footer-copyright text-center py-3">© <?php echo date("Y")?> Copyright: Portstewart Community Association
     <br> Charity Number: NIC101459
   </div>
   <!-- Copyright -->
