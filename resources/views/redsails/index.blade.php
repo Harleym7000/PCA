@@ -32,8 +32,6 @@
         $('#toggle-sidenav').on('click', function() {
             $('.sidenav-holder').toggle();
             $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
-            drawMembersChart();
-            drawTrafficChart();
         });
     });
     </script>
@@ -78,7 +76,7 @@
       <td>
         <a href=""><button id="comms-user" type="submit" class="btn btn-success"><img src="/img/baseline_add_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Add Festival Programme"></button></a>
         <a href=""><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Event"></button></a>
-        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target=""><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteFestivalModal{{$f->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
     </td>
     </tr>
     @endforeach
@@ -126,6 +124,31 @@
       </div>
     </div>
   </div>
+    </div>
+  @foreach($festivals as $f)
+  <div class="modal fade" id="deleteFestivalModal{{$f->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Festival Year {{$f->year}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to delete the festival for {{$f->year}}? <br>This action cannot be reversed
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="/events/red-sails/delete/{{$f->id}}" method="POST">
+                @csrf
+        <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 </div>
                             </div>
                         </div>
@@ -133,6 +156,5 @@
                 </div>
             </div>
         </div>
-    </div>
 </body>
 </html>

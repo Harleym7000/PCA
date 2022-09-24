@@ -82,6 +82,7 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('auth'
 
 Route::get('/events/red-sails', 'RedSailsController@index')->middleware('auth', 'can:manage-events');
 Route::post('/events/red-sails/new', 'RedSailsController@addNewFestival')->middleware('auth', 'can:manage-events');
+Route::post('/events/red-sails/delete/{id}', 'RedSailsController@deleteFestival');
 
 //User links
 Route::group(['prefix' => 'user'], function () {

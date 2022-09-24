@@ -24,8 +24,19 @@ class RedSailsController extends Controller
         ]);
 
         if($storeFestival) {
-
-        }$request->session()->flash('success', 'The festival was created successfully. You can now add a programme to this festival, or edit the festival dates at any time.');
+            $request->session()->flash('success', 'The festival was created successfully. You can now add a programme to this festival, or edit the festival dates at any time.');
             return redirect()->back();
+        }
+    }
+
+    public function deleteFestival(Request $request, $id) {
+        $deleteFestival = DB::table('red_sails_festivals')
+                          ->where('id',$id)
+                          ->delete();
+
+        if($deleteFestival) {
+            $request->session()->flash('success', 'The festival was deleted successfully.');
+            return redirect()->back();
+        }
     }
 }
