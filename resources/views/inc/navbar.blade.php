@@ -9,7 +9,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
-        
+
 
         </ul>
 
@@ -22,7 +22,7 @@
                 <a class="nav-link" href="/about">About</a>
             </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/event">Events</a>
+                <a class="nav-link" href="/events">Events</a>
             </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/news">News</a>
@@ -35,7 +35,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/login">{{ __('Login') }}</a>
                 </li>
-                
+
                     <li class="nav-item">
                         <a class="nav-link" href="/register">{{ __('Register') }}</a>
                     </li>
@@ -45,7 +45,7 @@
                         My Account<span class="caret"></span>
                     </a>
 
-                    
+
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @can('manage-users')
@@ -62,7 +62,7 @@
 
                      @can('manage-news')
                      <a class="dropdown-item" href="/news/index">
-                        Manage News 
+                        Manage News
                     </a>
                     @endcan
 
@@ -78,9 +78,9 @@
                             {{ __('Logout') }}
                         </a>
 
-                        
 
-                     
+
+
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
