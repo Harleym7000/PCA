@@ -100,7 +100,8 @@
     <label for="exampleInputEmail1">Festival Year</label>
     <select class="form-control" id="exampleFormControlSelect1" name="festivalYear">
         <?php
-        for($i = date('Y'); $i<2100; $i++) {
+        $end = date('Y', strtotime('+10 years'));
+        for($i = date('Y'); $i<$end; $i++) {
       echo "<option>$i</option>";
         }
         ?>
