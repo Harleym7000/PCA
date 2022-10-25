@@ -193,11 +193,7 @@
           <span>Red Sails Festival</span>
           </div>
       </div>
-<<<<<<< HEAD
-      <h5 class="label">Create Event</h5>
-=======
       <h5 class="label">Red Sails Festival</h5>
->>>>>>> 34b5d4e9f96b74e9f8efc4f8b042e3197313fe2f
     </div></a>
     <div class="divider">
     </div>
