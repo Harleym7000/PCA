@@ -204,19 +204,6 @@
     <h5 class="section">PCA Member</h5>
     <div class="divider">
     </div>
-    <a href="/member"><div class="option">
-      <div class="row no-gutters">
-        <div class="col-xl-3 my-auto">
-          <img class="d-block mx-auto mx-xl-0" src="/img/baseline_dashboard_white_18dp.png">
-          </div>
-          <div class="col-9 my-auto">
-          <span>Members Dashboard</span>
-          </div>
-      </div>
-      <h5 class="label">My Events</h5>
-      </div></a>
-      <div class="divider">
-      </div>
     <a href="/user/events"><div class="option">
       <div class="row no-gutters">
         <div class="col-xl-3 my-auto">

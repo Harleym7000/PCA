@@ -65,16 +65,10 @@
           <a class="nav-link" href="/events/create">Create Event</a>
         </div>
         </li>
-        <li class="nav-item">
+        < class="nav-item">
           <div class="row">
             <img src="/img/baseline_event_note_white_18dp.png">
           <a class="nav-link" href="/admin/events/applications">Event Applications</a>
-        </div>
-        </li>
-        <li class="nav-item">
-          <div class="row">
-            <img src="/img/baseline_dashboard_white_18dp.png">
-          <a class="nav-link" href="/member">Members Dashboard</a>
         </div>
         </li>
         <li class="nav-item">

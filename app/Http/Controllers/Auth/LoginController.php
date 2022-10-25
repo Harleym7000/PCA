@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
+
         protected function authenticated(Request $request, $user)
         {
                 $userID = Auth::user()->id;
@@ -46,15 +46,15 @@ class LoginController extends Controller
             if($user->hasRole('Event Manager')) {
                 return redirect('/event-manager/index');
             }
-            if($user->hasRole('Committee Member')) {
-                return redirect('/member');
+            if($user->hasRole('Member')) {
+                return redirect('/user/events');
             }
             if($user->hasRole('Author')) {
                 return redirect('/author');
             }
         }
 
-        protected function index() 
+        protected function index()
         {
             return view('auth.login');
         }

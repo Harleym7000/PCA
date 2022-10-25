@@ -61,7 +61,6 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 //Member links
-Route::get('/member', 'MemberController@index')->name('member')->middleware('auth', 'can:view-policy');
 Route::post('/policy/download/{filename}', 'PoliciesController@downloadFile')->middleware('auth', 'can:view-policy');
 Route::get('/policies', 'MemberController@viewPolicies')->middleware('auth', 'can:view-policy');
 
@@ -138,7 +137,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('/users/resetPass', 'UsersController@displayResetUserPassword');
     Route::get('/users/{id}/edit', 'UsersController@edit');
 });
-Route::post('/meeting/update', 'AdminPagesManagerController@updateMeeting')->middleware('auth', 'can:manage-users');
 
 //Policy links
 Route::get('/policy-docs', 'PoliciesController@index')->middleware('auth', 'can:manage-users');
