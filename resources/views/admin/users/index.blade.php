@@ -29,7 +29,7 @@
       $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
     });
                         });
-                        
+
                       </script>
 </head>
 <body>
@@ -47,7 +47,7 @@
           <div class="col-12">
           <div class="card">
             <div class="card-header">User Management</div>
-            <p class="mob-info pt-5">Scroll right to see more</p> 
+            <p class="mob-info pt-5">Scroll right to see more</p>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-sm" id="user-table">
                       <span id="total_records"></span>
@@ -81,7 +81,7 @@
                         <td class="col-6 col-lg-3">{{implode(", ", $u->roles()->pluck('name')->toArray())}}</td>
                         <td id="action-buttons" class="text-center col-6 col-lg-4">
                           <button id="view-user{{$u->id}}" type="submit" class="btn btn-success " value="{{$u->id}}" data-toggle="modal" data-target="#view{{$u->id}}"><img src="/img/baseline_visibility_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View User Details"></button>
-                          <button id="comms-user{{$u->id}}" type="submit" class="btn btn-dark " value="{{$u->id}}" data-toggle="modal" data-target="#comms{{$u->id}}"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="User Committees"></button>  
+                          <button id="comms-user{{$u->id}}" type="submit" class="btn btn-dark " value="{{$u->id}}" data-toggle="modal" data-target="#comms{{$u->id}}"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="User Committees"></button>
                           <a href="{{route('admin.users.edit', $u->id)}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit User Roles"></button></a>
                                 <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$u->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete User"></button>
                         </td>
@@ -89,6 +89,7 @@
                       @endforeach
                     </tbody>
                       </table>
+                      {!! $users->render() !!}
                     </div>
                     </div>
             </div>
@@ -142,7 +143,7 @@
       <div class="modal-body">
         <form action="/user/committees/update/{{$user->id}}" method="POST">
           {{ method_field('PUT') }}
-          @csrf 
+          @csrf
           <div class="form-group row">
             <div class="row">
             @foreach($causes as $cause)
