@@ -67,8 +67,8 @@
                     @endcan
 
                     @can('view-policy')
-                    <a class="dropdown-item" href="/member">
-                        Members Dashboard
+                    <a class="dropdown-item" href="/user/events">
+                        Members Home
                     </a>
                     @endcan
 
