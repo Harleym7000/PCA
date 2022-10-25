@@ -1,5 +1,5 @@
 @include('inc.mobile-nav')
-<div id="sidenav">
+  <div id="sidenav">
       <div class="logo justify-content-center">
     <div class="row">
       <div class="col-12 my-auto">
@@ -7,7 +7,7 @@
       </div>
           </div>
         </div>
-        @if(auth()->user()->hasRole('Admin')))
+        @if(auth()->user()->hasRole('Admin'))
           <h5 class="section">Dashboard</h5>
           <div class="divider">
           </div>
@@ -193,7 +193,11 @@
           <span>Red Sails Festival</span>
           </div>
       </div>
+<<<<<<< HEAD
       <h5 class="label">Create Event</h5>
+=======
+      <h5 class="label">Red Sails Festival</h5>
+>>>>>>> 34b5d4e9f96b74e9f8efc4f8b042e3197313fe2f
     </div></a>
     <div class="divider">
     </div>
@@ -326,4 +330,7 @@
     </div>
     <br>
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 34b5d4e9f96b74e9f8efc4f8b042e3197313fe2f

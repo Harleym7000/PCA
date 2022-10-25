@@ -103,6 +103,23 @@
   <hr>
 
   <!-- Call to action -->
+  <!-- <div class="subscribe">
+  <ul class="list-unstyled list-inline text-center py-2">
+    <li class="list-inline-item">
+      <h3 class="mb-1">Subscribe to Our Newsletter</h3>
+    </li>
+  </ul>
+  <div id="subscribe-form">
+    <form action="/subscribe" method="POST">
+      @csrf
+        <input class="form-control col-9" type="email" placeholder="Enter email address..." name="sub_email">
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary col-9">Subscribe</button>
+      </div>
+    </form>
+</div>
+</div> -->
+</div>
   <!-- Call to action -->
 
   <hr>

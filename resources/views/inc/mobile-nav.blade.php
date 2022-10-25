@@ -65,7 +65,7 @@
           <a class="nav-link" href="/events/create">Create Event</a>
         </div>
         </li>
-        < class="nav-item">
+        <li class="nav-item">
           <div class="row">
             <img src="/img/baseline_event_note_white_18dp.png">
           <a class="nav-link" href="/admin/events/applications">Event Applications</a>
