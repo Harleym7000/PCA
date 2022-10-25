@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $request->server->set('HTTP_HOST', $request->server->get('HTTP_X_ORIGINAL_HOST'));
             $request->headers->set('HOST', $request->server->get('HTTP_X_ORIGINAL_HOST'));
         }
+
+        Paginator::useBootstrap();
     }
 }

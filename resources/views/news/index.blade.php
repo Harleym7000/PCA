@@ -22,20 +22,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                           <script>
-                        
+
                         $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-                      
+
                         $(document).ready(function(){
                           $('#toggle-sidenav').on('click', function(){
       $('.sidenav-holder').toggle();
       $('.content-holder').toggleClass('col-lg-10').toggleClass('col-lg-12');
     });
                         });
-                        
+
                       </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">My News Stories Management</div>
-              <p class="mob-info pt-5">Scroll right to see more</p> 
+              <p class="mob-info pt-5">Scroll right to see more</p>
                   <div class="table-responsive">
                       <table class="table table-striped table-bordered table-sm" id="user-table">
                         <span id="total_records"></span>
@@ -94,7 +94,7 @@
                       </div>
               </div>
               </div>
-            <?php echo $news->render(); ?>
+              {!! $news->render() !!}
         </div>
     </div>
 </div>
