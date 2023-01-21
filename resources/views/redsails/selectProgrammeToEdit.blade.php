@@ -51,31 +51,27 @@
                         <div class="row justify-content-center">
                             <div class="col-12">
                                 <div class="text-right mr-5 mb-4">
-                                <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#addFestivalModal">Add New Festival</button>
-                                </div>
+                                <a href="/events/red-sails/programme/{{Request::segment(5)}}"><button type="button" class="btn btn-success mr-2">Add To Programme</button></a>
+                            </div>
                                 <div class="card">
                                     <div class="card-header">Red Sails Festival Management</div>
                                     <div class="m-3">
-                                    <table class="table table-striped table-responsive">
+                                    <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <th scope="col" class="col-2">Festival ID</th> -->
-      <th scope="col" class="col-4">Festival Year</th>
-      <th scope="col" class="col-5">Festival Start Date</th>
-      <th scope="col" class="col-5">Festival End Date</th>
-      <th scope="col" class="col-5">Actions</th>
+      <th scope="col">Festival Year</th>
+      <th scope="col">Festival Date</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-    @foreach($festivals as $f)
+    @foreach($getFestivalProgramme as $gfp)
     <tr>
-      <!-- <th scope="row">{{$f->id}}</th> -->
-      <td class="col-4">{{$f->year}}</td>
-      <td class="col-5">{{ \Carbon\Carbon::parse($f->start_date)->format('D jS M Y')}}</td>
-      <td class="col-5">{{ \Carbon\Carbon::parse($f->end_date)->format('D jS M Y')}}</td>
+      <th scope="row">{{ \Carbon\Carbon::parse($gfp->festival_date)->format('Y')}} Festival</th>
+      <td>{{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}</td>
       <td>
-        <a href="/events/red-sails/programme/selectEdit/{{$f->id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Festival Programme"></button></a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteFestivalModal{{$f->id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Event"></button>
+        <a href="/events/red-sails/programme/edit/{{$gfp->programme_id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Festival Programme"></button></a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteFestivalModal"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Festival"></button>
     </td>
     </tr>
     @endforeach
@@ -83,7 +79,7 @@
 </table>
 </div>
 </div>
-<div class="modal fade center" id="addFestivalModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="addFestivalModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -124,22 +120,21 @@
     </div>
   </div>
     </div>
-  @foreach($festivals as $f)
-  <div class="modal fade" id="deleteFestivalModal{{$f->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteFestivalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Festival Year {{$f->year}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Festival Year</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you wish to delete the festival for {{$f->year}}? <br>This action cannot be reversed
+        Are you sure you wish to delete the festival for? <br>This action cannot be reversed
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <form action="/events/red-sails/delete/{{$f->id}}" method="POST">
+            <form action="/events/red-sails/delete/" method="POST">
                 @csrf
         <button type="submit" class="btn btn-danger">Delete</button>
         </form>
@@ -147,7 +142,6 @@
     </div>
   </div>
 </div>
-@endforeach
 </div>
                             </div>
                         </div>

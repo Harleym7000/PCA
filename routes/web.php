@@ -21,6 +21,8 @@ Route::get('/', 'PagesController@index')->name('home');
 Route::get('/about', 'PagesController@about');
 Route::post('/events', 'PagesController@getEventsByFilters');
 Route::post('/events/register', 'Events\EventsController@registerEventUser');
+Route::get('/red-sails', 'RedSailsController@showFestivalOverview');
+Route::get('/red-sails/{date}', 'RedSailsController@showProgrammeForDay');
 
 //News page links
 Route::group(['prefix' => 'news'], function() {
@@ -79,9 +81,15 @@ Route::namespace('Events')->prefix('events')->name('events.')->middleware('auth'
     Route::post('/search', 'EventsController@searchEvents');
 });
 
+//Red Sails Links
 Route::get('/events/red-sails', 'RedSailsController@index')->middleware('auth', 'can:manage-events');
 Route::post('/events/red-sails/new', 'RedSailsController@addNewFestival')->middleware('auth', 'can:manage-events');
-Route::post('/events/red-sails/delete/{id}', 'RedSailsController@deleteFestival');
+Route::post('/events/red-sails/delete/{id}', 'RedSailsController@deleteFestival')->middleware('auth', 'can:manage-events');
+Route::get('/events/red-sails/programme/{id}', 'RedSailsController@addFestivalProgramme')->middleware('auth', 'can:manage-events');
+Route::post('/events/red-sails/programme/{id}', 'RedSailsController@addProgramme')->middleware('auth', 'can:manage-events');
+Route::get('/events/red-sails/programme/selectEdit/{id}', 'RedSailsController@editFestivalProgramme')->middleware('auth', 'can:manage-events');
+Route::get('/events/red-sails/programme/edit/{id}', 'RedSailsController@showEditProgramme')->middleware('auth', 'can:manage-events');
+Route::post('/events/red-sails/programme/edit/{id}', 'RedSailsController@updateProgramme');
 
 //User links
 Route::group(['prefix' => 'user'], function () {
