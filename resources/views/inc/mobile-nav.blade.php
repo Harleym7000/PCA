@@ -67,6 +67,12 @@
         </li>
         <li class="nav-item">
           <div class="row">
+            <img src="/img/outline_sailing_white_24dp.png">
+          <a class="nav-link" href="/events/red-sails">Red Sails Festival</a>
+        </div>
+        </li>
+        <li class="nav-item">
+          <div class="row">
             <img src="/img/baseline_event_note_white_18dp.png">
           <a class="nav-link" href="/admin/events/applications">Event Applications</a>
         </div>
