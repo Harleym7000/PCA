@@ -25,7 +25,7 @@
                 <a class="nav-link" href="/event">Events</a>
             </li>
             <li class="nav-item">
-        <a class="nav-link" href="/red-sails/whats-on">Red Sails Festival</a>
+        <a class="nav-link" href="/red-sails">Red Sails Festival</a>
           <!-- <a class="dropdown-item" href="#">Get Involved</a> -->
       </li>
                 <li class="nav-item">
