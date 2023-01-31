@@ -68,7 +68,7 @@
                     @csrf
 
                     <div class="form-group row">
-                        <label for="festivalDay" class="col-12 col-md-3 col-form-label text-md-right">Day of Festival:</label>
+                        <label for="festivalDay" class="col-12 col-md-3 col-form-label text-md-right">Day of Festival: <span class="asterisk">*</span></label>
 
                         <div class="col-12 col-lg-8">
                             <select id="festivalDay" class="form-control @error('festivalDay') is-invalid @enderror" name="festivalDay" required>
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="programme" class="col-12 col-md-3 col-form-label text-md-right">Programme:</label>
+                        <label for="programme" class="col-12 col-md-3 col-form-label text-md-right">Programme: <span class="asterisk">*</span></label>
 
                     <div class="col-12 col-md-9">
                     <textarea id="programme" name="programme" cols="40" rows="20" class="@error('programme') is-invalid @enderror">

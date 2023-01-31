@@ -172,11 +172,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
-                            <label>Start Date</label>
+                            <label>Start Date: <span class="asterisk">*</span></label>
                             <input type="date" class="form-control" placeholder="Festival Start Date..." name="startDate" value="{{$gfp->start_date}}">
                         </div>
                         <div class="col">
-                            <label>End Date</label>
+                            <label>End Date: <span class="asterisk">*</span></label>
                             <input type="date" class="form-control" placeholder="Festival End Date..." name="endDate" value="{{$gfp->end_date}}">
                         </div>
                     </div>
