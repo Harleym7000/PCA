@@ -145,7 +145,7 @@ class RedSailsController extends Controller
                 'festivalDates' => $festivalDates
             ]);
         }
-        return view('pages.redSails')->with('festivalExists',$festivalExists);
+        return view('pages.showRedSailsProgramme')->with('festivalExists',$festivalExists);
     }
 
     public function showProgrammeForDay($festivalDate) {
