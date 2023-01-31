@@ -13,7 +13,7 @@
     <img src="/storage/news_images/{{$n->image}}" class="img-fluid">
 </div>
 <br>
-    <h5 class="text-center">{!!$n->story !!}</h5>
+    <h5 class="text-center">{!! htmlspecialchars_decode($n->story) !!}</h5>
     @endforeach
     <br>
     <br>

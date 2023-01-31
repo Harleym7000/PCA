@@ -36,7 +36,7 @@
                     @if($event->is_eventbrite == 1)
                     <a href="{{$event->eventbrite_link}}" class="col-5" target="_blank" style="padding-top: 2%;"><button type="button" class="btn btn-light" style="width:115%;">
                       Register
-                    </button></a> 
+                    </button></a>
                     @else
                     <button type="button" class="btn btn-light col-5" data-toggle="modal" data-target="#event{{$event->id}}">
                       Register
@@ -47,7 +47,7 @@
               </div>
             </div>
             @endforeach
-                  @else 
+                  @else
                   <p>There are currently no Upcoming Events</p>
                   @endif
           </div>
@@ -65,7 +65,7 @@
               <div class="col-12 col-lg-9">
               <div class="media-body">
                 <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
-                <p class="story ml-5 mr-5">{!!$story->story!!}
+                <p class="story ml-5 mr-5">{!! htmlspecialchars_decode($story->story) !!}
                 </div>
             </div>
               </div>
@@ -136,7 +136,7 @@
 @endauth
 @guest
 <form action="/events/register/guest" method="POST">
-  @csrf 
+  @csrf
 <div class="form-row">
   <label class="col">First Name:</label>
   <label class="col">Surname:</label>

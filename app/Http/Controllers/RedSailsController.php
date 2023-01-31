@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\CarbonPeriod;
+use App\Rules\Script_Validation;
 
 class RedSailsController extends Controller
 {
@@ -14,18 +15,33 @@ class RedSailsController extends Controller
     }
 
     public function addNewFestival(Request $request) {
+        $validatedData = $request->validate([
+            'festivalYear' => ['required', 'date_format:Y', new Script_Validation],
+            'startDate' => ['required', 'date'],
+            'endDate' => ['required', 'date']
+        ],
+        $messages = [
+            'festivalYear.date_format' => 'Please provide the festival year in the format yyyy',
+            'festivalYear.required' => 'Festival year is a required field. Please select a festival year from the dropdown',
+            'startDate.required' => 'Start Date is a required field. Please provide the start date for the festival',
+            'startDate.date' => 'Please provide the start date in the format dd/mm/yyyy',
+            'endDate.required' => 'End date is a required field. Please provide the end date for the festival',
+            'endDate.date' => 'Please provide the end date in the format dd/mm/yyyy'
+            ]);
+
         $year = $request->festivalYear;
         $start_date = $request->startDate;
         $end_date = $request->endDate;
+        // dd('Year '.$year.' start '.$start_date.' end'.$end_date);
 
         $festivals = DB::table('red_sails_festivals')->get();
 
-        // foreach($festivals as $f) {
-        //     if($f->year === (int)$year) {
-        //         $request->session()->flash('error', 'Error: A festival for this year already exists. You can view and edit this festival at any time.');
-        //         return redirect()->back();
-        //     }
-        // }
+        foreach($festivals as $f) {
+            if($f->year === (int)$year) {
+                $request->session()->flash('error', 'Error: A festival for this year already exists. You can view and edit this festival at any time.');
+                return redirect()->back();
+            }
+        }
 
         $storeFestival = DB::table('red_sails_festivals')->insert([
             'year' => $year,
@@ -49,6 +65,9 @@ class RedSailsController extends Controller
                 'festival' => $festival,
                 'festivalDates' => $festivalDates
                 ]);
+        } else {
+            $request->session()->flash('error', 'Error: Something went wrong. Please try again');
+            return redirect()->back();
         }
     }
 
@@ -210,6 +229,41 @@ $festivalDates = CarbonPeriod::create($f->start_date, $f->end_date);
             return redirect()->back();
         } else {
             $request->session()->flash('error', 'Error: The programme was not updated. Please try again');
+            return redirect()->back();
+        }
+        }
+
+        public function updateFestivalDates(Request $request, $id) {
+        //dd($id);
+            $startDate = $request->startDate;
+            $endDate = $request->endDate;
+
+            $updateDates = DB::table('red_sails_festivals')
+                           ->where('id', $id)
+                           ->update([
+                               'start_date' => $startDate,
+                               'end_date' => $endDate
+                           ]);
+
+            if($updateDates) {
+                $request->session()->flash('success', 'The festival dates were updated successfully. If you have already uploaded a festival programme, these dates will need to be updated');
+                return redirect()->back();
+            } else {
+                $request->session()->flash('error', 'Error: Something went wrong, please try again');
+                return redirect()->back();
+            }
+        }
+
+        public function deleteProgramme($id, Request $request) {
+        $deleteProgramme = DB::table('festival_programme')
+                           ->where('programme_id', $id)
+                           ->delete();
+
+        if($deleteProgramme) {
+            $request->session()->flash('success', 'The festival programme for '.$request->festivalDate.' was deleted successfully.');
+            return redirect()->back();
+        } else {
+            $request->session()->flash('error', 'Error: something went wrong, please try again');
             return redirect()->back();
         }
         }

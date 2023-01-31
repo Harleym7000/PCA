@@ -50,8 +50,13 @@
                         @include('partials.alerts')
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <div class="text-right mr-5 mb-4">
-                                <a href="/events/red-sails/programme/{{Request::segment(5)}}"><button type="button" class="btn btn-success mr-2">Add To Programme</button></a>
+                                <div class="text-right mr-3 ml-3 mb-4 mr-lg-5">
+                                <a href="/events/red-sails/programme/{{Request::segment(5)}}">
+                                    <button type="button" class="btn btn-success col-12 col-md-4 col-lg-3 col-xl-2 mb-2 mr-lg-2">Add To Programme</button>
+                                </a>
+                                    <button type="button" class="btn btn-secondary col-12 col-md-4 col-lg-3 col-xl-2 mb-2 mr-lg-2" data-toggle="modal" data-target="#editFestivalDatesModal">
+                                        Edit Festival Dates
+                                    </button>
                             </div>
                                 <div class="card">
                                     <div class="card-header">Red Sails Festival Management</div>
@@ -71,7 +76,7 @@
       <td>{{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}</td>
       <td>
         <a href="/events/red-sails/programme/edit/{{$gfp->programme_id}}"><button type="button" class="btn btn-dark "><img src="/img/baseline_create_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Edit Festival Programme"></button></a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteFestivalModal"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Festival"></button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteProgrammeModal{{$gfp->programme_id}}"><img src="/img/baseline_delete_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="Delete Festival"></button>
     </td>
     </tr>
     @endforeach
@@ -120,28 +125,31 @@
     </div>
   </div>
     </div>
-  <div class="modal fade" id="deleteFestivalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+   @foreach($getFestivalProgramme as $gfp)
+  <div class="modal fade" id="deleteProgrammeModal{{$gfp->programme_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Festival Year</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Programme of Events - {{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you wish to delete the festival for? <br>This action cannot be reversed
+        Are you sure you wish to delete the festival programme for {{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}? <br>This action cannot be reversed
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <form action="/events/red-sails/delete/" method="POST">
+            <form action="/events/red-sails/deleteProgramme/{{$gfp->programme_id}}" method="POST">
                 @csrf
+                <input type="hidden" value="{{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}" name="festivalDate">
         <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+       @endforeach
 </div>
                             </div>
                         </div>
@@ -149,5 +157,38 @@
                 </div>
             </div>
         </div>
+    @foreach($getFestivalProgramme as $gfp)
+        <form action="/events/red-sails/programme/editDates/{{$gfp->id}}" method="POST">
+            @csrf
+    <div class="modal fade" id="editFestivalDatesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Festival Dates</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <label>Start Date</label>
+                            <input type="date" class="form-control" placeholder="Festival Start Date..." name="startDate" value="{{$gfp->start_date}}">
+                        </div>
+                        <div class="col">
+                            <label>End Date</label>
+                            <input type="date" class="form-control" placeholder="Festival End Date..." name="endDate" value="{{$gfp->end_date}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
 </body>
 </html>

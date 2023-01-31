@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 <div id="red-sails">
@@ -22,7 +21,7 @@
         @if($programmeExists != 0)
         <h2 class="text-center">Programme of Events</h2>
         @foreach($programme as $p)
-        <h4 class="text-center mt-3 ml-5 mr-5">{!! $p->programme !!}</h4>
+        <h4 class="text-center mt-3 ml-5 mr-5">{!! htmlspecialchars_decode($p->programme) !!}</h4>
         @endforeach
         @else
         <h4 class="text-center mb-5 ml-5 mr-5">There is currently no programme of events for this date. Please check back again later</h4>

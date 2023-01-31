@@ -53,17 +53,22 @@
     @include('partials.alerts')
     <div class="row justify-content-center">
         <div class="col-12">
-            <div class="card mt-5">
+            <div class="text-right mt-2">
+            <a href="/events/red-sails">
+                <button type="button" class="btn btn-secondary col-4 col-md-3 col-lg-2">Go Back</button>
+            </a>
+            </div>
+            <div class="card mt-3">
                 @foreach($getFestivalProgramme as $gfp)
                 <div class="card-header">Edit Festival Programme - {{ \Carbon\Carbon::parse($gfp->festival_date)->format('D jS M Y')}}</div>
                 @endforeach
                 <div class="card-body">
 
-                  <form action="" method="POST">
+                  <form action="/events/red-sails/programme/edit/{{$gfp->programme_id}}" method="POST">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="festivalDay" class="col-9 col-md-2 col-form-label text-md-right">Day of Festival:</label>
+                        <label for="festivalDay" class="col-12 col-md-3 col-form-label text-md-right">Day of Festival:</label>
 
                         <div class="col-12 col-lg-8">
                             <select id="festivalDay" class="form-control @error('festivalDay') is-invalid @enderror" name="festivalDay" required>
@@ -80,9 +85,9 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="programme" class="col-12 col-md-2 col-form-label text-md-right">Programme:</label>
+                        <label for="programme" class="col-12 col-md-3 col-form-label text-md-right">Programme:</label>
 
-                    <div class="col-12 col-md-10">
+                    <div class="col-12 col-md-9">
                     <textarea id="programme" name="programme" cols="40" rows="20" class="@error('programme') is-invalid @enderror">
                         {{$gfp->programme}}
           </textarea>
@@ -94,7 +99,7 @@
 </div>
 </div>
                     <div class="text-right mt-md-5 mr-md-5">
-                    <button type="submit" class="btn btn-primary">Update Programme</button>
+                    <button type="submit" class="btn btn-primary col-12 col-md-4 col-lg-3">Update Programme</button>
                     </div>
                 </div>
                 </div>
