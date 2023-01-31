@@ -54,6 +54,11 @@
         <div class="col-12">
             <div class="mt-4"></div>
         @include('partials.alerts')
+            <div class="text-right mt-2">
+                <a href="/events/red-sails">
+                    <button type="button" class="btn btn-secondary col-2">Go Back</button>
+                </a>
+            </div>
             <div class="card mt-2">
                 @foreach($festival as $f)
                 <div class="card-header">{{$f->year}} Festival Management</div>
@@ -61,9 +66,9 @@
                 <form action="/events/red-sails/programme/{{$f->id}}" method="POST">
                     @csrf
                     <div class="form-group row">
-                        <label for="festivalDay" class="col-9 col-md-2 col-form-label text-md-right">Day of Festival:</label>
+                        <label for="festivalDay" class="col-9 col-lg-2 col-form-label text-md-right">Day of Festival:</label>
 
-                        <div class="col-8">
+                        <div class="col-12 col-lg-8">
                             <select id="festivalDay" class="form-control @error('festivalDay') is-invalid @enderror" name="festivalDay" required>
                                 <option selected="selected" disabled>Select...</option>
                                 @foreach($festivalDates as $date)
@@ -79,7 +84,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="programme" class="col-12 col-md-2 col-form-label text-md-right">Programme:</label>
+                        <label for="programme" class="col-12 col-lg-2 col-form-label text-md-right">Programme:</label>
 
                     <div class="col-12 col-md-10">
                     <textarea id="programme" name="programme" cols="40" rows="20" class="@error('programme') is-invalid @enderror">

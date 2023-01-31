@@ -90,7 +90,10 @@ Route::get('/events/red-sails/programme/{id}', 'RedSailsController@addFestivalPr
 Route::post('/events/red-sails/programme/{id}', 'RedSailsController@addProgramme')->middleware('auth', 'can:manage-events');
 Route::get('/events/red-sails/programme/selectEdit/{id}', 'RedSailsController@editFestivalProgramme')->middleware('auth', 'can:manage-events');
 Route::get('/events/red-sails/programme/edit/{id}', 'RedSailsController@showEditProgramme')->middleware('auth', 'can:manage-events');
-Route::post('/events/red-sails/programme/edit/{id}', 'RedSailsController@updateProgramme');
+Route::post('/events/red-sails/programme/edit/{id}', 'RedSailsController@updateProgramme')->middleware('auth', 'can:manage-events');
+Route::post('/events/red-sails/programme/editDates/{id}', 'RedSailsController@updateFestivalDates')->middleware('auth', 'can:manage-events');
+Route::post('/events/red-sails/deleteProgramme/{id}', 'RedSailsController@deleteProgramme')->middleware('auth', 'can:manage-events');
+
 
 //User links
 Route::group(['prefix' => 'user'], function () {

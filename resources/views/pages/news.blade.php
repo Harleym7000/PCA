@@ -35,7 +35,7 @@
   <div class="col-12 col-lg-9">
   <div class="media-body">
     <a href="/news/story/{{$story->id}}"><h5 class="mt-0">{{$story->title}}</h5></a>
-    <p class="story ml-5 mr-5">{!!$story->story!!}
+    <p class="story ml-5 mr-5">{!! htmlspecialchars_decode($story->story) !!}
     </div>
 </div>
   </div>
