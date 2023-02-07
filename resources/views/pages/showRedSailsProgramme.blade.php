@@ -6,9 +6,9 @@
                 <h1 class="text-center mt-5">Red Sails Festival</h1>
                 <h2 class="text-center mt-2">What's On?</h2>
         <div class="col-12">
-        <ul class="nav nav-pills justify-content-center mt-3">
         @isset($festivalDates)
                 <h4 class="text-center mt-5">Select a Date to view the day's events</h4>
+        <ul class="nav nav-pills justify-content-center mt-3">
         @foreach($festivalDates as $fd)
   <li class="nav-item">
     <!-- <a class="nav-link active" href="/red-sails/{{$fd}}">{{$fd->format('D jS M Y')}}</a> -->
