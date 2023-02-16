@@ -60,8 +60,10 @@ class EventsController extends Controller
         $validatedData = $request->validate([
             'title' => ['required', 'min:2', 'max:255'],
             'desc' => ['required', 'min:8', 'max:255'],
-            'date' => ['required', 'date_format:Y-m-d', 'after:today'],
-            'time' => ['required', 'date_format:H:i'],
+            'start_date' => ['required', 'date_format:Y-m-d', 'after:yesterday'],
+            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:start_date'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
             'location' => ['required'],
             'admission' => ['required'],
             'capacity' => ['required', 'numeric'],
@@ -71,11 +73,16 @@ class EventsController extends Controller
         $messages = [
             'title.required' => 'Please provide an event title',
             'desc.required' => 'Please provide an event description',
-            'date.required' => 'Please provide a date for this event',
-            'date.date_format' => 'Please provide a date in the format dd/mm/yyyy',
-            'date.after' => 'The event cannot be before today',
-            'time.required' => 'Please provide a start time for this event',
-            'time.date_format' => 'Please provide a time in the format hh:mm',
+            'start_date.required' => 'Please provide a start date for this event',
+            'start_date.date_format' => 'Please provide a start date in the format dd/mm/yyyy',
+            'start_date.after' => 'The event cannot be before today',
+            'start_time.required' => 'Please provide a start time for this event',
+            'start_time.date_format' => 'Please provide a start time in the format hh:mm',
+            'end_date.required' => 'Please provide an end date for this event',
+            'end_date.date_format' => 'Please provide an end date in the format dd/mm/yyyy',
+            'end_date.after' => 'The event cannot end before the start date selected',
+            'end_time.required' => 'Please provide an end time for this event',
+            'end_time.date_format' => 'Please provide an end time in the format hh:mm',
             'location.required' => 'Please provide a venue for this event',
             'admission.required' => 'Please provide an entry fee for this event',
             'capacity.required' => 'Please provide the total capacity for this event',
@@ -99,8 +106,10 @@ class EventsController extends Controller
         $event = new Event;
         $event->title = $request->input('title');
         $event->description = $request->input('desc');
-        $event->date = $request->input('date');
-        $event->time = $request->input('time');
+        $event->start_date = $request->input('start_date');
+        $event->start_time = $request->input('start_time');
+        $event->end_time = $request->input('end_time');
+        $event->end_date = $request->input('end_date');
         $event->venue = $request->input('location');
         $event->admission = $request->input('admission');
         $event->spaces_left = $request->input('capacity');
@@ -204,7 +213,10 @@ class EventsController extends Controller
         $validatedData = $request->validate([
             'title' => ['required', 'min:2', 'max:255'],
             'desc' => ['required', 'min:8', 'max:255'],
-            'date' => ['required', 'date_format:Y-m-d'],
+            'start_date' => ['required', 'date_format:Y-m-d'],
+            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:start_date'],
+            'start_time' => ['required'],
+            'end_time' => ['required'],
             'location' => ['required'],
             'admission' => ['required'],
             'capacity' => ['required', 'numeric'],
@@ -214,11 +226,16 @@ class EventsController extends Controller
         $messages = [
             'title.required' => 'Please provide an event title',
             'desc.required' => 'Please provide an event description',
-            'date.required' => 'Please provide a date for this event',
-            'date.date_format' => 'Please provide a date in the format dd/mm/yyyy',
-            'date.after' => 'The event cannot be before today',
-            'time.required' => 'Please provide a start time for this event',
-            'time.date_format' => 'Please provide a time in the format hh:mm',
+            'start_date.required' => 'Please provide a start date for this event',
+            'start_date.date_format' => 'Please provide a start date in the format dd/mm/yyyy',
+            'start_date.after' => 'The event cannot be before today',
+            'start_time.required' => 'Please provide a start time for this event',
+            'start_time.date_format' => 'Please provide a start time in the format hh:mm',
+            'end_date.required' => 'Please provide an end date for this event',
+            'end_date.date_format' => 'Please provide an end date in the format dd/mm/yyyy',
+            'end_date.after' => 'The event end date cannot be before the event start date',
+            'end_time.required' => 'Please provide an end time for this event',
+            'end_time.date_format' => 'Please provide an end time in the format hh:mm',
             'location.required' => 'Please provide a venue for this event',
             'admission.required' => 'Please provide an entry fee for this event',
             'capacity.required' => 'Please provide the total capacity for this event',
@@ -238,8 +255,10 @@ class EventsController extends Controller
         $event = Event::find($id);
         $event->title = $request->input('title');
         $event->description = $request->input('desc');
-        $event->date = $request->input('date');
-        $event->time = $request->input('time');
+        $event->start_date = $request->input('start_date');
+        $event->end_date = $request->input('end_date');
+        $event->start_time = $request->input('start_time');
+        $event->end_time = $request->input('end_time');
         $event->venue = $request->input('location');
         $event->admission = $request->input('admission');
         $event->spaces_left = $request->input('capacity');
@@ -294,9 +313,9 @@ class EventsController extends Controller
         $request->session()->flash('error', 'There was an error deleting this event. Please try again later');
             return redirect()->back();
         }
-        
 
-    public function registerEventUser(Request $request) 
+
+    public function registerEventUser(Request $request)
     {
         $userID = $_POST['UID'];
         $eventID = $_POST['EID'];
@@ -330,9 +349,9 @@ class EventsController extends Controller
             DB::table('events')
             ->where('id', $eventID)
             ->decrement('spaces_left');
-    
+
             $request->session()->flash('success', 'You have successfully registered for this event. You can view this under the My Events Section of your account');
-            
+
             \Mail::send('email.eventConfirmUser', [
                     'body' => 'You are receiving this email as you wish to register for '.$eventName,
                 ], function ($mail) use ($request) {
@@ -343,10 +362,10 @@ class EventsController extends Controller
                     $request->session()->flash('error', 'Something went wrong');
                     return redirect()->back();
                     }
-                    
+
             return redirect()->back();
-            
-            
+
+
         }
     }
 
@@ -359,10 +378,10 @@ class EventsController extends Controller
     //     $eventID = $request->input('eventID');
 
     //     DB::table('guest_event_registrations')
-    //     ->insert(['event_id' => $eventID, 
-    //               'forename' => $forename, 
-    //               'surname' => $surname, 
-    //               'email' => $email, 
+    //     ->insert(['event_id' => $eventID,
+    //               'forename' => $forename,
+    //               'surname' => $surname,
+    //               'email' => $email,
     //               'contact_no' => $phone
     //               ]);
 
@@ -375,7 +394,7 @@ class EventsController extends Controller
         return view('events.insertEvent');
     }
 
-    public function insertwidget(Request $request) 
+    public function insertwidget(Request $request)
     {
         $code = $request->widget;
 
@@ -448,7 +467,7 @@ class EventsController extends Controller
         return redirect()->back();
 }
 
-public function deleteImages(Request $request) 
+public function deleteImages(Request $request)
 {
       $imageID = $request->id;
 

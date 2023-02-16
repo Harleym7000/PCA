@@ -96,7 +96,7 @@ public function contact()
 
         $eventDate = '';
         foreach ($events as $event) {
-            $eventDate = $event->date;
+            $eventDate = $event->start_date;
         }
 
         //dd($eventDate);

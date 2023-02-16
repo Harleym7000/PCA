@@ -35,14 +35,14 @@
           </div>
           {{-- <div class="col-12 col-md-6 col-lg-2"></div> --}}
           <div class="col-12 col-md-6 col-lg-5">
-            <h3> <strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date)->format('D jS M Y')}}</h3>
+            <h3> <strong>Date:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('D jS M Y')}}</h3>
             <br>
-            <h3> <strong>Time:</strong> {{ \Carbon\Carbon::parse($event->time)->format('g:ia')}}</h3>
+            <h3> <strong>Time:</strong> {{ \Carbon\Carbon::parse($event->start_time)->format('g:ia')}}</h3>
             <br>
             <h3> <strong>Venue:</strong> {{$event->venue}}</h3>
             <br>
             <h3> <strong>Organiser:</strong> {{$event->managed_by}}</h3>
-            <br> 
+            <br>
             <h3 @if($eventHappened ?? '' === 1) style="display:none;" @endif @if($event->admission == '£0.00') style="color: green" @endif><strong>Admission:</strong>@if($event->admission == '£0.00') Free @else {{$event->admission}} @endif</h3>
             <br>
             <h3 @if($eventHappened ?? '' === 1) style="display:none;" @endif @if($event->spaces_left > 0) style="color: green" @else style="color: red" @endif><strong>Spaces Left:</strong> {{$event->spaces_left}}</h3>
@@ -63,7 +63,7 @@
   <div class="container mb-5">
     <div class="row gallery">
       @foreach($images as $i)
-      
+
 <a href="/storage/event_images/{{ $i->image_path }}" class="col-12 col-md-6 col-lg-3 mb-4">
   <img src="/storage/event_images/{{ $i->image_path }}" class="event_image" style="width: 100%; height: 300px; object-fit:cover;" alt="Event Image">
 </a>
@@ -130,7 +130,7 @@
       @endauth
           @guest
           <form action="/events/register/guest" method="POST">
-            @csrf 
+            @csrf
           <div class="form-row">
             <label class="col">First Name:</label>
             <label class="col">Surname:</label>
@@ -219,7 +219,7 @@
 <script>
     $(document).ready(function(){
         $('.carousel').carousel();
-    }); 
+    });
     </script>
 
         @endsection
