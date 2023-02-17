@@ -23,7 +23,10 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.1",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "santigarcor/laratrust": "^7.0"
+        "santigarcor/laratrust": "^7.0",
+        "symfony/http-client": "^6.2",
+        "symfony/mailgun-mailer": "^6.2",
+        "symfony/postmark-mailer": "^6.2"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",
