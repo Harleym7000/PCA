@@ -82,7 +82,7 @@
     @foreach($events as $e)
                       <tr class="d-flex">
                         <td class="col-6 col-lg-2"><strong>{{$e->title}}</strong></td>
-                          <td class="col-6 col-lg-3"><strong>{{ \Carbon\Carbon::parse($e->date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($e->time)->format('g:ia')}}</strong></td>
+                          <td class="col-6 col-lg-3"><strong>{{ \Carbon\Carbon::parse($e->start_date)->format('D jS M Y')}} - {{ \Carbon\Carbon::parse($e->start_time)->format('g:ia')}}</strong></td>
                           <td class="col-6 col-lg-3"><strong>{{$e->venue}}</strong></td>
                           <td id="action-buttons" class="text-center col-6 col-lg-4">
                             <a href="/events/registered/{{$e->id}}"><button id="comms-user" type="submit" class="btn btn-success"><img src="/img/baseline_people_alt_white_18dp.png" data-toggle="tooltip" data-placement="bottom" title="View Registered"></button></a>
@@ -109,10 +109,7 @@
       </div>
     </div>
   </div>
-
-
                     </div>
-
             </div>
             {!! $events->render() !!}
         </div>

@@ -30,7 +30,7 @@
     keyup: function() {
       formatCurrency($(this));
     },
-    blur: function() { 
+    blur: function() {
       formatCurrency($(this), "blur");
     }
 });
@@ -45,19 +45,19 @@ function formatNumber(n) {
 function formatCurrency(input, blur) {
   // appends $ to value, validates decimal side
   // and puts cursor back in right position.
-  
+
   // get input value
   var input_val = $('#admission').val();
-  
+
   // don't validate empty input
   if (input_val === "") { return; }
-  
+
   // original length
   var original_len = input_val.length;
 
-  // initial caret position 
+  // initial caret position
   var caret_pos = input.prop("selectionStart");
-    
+
   // check for decimal
   if (input_val.indexOf(".") >= 0) {
 
@@ -75,12 +75,12 @@ function formatCurrency(input, blur) {
 
     // validate right side
     right_side = formatNumber(right_side);
-    
+
     // On blur make sure 2 numbers after decimal
     if (blur === "blur") {
       right_side += "00";
     }
-    
+
     // Limit decimal to only 2 digits
     right_side = right_side.substring(0, 2);
 
@@ -93,13 +93,13 @@ function formatCurrency(input, blur) {
     // remove all non-digits
     input_val = formatNumber(input_val);
     input_val = "£" + input_val;
-    
+
     // final formatting
     if (blur === "blur") {
       input_val += ".00";
     }
   }
-  
+
   // send updated string to input
   input.val(input_val);
 
@@ -152,23 +152,41 @@ function formatCurrency(input, blur) {
                                           @enderror
                             </div>
                             <div class="form-group">
-                              <label for="title">Event Date:</label>
-                              <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{$event->date}}" required>
-                              @error('date')
+                              <label for="start_date">Event Start Date:</label>
+                              <input type="date" class="form-control @error('start_date') is-invalid @enderror" id="start_date" name="start_date" value="{{$event->start_date}}" required>
+                              @error('start_date')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
                                           @enderror
                             </div>
+                      <div class="form-group">
+                          <label for="start_date">Event End Date:</label>
+                          <input type="date" class="form-control @error('end_date') is-invalid @enderror" id="end_date" name="end_date" value="{{$event->end_date}}" required>
+                          @error('end_date')
+                          <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                          @enderror
+                      </div>
                             <div class="form-group">
-                              <label for="time">Event Time:</label>
-                              <input type="time" class="form-control @error('time') is-invalid @enderror" id="time" name="time" value="{{$event->time}}" required>
-                              @error('time')
+                              <label for="time">Event Start Time:</label>
+                              <input type="time" class="form-control @error('start_time') is-invalid @enderror" id="start_time" name="start_time" value="{{$event->start_time}}" required>
+                              @error('start_time')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
                                           @enderror
                             </div>
+                      <div class="form-group">
+                          <label for="time">Event End Time:</label>
+                          <input type="time" class="form-control @error('end_time') is-invalid @enderror" id="end_time" name="end_time" value="{{$event->end_time}}" required>
+                          @error('end_time')
+                          <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                              </span>
+                          @enderror
+                      </div>
                             <div class="form-group">
                               <label for="location">Event Venue:</label>
                               <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="Enter Event Venue..." name="location" value="{{$event->venue}}" required>

@@ -11,6 +11,7 @@ use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 use App\News;
@@ -21,7 +22,8 @@ use App\User;
 class MailSend extends Controller
 {
 
-    public function contact_us(Request $request) {
+    public function contact_us(Request $request)
+    {
         $secretKey = env('NOCAPTCHA_SECRET');
         $response = $_POST['g-recaptcha-response'];
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -30,61 +32,61 @@ class MailSend extends Controller
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$ip";
         $file = file_get_contents($url);
         $data = json_decode($file);
-        if($data->success == true)
-        {
-        $request->validate([
-            'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
-            'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
-            'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
-            'subject' => ['required', 'min:2', 'max:255', new Script_Validation],
-            'message' => ['required', 'max:510', new Script_Validation]
-        ],
-    $messages = [
-        'firstname.required' => 'Please provide a First Name',
-        'surname.required' => 'Please provide a Surname',
-        'email.required' => 'Please provide your email address',
-        'subject.required' => 'Please enter a message subject',
-        'message.required' => 'Please provide us with a brief description of why you are contacting us',
-        'g-recaptcha-response.required' => 'Please verify you are not a robot'
-    ]);
-        $contactfirst_name = Crypt::encrypt($request->input('firstname'));
-        $contactemail = $request->input('email');
-        $contactsurname = Crypt::encrypt($request->input('surname'));
-        $contactsubject = Crypt::encrypt($request->input('subject'));
-        $contactmessage = Crypt::encrypt($request->input('message'));
+        if ($data->success == true) {
+            $request->validate([
+                'firstname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
+                'surname' => ['required', 'max:255', 'min:2', new Script_Validation, new Name_Validation],
+                'email' => ['required', 'email', 'min:8', 'max:255', new Script_Validation, new Email_Validation],
+                'subject' => ['required', 'min:2', 'max:255', new Script_Validation],
+                'message' => ['required', 'max:510', new Script_Validation]
+            ],
+                $messages = [
+                    'firstname.required' => 'Please provide a First Name',
+                    'surname.required' => 'Please provide a Surname',
+                    'email.required' => 'Please provide your email address',
+                    'subject.required' => 'Please enter a message subject',
+                    'message.required' => 'Please provide us with a brief description of why you are contacting us',
+                    'g-recaptcha-response.required' => 'Please verify you are not a robot'
+                ]);
+            $contactfirst_name = Crypt::encrypt($request->input('firstname'));
+            $contactemail = $request->input('email');
+            $contactsurname = Crypt::encrypt($request->input('surname'));
+            $contactsubject = Crypt::encrypt($request->input('subject'));
+            $contactmessage = Crypt::encrypt($request->input('message'));
 
-        DB::table('contacts')->insert(
-            ['firstname' => $contactfirst_name, 'surname' => $contactsurname, 'email' => $contactemail, 'subject' => $contactsubject, 'message' => $contactmessage]
-        );
+            DB::table('contacts')->insert(
+                ['firstname' => $contactfirst_name, 'surname' => $contactsurname, 'email' => $contactemail, 'subject' => $contactsubject, 'message' => $contactmessage]
+            );
 
-        // $details = array(
-        //     'title' => 'Contact Message from '.$firstname.' '.$surname,
-        //     'email' => $email,
-        //     'subject' => $subject,
-        //     'body' => $body
-        // );
+            // $details = array(
+            //     'title' => 'Contact Message from '.$firstname.' '.$surname,
+            //     'email' => $email,
+            //     'subject' => $subject,
+            //     'body' => $body
+            // );
 
-        \Mail::send('email.sendMail', [
+            \Mail::send('email.sendMail', [
 
-            'body' => $request->input('message')
-        ], function ($mail) use ($request) {
-            $mail->from($request->email, $request->firstname);
-            $mail->to(env('MAIL_FROM_ADDRESS'))->subject($request->subject);
-            $mail->replyTo($request->email);
+                'body' => $request->input('message')
+            ], function ($mail) use ($request) {
+                $mail->from($request->email, $request->firstname);
+                $mail->to(env('MAIL_FROM_ADDRESS'))->subject($request->subject);
+                $mail->replyTo($request->email);
 
-        });
-        if( count(\Mail::failures()) > 0) {
-        $request->session()->flash('error', 'Something went wrong');
-        return view('pages.contact');
-        } else {
-        $request->session()->flash('success', 'Thanks. Your message has been sent');
-        return redirect()->back();
+            });
+//        if( count(\Mail::flushMacros()) > 0) {
+//        $request->session()->flash('error', 'Something went wrong');
+//        return view('pages.contact');
+//        } else {
+            $request->session()->flash('success', 'Thanks. Your message has been sent');
+            return redirect()->back();
         }
-    } else {
-        $request->session()->flash('error', 'Plese verify you are not a robot');
-        return redirect()->back();
     }
-}
+//    } else {
+//        $request->session()->flash('error', 'Plese verify you are not a robot');
+//        return redirect()->back();
+//    }
+//}
 
     public function contact_response(Request $request, $id)
     {
