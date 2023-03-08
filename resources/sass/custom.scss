@@ -1,6 +1,7 @@
 /*Fonts*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 /*Global Styles*/
 body {
@@ -37,6 +38,11 @@ body {
   }
   body {
     position: relative;
+  }
+
+  label {
+      color: #0b1d2c;
+      font-weight: bold;
   }
 
   .asterisk {

@@ -94,11 +94,14 @@
                         @endforeach
                       </tbody>
                         </table>
+              {!! $events->render() !!}
                       </div>
                       </div>
               </div>
               </div>
+
               <div class="render">
+
               </div>
           </div>
       </div>
@@ -111,7 +114,7 @@
   </div>
                     </div>
             </div>
-            {!! $events->render() !!}
+
         </div>
     </div>
 </div>

@@ -17,8 +17,6 @@
                 <a href="/about"><button type="button" class="btn btn-light">FIND OUT MORE</button></a>
                 </div>
               </div>
-          </div>
-          </div>
           <div id="events">
               <h1>Upcoming Events</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-3">

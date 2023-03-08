@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Events;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\StoreEventRequest;
+use App\Services\EventService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Event;
-use App\User;
-use App\News;
-use App\Rules\Name_Validation;
 use App\Rules\Phone_Vaidation;
-use App\Rules\Script_Validation;
-use Carbon\Carbon;
-use Faker\Guesser\Name;
 
 class EventsController extends Controller
 {
@@ -53,96 +49,18 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request, EventService $eventService, UserService $userService)
     {
+        $event = $eventService->storeEvent($request, $userService);
 
-        //dd($request);
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:2', 'max:255'],
-            'desc' => ['required', 'min:8', 'max:255'],
-            'start_date' => ['required', 'date_format:Y-m-d', 'after:yesterday'],
-            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:start_date'],
-            'start_time' => ['required'],
-            'end_time' => ['required'],
-            'location' => ['required'],
-            'admission' => ['required'],
-            'capacity' => ['required', 'numeric'],
-            'org' => 'required',
-            'main_image' => ['required', 'max:2048'],
-        ],
-        $messages = [
-            'title.required' => 'Please provide an event title',
-            'desc.required' => 'Please provide an event description',
-            'start_date.required' => 'Please provide a start date for this event',
-            'start_date.date_format' => 'Please provide a start date in the format dd/mm/yyyy',
-            'start_date.after' => 'The event cannot be before today',
-            'start_time.required' => 'Please provide a start time for this event',
-            'start_time.date_format' => 'Please provide a start time in the format hh:mm',
-            'end_date.required' => 'Please provide an end date for this event',
-            'end_date.date_format' => 'Please provide an end date in the format dd/mm/yyyy',
-            'end_date.after' => 'The event cannot end before the start date selected',
-            'end_time.required' => 'Please provide an end time for this event',
-            'end_time.date_format' => 'Please provide an end time in the format hh:mm',
-            'location.required' => 'Please provide a venue for this event',
-            'admission.required' => 'Please provide an entry fee for this event',
-            'capacity.required' => 'Please provide the total capacity for this event',
-            'capacity.numeric' => 'The total capacity must be a number',
-            'org.required' => 'Please provide who the event Organiser is (PCA or other)',
-            'main_image.required' => 'Please provide an image for this event',
-            'main_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
-            ]);
-
-
-        if($request->hasFile('main_image')) {
-            $filenameWithExt = $request->file('main_image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $ext = $request->file('main_image')->getClientOriginalExtension();
-            $filenameToStore = $filename.'_'.time().'.'.$ext;
-            $path = $request->file('main_image')->storeAs('public/event_images', $filenameToStore);
-        } else {
-            $filenameToStore = 'pcaLogo.png';
+        if ($request->hasFile('image')) {
+            $eventService->uploadEventImage($event, $request->image);
+        }
+        if ($request->has('eventbrite')) {
+            $eventService->handleEventbrite($event, $request->eventbrite_link);
         }
 
-        $event = new Event;
-        $event->title = $request->input('title');
-        $event->description = $request->input('desc');
-        $event->start_date = $request->input('start_date');
-        $event->start_time = $request->input('start_time');
-        $event->end_time = $request->input('end_time');
-        $event->end_date = $request->input('end_date');
-        $event->venue = $request->input('location');
-        $event->admission = $request->input('admission');
-        $event->spaces_left = $request->input('capacity');
-        $event->image = $filenameToStore;
-        $event->managed_by = $request->input('org');
-        if($request->has('eventbrite')) {
-            $event->is_eventbrite = 1;
-        } else {
-            $event->is_eventbrite = 0;
-        }
-        if($request->has('eventbrite_link')) {
-            $event->eventbrite_link = $request->input('eventbrite_link');
-        } else {
-            $event->eventbrite_link = "";
-        }
-        $userID = Auth::user()->id;
-        if($userID === 34) {
-            $event->approved = 1;
-            $event->save();
-            $request->session()->flash('success', 'The event was created successfully. You can now view your event on the site');
-            return redirect()->back();
-        } else {
-            $event->approved = 0;
-        }
-
-        $event->save();
-
-        if($event->save()) {
-            $request->session()->flash('success', 'The event was created successfully and is pending approval. Your event will appear on the site once it has been approved');
-            return redirect()->back();
-        }
-        $request->session()->flash('error', 'There was an error creating the event. Please try again.');
-            return redirect()->back();
+        return redirect()->back();
     }
 
     /**
@@ -207,42 +125,42 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreEventRequest $request, $id, Event $event)
     {
 
-        $validatedData = $request->validate([
-            'title' => ['required', 'min:2', 'max:255'],
-            'desc' => ['required', 'min:8', 'max:255'],
-            'start_date' => ['required', 'date_format:Y-m-d'],
-            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:start_date'],
-            'start_time' => ['required'],
-            'end_time' => ['required'],
-            'location' => ['required'],
-            'admission' => ['required'],
-            'capacity' => ['required', 'numeric'],
-            'org' => 'required',
-            'main_image' => ['max:2048'],
-        ],
-        $messages = [
-            'title.required' => 'Please provide an event title',
-            'desc.required' => 'Please provide an event description',
-            'start_date.required' => 'Please provide a start date for this event',
-            'start_date.date_format' => 'Please provide a start date in the format dd/mm/yyyy',
-            'start_date.after' => 'The event cannot be before today',
-            'start_time.required' => 'Please provide a start time for this event',
-            'start_time.date_format' => 'Please provide a start time in the format hh:mm',
-            'end_date.required' => 'Please provide an end date for this event',
-            'end_date.date_format' => 'Please provide an end date in the format dd/mm/yyyy',
-            'end_date.after' => 'The event end date cannot be before the event start date',
-            'end_time.required' => 'Please provide an end time for this event',
-            'end_time.date_format' => 'Please provide an end time in the format hh:mm',
-            'location.required' => 'Please provide a venue for this event',
-            'admission.required' => 'Please provide an entry fee for this event',
-            'capacity.required' => 'Please provide the total capacity for this event',
-            'capacity.numeric' => 'The total capacity must be a number',
-            'org.required' => 'Please provide who the event Organiser is (PCA or other)',
-            'main_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
-            ]);
+//        $validatedData = $request->validate([
+//            'title' => ['required', 'min:2', 'max:255'],
+//            'desc' => ['required', 'min:8', 'max:255'],
+//            'start_date' => ['required', 'date_format:Y-m-d'],
+//            'end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:start_date'],
+//            'start_time' => ['required'],
+//            'end_time' => ['required'],
+//            'location' => ['required'],
+//            'admission' => ['required'],
+//            'capacity' => ['required', 'numeric'],
+//            'org' => 'required',
+//            'main_image' => ['max:2048'],
+//        ],
+//        $messages = [
+//            'title.required' => 'Please provide an event title',
+//            'desc.required' => 'Please provide an event description',
+//            'start_date.required' => 'Please provide a start date for this event',
+//            'start_date.date_format' => 'Please provide a start date in the format dd/mm/yyyy',
+//            'start_date.after' => 'The event cannot be before today',
+//            'start_time.required' => 'Please provide a start time for this event',
+//            'start_time.date_format' => 'Please provide a start time in the format hh:mm',
+//            'end_date.required' => 'Please provide an end date for this event',
+//            'end_date.date_format' => 'Please provide an end date in the format dd/mm/yyyy',
+//            'end_date.after' => 'The event end date cannot be before the event start date',
+//            'end_time.required' => 'Please provide an end time for this event',
+//            'end_time.date_format' => 'Please provide an end time in the format hh:mm',
+//            'location.required' => 'Please provide a venue for this event',
+//            'admission.required' => 'Please provide an entry fee for this event',
+//            'capacity.required' => 'Please provide the total capacity for this event',
+//            'capacity.numeric' => 'The total capacity must be a number',
+//            'org.required' => 'Please provide who the event Organiser is (PCA or other)',
+//            'main_image.max' => 'The maximum file size for image uploads is 2MB. Please upload an image that is less than 2MB'
+//            ]);
 
         if($request->hasFile('main_image')) {
             $filenameWithExt = $request->file('main_image')->getClientOriginalName();
@@ -253,30 +171,33 @@ class EventsController extends Controller
         }
 
         $event = Event::find($id);
-        $event->title = $request->input('title');
-        $event->description = $request->input('desc');
-        $event->start_date = $request->input('start_date');
-        $event->end_date = $request->input('end_date');
-        $event->start_time = $request->input('start_time');
-        $event->end_time = $request->input('end_time');
-        $event->venue = $request->input('location');
-        $event->admission = $request->input('admission');
-        $event->spaces_left = $request->input('capacity');
-        if($request->has('eventbrite')) {
-            $event->is_eventbrite = 1;
-        }
-        if($request->hasFile('main_image')) {
-            $event->image = $filenameToStore;
-        }
-        $event->managed_by = $request->input('org');
-        if($request->has('eventbrite_link')) {
-            $event->eventbrite_link = $request->input('eventbrite_link');
-        }
+        $event->update($request->all());
+//        $event->title = $request->input('title');
+//        $event->description = $request->input('desc');
+//        $event->start_date = $request->input('start_date');
+//        $event->end_date = $request->input('end_date');
+//        $event->start_time = $request->input('start_time');
+//        $event->end_time = $request->input('end_time');
+//        $event->venue = $request->input('location');
+//        $event->admission = $request->input('admission');
+//        $event->spaces_left = $request->input('capacity');
+//        if($request->has('eventbrite')) {
+//            $event->is_eventbrite = 1;
+//        }
+//        if($request->hasFile('main_image')) {
+//            $event->image = $filenameToStore;
+//        }
+//        $event->managed_by = $request->input('org');
+//        if($request->has('eventbrite_link')) {
+//            $event->eventbrite_link = $request->input('eventbrite_link');
+//        }
 
-        if($event->save()) {
+        if($event->update($request->all())) {
             $request->session()->flash('success', 'The event was updated successfully');
-            return redirect()->back();
+        } else {
+            $request->session()->flash('error', 'Something went wrong');
         }
+        return redirect()->back();
     }
 
     /**

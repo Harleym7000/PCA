@@ -134,7 +134,7 @@ function formatCurrency(input, blur) {
                     @csrf
                     {{ method_field('PUT') }}
                           <div class="form-group">
-                              <label for="title">Event Title:</label>
+                              <label for="title">Event Title: <span class="asterisk">*</span></label>
                               <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Enter Event Title..." name="title" value="{{$event->title}}" required autofocus>
                               @error('title')
                                               <span class="invalid-feedback" role="alert">
@@ -143,16 +143,16 @@ function formatCurrency(input, blur) {
                                           @enderror
                             </div>
                             <div class="form-group">
-                              <label for="desc">Event Description:</label>
-                              <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" rows="8" placeholder="Summarise the event..." name="desc" required>{{$event->description}}</textarea>
-                              @error('desc')
+                              <label for="description">Event Description: <span class="asterisk">*</span></label>
+                              <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="8" placeholder="Summarise the event..." name="description" required>{{$event->description}}</textarea>
+                              @error('description')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
                                           @enderror
                             </div>
                             <div class="form-group">
-                              <label for="start_date">Event Start Date:</label>
+                              <label for="start_date">Event Start Date: <span class="asterisk">*</span></label>
                               <input type="date" class="form-control @error('start_date') is-invalid @enderror" id="start_date" name="start_date" value="{{$event->start_date}}" required>
                               @error('start_date')
                                               <span class="invalid-feedback" role="alert">
@@ -161,7 +161,7 @@ function formatCurrency(input, blur) {
                                           @enderror
                             </div>
                       <div class="form-group">
-                          <label for="start_date">Event End Date:</label>
+                          <label for="start_date">Event End Date: <span class="asterisk">*</span></label>
                           <input type="date" class="form-control @error('end_date') is-invalid @enderror" id="end_date" name="end_date" value="{{$event->end_date}}" required>
                           @error('end_date')
                           <span class="invalid-feedback" role="alert">
@@ -170,7 +170,7 @@ function formatCurrency(input, blur) {
                           @enderror
                       </div>
                             <div class="form-group">
-                              <label for="time">Event Start Time:</label>
+                              <label for="time">Event Start Time: <span class="asterisk">*</span></label>
                               <input type="time" class="form-control @error('start_time') is-invalid @enderror" id="start_time" name="start_time" value="{{$event->start_time}}" required>
                               @error('start_time')
                                               <span class="invalid-feedback" role="alert">
@@ -179,7 +179,7 @@ function formatCurrency(input, blur) {
                                           @enderror
                             </div>
                       <div class="form-group">
-                          <label for="time">Event End Time:</label>
+                          <label for="time">Event End Time: <span class="asterisk">*</span></label>
                           <input type="time" class="form-control @error('end_time') is-invalid @enderror" id="end_time" name="end_time" value="{{$event->end_time}}" required>
                           @error('end_time')
                           <span class="invalid-feedback" role="alert">
@@ -188,9 +188,9 @@ function formatCurrency(input, blur) {
                           @enderror
                       </div>
                             <div class="form-group">
-                              <label for="location">Event Venue:</label>
-                              <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="Enter Event Venue..." name="location" value="{{$event->venue}}" required>
-                              @error('location')
+                              <label for="venue">Event Venue:</label>
+                              <input type="text" class="form-control @error('venue') is-invalid @enderror" id="venue" placeholder="Enter Event Venue..." name="venue" value="{{$event->venue}}" required>
+                              @error('venue')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
@@ -207,8 +207,8 @@ function formatCurrency(input, blur) {
                             </div>
                             <div class="form-group">
                               <label for="capacity">Event Capacity:</label>
-                              <input type="number" class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="capacity" value="{{$event->spaces_left}}" required>
-                              @error('admission')
+                              <input type="number" class="form-control @error('capacity') is-invalid @enderror" id="capacity" placeholder="Enter event capacity. How many tickets/seats are available?" name="spaces_left" value="{{$event->spaces_left}}" required>
+                              @error('capacity')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                               </span>
@@ -216,7 +216,7 @@ function formatCurrency(input, blur) {
                             </div>
                             <div class="form-group">
                               <label for="org">Event Organiser:</label>
-                              <input type="text" class="form-control @error('org') is-invalid @enderror" id="org" placeholder="Who is organising the event..." name="org" value="{{$event->managed_by}}" required>
+                              <input type="text" class="form-control @error('org') is-invalid @enderror" id="org" placeholder="Who is organising the event..." name="managed_by" value="{{$event->managed_by}}" required>
                               @error('org')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
@@ -226,7 +226,7 @@ function formatCurrency(input, blur) {
                             <div class="form-group">
                               <label for="main-image">Main Event Image:</label>
                               <img src="/storage/event_images/{{$event->image}}" class="img-fluid" style="height: 140px;">
-                              <input type="file" class="form-control @error('main_image') is-invalid @enderror" id="main_image" name="main_image" value="{{$event->image}}">
+                              <input type="file" class="form-control @error('main_image') is-invalid @enderror" id="main_image" name="image" value="{{$event->image}}">
                               @error('main_image')
                                               <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
