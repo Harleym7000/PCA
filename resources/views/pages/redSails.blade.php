@@ -4,7 +4,7 @@
     <div id="rs-images">
   @include('partials.alerts')
     <div class="mt-5">
-        <h2 class="text-center mb-4">What's On?</h2>
+        <h2 class="text-center mb-4">What's On ?</h2>
         @if($festivalExists != 0)
         <ul class="nav justify-content-center">
         @foreach($festivalDates as $fd)
