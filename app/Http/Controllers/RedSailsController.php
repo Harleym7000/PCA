@@ -139,7 +139,7 @@ class RedSailsController extends Controller
             foreach($festivalExistsQuery as $f) {
                 $festivalDates = CarbonPeriod::create($f->start_date, $f->end_date);
             }
-            return view('pages.redSails')->with([
+            return view('pages.showRedSailsProgramme')->with([
                 'festivalExists' => $festivalExists,
                 'festivalExistsQuery' => $festivalExistsQuery,
                 'festivalDates' => $festivalDates

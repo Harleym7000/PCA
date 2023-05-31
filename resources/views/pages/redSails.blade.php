@@ -1,11 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<div id="events">
+<div id="red-sails">
+    <div id="rs-images">
   @include('partials.alerts')
-    <h1>Red Sails Festival</h1>
-    <div class="mt-5">
-        <h4 class="text-center">The Red Sails Festival is an annual, week-long event filled with fun-packed activities for people of all ages</h4>
-    </div>
     <div class="mt-5">
         <h2 class="text-center mb-4">What's On?</h2>
         @if($festivalExists != 0)
