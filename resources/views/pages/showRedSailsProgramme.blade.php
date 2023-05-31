@@ -2,7 +2,7 @@
 @section('content')
 <div id="red-sails">
         <div id="rs-images">
-{{--            <img src="/img/red_sails_banner.png"/>--}}
+            <img src="/img/red_sails_banner.png"/>
                 </div>
                 <h1 class="text-center mt-2">What's On?</h1>
         <div class="col-12">
