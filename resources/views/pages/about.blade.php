@@ -6,8 +6,8 @@
                 <div class="row">
                 <div id="tagline" class="justify-content-center">
                         <h1>- What We Do -</h1>
-                        <p>Portstewart Community Association is a charitable organisation who currently organises and implemets 
-                          <a href="https://redsails.co.uk/" target="_blank">The Red Sails Festival</a> alongside other events and activities for the benefit 
+                        <p>Portstewart Community Association is a charitable organisation who currently organises and implemets
+                          <a href="/red-sails" target="_blank">The Red Sails Festival</a> alongside other events and activities for the benefit
                           of the community.</p>
                           <br>
                           <div class="text-center">
@@ -21,7 +21,7 @@
                           <div class="card">
                             <img src="/img/red_sails.jpg" class="card-img-top img-fluid img-thumbnail" alt="..." style="object-fit:cover;">
                             <div class="card-body">
-                              <h1 class="card-title"><a href="https://redsails.co.uk/">Red Sails Festival</a></h1>
+                              <h1 class="card-title"><a href="/red-sails">Red Sails Festival</a></h1>
                               <p class="card-text" style="width: 90%; margin: auto;">Red Sails Festival runs over the course of a week every summer in Portstewart. Live music, dance and activities for everyone to enjoy, finishing with our famous fireworks display</p>
                             </div>
                           </div>
@@ -30,8 +30,8 @@
                             <div class="card">
                               <img src="/img/event.jpg" class="card-img-top img-fluid img-thumbnail" alt="..." style="object-fit:cover;">
                               <div class="card-body">
-                                <h1 class="card-title"><a href="/events">Community Events</a></h1>
-                                <p class="card-text" style="width: 90%; margin: auto;">Portstewart Community Association hold events of all kinds for people of all ages within the community. Why not go to our <a href="/events">events</a> page to find an event for you?</p>
+                                <h1 class="card-title"><a href="/event">Community Events</a></h1>
+                                <p class="card-text" style="width: 90%; margin: auto;">Portstewart Community Association hold events of all kinds for people of all ages within the community. Why not go to our <a href="/event">events</a> page to find an event for you?</p>
                               </div>
                             </div>
                           </div>
